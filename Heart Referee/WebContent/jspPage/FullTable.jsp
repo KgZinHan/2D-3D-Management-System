@@ -1,0 +1,144 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="ISO-8859-1">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<title>Heart Referee</title>
+	<link rel="stylesheet" href="./cssStyle/styles.css">
+	<link rel="stylesheet" href="./cssStyle/all.css">
+    <script src="JavaScript/javaScript.js" defer></script>
+</head>
+<body  tabindex="-1" style="overflow-x: hidden">
+	<div class="mv-ftbl-bg">
+		<div class="mv-tab-bar">
+			<a href="Table" class="recover-button hover-effect margin-left">
+				<h3>Home</h3>
+			</a>
+			<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">
+				<h3>Waiting Table</h3>
+			</a>
+			<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">
+				<h3>Recover Check</h3>
+			</a>
+			<a href="RecoverPageController" class="recover-button hover-effect margin-left">
+				<h3>Recover Note</h3>
+			</a>
+			<a href="FullTableController" class="ftbl-button hover-effect margin-left" style="color:${fullTable}">
+				<h3>Full Table</h3>
+			</a>
+		</div>
+		<div class="user-total-field">
+				total money - ${totalMoney} ks
+				<div style="margin-left: 100px;color: green"> 
+  					total recover - ${totalRecover} ks
+				</div>
+			</div>
+		
+		<div class="ftbl-row">
+	  		<div class="ftbl-column" style="margin-left: 10px">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${zeroList}" var="twoD">  		
+				      <tr>
+				     
+				        <th class="ftbl-th">${twoD.number}</th> 
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>	 
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${oneList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${twoList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${threeList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${fourList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${fiveList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				         <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${sixList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${sevenList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${eightList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}&money=${twoD.money}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+	  		<div class="ftbl-column">
+			    <table class="ftbl-table-style">
+			    	<c:forEach items="${nineList}" var="twoD">
+				      <tr>
+				        <th class="ftbl-th">${twoD.number}</th>
+				        <th class="ftbl-th" style="width: 90%"> <a href="SummaryTable?number=${twoD.number}&money=${twoD.money}" style="color:${twoD.color}">${twoD.money}</a></th>
+				      </tr>
+			      </c:forEach>
+			    </table>
+	  		</div>
+		</div>
+	</div>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.5.0 &nbsp; Design by N0iSyLuvie</footer>
+</body>
+</html>

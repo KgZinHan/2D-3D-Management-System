@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>Heart Referee</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+    <description></description>
+    <display-name>Table</display-name>
+    <servlet-name>TableController</servlet-name>
+    <servlet-class>com.controller.TableController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TableController</servlet-name>
+    <url-pattern>/Table</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>ManualTable</display-name>
+    <servlet-name>ManualTableController</servlet-name>
+    <servlet-class>com.controller.ManualTableController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManualTableController</servlet-name>
+    <url-pattern>/ManualTable</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Details</display-name>
+    <servlet-name>DetailsController</servlet-name>
+    <servlet-class>com.controller.DetailsController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DetailsController</servlet-name>
+    <url-pattern>/Details</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Setting</display-name>
+    <servlet-name>SettingController</servlet-name>
+    <servlet-class>com.controller.SettingController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SettingController</servlet-name>
+    <url-pattern>/Setting</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Multiple Input</display-name>
+    <servlet-name>MultiInputController</servlet-name>
+    <servlet-class>com.controller.MultiInputController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>MultiInputController</servlet-name>
+    <url-pattern>/MultiInput</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Custom Input</display-name>
+    <servlet-name>CustomInputController</servlet-name>
+    <servlet-class>com.controller.CustomInputController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CustomInputController</servlet-name>
+    <url-pattern>/CustomInput</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Recover</servlet-name>
+    <servlet-class>com.controller.RecoverController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Recover</servlet-name>
+    <url-pattern>/Recover</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>History</servlet-name>
+    <servlet-class>com.controller.HistoryController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>History</servlet-name>
+    <url-pattern>/History</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SearchTwoD</servlet-name>
+    <servlet-class>com.controller.SearchController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SearchTwoD</servlet-name>
+    <url-pattern>/Search</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SortBy</servlet-name>
+    <servlet-class>com.controller.SortByController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SortBy</servlet-name>
+    <url-pattern>/SortBy</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SortByUser</servlet-name>
+    <servlet-class>com.controller.SortByUserController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SortByUser</servlet-name>
+    <url-pattern>/SortByUser</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description></description>
+    <display-name>Delete</display-name>
+    <servlet-name>DeleteController</servlet-name>
+    <servlet-class>com.controller.DeleteController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>DeleteController</servlet-name>
+    <url-pattern>/Delete</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>WaitingTable</servlet-name>
+    <servlet-class>com.controller.WaitingTableController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>WaitingTable</servlet-name>
+    <url-pattern>/WaitingTable</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>SummaryTable</servlet-name>
+    <servlet-class>com.controller.SummaryTableController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SummaryTable</servlet-name>
+    <url-pattern>/SummaryTable</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>HomePage</description>
+    <servlet-name>TwoDList</servlet-name>
+    <jsp-file>/jspPage/Home.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>TwoDList</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>WaitingTablePage</description>
+    <servlet-name>Waiting</servlet-name>
+    <jsp-file>/jspPage/WaitingTable.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Waiting</servlet-name>
+    <url-pattern>/waiting</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>RecoverTablePage</description>
+    <servlet-name>RecoverTable</servlet-name>
+    <jsp-file>/jspPage/RecoverTable.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>RecoverTable</servlet-name>
+    <url-pattern>/recoverTable</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>SummaryTablePage</description>
+    <servlet-name>Summary</servlet-name>
+    <jsp-file>/jspPage/SummaryTable.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>Summary</servlet-name>
+    <url-pattern>/summary</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>logOut</description>
+    <servlet-name>logOut</servlet-name>
+    <jsp-file>/jspPage/logOut.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>logOut</servlet-name>
+    <url-pattern>/log-out</url-pattern>
+  </servlet-mapping>
+  
+  <!-- new Recover Table Controllers mapping -->
+  <servlet>
+    <servlet-name>RecoverPageController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.RecoverPageController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>RecoverPageController</servlet-name>
+    <url-pattern>/RecoverPageController</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>CheckRecoverPage</description>
+    <servlet-name>RecoverPage</servlet-name>
+    <jsp-file>/jspPage/RecoverPage.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>RecoverPage</servlet-name>
+    <url-pattern>/recoverPage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MultiInputRecoverController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.MultiInputRecoverController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>MultiInputRecoverController</servlet-name>
+    <url-pattern>/multiInputRecover</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CustomInputRecoverController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.CustomInputRecoverController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>CustomInputRecoverController</servlet-name>
+    <url-pattern>/customInputRecover</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverDetailsController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.RecoverDetailsController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>RecoverDetailsController</servlet-name>
+    <url-pattern>/RecoverDetails</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SearchRecoverController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.SearchRecoverController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SearchRecoverController</servlet-name>
+    <url-pattern>/SearchRecover</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SortRecoverController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.SortRecoverController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>SortRecoverController</servlet-name>
+    <url-pattern>/SortRecover</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>fullTable</description>
+    <servlet-name>fullTable</servlet-name>
+    <jsp-file>/jspPage/FullTable.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>fullTable</servlet-name>
+    <url-pattern>/fullTable</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FullTableController</servlet-name>
+    <servlet-class>com.controller.FullTableController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>FullTableController</servlet-name>
+    <url-pattern>/FullTableController</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverDeleteController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.RecoverDeleteController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>RecoverDeleteController</servlet-name>
+    <url-pattern>/RecoverDelete</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>addRecover</servlet-name>
+    <servlet-class>com.controller.addRecover</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>addRecover</servlet-name>
+    <url-pattern>/addRecover</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>addRecoverPage</description>
+    <servlet-name>addRecoverPage</servlet-name>
+    <jsp-file>/jspPage/addRecover.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>addRecoverPage</servlet-name>
+    <url-pattern>/addRecoverPage</url-pattern>
+  </servlet-mapping>
+  
+</web-app>

@@ -1,0 +1,60 @@
+//SearchContoller //doGet
+List<Number2D> top2D = new ArrayList<Number2D>();
+		String numberS = request.getParameter("top");
+		int number = Integer.parseInt(numberS);
+		top2D = tableDao.searchTop2D(number);
+		for (int j = 0; j < top2D.size(); j++) {
+			if (top2D.get(j).getMoney() > 800) {
+				top2D.get(j).setColor("firebrick");
+			}
+			if (top2D.get(j).getMoney() >= 1500) {
+				top2D.get(j).setColor("red");
+			}
+		}
+		total = tableDao.getTotalMoney();
+		totalRecover = tableDao.getTotal2DCount();
+		request.setAttribute("totalMoney", total);
+		request.setAttribute("totalRecover", totalRecover);
+		request.setAttribute("deleteLink", "none");
+		request.setAttribute("twoDList", top2D);
+		dispatcher = request.getRequestDispatcher("/home");
+		dispatcher.forward(request, response);
+
+////////////////////////////////////////////////////////////////////
+//TableDao //searchTop2D
+
+ public List<Number2D> searchTop2D(int number); 
+ 
+//TableDao //search2DAmount
+
+public List<Number2D> search2DAmount(int number);
+
+////////////////////////////////////////////////////////////////////
+//TableDaoImpl //searchTop2D
+
+@Override
+	public List<Number2D> searchTop2D(int number) {
+		twoDList = new ArrayList<Number2D>();
+		String query = "SELECT NUMBER,SUM(MONEY) AS MONEY,COUNT(NUMBER) AS QUANTITY FROM TWO_D_TABLE GROUP BY NUMBER ORDER BY MONEY DESC limit ?";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, number);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				twoD = new Number2D();
+				twoD.setId(99999);
+				twoD.setNumber(resultSet.getInt("number"));
+				twoD.setMoney(resultSet.getInt("money"));
+				twoD.setQuantity(resultSet.getInt("quantity"));
+				twoDList.add(twoD);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return twoDList;
+	}
+
+//////////////////////////////////////////////////////////////////////
+
+		
