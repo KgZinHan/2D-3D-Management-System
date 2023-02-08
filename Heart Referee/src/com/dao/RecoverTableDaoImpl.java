@@ -22,7 +22,6 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	Summary2D result2D = null;
 
 	public RecoverTableDaoImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

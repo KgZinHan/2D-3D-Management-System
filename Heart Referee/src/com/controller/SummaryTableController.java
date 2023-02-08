@@ -35,7 +35,6 @@ public class SummaryTableController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String numberS = request.getParameter("number");
 		int number = Integer.parseInt(numberS);
 		int money = 0;
@@ -54,7 +53,6 @@ public class SummaryTableController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

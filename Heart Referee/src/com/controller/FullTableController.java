@@ -31,7 +31,6 @@ public class FullTableController extends HttpServlet {
 
 	public FullTableController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

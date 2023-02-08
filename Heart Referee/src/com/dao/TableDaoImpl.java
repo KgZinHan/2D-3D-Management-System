@@ -23,7 +23,6 @@ public class TableDaoImpl implements TableDao {
 	Summary2D result2D = null;
 
 	public TableDaoImpl() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
