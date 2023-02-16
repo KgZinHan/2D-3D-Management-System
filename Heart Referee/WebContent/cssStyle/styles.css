@@ -627,12 +627,15 @@ footer{
 	background-color:rgba(255,255,255,0.95);
 	color: black;
 	font-family: roboto;
+	font-weight: 500;
+	box-shadow: 0 15px 10px rgba(0,0,0,0.4);
 	cursor: pointer;
 }
 
 .enter-button:hover{
 	background-color: rgb(40,40,40);
-	border: 1px solid white;
+	border: 1px solid rgb(40,40,40);
+	font-family: robom;
 	color: white;
 }
 
