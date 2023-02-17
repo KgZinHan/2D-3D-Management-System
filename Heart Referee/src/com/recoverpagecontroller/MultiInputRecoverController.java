@@ -17,6 +17,7 @@ import com.dao.TableDaoImpl;
 import com.entity.History2D;
 import com.entity.Number2D;
 
+import common.CommonConstants;
 import common.CommonParameters;
 
 public class MultiInputRecoverController extends HttpServlet {
@@ -59,7 +60,7 @@ public class MultiInputRecoverController extends HttpServlet {
 			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 			request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
 			request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-			request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, "aqua");
+			request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 			request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
 			request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");
 			request.setAttribute(CommonParameters.TOTAL_COLUMN_DISPLAY, "table-cell");

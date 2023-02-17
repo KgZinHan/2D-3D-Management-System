@@ -37,12 +37,12 @@
         <!---->
         <div id="modal02" class="mv-display-center mv-view-image mv-animate-zoom"> 
             <button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
-            <h2 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;<% 
+            <h1 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;<% 
                	String name = (String)session.getAttribute("userName");
    				out.print(name);
-   			%></h2>
+   			%></h1>
              <div id="radioTab" class="mv-table-input" style="text-align: left;margin-left: 30px;overflow: auto">
-             <h6 style="margin: 0px;margin-bottom: 15px;text-align: center;font-family: robol;color: red">The Smarter you play, The Luckier you will be...</h6>
+             	<h6 style="margin: 0px;margin-bottom: 15px;text-align: center;font-family: kanit;color: red">The Smarter you play, The Luckier you will be...</h6>
             	<c:forEach items="${userList}" var="user">
             		<a href="Setting?userName=${user.user}">
              			<h4 class="user-choose">${user.user}&emsp;<i style="float: right">${user.money} ks </i></h4>
@@ -54,7 +54,7 @@
             	<button class="log-out-btn"><i class="fas fa-user-plus"></i>&nbsp;New</button>
             </a>
         </div>
-		<div class="mv-home-bg">
+		<div class="mv-basic-bg">
 			<div class="mv-tab-bar">
 				<div class="user-name hover-effect" onclick="displayBlock('modal02')">
 					<h2>
@@ -79,16 +79,11 @@
 				<a href="FullTableController" class="ftbl-button hover-effect margin-left">
 					<h3>Full Table</h3>
 				</a>
-				<h2 class="mv-setting-button hover-effect" style="margin-left: 500px" onclick="displayBlock('modal01')">
+				<h2 class="mv-setting-button hover-effect" style="margin-left: 400px" onclick="displayBlock('modal01')">
                 <i class="fa fa-cogs" ></i>
             </h2>
 				
 			</div>
-		<%-- <!-- For Msg box -->
-            <div id="msgbox01" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0" onclick="displayNone('msgbox01')">${message}</div>
-            <div id="msgbox02" class="mv-hot-numbers-noti mv-animate-slideIn" onclick="displayNone('msgbox01')">Top Ten Hot Numbers
-            <!--  <i class="fas fa-fire"></i> -->&emsp;[&emsp;${dNumbers}&emsp;]</div>
-			 --%>
 			<div class="user-total-field">
 				<% 
    					out.print(name);
@@ -111,16 +106,16 @@
                 	<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
                 	
 					<div class="multiple-input-tab">
-						<i style="color:white">1</i>&nbsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
-						<i style="color:white">2</i>&nbsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">3</i>&nbsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">4</i>&nbsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">5</i>&nbsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">6</i>&nbsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">7</i>&nbsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">8</i>&nbsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">9</i>&nbsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">10</i>&nbsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<i style="color:white">1</i>&emsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
+						<br><i style="color:white">2</i>&emsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">3</i>&emsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">4</i>&emsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">5</i>&emsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">6</i>&emsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">7</i>&emsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">8</i>&emsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
 					<div id="radioTab" class="mv-radio-btn">
 						<h2 style="color: white">R</h2>
@@ -140,16 +135,16 @@
 				<form id="customInput" action="CustomInput" method="post" style="display: none">
 					<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
 					<div class="multiple-input-tab">
-						<i style="color:white">1</i>&nbsp;<input id="CNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
-						<i style="color:white">2</i>&nbsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">3</i>&nbsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">4</i>&nbsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">5</i>&nbsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">6</i>&nbsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">7</i>&nbsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">8</i>&nbsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">9</i>&nbsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">10</i>&nbsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<i style="color:white">1</i>&emsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
+						<br><i style="color:white">2</i>&emsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">3</i>&emsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">4</i>&emsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">5</i>&emsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">6</i>&emsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">7</i>&emsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">8</i>&emsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
 					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
                     <h2 style="color: white; position: absolute;right: 80px">R</h2>
@@ -181,7 +176,6 @@
 			<div class="mv-table-style" style="margin-top: 45px">
 				<table class="mv-list-table">
 					<tr class="mv-list-table-head">
-						<%-- <th style="width: 40px;display: none;display: ${pageLink}"><h4>Page</h4></th>	 --%>	
 						<th style="display: ${numberLink}">
 							<a href="SortByUser?m=number">
 								<button class="sort-button"  style="background-color: ${numberHColor}">
@@ -207,14 +201,12 @@
 									<h4>Quantity<i class="fas fa-sort" style="float: right"></i></h4>
 								</button>
 							</a>
-						</th>	
-						<%-- <th style="width: 120px;display: none;display: ${pageTotalLink}"><h4>Page Total</h4></th>	 --%>	
+						</th>
 						<th style="width: 60px;display: none;display: ${deleteLink}"><h4>Delete</h4></th>
 					</tr>
 					
 					<c:forEach items="${twoDList}" var="twoD">
 						<tr id="${twoD.number}" class="mv-list-table-data" >
-							<%-- <td style="display: none;display: ${pageLink}"><h3>${twoD.page}</h3></td> --%>
 							<td style="color: ${twoD.color};display: ${numberLink}"><h3>${twoD.number}</h3></td>
 							<td style="display: none;display: ${noteLink}"><h3>${twoD.note}</h3></td>
 							<td style="display: none;display: ${rLink}"><h3>${twoD.r}</h3></td>

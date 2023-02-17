@@ -10,7 +10,7 @@
         <script src="JavaScript/javaScript.js" defer></script>
 	</head>
     <body>
-        <div class="mv-list-bg">
+        <div class="mv-index-bg">
             <div id="click">
             	<h3 id="msg00" class="mv-menu-msgBox">${message}</h3>
             </div>

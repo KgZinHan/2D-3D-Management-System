@@ -10,7 +10,7 @@
         <script src="JavaScript/javaScript.js" defer></script>
 	</head>
 	<body tabindex="-1" style="overflow-x: hidden">
-		<div class="mv-recover-bg">
+		<div class="mv-basic-bg">
 			 <div class="mv-tab-bar">
 				<a href="Table" class="recover-button hover-effect margin-left" style="color:">
 					<h3>Home</h3>
@@ -46,16 +46,16 @@
 
                 <form id="multiInput" action="multiInputRecover" method="post" >                	
 					<div class="multiple-input-tab">
-						<i style="color:white">1</i>&nbsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
-						<i style="color:white">2</i>&nbsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">3</i>&nbsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">4</i>&nbsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">5</i>&nbsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">6</i>&nbsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">7</i>&nbsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">8</i>&nbsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">9</i>&nbsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">10</i>&nbsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<i style="color:white">1</i>&emsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
+						<br><i style="color:white">2</i>&emsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">3</i>&emsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">4</i>&emsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">5</i>&emsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">6</i>&emsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">7</i>&emsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">8</i>&emsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
 					<div id="radioTab" class="mv-radio-btn">
 						<h2 style="color: white">R</h2>
@@ -75,16 +75,16 @@
 				
 				<form id="customInput" action="customInputRecover" method="post" style="display: none">
 					<div class="multiple-input-tab">
-						<i style="color:white">1</i>&nbsp;<input id="CNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
-						<i style="color:white">2</i>&nbsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">3</i>&nbsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">4</i>&nbsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">5</i>&nbsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">6</i>&nbsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">7</i>&nbsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">8</i>&nbsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">9</i>&nbsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
-						<i style="color:white">10</i>&nbsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<i style="color:white">1</i>&emsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
+						<br><i style="color:white">2</i>&emsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">3</i>&emsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">4</i>&emsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">5</i>&emsp;<input id="number" type="number" name="number5" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">6</i>&emsp;<input id="number" type="number" name="number6" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">7</i>&emsp;<input id="number" type="number" name="number7" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">8</i>&emsp;<input id="number" type="number" name="number8" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
+						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
 					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
                     <h2 style="color: white; position: absolute;right: 80px">R</h2>

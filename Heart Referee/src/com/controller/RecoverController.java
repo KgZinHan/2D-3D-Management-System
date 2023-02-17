@@ -16,6 +16,7 @@ import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.Number2D;
 
+import common.CommonConstants;
 import common.CommonParameters;
 
 public class RecoverController extends HttpServlet {
@@ -83,7 +84,7 @@ public class RecoverController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, totalRecover);
-		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_CHECK_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_CHECK_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		dispatcher = request.getRequestDispatcher("/recoverTable");
 		dispatcher.forward(request, response);
 

@@ -69,7 +69,7 @@ public class SortRecoverController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.NUMBER_SORT_COLOR, numberHColor);
 		request.setAttribute(CommonParameters.MONEY_SORT_COLOR, moneyHColor);
 		request.setAttribute(CommonParameters.TWO_D_LIST, top2D);

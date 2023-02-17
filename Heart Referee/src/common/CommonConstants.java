@@ -4,6 +4,7 @@ public class CommonConstants {
 
 	// color_code
 	public static final String SORT_COLOR_CODE = "#2196F3";
+	public static final String HOVER_COLOR_CODE = "firebrick";
 
 	// Limits
 	public static final int VERY_HAPPY_LIMIT = 1000;

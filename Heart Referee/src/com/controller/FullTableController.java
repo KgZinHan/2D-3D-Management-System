@@ -70,7 +70,7 @@ public class FullTableController extends HttpServlet {
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
-		request.setAttribute(CommonParameters.TAB_BAR_FULL_TABLE_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_FULL_TABLE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute("zeroList", zeroStartList);
 		request.setAttribute("oneList", oneStartList);
 		request.setAttribute("twoList", twoStartList);

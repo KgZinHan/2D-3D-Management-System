@@ -116,7 +116,7 @@ public class SearchController extends HttpServlet {
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
-		request.setAttribute(CommonParameters.TAB_BAR_WAITING_TABLE_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_WAITING_TABLE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.RECOVER_AMOUNT, CommonConstants.RECOVER_LIMIT);
 		request.setAttribute(CommonParameters.COLOR_COUNT, count2D);

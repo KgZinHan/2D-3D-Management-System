@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="./cssStyle/all.css">
     <script src="JavaScript/javaScript.js" defer></script>
 </head>
-<body class="mv-list-bg" tabindex="-1" style="overflow-x: hidden" onload="checkNumber('${number}')">
+<body class="mv-basic-bg" tabindex="-1" style="overflow-x: hidden" onload="checkNumber('${number}')">
 	<div class="mv-tab-bar">
 		<a href="Table" class="recover-button hover-effect margin-left">
 			<h3>Home</h3>
@@ -33,11 +33,12 @@
 		<p>total recover - ${totalRecover} ks</p>
 	</div>	
 	<div class="mv-margin-top mv-display-middle">
-	<button class="back-button hover-effect" style="left: 10px" onclick="goBack()"><i class="fas fa-arrow-up"></i></button>
-	<a href="SummaryTable?number=${number-1}&money=${money}">
-	<button id="btn1" class="back-button hover-effect" style="float: left"><i class="fas fa-angle-left"></i></button></a>
-	<a href="SummaryTable?number=${number+1}&money=${money}">
-	<button id="btn2" class="back-button hover-effect" style="float: right"><i class="fas fa-angle-right"></i></button></a>
+		
+		<button class="back-button hover-effect" onclick="goBack()"><i class="fas fa-arrow-up fa-2x"></i></button>
+		<a href="SummaryTable?number=${number-1}&money=${money}">
+		<button id="btn1" class="back-button hover-effect" style="float: left"><i class="fas fa-angle-left fa-2x"></i></button></a>
+		<a href="SummaryTable?number=${number+1}&money=${money}">
+		<button id="btn2" class="back-button hover-effect" style="float: right;margin-right: 35px"><i class="fas fa-angle-right fa-2x"></i></button></a>
 		<div id="tb02" class="mv-table-style" style="height: 600px">
 			<table class="mv-waiting-table" style="width: 600px">
 				<tr class="mv-list-table-head" style="font-size: 20px">

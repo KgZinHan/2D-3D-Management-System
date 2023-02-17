@@ -19,12 +19,12 @@
 			<input type="number" name="number" class="mv-special-list-search-box mv-display-center"  placeholder="Enter 2D Number..." autofocus required>
 		</form>
     </div>
-    <div class="mv-waiting-bg">
+    <div class="mv-basic-bg">
     	<div class="mv-tab-bar">
 			<a href="Table" class="recover-button hover-effect margin-left">
 				<h3>Home</h3>
 			</a>
-			<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left" style="color:${waiting}">
+			<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left" style="color:${waiting};border-bottom-color:${home}">
 				<h3>Waiting Table</h3>
 			</a>
 			<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">

@@ -16,6 +16,7 @@ import com.dao.TableDaoImpl;
 import com.entity.Number2D;
 import com.entity.User2D;
 
+import common.CommonConstants;
 import common.CommonParameters;
 
 public class HistoryController extends HttpServlet {
@@ -61,7 +62,7 @@ public class HistoryController extends HttpServlet {
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
-		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.TOTAL_COLUMN_DISPLAY, "table-cell");

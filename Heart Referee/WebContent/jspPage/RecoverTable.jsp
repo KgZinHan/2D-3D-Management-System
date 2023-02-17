@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="./cssStyle/all.css">
     <script src="JavaScript/javaScript.js" defer></script>
 </head>
-<body class="mv-list-bg">
+<body class="mv-basic-bg">
 	<!-- For Msg box -->
     <div id="msgbox01" class="mv-menu-msgBox mv-animate-noti-drop" onclick="displayNone('msgbox01')">${message}</div>
 	<div class="mv-tab-bar">

@@ -6,7 +6,7 @@
 
 /*common functions*/
 
-var myVar=setInterval(function () {myTimer()}, 1000);
+var myVar = setInterval(function () {myTimer()}, 100);
 function myTimer() {
     var date = new Date();
     document.getElementById("time").innerHTML = date.toLocaleTimeString();

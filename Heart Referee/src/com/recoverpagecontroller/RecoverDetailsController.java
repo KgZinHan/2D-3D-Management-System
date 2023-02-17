@@ -18,6 +18,7 @@ import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.User2D;
 
+import common.CommonConstants;
 import common.CommonParameters;
 
 public class RecoverDetailsController extends HttpServlet {
@@ -59,7 +60,7 @@ public class RecoverDetailsController extends HttpServlet {
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);	
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);

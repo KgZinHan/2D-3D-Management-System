@@ -88,7 +88,7 @@ public class SortByUserController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.NUMBER_SORT_COLOR, numberHColor);
 		request.setAttribute(CommonParameters.MONEY_SORT_COLOR, moneyHColor);

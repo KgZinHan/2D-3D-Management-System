@@ -17,6 +17,7 @@ import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.User2D;
 
+import common.CommonConstants;
 import common.CommonParameters;
 
 public class DeleteController extends HttpServlet {
@@ -100,7 +101,7 @@ public class DeleteController extends HttpServlet {
 			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 			request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
 			request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-			request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, "aqua");
+			request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 			request.setAttribute(CommonParameters.REAL_ID, realID);
 			request.setAttribute(CommonParameters.MESSAGE, msg);
 			request.setAttribute(CommonParameters.PAGE_DISPLAY, "table-cell");
