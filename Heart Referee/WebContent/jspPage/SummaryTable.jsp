@@ -11,21 +11,21 @@
 </head>
 <body class="mv-basic-bg" tabindex="-1" style="overflow-x: hidden" onload="checkNumber('${number}')">
 	<div class="mv-tab-bar">
-		<a href="Table" class="recover-button hover-effect margin-left">
-			<h3>Home</h3>
-		</a>
-		<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left" style="color:${waiting}">
-			<h3>Waiting Table</h3>
-		</a>
-		<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">
-			<h3>Recover Check</h3>
-		</a>
-		<a href="RecoverPageController" class="recover-button hover-effect margin-left">
-			<h3>Recover Note</h3>
-		</a>
-		<a href="FullTableController" class="ftbl-button hover-effect margin-left">
-			<h3>Full Table</h3>
-		</a>
+		<h3>
+			<a href="Table" class="recover-button hover-effect margin-left">Home</a>
+		</h3>
+		<h3>
+			<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left" style="color:${waiting}">Waiting Table</a>
+		</h3>
+		<h3>
+			<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">Recover Check</a>
+		</h3>
+		<h3>
+			<a href="RecoverPageController" class="recover-button hover-effect margin-left">Recover Note</a>
+		</h3>
+		<h3>
+			<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
+		</h3>
 	</div>
 	<div id="userfield" class="user-total-field">
 		<p>total money - ${totalMoney} ks</p>
@@ -38,7 +38,7 @@
 		<a href="SummaryTable?number=${number-1}&money=${money}">
 		<button id="btn1" class="back-button hover-effect" style="float: left"><i class="fas fa-angle-left fa-2x"></i></button></a>
 		<a href="SummaryTable?number=${number+1}&money=${money}">
-		<button id="btn2" class="back-button hover-effect" style="float: right;margin-right: 35px"><i class="fas fa-angle-right fa-2x"></i></button></a>
+		<button id="btn2" class="back-button hover-effect" style="float: right;margin-right: 30px"><i class="fas fa-angle-right fa-2x"></i></button></a>
 		<div id="tb02" class="mv-table-style" style="height: 600px">
 			<table class="mv-waiting-table" style="width: 600px">
 				<tr class="mv-list-table-head" style="font-size: 20px">

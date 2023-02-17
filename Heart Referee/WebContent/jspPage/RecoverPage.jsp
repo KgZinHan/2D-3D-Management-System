@@ -12,22 +12,22 @@
 	<body tabindex="-1" style="overflow-x: hidden">
 		<div class="mv-basic-bg">
 			 <div class="mv-tab-bar">
-				<a href="Table" class="recover-button hover-effect margin-left" style="color:">
-					<h3>Home</h3>
-				</a>
-				<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">
-					<h3>Waiting Table</h3>
-				</a>
-				<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">
-					<h3>Recover Check</h3>
-				</a>
-				<a href="RecoverPageController" class="recover-button hover-effect margin-left" style="color:${recoverNote}">
-					<h3>Recover Note</h3>
-				</a>
-				<a href="FullTableController" class="ftbl-button hover-effect margin-left">
-					<h3>Full Table</h3>
-				</a>
-			</div>		
+				<h3>
+					<a href="Table" class="recover-button hover-effect margin-left">Home</a>
+				</h3>
+				<h3>
+					<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">Waiting Table</a>
+				</h3>
+				<h3>
+					<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">Recover Check</a>
+				</h3>
+				<h3>
+					<a href="RecoverPageController" class="recover-button hover-effect margin-left" style="color:${recoverNote}">Recover Note</a>
+				</h3>
+				<h3>
+					<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
+				</h3>
+			</div>	
 			<div class="user-total-field">
 				total money&emsp;-&emsp;${totalMoney} ks
 				<div style="margin-left: 100px"> 

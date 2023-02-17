@@ -64,21 +64,21 @@
 	   			%>
 					</h2>
 				</div>
-				<a href="Table" class="recover-button hover-effect margin-left" style="color:${home}">
-					<h3>Home</h3>
-				</a>
-				<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">
-					<h3>Waiting Table</h3>
-				</a>
-				<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">
-					<h3>Recover Check</h3>
-				</a>
-				<a href="RecoverPageController" class="recover-button hover-effect margin-left">
-					<h3>Recover Note</h3>
-				</a>
-				<a href="FullTableController" class="ftbl-button hover-effect margin-left">
-					<h3>Full Table</h3>
-				</a>
+				<h3>
+					<a href="Table" class="recover-button hover-effect margin-left" style="color:${home}">Home</a>
+				</h3>
+				<h3>
+					<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">Waiting Table</a>
+				</h3>
+				<h3>
+					<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">Recover Check</a>
+				</h3>
+				<h3>
+					<a href="RecoverPageController" class="recover-button hover-effect margin-left">Recover Note</a>
+				</h3>
+				<h3>
+					<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
+				</h3>
 				<h2 class="mv-setting-button hover-effect" style="margin-left: 400px" onclick="displayBlock('modal01')">
                 <i class="fa fa-cogs" ></i>
             </h2>

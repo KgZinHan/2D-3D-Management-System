@@ -13,21 +13,21 @@
 	<!-- For Msg box -->
     <div id="msgbox01" class="mv-menu-msgBox mv-animate-noti-drop" onclick="displayNone('msgbox01')">${message}</div>
 	<div class="mv-tab-bar">
-		<a href="Table" class="recover-button hover-effect margin-left" style="color:">
-			<h3>Home</h3>
-		</a>
-		<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">
-			<h3>Waiting Table</h3>
-		</a>
-		<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left" style="color:${recoverCheck}">
-			<h3>Recover Check</h3>
-		</a>
-		<a href="RecoverPageController" class="recover-button hover-effect margin-left">
-			<h3>Recover Note</h3>
-		</a>
-		<a href="FullTableController" class="ftbl-button hover-effect margin-left">
-			<h3>Full Table</h3>
-		</a>
+		<h3>
+			<a href="Table" class="recover-button hover-effect margin-left">Home</a>
+		</h3>
+		<h3>
+			<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">Waiting Table</a>
+		</h3>
+		<h3>
+			<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left" style="color:${recoverCheck}">Recover Check</a>
+		</h3>
+		<h3>
+			<a href="RecoverPageController" class="recover-button hover-effect margin-left">Recover Note</a>
+		</h3>
+		<h3>
+			<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
+		</h3>
 	</div>
 	<div id="userfield" class="user-total-field">
 		<p style="margin-left: 50px">total money - ${totalMoney} ks</p>
