@@ -135,7 +135,7 @@
 				<form id="customInput" action="CustomInput" method="post" style="display: none">
 					<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
 					<div class="multiple-input-tab">
-						<i style="color:white">1</i>&emsp;<input id="MNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
+						<i style="color:white">1</i>&emsp;<input id="CNumber1" type="number" name="number1" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
 						<br><i style="color:white">2</i>&emsp;<input id="number" type="number" name="number2" class="multiple-input" placeholder="Enter" min="00" max="99">
 						<br><i style="color:white">3</i>&emsp;<input id="number" type="number" name="number3" class="multiple-input" placeholder="Enter" min="00" max="99">
 						<br><i style="color:white">4</i>&emsp;<input id="number" type="number" name="number4" class="multiple-input" placeholder="Enter" min="00" max="99">

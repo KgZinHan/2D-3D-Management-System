@@ -169,7 +169,7 @@ public class SearchController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");
 		request.setAttribute(CommonParameters.TOTAL_MONEY_DISPLAY, "table-cell");
