@@ -69,7 +69,6 @@
 					</th>
 				</tr>
 				<c:forEach items="${twoDList}" var="twoD">
-					<form>
 					<tr id="${twoD.number}" class="mv-waiting-table-data">
 						<td><h3>${twoD.number}</h3></td>
 						<td><h3>${twoD.money}</h3></td>
@@ -79,7 +78,6 @@
 						<td style="cursor: pointer"><a href="addRecover?number=${twoD.number}&money=${twoD.money}&rMoney=${twoD.rNumber}&limit=${limit}">
 							<i class="fa fa-plus"></i></a></td>
 					</tr>
-					</form>
 				</c:forEach>
 			</table>
 		</div>

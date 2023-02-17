@@ -38,6 +38,11 @@ a{
     text-decoration: none;
 }
 
+h4 > a{
+	font-style: normal;
+	color: white;
+}
+
 th > a{
 	font-style: normal;
 	color: black;
@@ -1043,7 +1048,7 @@ input:active + .slider:before {
   background-size: 200% auto;
   color: #fff;
   background-clip: text;
-  text-fill-color: transparent;
+ /*  text-fill-color: transparent; */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 2s linear infinite;

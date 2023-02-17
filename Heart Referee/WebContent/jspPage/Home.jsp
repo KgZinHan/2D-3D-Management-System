@@ -44,9 +44,11 @@
              <div id="radioTab" class="mv-table-input" style="text-align: left;margin-left: 30px;overflow: auto">
              	<h6 style="margin: 0px;margin-bottom: 15px;text-align: center;font-family: kanit;color: red">The Smarter you play, The Luckier you will be...</h6>
             	<c:forEach items="${userList}" var="user">
-            		<a href="Setting?userName=${user.user}">
-             			<h4 class="user-choose">${user.user}&emsp;<i style="float: right">${user.money} ks </i></h4>
-             		</a>
+            		<h4 class="user-choose">
+	            		<a href="Setting?userName=${user.user}">
+	             			${user.user}&emsp;<i style="float: right">${user.money} ks </i>
+	             		</a>
+             		</h4>
              	</c:forEach>
 			</div>
                 
