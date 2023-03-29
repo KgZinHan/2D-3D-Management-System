@@ -20,7 +20,7 @@
                 <div style="display: flex;">
                 	<form action="Setting" method="GET">
                     <input id="user" type="text" name="userName" placeholder="Enter Name" maxlength="14" class="mv-list-search-box" style="width: 300px;border: 1px solid white;color: white" required>
-                    <input id="submitbtn" type="submit" class="enter-button" value="Sign In" onclick="displayMsgBox()">
+                    <input id="submitbtn" type="submit" class="enter-button" value="Go" onclick="displayMsgBox()">
                 </form>
                 </div>
                 
