@@ -129,5 +129,11 @@ function checkNumber(num){
 	}
 }
 
+function showDetails(Details){
+	document.getElementById(Details).style.display = "block";
+}
+function closeDetails(Details){
+	document.getElementById(Details).style.display = "none";
+}
 
 /*****************/

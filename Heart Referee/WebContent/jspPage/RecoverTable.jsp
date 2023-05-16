@@ -30,9 +30,9 @@
 		</h3>
 	</div>
 	<div id="userfield" class="user-total-field">
-		<p style="margin-left: 50px">total money - ${totalMoney} ks</p>
-		<p style="margin-left: 50px">total recover - ${userTotalMoney} ks</p>
-		<p style="margin-left: 50px">approximate recover - ${totalRecover} ks</p>
+		<p style="margin-left: 50px">total money&emsp;-&emsp;${totalMoney} ks</p>
+		<p style="margin-left: 50px">total recover&emsp;-&emsp;${userTotalMoney} ks</p>
+		<p style="margin-left: 50px">approximate recover&emsp;-&emsp;${totalRecover} ks</p>
 	</div>
 	<div class="mv-display-middle">
 		<div class="mv-waiting-panel" style="width: 1000px;justify-content: flex-start;">

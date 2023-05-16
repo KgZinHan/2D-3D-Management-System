@@ -198,6 +198,19 @@ footer{
       
 }
 
+.mv-view-details{
+	display: none;
+	position: fixed;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.95);
+    border-radius: 10px;
+    overflow: auto;
+    z-index: 3;
+      
+}
+
 .mv-logIn-close-button{
     background: transparent;
     color: white;
@@ -292,7 +305,7 @@ footer{
 }
 
 .mv-index-bg{
-	height: 1000px;
+	height: 100vh;
 	background-image: url(../Images/wallpaper1.webp);
 	background-position: center;
 	background-size: cover;
@@ -312,6 +325,11 @@ footer{
 	background-color: black;
 	background-position: center;
 	background-size: cover;
+	text-align: center;
+}
+
+.mv-recover-bg{
+	height: 100vh;
 	text-align: center;
 }
 
@@ -645,6 +663,7 @@ footer{
 .mv-list-search-box,.mv-special-list-search-box{
 	padding: 12px;
 	border: none;
+	margin-right: 15px;
 	border-bottom: 1px solid black;
 	background-color: transparent;
 	font-family: robom;

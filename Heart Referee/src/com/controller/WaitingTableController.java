@@ -46,7 +46,6 @@ public class WaitingTableController extends HttpServlet {
 		String quantityHColor = "";
 		String dNumbers = "0";
 		int redCount = 0;
-		int blueCount = 0;
 		int greenCount = 0;
 		int orangeCount = 0;
 		int blackCount = 0;
@@ -66,9 +65,6 @@ public class WaitingTableController extends HttpServlet {
 			quantityHColor = CommonConstants.SORT_COLOR_CODE;
 		}
 		for (int j = 0; j < top2D.size(); j++) {
-			if (getTotal()-((top2D.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				top2D.get(j).setColor("blue");
-			}
 			if (top2D.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				top2D.get(j).setColor("green");
 			}
@@ -101,9 +97,6 @@ public class WaitingTableController extends HttpServlet {
 			if (countList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}
-			else if (getTotal()-((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				blueCount = blueCount + 1;
-			}
 			else if ((countList.get(j).getMoney() * 80) > getTotal()) {
 				redCount = redCount + 1;
 			}
@@ -114,12 +107,10 @@ public class WaitingTableController extends HttpServlet {
 				blackCount = blackCount + 1;
 			}
 		}
-		count2D.setGreenCount(greenCount);
-		count2D.setBlueCount(blueCount);
 		count2D.setBlackCount(blackCount);
 		count2D.setOrangeCount(orangeCount);
 		count2D.setRedCount(redCount);
-		count2D.setPurpleCount(100 - greenCount - blueCount - blackCount - orangeCount - redCount);
+		count2D.setGreenCount(100 - blackCount - orangeCount - redCount);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
@@ -146,7 +137,6 @@ public class WaitingTableController extends HttpServlet {
 		List<Integer> dNumberList = new ArrayList<Integer>();
 		ColorCount2D count2D = new ColorCount2D();
 		int redCount = 0;
-		int blueCount = 0;
 		int greenCount = 0;
 		int orangeCount = 0;
 		int blackCount = 0;
@@ -158,9 +148,6 @@ public class WaitingTableController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				twoDList.get(j).setColor("blue");
-			}
 			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
@@ -191,9 +178,6 @@ public class WaitingTableController extends HttpServlet {
 			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}
-			else if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				blueCount = blueCount + 1;
-			}
 			else if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
 				redCount = redCount + 1;
 			}
@@ -204,12 +188,11 @@ public class WaitingTableController extends HttpServlet {
 				blackCount = blackCount + 1;
 			}
 		}
-		count2D.setGreenCount(greenCount * 10);
-		count2D.setBlueCount(blueCount * 10);
+		
 		count2D.setBlackCount(blackCount * 10);
 		count2D.setOrangeCount(orangeCount * 10);
 		count2D.setRedCount(redCount * 10);
-		count2D.setPurpleCount((10 - greenCount - blueCount - blackCount - orangeCount - redCount) * 10);
+		count2D.setGreenCount((10 - blackCount - orangeCount - redCount) * 10);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);

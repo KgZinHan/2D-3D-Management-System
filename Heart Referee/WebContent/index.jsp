@@ -15,11 +15,11 @@
             	<h3 id="msg00" class="mv-menu-msgBox">${message}</h3>
             </div>
             <div class="mv-display-center">
-                <h3 style="font-family: roboto;color: silver">since 2021<br>founded by S.H.M.K <br> shared by H.M.K.T.Z</h3>
+                <!-- <h3 style="font-family: roboto;color: silver">since 2021<br>founded by S.H.M.K <br> shared by H.M.K.T.Z</h3> -->
                 <h1 class="mv-welcomeText animate-charcter">HEART REFEREE &nbsp;<i class="fas fa-heart"></i><i class="fas fa-user-secret"></i></h1>
                 <div style="display: flex;">
                 	<form action="Setting" method="GET">
-                    <input id="user" type="text" name="userName" placeholder="Enter Name" maxlength="14" class="mv-list-search-box" style="width: 300px;border: 1px solid white;color: white" required>
+                    <input id="user" type="text" name="userName" placeholder="Enter Commission Name" maxlength="14" class="mv-list-search-box" style="width: 300px;border: 1px solid white;color: white" required>
                     <input id="submitbtn" type="submit" class="enter-button" value="Go" onclick="displayMsgBox()">
                 </form>
                 </div>

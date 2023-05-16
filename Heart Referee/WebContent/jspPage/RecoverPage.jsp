@@ -31,7 +31,7 @@
 			<div class="user-total-field">
 				total money&emsp;-&emsp;${totalMoney} ks
 				<div style="margin-left: 100px"> 
-  					total recover money&emsp;-&emsp;${userTotalMoney} ks
+  					total recover &emsp;-&emsp;${userTotalMoney} ks
 				</div>
 			</div>	
 			
@@ -156,6 +156,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.5.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.6.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

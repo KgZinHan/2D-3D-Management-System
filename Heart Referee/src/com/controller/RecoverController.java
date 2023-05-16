@@ -66,8 +66,14 @@ public class RecoverController extends HttpServlet {
 				if (flag == true) {
 					if (rNumberMoney == 99) {
 						rNumberMoney = 0;						
-					} else {
+					} 
+					else if(rNumberMoney >= recoverLimit) 
+					{
 						rNumberMoney = rNumberMoney - recoverLimit;
+					}
+					else if (rNumberMoney < recoverLimit)
+					{
+						rNumberMoney = 0;
 					}
 
 					Number2D r2D = new Number2D();

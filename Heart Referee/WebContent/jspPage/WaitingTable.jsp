@@ -10,7 +10,19 @@
     <script src="JavaScript/javaScript.js" defer></script>
 </head>
 <!-- For search box -->
-	
+
+<div id="redDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
+	<p style="color: red;font-family:sans-serif;">Red color means the number with red color will be significantly minus(-) in profit.</p>
+</div>
+<div id="orangeDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
+	<p style="color: orange;font-family:sans-serif;">Orange color means the number with orange color will be a little minus(-) in profit.</p>
+</div>
+<div id="blackDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
+	<p style="color: white;font-family:sans-serif;">Black color means the number with black color will be plus(+) in profit.</p>
+</div>
+<div id="greenDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
+	<p style="color: green;font-family:sans-serif;">Green color means the number with green color are less than P(1000) and will be significantly plus(+) in profit.</p>
+</div>
 <body tabindex="-1" style="overflow-x: hidden">
 	
     <div id="msgbox01" class="mv-menu-msgBox mv-animate-noti-drop" onclick="displayNone('msgbox01')">${message}</div>
@@ -41,12 +53,11 @@
 			total money&emsp;-&emsp;${totalMoney} ks
 			<table style="margin-left: 50px;margin-right: 50px">
 				<tr class="mv-count-table">
-					<th class="mv-count-table-head" style="color: red">${count.redCount}%</th>
-					<th class="mv-count-table-head" style="color: orange">${count.orangeCount}%</th>
-					<th class="mv-count-table-head" style="color: black">${count.blackCount}%</th>
-					<th class="mv-count-table-head" style="color: blue">${count.blueCount}%</th>
-					<th class="mv-count-table-head" style="color: green">${count.greenCount}%</th>
-					<th class="mv-count-table-head" style="color: purple">${count.purpleCount}%</th>
+					<th class="mv-count-table-head" style="color: red" onmouseout="closeDetails('redDetailsId')" onmouseover="showDetails('redDetailsId')" >${count.redCount}%</th>
+					<th class="mv-count-table-head" style="color: orange" onmouseout="closeDetails('orangeDetailsId')" onmouseover="showDetails('orangeDetailsId')">${count.orangeCount}%</th>
+					<th class="mv-count-table-head" style="color: black" onmouseout="closeDetails('blackDetailsId')" onmouseover="showDetails('blackDetailsId')">${count.blackCount}%</th>
+					<%-- <th class="mv-count-table-head" style="color: blue">${count.blueCount}%</th>  --%>
+					<th class="mv-count-table-head" style="color: green" onmouseout="closeDetails('greenDetailsId')" onmouseover="showDetails('greenDetailsId')">${count.greenCount}%</th>
 				</tr>
 			</table>
 			total recover&emsp;-&emsp;${totalRecover} ks
@@ -106,6 +117,6 @@
 			</div>
 		</div>
 	</div>
-	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.5.0 &nbsp; Design by N0iSyLuvie</footer>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.6.0 &nbsp; Design by N0iSyLuvie</footer>
 </body>
 </html>

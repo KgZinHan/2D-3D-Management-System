@@ -49,16 +49,12 @@ public class SearchController extends HttpServlet {
 		ColorCount2D count2D = new ColorCount2D();
 		String dNumbers = "0";
 		int redCount = 0;
-		int blueCount = 0;
 		int greenCount = 0;
 		int orangeCount = 0;
 		int blackCount = 0;
 
 		twoDList = tableDao.search2DAmount(number);
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				twoDList.get(j).setColor("blue");
-			}
 			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
@@ -94,9 +90,6 @@ public class SearchController extends HttpServlet {
 			if (countList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}	
-			else if (getTotal()-((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				blueCount = blueCount + 1;
-			}
 			else if ((countList.get(j).getMoney() * 80) > getTotal()) {
 				redCount = redCount + 1;
 			}
@@ -107,12 +100,10 @@ public class SearchController extends HttpServlet {
 				blackCount = blackCount + 1;
 			}
 		}
-		count2D.setGreenCount(greenCount);
-		count2D.setBlueCount(blueCount);
 		count2D.setBlackCount(blackCount);
 		count2D.setOrangeCount(orangeCount);
 		count2D.setRedCount(redCount);
-		count2D.setPurpleCount(100 - greenCount - blueCount - blackCount - orangeCount - redCount);
+		count2D.setGreenCount(100  - blackCount - orangeCount - redCount);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);

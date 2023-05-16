@@ -42,13 +42,13 @@
    				out.print(name);
    			%></h1>
              <div id="radioTab" class="mv-table-input" style="text-align: left;margin-left: 30px;overflow: auto">
-             	<h6 style="margin: 0px;margin-bottom: 15px;text-align: center;font-family: kanit;color: red">The Smarter you play, The Luckier you will be...</h6>
+             	<!-- <h6 style="margin: 0px;margin-bottom: 15px;text-align: center;font-family: kanit;color: red">The Smarter you play, The Luckier you will be...</h6> -->
             	<c:forEach items="${userList}" var="user">
-            		<h4 class="user-choose">
-	            		<a href="Setting?userName=${user.user}">
+            		<a href="Setting?userName=${user.user}">
+	            		<h4 class="user-choose">
 	             			${user.user}&emsp;<i style="float: right">${user.money} ks </i>
-	             		</a>
-             		</h4>
+	             		</h4>
+             		</a>
              	</c:forEach>
 			</div>
                 
@@ -169,7 +169,6 @@
 	           	</div>
 				<form action="Search" method="post" id="search01">
 					&nbsp;<i class="fab fa-sistrix">&nbsp;</i><input type="number" name="number" class="mv-list-search-box"  placeholder="Search Total..." required>
-					
 				</form>
 				<form action="Details" method="post" id="search02">
 					&nbsp;<i class="fas fa-eraser">&nbsp;</i><input type="number" name="number" class="mv-list-search-box"  placeholder="Search Details..." required>
@@ -225,6 +224,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.5.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.6.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>
