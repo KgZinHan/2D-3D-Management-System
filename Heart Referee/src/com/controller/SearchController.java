@@ -65,9 +65,6 @@ public class SearchController extends HttpServlet {
 				twoDList.get(j).setColor("red");
 			}
 		}
-		if (twoDList.size() < 1) {
-			request.setAttribute(CommonParameters.MESSAGE, "Dance off bro!! Number not found.");
-		}
 		
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 

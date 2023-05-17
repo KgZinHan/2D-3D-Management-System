@@ -12,16 +12,19 @@
 <!-- For search box -->
 
 <div id="redDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: red;font-family:sans-serif;">Red color means the number with red color will be significantly minus(-) in profit.</p>
+	<p style="color: red;font-family:sans-serif;">Red color means the numbers with red color will be significantly minus(-) in profit.</p>
 </div>
 <div id="orangeDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: orange;font-family:sans-serif;">Orange color means the number with orange color will be a little minus(-) in profit.</p>
+	<p style="color: orange;font-family:sans-serif;">Orange color means the numbers with orange color will be a little minus(-) in profit.</p>
 </div>
 <div id="blackDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: white;font-family:sans-serif;">Black color means the number with black color will be plus(+) in profit.</p>
+	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be a little plus(+) in profit.</p>
 </div>
 <div id="greenDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: green;font-family:sans-serif;">Green color means the number with green color are less than P(1000) and will be significantly plus(+) in profit.</p>
+	<p style="color: green;font-family:sans-serif;">Green color means the numbers with green color are less than P(1000) and will be plus(+) in profit.</p>
+</div>
+<div id="purpleDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
+	<p style="color: purple;font-family:sans-serif;">Purple color means the numbers with purple color are P(0) and will be significantly plus(+) in profit.</p>
 </div>
 <body tabindex="-1" style="overflow-x: hidden">
 	
@@ -56,8 +59,8 @@
 					<th class="mv-count-table-head" style="color: red" onmouseout="closeDetails('redDetailsId')" onmouseover="showDetails('redDetailsId')" >${count.redCount}%</th>
 					<th class="mv-count-table-head" style="color: orange" onmouseout="closeDetails('orangeDetailsId')" onmouseover="showDetails('orangeDetailsId')">${count.orangeCount}%</th>
 					<th class="mv-count-table-head" style="color: black" onmouseout="closeDetails('blackDetailsId')" onmouseover="showDetails('blackDetailsId')">${count.blackCount}%</th>
-					<%-- <th class="mv-count-table-head" style="color: blue">${count.blueCount}%</th>  --%>
 					<th class="mv-count-table-head" style="color: green" onmouseout="closeDetails('greenDetailsId')" onmouseover="showDetails('greenDetailsId')">${count.greenCount}%</th>
+					<th class="mv-count-table-head" style="color: purple" onmouseout="closeDetails('purpleDetailsId')" onmouseover="showDetails('purpleDetailsId')">${count.purpleCount}%</th>
 				</tr>
 			</table>
 			total recover&emsp;-&emsp;${totalRecover} ks
