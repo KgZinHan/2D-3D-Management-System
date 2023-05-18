@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 
 public class DbDriver {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/testing";
-	private static final String USER = "root";
+	private static final String URL = "jdbc:postgresql://localhost:5432/localTest";
+	private static final String USER = "postgres";
 	private static final String PASSWORD = "jarvis1998";
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DRIVER = "org.postgresql.Driver";
 	private static Connection connection = null;
 
 	public static Connection getConnection() {
