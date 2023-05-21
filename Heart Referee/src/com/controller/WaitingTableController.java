@@ -68,9 +68,6 @@ public class WaitingTableController extends HttpServlet {
 			if (top2D.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				top2D.get(j).setColor("green");
 			}
-			if (getTotal()-((top2D.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal ) {
-				top2D.get(j).setColor("rgb(255,165,30)");
-			}
 			if ((top2D.get(j).getMoney() * 80) > getTotal()) {
 				top2D.get(j).setColor("red");
 			}	
@@ -97,9 +94,6 @@ public class WaitingTableController extends HttpServlet {
 			}
 			else if ((countList.get(j).getMoney() * 80) > getTotal()) {
 				redCount = redCount + 1;
-			}
-			else if (getTotal()-((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal ) {
-				orangeCount = orangeCount + 1;
 			}		
 			else {
 				blackCount = blackCount + 1;
@@ -107,9 +101,8 @@ public class WaitingTableController extends HttpServlet {
 		}
 		count2D.setGreenCount(greenCount);
 		count2D.setBlackCount(blackCount);
-		count2D.setOrangeCount(orangeCount);
 		count2D.setRedCount(redCount);
-		count2D.setPurpleCount(100 - blackCount - orangeCount - redCount - greenCount);
+		count2D.setPurpleCount(100 - blackCount - redCount - greenCount);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
@@ -150,9 +143,6 @@ public class WaitingTableController extends HttpServlet {
 			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal ) {
-				twoDList.get(j).setColor("rgb(255,165,30)");
-			}
 			if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
 				twoDList.get(j).setColor("red");
 			}
@@ -180,18 +170,14 @@ public class WaitingTableController extends HttpServlet {
 			else if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
 				redCount = redCount + 1;
 			}
-			else if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal ) {
-				orangeCount = orangeCount + 1;
-			}
 			else {
 				blackCount = blackCount + 1;
 			}
 		}
 		count2D.setGreenCount(greenCount);
 		count2D.setBlackCount(blackCount * 10);
-		count2D.setOrangeCount(orangeCount * 10);
 		count2D.setRedCount(redCount * 10);
-		count2D.setPurpleCount((10 - blackCount - orangeCount - redCount - greenCount) * 10);
+		count2D.setPurpleCount((10 - blackCount - redCount - greenCount) * 10);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);

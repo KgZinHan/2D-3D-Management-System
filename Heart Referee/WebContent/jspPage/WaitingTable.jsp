@@ -14,9 +14,6 @@
 <div id="redDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
 	<p style="color: red;font-family:sans-serif;">Red color means the numbers with red color will be significantly minus(-) in profit.</p>
 </div>
-<div id="orangeDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: orange;font-family:sans-serif;">Orange color means the numbers with orange color will be a little minus(-) in profit.</p>
-</div>
 <div id="blackDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
 	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be a little plus(+) in profit.</p>
 </div>
@@ -51,13 +48,15 @@
 			<h3>
 				<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
 			</h3>
+			<h3>
+				<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+			</h3>
 		</div>
 		<div id="userfield" class="user-total-field">
 			total money&emsp;-&emsp;${totalMoney} ks
 			<table style="margin-left: 50px;margin-right: 50px">
 				<tr class="mv-count-table">
 					<th class="mv-count-table-head" style="color: red" onmouseout="closeDetails('redDetailsId')" onmouseover="showDetails('redDetailsId')" >${count.redCount}%</th>
-					<th class="mv-count-table-head" style="color: orange" onmouseout="closeDetails('orangeDetailsId')" onmouseover="showDetails('orangeDetailsId')">${count.orangeCount}%</th>
 					<th class="mv-count-table-head" style="color: black" onmouseout="closeDetails('blackDetailsId')" onmouseover="showDetails('blackDetailsId')">${count.blackCount}%</th>
 					<th class="mv-count-table-head" style="color: green" onmouseout="closeDetails('greenDetailsId')" onmouseover="showDetails('greenDetailsId')">${count.greenCount}%</th>
 					<th class="mv-count-table-head" style="color: purple" onmouseout="closeDetails('purpleDetailsId')" onmouseover="showDetails('purpleDetailsId')">${count.purpleCount}%</th>
@@ -120,6 +119,6 @@
 			</div>
 		</div>
 	</div>
-	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.6.0 &nbsp; Design by N0iSyLuvie</footer>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
 </body>
 </html>

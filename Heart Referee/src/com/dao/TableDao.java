@@ -84,5 +84,7 @@ public interface TableDao {
 	
 	public List<Number2D> startList(int start);
 	
+	public int getUserMoneyByNumber(String name,int number);
+	
 	
 }

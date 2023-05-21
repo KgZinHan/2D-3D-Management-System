@@ -26,6 +26,9 @@
 			<h3>
 				<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
 			</h3>
+			<h3>
+				<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+			</h3>
 		</div>
 		<div class="mv-recover-bg" style="background: rgb(50,50,50)">
 			<div class="mv-add-recover-field">
@@ -42,6 +45,6 @@
 			 <button id="singlebtn" class="special-button hover-effect" onclick="goBack()">Back</button>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.5.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

@@ -55,5 +55,17 @@ public class CommonParameters {
 	public static final String TAB_BAR_RECOVER_CHECK_COLOR = "recoverCheck";
 	public static final String TAB_BAR_RECOVER_NOTE_COLOR = "recoverNote";
 	public static final String TAB_BAR_FULL_TABLE_COLOR = "fullTable";
+	public static final String TAB_BAR_FINAL_RESULT_COLOR = "finalResult";
+	
+	// final result Page
+	public static final String FINAL_RESULT_DIV_DISPLAY = "divDisplay";
+	public static final String FINAL_RESULT_NUMBER = "number";	
+	public static final String FINAL_RESULT_TOTAL_MONEY = "totalMoney";
+	public static final String FINAL_RESULT_P_AMOUNT = "pAmount";
+	public static final String FINAL_RESULT_P_MONEY = "pMoney";
+	public static final String FINAL_RESULT_COMMISSION = "commission";
+	public static final String FINAL_RESULT_TOTAL = "total";
+	public static final String FINAL_RESULT_TOTAL_COLOR = "totalColor";
+	
 
 }

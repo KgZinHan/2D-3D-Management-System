@@ -26,6 +26,9 @@
 		<h3>
 			<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
 		</h3>
+		<h3>
+			<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+		</h3>
 	</div>
 	<div id="userfield" class="user-total-field">
 		<p>total money - ${totalMoney} ks</p>

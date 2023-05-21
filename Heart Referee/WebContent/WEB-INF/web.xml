@@ -335,4 +335,25 @@
     <url-pattern>/addRecoverPage</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>finalResult</servlet-name>
+    <servlet-class>com.controller.FinalResultController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>finalResult</servlet-name>
+    <url-pattern>/Final</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>finalResultPage</description>
+    <servlet-name>finalResultPage</servlet-name>
+    <jsp-file>/jspPage/FinalResultPage.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>finalResultPage</servlet-name>
+    <url-pattern>/finalResult</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

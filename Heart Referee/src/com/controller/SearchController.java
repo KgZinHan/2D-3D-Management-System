@@ -90,9 +90,6 @@ public class SearchController extends HttpServlet {
 			}	
 			else if ((countList.get(j).getMoney() * 80) > getTotal()) {
 				redCount = redCount + 1;
-			}
-			else if (getTotal()-((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal ) {
-				orangeCount = orangeCount + 1;
 			}	
 			else {
 				blackCount = blackCount + 1;
@@ -101,7 +98,7 @@ public class SearchController extends HttpServlet {
 		count2D.setBlackCount(blackCount);
 		count2D.setOrangeCount(orangeCount);
 		count2D.setRedCount(redCount);
-		count2D.setGreenCount(100  - blackCount - orangeCount - redCount);
+		count2D.setGreenCount(100  - blackCount - redCount);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);

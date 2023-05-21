@@ -59,12 +59,12 @@
 		<div class="mv-basic-bg">
 			<div class="mv-tab-bar">
 				<div class="user-name hover-effect" onclick="displayBlock('modal02')">
-					<h2>
-						<i class="fas fa-users"></i>&nbsp;
+					<h4>
+						<i class="fas fa-users"></i>&nbsp;<b>
 						<% 
 	   				out.print(name);
-	   			%>
-					</h2>
+	   			%></b>
+					</h4>
 				</div>
 				<h3>
 					<a href="Table" class="recover-button hover-effect margin-left" style="color:${home}">Home</a>
@@ -81,7 +81,10 @@
 				<h3>
 					<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
 				</h3>
-				<h2 class="mv-setting-button hover-effect" style="margin-left: 400px" onclick="displayBlock('modal01')">
+				<h3>
+					<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+				</h3>
+				<h2 class="ftbl-button hover-effect margin-left"  onclick="displayBlock('modal01')">
                 <i class="fa fa-cogs" ></i>
             </h2>
 				
@@ -234,6 +237,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.6.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

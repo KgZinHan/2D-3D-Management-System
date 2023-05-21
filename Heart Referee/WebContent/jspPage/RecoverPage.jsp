@@ -27,6 +27,9 @@
 				<h3>
 					<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
 				</h3>
+				<h3>
+					<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+				</h3>
 			</div>	
 			<div class="user-total-field">
 				total money&emsp;-&emsp;${totalMoney} ks
@@ -167,6 +170,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.6.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

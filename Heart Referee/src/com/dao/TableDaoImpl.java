@@ -921,4 +921,23 @@ public class TableDaoImpl implements TableDao {
 		}
 	}
 
+	@Override
+	public int getUserMoneyByNumber(String name,int number) {
+		int money = 0;
+		String selectQuery = "SELECT SUM(MONEY) AS money FROM TWO_D_TABLE WHERE NAME = ? AND NUMBER = ? GROUP BY NUMBER";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setString(1, name);
+			preparedStatement.setInt(2, number);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				money = resultSet.getInt("money");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return money;
+	}
+
 }
