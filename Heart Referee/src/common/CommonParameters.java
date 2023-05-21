@@ -13,6 +13,7 @@ public class CommonParameters {
 	public static final String USER_TOTAL_MONEY = "userTotalMoney";
 	public static final String PAGE_NUMBER = "pageNo";
 	public static final String REAL_ID = "id";
+	public static final String ID_ALERT_COLOR = "idAlertColor";
 
 	// Lists
 	public static final String TWO_D_LIST = "twoDList";

@@ -396,6 +396,9 @@ footer{
 	color: aliceblue;
 	text-align: left;
 	font-family: robol;
+	padding: 10px;
+	border: 1px solid silver;
+	border-radius: 5px;
 }
 
 .multiple-input-tab{
@@ -541,7 +544,7 @@ footer{
 
 .mv-drop-down-button{
 	padding: 10px;
-	width: 200px;
+	width: 180px;
 	background: transparent;
 	cursor: pointer;
 	border: none;
@@ -553,8 +556,8 @@ footer{
 	display: none;
 	position: absolute;
     top: 40px;
-    right: 435px;
-	width: 200px;
+    right: 455px;
+	width: 180px;
 	height: 150px;
     background-color: rgba(240,240,240,1);   
     z-index: 1;  

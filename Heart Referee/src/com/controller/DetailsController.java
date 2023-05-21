@@ -41,12 +41,16 @@ public class DetailsController extends HttpServlet {
 		List<Integer> dNumberList = new ArrayList<Integer>();
 		String dNumbers = "0";
 		int realID;
+		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 		twoDList = tableDao.getTableByUser(userName);
 
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		if(realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+		}
 
 		dNumberList = tableDao.getDangerousNumber();
 		if (!(dNumberList.size() <= 0)) {
@@ -66,6 +70,7 @@ public class DetailsController extends HttpServlet {
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
+		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
 		request.setAttribute(CommonParameters.PAGE_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");
@@ -80,6 +85,7 @@ public class DetailsController extends HttpServlet {
 		List<Integer> dNumberList = new ArrayList<Integer>();
 		String dNumbers = "0";
 		int realID;
+		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
@@ -89,6 +95,9 @@ public class DetailsController extends HttpServlet {
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		if(realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+		}
 
 		dNumberList = tableDao.getDangerousNumber();
 		if (!(dNumberList.size() <= 0)) {
@@ -108,6 +117,7 @@ public class DetailsController extends HttpServlet {
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
+		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
 		request.setAttribute(CommonParameters.PAGE_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");

@@ -26,6 +26,7 @@ public class HistoryController extends HttpServlet {
 	List<Integer> rNumberList = new ArrayList<Integer>();
 	List<User2D> userList = new ArrayList<User2D>();
 	int realID;
+	String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 	int total;
 	int userTotal;
 	TableDao tableDao = new TableDaoImpl();
@@ -44,6 +45,9 @@ public class HistoryController extends HttpServlet {
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		if(realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+		}
 
 		dNumberList = tableDao.getDangerousNumber();
 		if (!(dNumberList.size() <= 0)) {
@@ -62,6 +66,7 @@ public class HistoryController extends HttpServlet {
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
+		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");

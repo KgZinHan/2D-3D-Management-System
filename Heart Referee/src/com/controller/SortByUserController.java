@@ -43,6 +43,7 @@ public class SortByUserController extends HttpServlet {
 		String numberHColor = "";
 		String moneyHColor = "";
 		String quantityHColor = "";
+		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 		if (entity == "number" || entity.equals("number")) {
 			top2D = tableDao.sortByUserNumber(userName);
 			numberHColor = CommonConstants.SORT_COLOR_CODE;
@@ -71,6 +72,9 @@ public class SortByUserController extends HttpServlet {
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		if(realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+		}
 
 		dNumberList = tableDao.getDangerousNumber();
 		if (!(dNumberList.size() <= 0)) {
@@ -90,6 +94,7 @@ public class SortByUserController extends HttpServlet {
 		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
+		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
 		request.setAttribute(CommonParameters.NUMBER_SORT_COLOR, numberHColor);
 		request.setAttribute(CommonParameters.MONEY_SORT_COLOR, moneyHColor);
 		request.setAttribute(CommonParameters.QUANTITY_SORT_COLOR, quantityHColor);

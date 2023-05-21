@@ -26,7 +26,7 @@
 				</div>
                 <input type="submit" class="mv-logIn-button " value="Change">
             </form>
-            <h3 style="color: aliceblue;text-align: center;margin-top: 30px">id count = ${id}</h3>
+            <h3 style="color: ${idAlertColor};text-align: center;margin-top: 30px">id count = ${id}</h3>
             <a href="Delete?id=99999&pageNo=${pageNo}">
 				<button class="mv-delete-button" onclick="if(!(confirm('Are you sure you want to delete entire table?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete Table</button>
 			</a>
@@ -99,8 +99,18 @@
 					<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
                   	<input id="number1" type="text" name="number" autofocus="autofocus" tabindex="1" class="mv-number-button" placeholder="Enter" min="00" max="99">
                    	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
-                 	<h3 class="mv-special-note">Note !<br>** &nbsp;&nbsp;=&nbsp; a puu<br> // &nbsp;&nbsp;&nbsp;=&nbsp; natkhat <br> ++ &nbsp;=&nbsp; power <br> /* &nbsp;&nbsp;=&nbsp; nyiko
-                 	 <br> *?* &nbsp;=&nbsp; 19 numbers<br> *?** =&nbsp; 20 numbers</h3>
+                 	<h3 class="mv-special-note">
+	                 	&emsp;Shortcut Note!
+	                 	<br>** &nbsp;&nbsp;=&nbsp; a puu
+	                 	<br> // &nbsp;&nbsp;&nbsp;=&nbsp; natkhat 
+	                 	<br> ++ &nbsp;=&nbsp; power 
+	                 	<br> /* &nbsp;&nbsp;=&nbsp; nyiko
+	                 	<br> ?+ &nbsp;=&nbsp; ? bk
+	                 	<br> ?* &nbsp;&nbsp;=&nbsp; ? start
+	                 	<br> *? &nbsp;&nbsp;=&nbsp; ? end
+	                 	<br> *?* &nbsp;=&nbsp; 19 numbers
+	                 	<br> *?** =&nbsp; 20 numbers
+                 	</h3>
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
                 </form>
 

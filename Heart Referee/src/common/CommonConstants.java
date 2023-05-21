@@ -5,6 +5,8 @@ public class CommonConstants {
 	// color_code
 	public static final String SORT_COLOR_CODE = "#2196F3";
 	public static final String HOVER_COLOR_CODE = "firebrick";
+	public static final String ID_ALERT_COLOR = "red";
+	public static final String ID_DEFAULT_COLOR = "green";
 
 	// Limits
 	public static final int VERY_HAPPY_LIMIT = 1000;
@@ -15,4 +17,5 @@ public class CommonConstants {
 	//Each Limits
 	public static final int ORANGE_LIMIT_PERSON = 3000;
 	public static final int RED_LIMIT_PERSON = 5000;
+	public static final int ID_COUNT_LIMIT = 950000;
 }
