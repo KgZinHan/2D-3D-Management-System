@@ -38,6 +38,7 @@ public class SummaryTableController extends HttpServlet {
 		String numberS = request.getParameter("number");
 		int number = Integer.parseInt(numberS);
 		int money = 0;
+		
 		money = tableDao.getMoney(number);
 		resultList = tableDao.getResultTableByNumber(number);
 		total = tableDao.getTotalMoney();

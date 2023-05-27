@@ -15,19 +15,22 @@
 				<a href="Table" class="recover-button hover-effect margin-left">Home</a>
 			</h3>
 			<h3>
-				<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">Waiting Table</a>
+				<a href="WaitingTable?m=default" class="tab-bar-button hover-effect margin-left">Waiting Table</a>
 			</h3>
 			<h3>
-				<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left" style="color:${recoverCheck}">Recover Check</a>
+				<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left" style="color:${recoverCheck}">Recover Check</a>
 			</h3>
 			<h3>
-				<a href="RecoverPageController" class="recover-button hover-effect margin-left">Recover Note</a>
+				<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left">Recover Note</a>
 			</h3>
 			<h3>
-				<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
+				<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>
 			</h3>
 			<h3>
-				<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+				<a href="Final" class="tab-bar-button hover-effect margin-left">Report</a>
+			</h3>
+			<h3>
+				<a href="HResult" class="tab-bar-button hover-effect margin-left">Ledger</a>
 			</h3>
 		</div>
 		<div class="mv-recover-bg" style="background: rgb(50,50,50)">

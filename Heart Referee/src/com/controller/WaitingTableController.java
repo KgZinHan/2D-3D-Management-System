@@ -38,16 +38,13 @@ public class WaitingTableController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Number2D> top2D = new ArrayList<Number2D>();
 		List<Number2D> countList = new ArrayList<Number2D>();
-		List<Integer> dNumberList = new ArrayList<Integer>();
 		ColorCount2D count2D = new ColorCount2D();
 		String entity = request.getParameter("m");
 		String numberHColor = "";
 		String moneyHColor = "";
 		String quantityHColor = "";
-		String dNumbers = "0";
 		int redCount = 0;
 		int greenCount = 0;
-		int orangeCount = 0;
 		int blackCount = 0;
 		
 		total = tableDao.getTotalMoney();
@@ -73,19 +70,6 @@ public class WaitingTableController extends HttpServlet {
 			}	
 		}
 		
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
-			}
-		}
-		
 		//color count method
 		countList = tableDao.sortByMoney();
 		for (int j = 0; j < countList.size(); j++) {
@@ -99,6 +83,7 @@ public class WaitingTableController extends HttpServlet {
 				blackCount = blackCount + 1;
 			}
 		}
+		
 		count2D.setGreenCount(greenCount);
 		count2D.setBlackCount(blackCount);
 		count2D.setRedCount(redCount);
@@ -107,7 +92,6 @@ public class WaitingTableController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.TAB_BAR_WAITING_TABLE_COLOR, CommonConstants.HOVER_COLOR_CODE);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.RECOVER_AMOUNT, CommonConstants.RECOVER_LIMIT);
 		request.setAttribute(CommonParameters.COLOR_COUNT, count2D);
 		request.setAttribute(CommonParameters.NUMBER_SORT_COLOR, numberHColor);
@@ -126,39 +110,23 @@ public class WaitingTableController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Integer> dNumberList = new ArrayList<Integer>();
 		ColorCount2D count2D = new ColorCount2D();
 		int redCount = 0;
 		int greenCount = 0;
-		int orangeCount = 0;
 		int blackCount = 0;
-		String dNumbers = "0";
 		String startS = request.getParameter("start");
 		int start = Integer.parseInt(startS);
 		
 		twoDList = tableDao.filterStart(start);
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
+		
 		for (int j = 0; j < twoDList.size(); j++) {
 			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
 			if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
 				twoDList.get(j).setColor("red");
-			}
-		}
-		
-		 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
 			}
 		}
 		
@@ -174,6 +142,7 @@ public class WaitingTableController extends HttpServlet {
 				blackCount = blackCount + 1;
 			}
 		}
+		
 		count2D.setGreenCount(greenCount);
 		count2D.setBlackCount(blackCount * 10);
 		count2D.setRedCount(redCount * 10);
@@ -182,7 +151,6 @@ public class WaitingTableController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.TAB_BAR_WAITING_TABLE_COLOR , CommonConstants.HOVER_COLOR_CODE);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.RECOVER_AMOUNT, CommonConstants.RECOVER_LIMIT);
 		request.setAttribute(CommonParameters.COLOR_COUNT, count2D);
 		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);

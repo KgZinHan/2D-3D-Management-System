@@ -37,25 +37,27 @@ public class SortByController extends HttpServlet {
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		List<Number2D> top2D = new ArrayList<Number2D>();
 		List<User2D> userList = new ArrayList<User2D>();
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
 		String entity = request.getParameter("m");
 		String numberHColor = "";
 		String moneyHColor = "";
 		String quantityHColor = "";
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
+		
 		if (entity == "number" || entity.equals("number")) {
 			top2D = tableDao.sortByNumber();
 			numberHColor = CommonConstants.SORT_COLOR_CODE;
 		}
+		
 		if (entity == "money" || entity.equals("money")) {
 			top2D = tableDao.sortByMoney();
 			moneyHColor = CommonConstants.SORT_COLOR_CODE;
 		}
+		
 		if (entity == "quantity" || entity.equals("quantity")) {
 			top2D = tableDao.sortByQuantity();
 			quantityHColor = CommonConstants.SORT_COLOR_CODE;
 		}
+		
 		for (int j = 0; j < top2D.size(); j++) {
 			if (top2D.get(j).getMoney() < CommonConstants.HAPPY_LIMIT) {
 				top2D.get(j).setColor("green");
@@ -67,30 +69,27 @@ public class SortByController extends HttpServlet {
 				top2D.get(j).setColor("red");
 			}
 		}
+		
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		
 		if(realID > CommonConstants.ID_COUNT_LIMIT) {
 			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 		}
 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
+		for(int i = 0;i < userList.size();i++) {
+			String checked = "red";
+			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+			{
+				checked = "green";
 			}
+			userList.get(i).setChecked(checked);
 		}
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);

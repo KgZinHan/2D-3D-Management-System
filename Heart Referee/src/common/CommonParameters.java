@@ -5,6 +5,7 @@ public class CommonParameters {
 	// Sessions
 	public static final String SESSION_USER = "userName";
 	public static final String SESSION_NAME = "sessionName";
+	public static final String SESSION_PAGE = "sessionPage";
 
 	// Constants
 	public static final String MESSAGE = "message";
@@ -19,6 +20,8 @@ public class CommonParameters {
 	public static final String TWO_D_LIST = "twoDList";
 	public static final String RECOVER_2D_LIST = "twoDList";
 	public static final String USER_LIST = "userList";
+	public static final String USER_2D_LIST = "user2DList";
+	public static final String TOTAL_USER_2D_LIST = "totalUser2DList";
 
 	// DisplayLink
 	public static final String DELETE_COLUMN_DISPLAY = "deleteLink";
@@ -38,7 +41,6 @@ public class CommonParameters {
 	public static final String QUANTITY_SORT_COLOR = "quantityHColor";
 
 	// Waiting Table
-	public static final String DANGEROUS_NUMBERS = "dNumbers";
 	public static final String COLOR_COUNT = "count";
 	public static final String RECOVER_AMOUNT = "recover";
 	
@@ -61,9 +63,10 @@ public class CommonParameters {
 	public static final String FINAL_RESULT_DIV_DISPLAY = "divDisplay";
 	public static final String FINAL_RESULT_NUMBER = "number";	
 	public static final String FINAL_RESULT_TOTAL_MONEY = "totalMoney";
-	public static final String FINAL_RESULT_P_AMOUNT = "pAmount";
+	public static final String FINAL_RESULT_P = "p";
 	public static final String FINAL_RESULT_P_MONEY = "pMoney";
 	public static final String FINAL_RESULT_COMMISSION = "commission";
+	public static final String FINAL_RESULT_COMMISSION_PERCENT = "comPercent";
 	public static final String FINAL_RESULT_TOTAL = "total";
 	public static final String FINAL_RESULT_TOTAL_COLOR = "totalColor";
 	

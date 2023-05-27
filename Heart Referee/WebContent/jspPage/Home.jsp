@@ -26,32 +26,41 @@
 				</div>
                 <input type="submit" class="mv-logIn-button " value="Change">
             </form>
-            <h3 style="color: ${idAlertColor};text-align: center;margin-top: 30px">id count = ${id}</h3>
-            <a href="Delete?id=99999&pageNo=${pageNo}">
-				<button class="mv-delete-button" onclick="if(!(confirm('Are you sure you want to delete entire table?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete Table</button>
-			</a>
-			<a href="Delete?id=delete">
-				<button class="mv-delete-button" style="left: 10px" onclick="if(!(confirm('Are you sure you want to delete user?'))) return false;"><i class="fas fa-user-slash"></i>&emsp;Delete User</button>
-			</a>
+            <%-- color: ${idAlertColor} --%>
+            <h3 style="color: white;text-align: center;margin-top: 30px;font-family: robom">id count = ${id}</h3>
+            <div style="text-align: center">
+            	<a href="#">
+					<button class="mv-delete-button" style="background-color: #2196F3;border-color: #2196F3;"><i class="fas fa-stop"></i>&emsp;Closed Number</button>
+				</a>
+	            <a href="Delete?id=99999&pageNo=${pageNo}">
+					<button class="mv-delete-button" style="background-color: #2196F3;border-color: #2196F3;" onclick="if(!(confirm('Are you sure you want to save and delete this table?'))) return false;"><i class="fas fa-save"></i>&emsp;Save Table</button>
+				</a><br>
+				<a href="Delete?id=delete">
+					<button class="mv-delete-button" onclick="if(!(confirm('Are you sure you want to delete user?'))) return false;"><i class="fas fa-user-slash"></i>&emsp;Delete User</button>
+				</a>
+				<a href="Delete?id=all">
+					<button class="mv-delete-button" onclick="if(!(confirm('Are you sure you want to delete all tables?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete Table</button>
+				</a>
+			</div>
         </div>
         <!---->
         <div id="modal02" class="mv-display-center mv-view-image mv-animate-zoom"> 
             <button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
-            <h1 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;<% 
+            <h2 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;<% 
                	String name = (String)session.getAttribute("userName");
    				out.print(name);
-   			%></h1>
-             <div id="radioTab" class="mv-table-input" style="text-align: left;margin-left: 30px;overflow: auto">
-             	<!-- <h6 style="margin: 0px;margin-bottom: 15px;text-align: center;font-family: kanit;color: red">The Smarter you play, The Luckier you will be...</h6> -->
+   			%></h2>
+             <div id="radioTab" class="mv-table-input">
+            	<h5 style="text-align: center">? &emsp;<spam style="color: red">red = not save</spam>&emsp;|&emsp;<spam style="color: green"> green = save</spam></h5>  
             	<c:forEach items="${userList}" var="user">
             		<a href="Setting?userName=${user.user}">
-	            		<h4 class="user-choose">
-	             			${user.user}&emsp;<i style="float: right">${user.money} ks </i>
-	             		</h4>
+	            		<h5 class="user-choose">
+	             			<span style="color:${user.checked}">${user.user}</span>&emsp;<spam style="float: right">${user.money} ks </spam>
+	             		</h5>
              		</a>
              	</c:forEach>
 			</div>
-                
+             
             <a href="log-out">
             	<button class="log-out-btn"><i class="fas fa-user-plus"></i>&nbsp;New</button>
             </a>
@@ -59,40 +68,39 @@
 		<div class="mv-basic-bg">
 			<div class="mv-tab-bar">
 				<div class="user-name hover-effect" onclick="displayBlock('modal02')">
-					<h4>
-						<i class="fas fa-users"></i>&nbsp;<b>
-						<% 
-	   				out.print(name);
-	   			%></b>
-					</h4>
+					<i class="fas fa-users"></i>&nbsp;<b>
+					<% out.print(name);%></b>
 				</div>
 				<h3>
-					<a href="Table" class="recover-button hover-effect margin-left" style="color:${home}">Home</a>
+					<a href="Table" class="tab-bar-button hover-effect margin-left" style="color:${home}">Home</a>
 				</h3>
 				<h3>
-					<a href="WaitingTable?m=default" class="waiting-button hover-effect margin-left">Waiting Table</a>
+					<a href="WaitingTable?m=default" class="tab-bar-button hover-effect margin-left">Waiting Table</a>
 				</h3>
 				<h3>
-					<a href="Recover?limit=1500" class="ftbl-button hover-effect margin-left">Recover Check</a>
+					<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left">Recover Check</a>
 				</h3>
 				<h3>
-					<a href="RecoverPageController" class="recover-button hover-effect margin-left">Recover Note</a>
+					<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left">Recover Note</a>
 				</h3>
 				<h3>
-					<a href="FullTableController" class="ftbl-button hover-effect margin-left">Full Table</a>
+					<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>
 				</h3>
 				<h3>
-					<a href="Final" class="ftbl-button hover-effect margin-left">Final</a>
+					<a href="Final" class="tab-bar-button hover-effect margin-left">Report</a>
 				</h3>
-				<h2 class="ftbl-button hover-effect margin-left"  onclick="displayBlock('modal01')">
-                <i class="fa fa-cogs" ></i>
-            </h2>
+				<h3>
+					<a href="HResult" class="tab-bar-button hover-effect margin-left">Ledger</a>
+				</h3>
+				<h3 class="tab-bar-button hover-effect margin-left"  onclick="displayBlock('modal01')">
+	                <i class="fa fa-cogs" ></i>
+	            </h3>
 				
 			</div>
 			<div class="user-total-field">
-				<% 
+				<b><% 
    					out.print(name);
-   				%>'s total money&emsp;-&emsp;${userTotalMoney} ks
+   				%></b>'s total money&emsp;-&emsp;${userTotalMoney} ks
    				<h2 id="time" style="margin-left: 50px;margin-right: 50px">
    				</h2>
 				total money&emsp;-&emsp;${totalMoney} ks

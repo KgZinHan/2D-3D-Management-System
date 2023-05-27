@@ -4,14 +4,16 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.driver.DbDriver;
+import com.entity.AllUser2D;
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Summary2D;
 import com.entity.User2D;
+import java.text.SimpleDateFormat;
 
 public class TableDaoImpl implements TableDao {
 
@@ -226,6 +228,7 @@ public class TableDaoImpl implements TableDao {
 		String deleteQuery2 = "DELETE FROM HISTORY_TABLE WHERE ID >= 0";
 		String deleteQuery3 = "DELETE FROM TWO_D_RECOVER_TABLE WHERE ID >= 0";
 		String deleteQuery4 = "DELETE FROM RECOVER_HISTORY_TABLE WHERE ID >= 0";
+		String deleteQuery5 = "DELETE FROM TEMP_TABLE";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
@@ -235,6 +238,8 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement = connection.prepareStatement(deleteQuery3);
 			preparedStatement.execute();
 			preparedStatement = connection.prepareStatement(deleteQuery4);
+			preparedStatement.execute();
+			preparedStatement = connection.prepareStatement(deleteQuery5);
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -860,7 +865,7 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public List<Number2D> getNumberDetailsByUser(String name, int number) {
-		twoDList = new ArrayList<Number2D>();
+		List<Number2D> twoDList = new ArrayList<Number2D>();
 		String query = "SELECT * FROM TWO_D_TABLE WHERE NAME = ? AND NUMBER = ? ORDER BY ID DESC";
 		connection = DbDriver.getConnection();
 		try {
@@ -939,5 +944,220 @@ public class TableDaoImpl implements TableDao {
 		}
 		return money;
 	}
+
+	@Override
+	public void addValuesToAllTable() {
+		List<AllUser2D> userList = getTempTable();
+		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,DATE,TWO_D_TIME) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String checkQuery = "SELECT DATE FROM ALL_TABLE WHERE DATE = ?";
+		String time;
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(checkQuery);
+			preparedStatement.setDate(1, Date.valueOf(LocalDate.now()));
+			resultSet = preparedStatement.executeQuery();
+			if (!resultSet.next()) {
+				time = "morning";
+			}
+			else {
+				time = "evening";
+			}
+			
+			preparedStatement = connection.prepareStatement(query);
+			for(int i =0; i< userList.size(); i++) {
+				preparedStatement.setString(1, userList.get(i).getUsername());
+				preparedStatement.setInt(2,userList.get(i).getNumber());
+				preparedStatement.setInt(3,userList.get(i).getTotalMoney());
+				preparedStatement.setInt(4,userList.get(i).getP());
+				preparedStatement.setInt(5,userList.get(i).getpMoney());
+				preparedStatement.setInt(6,userList.get(i).getComPercent());
+				preparedStatement.setInt(7,userList.get(i).getComMoney());
+				preparedStatement.setInt(8,userList.get(i).getTotal());
+				preparedStatement.setDate(9, Date.valueOf(LocalDate.now()));
+				preparedStatement.setString(10, time);
+				
+				preparedStatement.execute();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public List<AllUser2D> getAllTableByUser(String username) {
+		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
+		String query = "SELECT * FROM ALL_TABLE WHERE NAME = ? ";
+		int count = 1;
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				AllUser2D user2D = new AllUser2D();
+				user2D.setUsername(resultSet.getString("name"));
+				user2D.setNumber(resultSet.getInt("number"));
+				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setP(resultSet.getInt("p"));
+				user2D.setpMoney(resultSet.getInt("p_money"));
+				user2D.setComPercent(resultSet.getInt("com_percent"));
+				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTotal(resultSet.getInt("total"));
+				user2D.setDate(resultSet.getDate("date"));
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		        String formattedDate = dateFormat.format(user2D.getDate());
+		        user2D.setStringDate(formattedDate);
+				user2D.setTime(resultSet.getString("two_d_time"));
+				if(user2D.getTotal() <= 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
+				user2D.setCount(count);
+				count++;
+				user2DList.add(user2D);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user2DList;
+	}
+	
+	@Override
+	public List<AllUser2D> getTotalAllTableByUser(String username) {
+		List<AllUser2D> totalUser2DList = new ArrayList<AllUser2D>();
+		String query = "SELECT NAME,SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE WHERE NAME = ? GROUP BY NAME";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				AllUser2D user2D = new AllUser2D();
+				user2D.setUsername(resultSet.getString("name"));
+				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setP(resultSet.getInt("p"));
+				user2D.setpMoney(resultSet.getInt("p_money"));
+				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTotal(resultSet.getInt("total"));
+				if(user2D.getTotal() <= 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
+				totalUser2DList.add(user2D);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return totalUser2DList;
+	}
+
+	@Override
+	public void deleteAllTable() {
+		String deleteQuery = "DELETE FROM ALL_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	public void addUserTempTable(AllUser2D user2D) {
+		String query = "INSERT INTO TEMP_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL) VALUES (?,?,?,?,?,?,?,?)";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, user2D.getUsername());
+			preparedStatement.setInt(2,user2D.getNumber());
+			preparedStatement.setInt(3, user2D.getTotalMoney());
+			preparedStatement.setInt(4, user2D.getP());
+			preparedStatement.setInt(5, user2D.getpMoney());
+			preparedStatement.setInt(6, user2D.getComPercent());
+			preparedStatement.setInt(7, user2D.getComMoney());
+			preparedStatement.setInt(8, user2D.getTotal());
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public boolean checkNameInTempTable(String username) {
+		boolean flag = false;
+		String query = "SELECT * FROM TEMP_TABLE WHERE NAME = ?";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, username);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public void updateUserTempTable(AllUser2D user2D) {
+		String query = "UPDATE TEMP_TABLE SET NUMBER = ?,TOTAL_MONEY = ?,P = ?,P_MONEY = ?,COM_PERCENT = ?,COM_MONEY = ?, TOTAL = ? WHERE NAME = ?";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, user2D.getNumber());
+			preparedStatement.setInt(2, user2D.getTotalMoney());
+			preparedStatement.setInt(3, user2D.getP());
+			preparedStatement.setInt(4, user2D.getpMoney());
+			preparedStatement.setInt(5, user2D.getComPercent());
+			preparedStatement.setInt(6, user2D.getComMoney());
+			preparedStatement.setInt(7, user2D.getTotal());
+			preparedStatement.setString(8, user2D.getUsername());
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<AllUser2D> getTempTable() {
+		List<AllUser2D> allUser2DList = new ArrayList<AllUser2D>();
+		AllUser2D user2D;
+		String query = "SELECT * FROM TEMP_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				user2D = new AllUser2D();
+				user2D.setUsername(resultSet.getString("name"));
+				user2D.setNumber(resultSet.getInt("number"));
+				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setP(resultSet.getInt("p"));	
+				user2D.setpMoney(resultSet.getInt("p_money"));
+				user2D.setComPercent(resultSet.getInt("com_percent"));
+				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTotal(resultSet.getInt("Total"));
+				allUser2DList.add(user2D);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return allUser2DList;
+	}
+
+	
+
+	
 
 }

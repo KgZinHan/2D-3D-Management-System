@@ -92,11 +92,11 @@ footer{
 .mv-menu-msgBox{
 	display: flex;
 	position: absolute;
-    top: 70px;
+    top: 60px;
     width: 100%;
-    color: black;
-	background-color: rgba(255,255,255,0.95);
-    font-size: 30px;
+    color: silver;
+	background-color: black;
+	font-size: 22px;
     font-family: robom;
     z-index: 2;
     align-items: center;
@@ -112,18 +112,21 @@ footer{
 }
 
 .margin-left{
-	margin-left: 70px;
+	margin-left: 50px;
 }
 
 .user-name{
 	font-family: robom;
 	color: white;
 	margin-left: 10px;
-	margin-right: 10px;
+	margin-right: 50px;
 	cursor: pointer;
+	padding: 10px;
+	border: 2px solid;
+	border-radius: 5px;
 }
 
-.recover-button,.waiting-button,.ftbl-button,.mv-setting-button{
+.tab-bar-button{
 	color: black;
 	font-family: roboto;
 	cursor: pointer;	
@@ -191,7 +194,7 @@ footer{
 	display: none;
 	position: fixed;
     width: 400px;
-    height: 450px;
+    height: 550px;
     background-color: rgba(0,0,0,0.95);
     overflow: auto;
     z-index: 3;
@@ -241,7 +244,6 @@ footer{
 }
 
 .mv-table-input{
-	margin-top: 60px;
 	color: white;
 	font-family: robom;
 	font-size: 20px;
@@ -264,15 +266,14 @@ footer{
 }
 
 .mv-delete-button{
-	position: absolute;
-	bottom: 10px;
-	right: 10px;
 	width: 150px;
-	height: 50px;
-	background: rgba(230,230,230,0.9);
-	border: 2px solid white;
+	padding: 10px;
+	margin: 10px;
+	margin-top: 20px;
+	background: red;
+	border: 1px solid red;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 12px;
     font-family: robom;
     cursor: pointer;
 }
@@ -285,9 +286,8 @@ footer{
 }
 
 .mv-delete-button:hover{
-	border: 2px solid red;
-	width: 153px;
-	height: 53px;
+	border: 2px solid;
+	padding: 11px;
 	background: red;
 }
 
@@ -356,7 +356,7 @@ footer{
 .mv-input-field,.mv-add-recover-field{
 	position: absolute;
 	left: 15px;
-	top: 170px;
+	top: 160px;
 	width: 650px;
 	height: 550px;
 	background-color: rgba(0,0,0,0.9);	
@@ -533,7 +533,7 @@ footer{
 .mv-home-panel{
 	position: absolute;
 	display: flex;
-	top: 170px;
+	top: 160px;
 	right: 0px;
 	width: 635px;
 	height: 40px;
@@ -899,7 +899,7 @@ tr{
 	color: white;
 	margin: 20px;
 	font-size: 20px;
-	font-family: robom;
+	font-family: robol;
 }
 
 .f-pg-enter-no{
@@ -910,6 +910,7 @@ tr{
 	width: 30%;
 	border-bottom: 1px solid black;
 	font-family: robom;
+	text-align: center;
 }
 
 .f-pg-text-style{

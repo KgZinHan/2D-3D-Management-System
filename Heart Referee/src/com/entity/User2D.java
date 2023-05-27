@@ -4,6 +4,7 @@ public class User2D {
 
 	private String user;
 	private int money;
+	private String checked;
 
 	public String getUser() {
 		return user;
@@ -21,4 +22,12 @@ public class User2D {
 		this.money = money;
 	}
 
+	public String getChecked() {
+		return checked;
+	}
+
+	public void setChecked(String checked) {
+		this.checked = checked;
+	}
+	
 }

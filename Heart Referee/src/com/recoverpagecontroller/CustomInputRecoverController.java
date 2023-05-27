@@ -39,37 +39,22 @@ public class CustomInputRecoverController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
+		
 		twoDList = recoverTableDao.getRecoverHistoryTable();
-			total = tableDao.getTotalMoney();
-			recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
+		total = tableDao.getTotalMoney();
+		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
 
-			dNumberList = tableDao.getDangerousNumber();
-			if (!(dNumberList.size() <= 0)) {
-				dNumbers = dNumberList.get(0).toString();
-				for (int i = 1; i < dNumberList.size(); i++) {
-					if(dNumberList.get(i) < 10) {
-						dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-					}
-					else {
-						dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-					}		
-				}
-			}
-
-			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
-			request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
-			request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
-			request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
-			request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
-			request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");
-			request.setAttribute(CommonParameters.TOTAL_COLUMN_DISPLAY, "table-cell");
-			request.setAttribute(CommonParameters.NUMBER_COLUMN_DISPLAY, "none");
-			request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");
-			request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
-			dispatcher = request.getRequestDispatcher("/recoverPage");
-			dispatcher.forward(request, response);
+		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
+		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
+		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
+		request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
+		request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");
+		request.setAttribute(CommonParameters.TOTAL_COLUMN_DISPLAY, "table-cell");
+		request.setAttribute(CommonParameters.NUMBER_COLUMN_DISPLAY, "none");
+		request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");
+		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
+		dispatcher = request.getRequestDispatcher("/recoverPage");
+		dispatcher.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

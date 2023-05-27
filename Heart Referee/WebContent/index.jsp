@@ -19,7 +19,7 @@
                 <h1 class="mv-welcomeText animate-charcter">HEART REFEREE &nbsp;<i class="fas fa-heart"></i><i class="fas fa-user-secret"></i></h1>
                 <div style="display: flex;">
                 	<form action="Setting" method="GET">
-                    <input id="user" type="text" name="userName" placeholder="Enter Commission Name" maxlength="14" class="mv-list-search-box" style="width: 300px;border: 1px solid white;color: white" required>
+                    <input id="user" type="text" name="userName" placeholder="Enter Commission Name" maxlength="20" class="mv-list-search-box" style="width: 300px;border: 1px solid white;color: white" required>
                     <input id="submitbtn" type="submit" class="enter-button" value="Go" onclick="displayMsgBox()">
                 </form>
                 </div>

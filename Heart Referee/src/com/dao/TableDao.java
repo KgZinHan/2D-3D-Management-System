@@ -1,7 +1,9 @@
 package com.dao;
 
+import java.sql.Date;
 import java.util.List;
 
+import com.entity.AllUser2D;
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Summary2D;
@@ -84,7 +86,20 @@ public interface TableDao {
 	
 	public List<Number2D> startList(int start);
 	
-	public int getUserMoneyByNumber(String name,int number);
+	public int getUserMoneyByNumber(String name,int number); // for final result
 	
+	public void addValuesToAllTable(); // for history list
+	
+	public List<AllUser2D> getAllTableByUser(String username); // for history list
+	
+	public List<AllUser2D> getTotalAllTableByUser(String username); // for history list
+	
+	public boolean checkNameInTempTable(String username); // for history list
+	
+	public void addUserTempTable(AllUser2D user2D); // for history list
+	
+	public void updateUserTempTable(AllUser2D user2D); // for history list
+	
+	public void deleteAllTable(); // for history list
 	
 }

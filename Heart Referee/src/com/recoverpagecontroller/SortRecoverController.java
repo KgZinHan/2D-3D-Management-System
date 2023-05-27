@@ -35,16 +35,17 @@ public class SortRecoverController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		List<Number2D> top2D = new ArrayList<Number2D>();
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
 		String entity = request.getParameter("m");
 		String numberHColor = "";
 		String moneyHColor = "";
+		
 		if (entity == "number" || entity.equals("number")) {
 			top2D = recoverTableDao.sortRecoverByNumber();
 			numberHColor = CommonConstants.SORT_COLOR_CODE;
 		}
+		
 		if (entity == "money" || entity.equals("money")) {
 			top2D = recoverTableDao.sortRecoverByMoney();
 			moneyHColor = CommonConstants.SORT_COLOR_CODE;
@@ -53,22 +54,8 @@ public class SortRecoverController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
-			}
-		}
-
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.NUMBER_SORT_COLOR, numberHColor);
 		request.setAttribute(CommonParameters.MONEY_SORT_COLOR, moneyHColor);

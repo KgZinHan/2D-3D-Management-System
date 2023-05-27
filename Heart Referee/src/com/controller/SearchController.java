@@ -43,12 +43,10 @@ public class SearchController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Integer> dNumberList = new ArrayList<Integer>();
 		List<Number2D> countList = new ArrayList<Number2D>();
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
 		ColorCount2D count2D = new ColorCount2D();
-		String dNumbers = "0";
 		int redCount = 0;
 		int greenCount = 0;
 		int orangeCount = 0;
@@ -69,18 +67,6 @@ public class SearchController extends HttpServlet {
 		
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
-			}
-		}
 		
 		//color count method
 		countList = tableDao.sortByMoney();
@@ -95,6 +81,7 @@ public class SearchController extends HttpServlet {
 				blackCount = blackCount + 1;
 			}
 		}
+		
 		count2D.setBlackCount(blackCount);
 		count2D.setOrangeCount(orangeCount);
 		count2D.setRedCount(redCount);
@@ -103,7 +90,6 @@ public class SearchController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.TAB_BAR_WAITING_TABLE_COLOR, CommonConstants.HOVER_COLOR_CODE);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.RECOVER_AMOUNT, CommonConstants.RECOVER_LIMIT);
 		request.setAttribute(CommonParameters.COLOR_COUNT, count2D);
 		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
@@ -116,9 +102,9 @@ public class SearchController extends HttpServlet {
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
+		
 		twoDList = tableDao.search2DAmountByUser(number, userName);
+		
 		for (int j = 0; j < twoDList.size(); j++) {
 			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
 				twoDList.get(j).setColor("blue");
@@ -133,31 +119,28 @@ public class SearchController extends HttpServlet {
 				twoDList.get(j).setColor("red");
 			}
 		}
+		
 		twoDCheckList = tableDao.getHistoryTableByUsername(userName);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		
 		if(realID > CommonConstants.ID_COUNT_LIMIT) {
 			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 		}
 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
+		for(int i = 0;i < userList.size();i++) {
+			String checked = "red";
+			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+			{
+				checked = "green";
 			}
+			userList.get(i).setChecked(checked);
 		}
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);

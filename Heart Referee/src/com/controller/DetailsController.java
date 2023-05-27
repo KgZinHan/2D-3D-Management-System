@@ -38,36 +38,30 @@ public class DetailsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
 		int realID;
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
+		
 		twoDList = tableDao.getTableByUser(userName);
-
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		
 		if(realID > CommonConstants.ID_COUNT_LIMIT) {
 			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 		}
 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
+		for(int i = 0;i < userList.size();i++) {
+			String checked = "red";
+			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+			{
+				checked = "green";
 			}
+			userList.get(i).setChecked(checked);
 		}
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
@@ -82,39 +76,34 @@ public class DetailsController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
 		int realID;
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
+		
 		twoDList = tableDao.getNumberDetailsByUser(userName,number);
 		
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		
 		if(realID > CommonConstants.ID_COUNT_LIMIT) {
 			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 		}
 
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
+		for(int i = 0;i < userList.size();i++) {
+			String checked = "red";
+			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+			{
+				checked = "green";
 			}
+			userList.get(i).setChecked(checked);
 		}
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);

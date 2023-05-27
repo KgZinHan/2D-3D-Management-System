@@ -41,8 +41,6 @@ public class TableController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String table = (String) session.getAttribute(CommonParameters.SESSION_NAME);
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 		
 		if (table == null || table.isEmpty() || table.equals("details")) {
@@ -55,27 +53,23 @@ public class TableController extends HttpServlet {
 			total = tableDao.getTotalMoney();
 			userTotal = tableDao.getUserTotalMoney(userName);
 			userList = tableDao.getUsers();
+			
+			for(int i = 0;i < userList.size();i++) {
+				String checked = "red";
+				if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+				{
+					checked = "green";
+				}
+				userList.get(i).setChecked(checked);
+			}
+			
 			realID = tableDao.getIdCount();
 			if(realID > CommonConstants.ID_COUNT_LIMIT) {
 				idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 			}
-			
-			dNumberList = tableDao.getDangerousNumber();
-			if (!(dNumberList.size() <= 0)) {
-				dNumbers = dNumberList.get(0).toString();
-				for (int i = 1; i < dNumberList.size(); i++) {
-					if(dNumberList.get(i) < 10) {
-						dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-					}
-					else {
-						dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-					}		
-				}
-			}
 
 			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 			request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-			request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 			request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 			request.setAttribute(CommonParameters.REAL_ID, realID);
 			request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
@@ -86,6 +80,7 @@ public class TableController extends HttpServlet {
 			request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
 			dispatcher = request.getRequestDispatcher("/home");
 			dispatcher.forward(request, response);
+			
 		} else if (table.equals("history")) {
 			dispatcher = request.getRequestDispatcher("History");
 			dispatcher.forward(request, response);

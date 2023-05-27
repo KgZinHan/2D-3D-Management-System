@@ -41,8 +41,6 @@ public class RecoverDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String idS = request.getParameter("id");
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
 		int id = Integer.parseInt(idS);
 		
 		twoD = new Number2D();
@@ -59,24 +57,9 @@ public class RecoverDeleteController extends HttpServlet {
 
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
-		
 		twoDList = recoverTableDao.getRecoverTable();
 		
-		dNumberList = tableDao.getDangerousNumber();
-		if (!(dNumberList.size() <= 0)) {
-			dNumbers = dNumberList.get(0).toString();
-			for (int i = 1; i < dNumberList.size(); i++) {
-				if(dNumberList.get(i) < 10) {
-					dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-				}
-				else {
-					dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-				}		
-			}
-		}
-		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);	
-		request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");

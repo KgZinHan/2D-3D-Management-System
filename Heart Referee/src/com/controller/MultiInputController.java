@@ -42,38 +42,34 @@ public class MultiInputController extends HttpServlet {
 		String defaultTable = (String) session.getAttribute(CommonParameters.SESSION_NAME);
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		String dNumbers = "0";
+		
 		if (defaultTable == null || defaultTable.isEmpty() || defaultTable.equals("details")) {
 			if (userName == null || userName.isEmpty() || userName.equals(null)) {
 				twoDList = tableDao.getTable();
 			} else {
 				twoDList = tableDao.getTableByUser(userName);
 			}
+			
 			total = tableDao.getTotalMoney();
 			userTotal = tableDao.getUserTotalMoney(userName);
 			userList = tableDao.getUsers();
 			realID = tableDao.getIdCount();
+			
 			if(realID > CommonConstants.ID_COUNT_LIMIT) {
 				idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 			}
 			
-			dNumberList = tableDao.getDangerousNumber();
-			if (!(dNumberList.size() <= 0)) {
-				dNumbers = dNumberList.get(0).toString();
-				for (int i = 1; i < dNumberList.size(); i++) {
-					if(dNumberList.get(i) < 10) {
-						dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-					}
-					else {
-						dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-					}		
+			for(int i = 0;i < userList.size();i++) {
+				String checked = "red";
+				if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+				{
+					checked = "green";
 				}
+				userList.get(i).setChecked(checked);
 			}
 
 			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 			request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-			request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 			request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR,CommonConstants.HOVER_COLOR_CODE);
 			request.setAttribute(CommonParameters.REAL_ID, realID);
 			request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);

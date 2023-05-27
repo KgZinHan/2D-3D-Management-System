@@ -356,4 +356,25 @@
     <url-pattern>/finalResult</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>historyResult</servlet-name>
+    <servlet-class>com.controller.HistoryResultController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>historyResult</servlet-name>
+    <url-pattern>/HResult</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>historyResultPage</description>
+    <servlet-name>historyResultPage</servlet-name>
+    <jsp-file>/jspPage/HistoryResultPage.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>historyResultPage</servlet-name>
+    <url-pattern>/historyResult</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

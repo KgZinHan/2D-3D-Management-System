@@ -43,20 +43,23 @@ public class DeleteController extends HttpServlet {
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String idS = request.getParameter("id");
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
-		List<Integer> dNumberList = new ArrayList<Integer>();
-		
-
-		String dNumbers = "0";
 		int page;
+		
 		if (idS == "99999" || idS.equals("99999")) {
 			session.removeAttribute(CommonParameters.SESSION_NAME);
 			session.invalidate();
+			tableDao.addValuesToAllTable();
 			tableDao.deleteTable();
 			response.sendRedirect("index.jsp");
 
 		} 
 		else if(idS == "delete" || idS.equals("delete")) {
 			tableDao.deleteUser(userName);
+			response.sendRedirect("index.jsp");
+		}
+		else if (idS == "all" || idS.equals("all")) {
+			tableDao.deleteAllTable();
+			tableDao.deleteTable();
 			response.sendRedirect("index.jsp");
 		}
 		else {
@@ -89,22 +92,17 @@ public class DeleteController extends HttpServlet {
 				idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 			}
 
-			dNumberList = tableDao.getDangerousNumber();
-			if (!(dNumberList.size() <= 0)) {
-				dNumbers = dNumberList.get(0).toString();
-				for (int i = 1; i < dNumberList.size(); i++) {
-					if(dNumberList.get(i) < 10) {
-						dNumbers = dNumbers + " - " + "0"+ dNumberList.get(i).toString();
-					}
-					else {
-						dNumbers = dNumbers + " - " + dNumberList.get(i).toString();
-					}		
+			for(int i = 0;i < userList.size();i++) {
+				String checked = "red";
+				if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
+				{
+					checked = "green";
 				}
+				userList.get(i).setChecked(checked);
 			}
 
 			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 			request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
-			request.setAttribute(CommonParameters.DANGEROUS_NUMBERS, dNumbers);
 			request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 			request.setAttribute(CommonParameters.REAL_ID, realID);
 			request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
