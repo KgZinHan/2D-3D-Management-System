@@ -37,12 +37,32 @@ public class HistoryResultController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String username = (String) session.getAttribute(CommonParameters.SESSION_USER);
-		List<AllUser2D> user2DList = tableDao.getAllTableByUser(username);
-		List<AllUser2D> totalUser2DList = tableDao.getTotalAllTableByUser(username);
+		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
+		List<AllUser2D> totalUser2DList = new ArrayList<AllUser2D>();
+		String username = request.getParameter("username");
+		if(username == null) {
+			HttpSession session = request.getSession();
+			username = (String) session.getAttribute(CommonParameters.SESSION_USER);
+			user2DList = tableDao.getAllTableByUser(username);
+			totalUser2DList = tableDao.getTotalAllTableByUser(username);
+		}
+		else {
+			if(username == "12345" || username.equals("12345")) {
+				username = "Total";
+				user2DList = tableDao.getTotalAllTable();
+				totalUser2DList = tableDao.getTotalTotalAllTable();
+			}
+			else {
+				user2DList = tableDao.getAllTableByUser(username);
+				totalUser2DList = tableDao.getTotalAllTableByUser(username);
+			}
+		}
 		
+		List<AllUser2D> userList = tableDao.getUserAllTable();
+		
+		request.setAttribute(CommonParameters.TAB_BAR_LEDGER_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.SESSION_USER, username);
+		request.setAttribute(CommonParameters.USER_LIST, userList);
 		request.setAttribute(CommonParameters.USER_2D_LIST, user2DList);
 		request.setAttribute(CommonParameters.TOTAL_USER_2D_LIST, totalUser2DList);
 		dispatcher = request.getRequestDispatcher("/historyResult");

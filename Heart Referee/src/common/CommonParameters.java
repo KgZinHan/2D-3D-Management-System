@@ -9,6 +9,7 @@ public class CommonParameters {
 
 	// Constants
 	public static final String MESSAGE = "message";
+	public static final String ALERT_MESSAGE = "alertMessage";
 	public static final String TOTAL_MONEY = "totalMoney";
 	public static final String TOTAL_RECOVER_MONEY = "totalRecover";
 	public static final String USER_TOTAL_MONEY = "userTotalMoney";
@@ -22,6 +23,7 @@ public class CommonParameters {
 	public static final String USER_LIST = "userList";
 	public static final String USER_2D_LIST = "user2DList";
 	public static final String TOTAL_USER_2D_LIST = "totalUser2DList";
+	public static final String CLOSED_2D_LIST = "closed2DList";
 
 	// DisplayLink
 	public static final String DELETE_COLUMN_DISPLAY = "deleteLink";
@@ -58,6 +60,7 @@ public class CommonParameters {
 	public static final String TAB_BAR_RECOVER_NOTE_COLOR = "recoverNote";
 	public static final String TAB_BAR_FULL_TABLE_COLOR = "fullTable";
 	public static final String TAB_BAR_FINAL_RESULT_COLOR = "finalResult";
+	public static final String TAB_BAR_LEDGER_COLOR = "ledger";
 	
 	// final result Page
 	public static final String FINAL_RESULT_DIV_DISPLAY = "divDisplay";

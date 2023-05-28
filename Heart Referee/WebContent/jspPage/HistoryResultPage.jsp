@@ -11,6 +11,24 @@
 	</head>
 	<body tabindex="-1" style="overflow-x: hidden">
 		<div id="msgbox01" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0" onclick="displayNone('msgbox01')">${message}</div>
+		<div id="modal01" class="mv-display-center mv-view-image mv-animate-zoom"> 
+            <button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button>
+             <div id="radioTab" class="mv-table-input">
+             	<div style="text-align: center;margin-top: 50px">
+             		<p class="mv-username">Change User</p>
+	            	<c:forEach items="${userList}" var="user">
+	            		<a href="HResult?username=${user.username}">
+		            		<h5 class="user-choose" >
+		             			${user.username}
+		             		</h5>
+	             		</a>
+	             	</c:forEach>
+             	</div>
+             	<a href="HResult?username=12345">
+	            	<button class="log-out-btn">Total</button>
+	            </a>
+			</div>
+        </div>
 		<div class="mv-basic-bg">
 			 <div class="mv-tab-bar">
 				<h3>
@@ -23,7 +41,7 @@
 					<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left">Recover Check</a>
 				</h3>
 				<h3>
-					<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left" style="color:${recoverNote}">Recover Note</a>
+					<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left" >Recover Note</a>
 				</h3>
 				<h3>
 					<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>
@@ -32,15 +50,11 @@
 					<a href="Final" class="tab-bar-button hover-effect margin-left">Report</a>
 				</h3>
 				<h3>
-					<a href="HResult" class="tab-bar-button hover-effect margin-left">Ledger</a>
+					<a href="HResult" class="tab-bar-button hover-effect margin-left" style="color:${ledger}">Ledger</a>
 				</h3>
 			</div>	
 			<div class="user-total-field">
-				<b>
-				<% 
-               	String name = (String)session.getAttribute("userName");
-   				out.print(name);
-   			%> </b>'s ledger
+				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px">${userName} ledger</span>
 			</div>	
 			<div class="mv-display-middle">
 				<div id="tb02" class="mv-table-style" style="height:auto;width: 100%">

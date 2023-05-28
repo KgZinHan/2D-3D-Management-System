@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
+import com.entity.Closed2D;
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.User2D;
@@ -88,6 +89,7 @@ public class MultiInputController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		h2D = new History2D();
+		String alertMsg = "";
 		String msg = new String();
 		String moneyS = request.getParameter("money");
 		int pageNo = 1;
@@ -105,7 +107,7 @@ public class MultiInputController extends HttpServlet {
 		String numberS8 = request.getParameter("number8");
 		String numberS9 = request.getParameter("number9");
 		String numberS0 = request.getParameter("number0");
-
+		
 		if (reverse.equals("yes") || reverse == "yes") {
 			int rCount = 0;
 			if (!(numberS1.isEmpty())) {
@@ -113,6 +115,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber1 = getReverse(number1);
 				tableDao.add2DwithR(number1, rNumber1, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number1)) {
+					alertMsg = alertMsg + " " + numberS1;
+				}
+				if(checkClosedNumberOrNot(rNumber1)) {
+					alertMsg = alertMsg + " " + rNumber1.toString();
+				}
 				shortMsg = numberS1;
 			}
 			if (!(numberS2.isEmpty())) {
@@ -120,6 +128,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber2 = getReverse(number2);
 				tableDao.add2DwithR(number2, rNumber2, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number2)) {
+					alertMsg = alertMsg + " " + numberS2;
+				}
+				if(checkClosedNumberOrNot(rNumber2)) {
+					alertMsg = alertMsg + " " + rNumber2.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS2;
 			}
 			if (!(numberS3.isEmpty())) {
@@ -127,6 +141,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber3 = getReverse(number3);
 				tableDao.add2DwithR(number3, rNumber3, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number3)) {
+					alertMsg = alertMsg + " " + numberS3;
+				}
+				if(checkClosedNumberOrNot(rNumber3)) {
+					alertMsg = alertMsg + " " + rNumber3.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS3;
 			}
 			if (!(numberS4.isEmpty())) {
@@ -134,6 +154,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber4 = getReverse(number4);
 				tableDao.add2DwithR(number4, rNumber4, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number4)) {
+					alertMsg = alertMsg + " " + numberS4;
+				}
+				if(checkClosedNumberOrNot(rNumber4)) {
+					alertMsg = alertMsg + " " + rNumber4.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS4;
 			}
 			if (!(numberS5.isEmpty())) {
@@ -141,6 +167,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber5 = getReverse(number5);
 				tableDao.add2DwithR(number5, rNumber5, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number5)) {
+					alertMsg = alertMsg + " " + numberS5;
+				}
+				if(checkClosedNumberOrNot(rNumber5)) {
+					alertMsg = alertMsg + " " + rNumber5.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS5;
 			}
 			if (!(numberS6.isEmpty())) {
@@ -148,6 +180,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber6 = getReverse(number6);
 				tableDao.add2DwithR(number6, rNumber6, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number6)) {
+					alertMsg = alertMsg + " " + numberS6;
+				}
+				if(checkClosedNumberOrNot(rNumber6)) {
+					alertMsg = alertMsg + " " + rNumber6.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS6;
 			}
 			if (!(numberS7.isEmpty())) {
@@ -155,6 +193,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber7 = getReverse(number7);
 				tableDao.add2DwithR(number7, rNumber7, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number7)) {
+					alertMsg = alertMsg + " " + numberS7;
+				}
+				if(checkClosedNumberOrNot(rNumber7)) {
+					alertMsg = alertMsg + " " + rNumber7.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS7;
 			}
 			if (!(numberS8.isEmpty())) {
@@ -162,6 +206,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber8 = getReverse(number8);
 				tableDao.add2DwithR(number8, rNumber8, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number8)) {
+					alertMsg = alertMsg + " " + numberS8;
+				}
+				if(checkClosedNumberOrNot(rNumber8)) {
+					alertMsg = alertMsg + " " + rNumber8.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS8;
 			}
 			if (!(numberS9.isEmpty())) {
@@ -169,6 +219,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber9 = getReverse(number9);
 				tableDao.add2DwithR(number9, rNumber9, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number9)) {
+					alertMsg = alertMsg + " " + numberS9;
+				}
+				if(checkClosedNumberOrNot(rNumber9)) {
+					alertMsg = alertMsg + " " + rNumber9.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS9;
 			}
 			if (!(numberS0.isEmpty())) {
@@ -176,6 +232,12 @@ public class MultiInputController extends HttpServlet {
 				Integer rNumber0 = getReverse(number0);
 				tableDao.add2DwithR(number0, rNumber0, money, name, pageNo);
 				rCount = rCount + 1;
+				if(checkClosedNumberOrNot(number0)) {
+					alertMsg = alertMsg + " " + numberS0;
+				}
+				if(checkClosedNumberOrNot(rNumber0)) {
+					alertMsg = alertMsg  + " " + rNumber0.toString();
+				}
 				shortMsg = shortMsg + " / " + numberS0;
 			}
 			msg = shortMsg + " R " + moneyS + " ks added.";
@@ -190,60 +252,90 @@ public class MultiInputController extends HttpServlet {
 				int number1 = Integer.parseInt(numberS1);
 				tableDao.add2D(number1, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number1)) {
+					alertMsg = alertMsg + " " + numberS1;
+				}
 				shortMsg = numberS1;
 			}
 			if (!(numberS2.isEmpty())) {
 				int number2 = Integer.parseInt(numberS2);
 				tableDao.add2D(number2, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number2)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS2;
 			}
 			if (!(numberS3.isEmpty())) {
 				int number3 = Integer.parseInt(numberS3);
 				tableDao.add2D(number3, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number3)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS3;
 			}
 			if (!(numberS4.isEmpty())) {
 				int number4 = Integer.parseInt(numberS4);
 				tableDao.add2D(number4, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number4)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS4;
 			}
 			if (!(numberS5.isEmpty())) {
 				int number5 = Integer.parseInt(numberS5);
 				tableDao.add2D(number5, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number5)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS5;
 			}
 			if (!(numberS6.isEmpty())) {
 				int number6 = Integer.parseInt(numberS6);
 				tableDao.add2D(number6, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number6)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS6;
 			}
 			if (!(numberS7.isEmpty())) {
 				int number7 = Integer.parseInt(numberS7);
 				tableDao.add2D(number7, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number7)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS7;
 			}
 			if (!(numberS8.isEmpty())) {
 				int number8 = Integer.parseInt(numberS8);
 				tableDao.add2D(number8, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number8)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS8;
 			}
 			if (!(numberS9.isEmpty())) {
 				int number9 = Integer.parseInt(numberS9);
 				tableDao.add2D(number9, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number9)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS9;
 			}
 			if (!(numberS0.isEmpty())) {
 				int number0 = Integer.parseInt(numberS0);
 				tableDao.add2D(number0, money, name, pageNo);
 				count = count + 1;
+				if(checkClosedNumberOrNot(number0)) {
+					alertMsg = numberS1;
+				}
 				shortMsg = shortMsg + " / " + numberS0;
 			}
 			msg = shortMsg + " - " + moneyS + " ks added.";
@@ -258,7 +350,11 @@ public class MultiInputController extends HttpServlet {
 		h2D.setName(name);
 		h2D.setPageNo(pageNo);
 		tableDao.add2DtoHistory(h2D);
+		if(!alertMsg.equals("")) {
+			alertMsg = "The number (" + alertMsg + ") are closed numbers.";
+		}
 		request.setAttribute(CommonParameters.MESSAGE, msg);
+		request.setAttribute(CommonParameters.ALERT_MESSAGE, alertMsg);
 		doGet(request, response);
 	}
 
@@ -275,6 +371,18 @@ public class MultiInputController extends HttpServlet {
 		}
 
 		return reverse;
+	}
+	
+	protected boolean checkClosedNumberOrNot(int number) {
+		boolean flag = false;
+		List<Closed2D> closed2DList = new ArrayList<Closed2D>();
+		closed2DList = tableDao.getClosedNumberTable();
+		for(int i=0;i<closed2DList.size();i++) {
+			if(number == closed2DList.get(i).getNumber()) {
+				flag = true;
+			}
+		}
+		return flag;
 	}
 
 }

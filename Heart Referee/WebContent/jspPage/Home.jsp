@@ -12,6 +12,7 @@
 	<body tabindex="-1" style="overflow-x: hidden">
 	
 	 <div id="msgbox01" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0" onclick="displayNone('msgbox01')">${message}</div>
+	 <div id="msgbox02" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0;background-color: red;color: black;margin-top: 28px" onclick="displayNone('msgbox02')">${alertMessage}</div>
 		<!--extra modal for full size scenes on click-->
         <div id="modal01" class="mv-display-center mv-view-image mv-animate-zoom">
         	<button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button> 
@@ -29,8 +30,8 @@
             <%-- color: ${idAlertColor} --%>
             <h3 style="color: white;text-align: center;margin-top: 30px;font-family: robom">id count = ${id}</h3>
             <div style="text-align: center">
-            	<a href="#">
-					<button class="mv-delete-button" style="background-color: #2196F3;border-color: #2196F3;"><i class="fas fa-stop"></i>&emsp;Closed Number</button>
+            	<a href="ClosedNumbers?closedNumber=0&mode=nothing">
+					<button class="mv-delete-button" style="background-color: grey;border-color: grey"><i class="fas fa-stop"></i>&emsp;Closed Number</button>
 				</a>
 	            <a href="Delete?id=99999&pageNo=${pageNo}">
 					<button class="mv-delete-button" style="background-color: #2196F3;border-color: #2196F3;" onclick="if(!(confirm('Are you sure you want to save and delete this table?'))) return false;"><i class="fas fa-save"></i>&emsp;Save Table</button>
@@ -51,7 +52,7 @@
    				out.print(name);
    			%></h2>
              <div id="radioTab" class="mv-table-input">
-            	<h5 style="text-align: center">? &emsp;<spam style="color: red">red = not save</spam>&emsp;|&emsp;<spam style="color: green"> green = save</spam></h5>  
+            	<h5 style="text-align: center"><spam style="color: red">red = not save</spam>&emsp;|&emsp;<spam style="color: green"> green = save</spam></h5>  
             	<c:forEach items="${userList}" var="user">
             		<a href="Setting?userName=${user.user}">
 	            		<h5 class="user-choose">
@@ -92,7 +93,7 @@
 				<h3>
 					<a href="HResult" class="tab-bar-button hover-effect margin-left">Ledger</a>
 				</h3>
-				<h3 class="tab-bar-button hover-effect margin-left"  onclick="displayBlock('modal01')">
+				<h3 class="tab-bar-button hover-effect margin-left" onclick="displayBlock('modal01')">
 	                <i class="fa fa-cogs" ></i>
 	            </h3>
 				

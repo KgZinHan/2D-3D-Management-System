@@ -285,13 +285,6 @@ footer{
     background: #2196F3;
 }
 
-.mv-delete-button:hover{
-	border: 2px solid;
-	padding: 11px;
-	background: red;
-}
-
-
 .log-out-btn{
 	position: absolute;
 	top: 5px;

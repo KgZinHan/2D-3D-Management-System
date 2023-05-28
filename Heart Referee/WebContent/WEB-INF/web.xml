@@ -377,4 +377,24 @@
     <url-pattern>/historyResult</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>closedNumberController</servlet-name>
+    <servlet-class>com.controller.ClosedNumberController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>closedNumberController</servlet-name>
+    <url-pattern>/ClosedNumbers</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>closedNumberPage</description>
+    <servlet-name>closedNumberPage</servlet-name>
+    <jsp-file>/jspPage/closedNumbersPage.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>closedNumberPage</servlet-name>
+    <url-pattern>/closedNumbersPage</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -84,7 +84,7 @@
 						<input type="hidden" name="comPercent" value="${comPercent}" >
 						<input type="hidden" name="comMoney" value="${commission}" >
 						<input type="hidden" name="total" value="${total}" >
-						<input type="submit" class="f-pg-enter-no hover-effect" value="Save to Database" style="cursor: pointer;background-color: silver">
+						<input type="submit" class="f-pg-enter-no hover-effect" value="Save to Database" style="cursor: pointer;background-color: #2196F3">
 					</form>
 				</div>
 				

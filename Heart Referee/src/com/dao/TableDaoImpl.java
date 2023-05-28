@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.driver.DbDriver;
 import com.entity.AllUser2D;
+import com.entity.Closed2D;
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Summary2D;
@@ -1056,6 +1057,69 @@ public class TableDaoImpl implements TableDao {
 
 		return totalUser2DList;
 	}
+	
+	@Override
+	public List<AllUser2D> getTotalAllTable() {
+		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
+		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE GROUP BY TWO_D_TIME";
+		int count = 1;
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				AllUser2D user2D = new AllUser2D();
+				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setP(resultSet.getInt("p"));
+				user2D.setpMoney(resultSet.getInt("p_money"));
+				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTotal(resultSet.getInt("total"));
+				if(user2D.getTotal() <= 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
+				user2D.setCount(count);
+				count++;
+				user2DList.add(user2D);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user2DList;
+	}
+	
+	@Override
+	public List<AllUser2D> getTotalTotalAllTable() {
+		List<AllUser2D> totalUser2DList = new ArrayList<AllUser2D>();
+		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				AllUser2D user2D = new AllUser2D();
+				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setP(resultSet.getInt("p"));
+				user2D.setpMoney(resultSet.getInt("p_money"));
+				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTotal(resultSet.getInt("total"));
+				if(user2D.getTotal() <= 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
+				totalUser2DList.add(user2D);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return totalUser2DList;
+	}
 
 	@Override
 	public void deleteAllTable() {
@@ -1154,6 +1218,94 @@ public class TableDaoImpl implements TableDao {
 		}
 
 		return allUser2DList;
+	}
+
+	@Override
+	public boolean findNumberInClosedNumberTable(int closedNumber) {
+		boolean flag = false;
+		String query = "SELECT * FROM CLOSED_NUMBER_TABLE WHERE NUMBER = ?";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, closedNumber);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				flag = true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+
+	@Override
+	public void addNumberInClosedNumberTable(int closedNumber) {
+		String query = "INSERT INTO CLOSED_NUMBER_TABLE(NUMBER,PASS_FLAG) VALUES (?,?)";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, closedNumber);
+			preparedStatement.setBoolean(2,true);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public List<Closed2D> getClosedNumberTable() {
+		List<Closed2D> closed2DList = new ArrayList<Closed2D>();
+		int count = 1;
+		String query = "SELECT * FROM CLOSED_NUMBER_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				Closed2D closed2d = new Closed2D();
+				closed2d.setNumber(resultSet.getInt("number"));
+				closed2d.setPassFlag(resultSet.getBoolean("pass_flag"));
+				closed2d.setCount(count);
+				closed2DList.add(closed2d);
+				count++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return closed2DList;
+	}
+
+	@Override
+	public void deleteClosedNumberInClosedNumberTable(int closedNumber) {
+		String deleteQuery = "DELETE FROM CLOSED_NUMBER_TABLE WHERE NUMBER = ?";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setInt(1, closedNumber);
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<AllUser2D> getUserAllTable() {
+		List<AllUser2D> userList = new ArrayList<AllUser2D>();
+		String query = "SELECT NAME FROM ALL_TABLE GROUP BY NAME";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				AllUser2D user = new AllUser2D();
+				user.setUsername(resultSet.getString("name"));
+				userList.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return userList;
 	}
 
 	
