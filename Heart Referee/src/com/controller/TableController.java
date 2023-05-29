@@ -110,7 +110,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<arrayP.length;i++) {
 					if(checkClosedNumberOrNot(arrayP[i])){
 						Integer number = arrayP[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "apuu ";
@@ -122,7 +127,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<arraynk.length;i++) {
 					if(checkClosedNumberOrNot(arraynk[i])){
 						Integer number = arraynk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "natkhat ";
@@ -134,7 +144,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<arrayPP.length;i++) {
 					if(checkClosedNumberOrNot(arrayPP[i])){
 						Integer number = arrayPP[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "power ";
@@ -146,7 +161,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array0bk.length;i++) {
 					if(checkClosedNumberOrNot(array0bk[i])){
 						Integer number = array0bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "0 bk ";
@@ -158,7 +178,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array1bk.length;i++) {
 					if(checkClosedNumberOrNot(array1bk[i])){
 						Integer number = array1bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "1 bk ";
@@ -170,7 +195,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array2bk.length;i++) {
 					if(checkClosedNumberOrNot(array2bk[i])){
 						Integer number = array2bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "2 bk ";
@@ -182,7 +212,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array3bk.length;i++) {
 					if(checkClosedNumberOrNot(array3bk[i])){
 						Integer number = array3bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "3 bk ";
@@ -194,7 +229,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array4bk.length;i++) {
 					if(checkClosedNumberOrNot(array4bk[i])){
 						Integer number = array4bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "4 bk ";
@@ -206,7 +246,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array5bk.length;i++) {
 					if(checkClosedNumberOrNot(array5bk[i])){
 						Integer number = array5bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "5 bk ";
@@ -218,7 +263,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array6bk.length;i++) {
 					if(checkClosedNumberOrNot(array6bk[i])){
 						Integer number = array6bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "6 bk ";
@@ -230,7 +280,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array7bk.length;i++) {
 					if(checkClosedNumberOrNot(array7bk[i])){
 						Integer number = array7bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "7 bk ";
@@ -242,7 +297,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array8bk.length;i++) {
 					if(checkClosedNumberOrNot(array8bk[i])){
 						Integer number = array8bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "8 bk ";
@@ -254,7 +314,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array9bk.length;i++) {
 					if(checkClosedNumberOrNot(array9bk[i])){
 						Integer number = array9bk[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "9 bk ";
@@ -266,7 +331,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array0s.length;i++) {
 					if(checkClosedNumberOrNot(array0s[i])){
 						Integer number = array0s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "0 * ";
@@ -278,7 +348,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array1s.length;i++) {
 					if(checkClosedNumberOrNot(array1s[i])){
 						Integer number = array1s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "1 * ";
@@ -290,7 +365,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array2s.length;i++) {
 					if(checkClosedNumberOrNot(array2s[i])){
 						Integer number = array2s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "2 * ";
@@ -302,7 +382,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array3s.length;i++) {
 					if(checkClosedNumberOrNot(array3s[i])){
 						Integer number = array3s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "3 * ";
@@ -314,7 +399,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array4s.length;i++) {
 					if(checkClosedNumberOrNot(array4s[i])){
 						Integer number = array4s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "4 * ";
@@ -326,7 +416,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array5s.length;i++) {
 					if(checkClosedNumberOrNot(array5s[i])){
 						Integer number = array5s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "5 * ";
@@ -338,7 +433,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array6s.length;i++) {
 					if(checkClosedNumberOrNot(array6s[i])){
 						Integer number = array6s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "6 * ";
@@ -350,7 +450,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array7s.length;i++) {
 					if(checkClosedNumberOrNot(array7s[i])){
 						Integer number = array7s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "7 * ";
@@ -362,7 +467,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array8s.length;i++) {
 					if(checkClosedNumberOrNot(array8s[i])){
 						Integer number = array8s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "8 * ";
@@ -374,7 +484,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array9s.length;i++) {
 					if(checkClosedNumberOrNot(array9s[i])){
 						Integer number = array9s[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "9 * ";
@@ -386,7 +501,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array0e.length;i++) {
 					if(checkClosedNumberOrNot(array0e[i])){
 						Integer number = array0e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 0 ";
@@ -398,7 +518,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array1e.length;i++) {
 					if(checkClosedNumberOrNot(array1e[i])){
 						Integer number = array1e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 1 ";
@@ -410,7 +535,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array2e.length;i++) {
 					if(checkClosedNumberOrNot(array2e[i])){
 						Integer number = array2e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 2 ";
@@ -422,7 +552,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array3e.length;i++) {
 					if(checkClosedNumberOrNot(array3e[i])){
 						Integer number = array3e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 3 ";
@@ -434,7 +569,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array4e.length;i++) {
 					if(checkClosedNumberOrNot(array4e[i])){
 						Integer number = array4e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 4";
@@ -446,7 +586,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array5e.length;i++) {
 					if(checkClosedNumberOrNot(array5e[i])){
 						Integer number = array5e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 5 ";
@@ -458,7 +603,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array6e.length;i++) {
 					if(checkClosedNumberOrNot(array6e[i])){
 						Integer number = array6e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 6 ";
@@ -470,7 +620,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array7e.length;i++) {
 					if(checkClosedNumberOrNot(array7e[i])){
 						Integer number = array7e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 7 ";
@@ -482,7 +637,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array8e.length;i++) {
 					if(checkClosedNumberOrNot(array8e[i])){
 						Integer number = array8e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 8 ";
@@ -494,7 +654,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array9e.length;i++) {
 					if(checkClosedNumberOrNot(array9e[i])){
 						Integer number = array9e[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "* 9 ";
@@ -506,7 +671,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<arraybro.length;i++) {
 					if(checkClosedNumberOrNot(arraybro[i])){
 						Integer number = arraybro[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "nyiko ";
@@ -519,7 +689,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array0p.length;i++) {
 					if(checkClosedNumberOrNot(array0p[i])){
 						Integer number = array0p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "0 apar ";
@@ -532,7 +707,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array1p.length;i++) {
 					if(checkClosedNumberOrNot(array1p[i])){
 						Integer number = array1p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "1 apar ";
@@ -545,7 +725,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array2p.length;i++) {
 					if(checkClosedNumberOrNot(array2p[i])){
 						Integer number = array2p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "2 apar ";
@@ -558,7 +743,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array3p.length;i++) {
 					if(checkClosedNumberOrNot(array3p[i])){
 						Integer number = array3p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "3 apar ";
@@ -571,7 +761,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array4p.length;i++) {
 					if(checkClosedNumberOrNot(array4p[i])){
 						Integer number = array4p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "4 apar ";
@@ -584,7 +779,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array5p.length;i++) {
 					if(checkClosedNumberOrNot(array5p[i])){
 						Integer number = array5p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "5 apar ";
@@ -597,7 +797,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array6p.length;i++) {
 					if(checkClosedNumberOrNot(array6p[i])){
 						Integer number = array6p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "6 apar ";
@@ -610,7 +815,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array7p.length;i++) {
 					if(checkClosedNumberOrNot(array7p[i])){
 						Integer number = array7p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "7 apar ";
@@ -623,7 +833,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array8p.length;i++) {
 					if(checkClosedNumberOrNot(array8p[i])){
 						Integer number = array8p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "8 apar ";
@@ -636,7 +851,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array9p.length;i++) {
 					if(checkClosedNumberOrNot(array9p[i])){
 						Integer number = array9p[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "9 apar ";
@@ -649,7 +869,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array0pp.length;i++) {
 					if(checkClosedNumberOrNot(array0pp[i])){
 						Integer number = array0pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "0 apar ";
@@ -662,7 +887,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array1pp.length;i++) {
 					if(checkClosedNumberOrNot(array1pp[i])){
 						Integer number = array1pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "1 apar ";
@@ -675,7 +905,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array2pp.length;i++) {
 					if(checkClosedNumberOrNot(array2pp[i])){
 						Integer number = array2pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "2 apar ";
@@ -688,7 +923,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array3pp.length;i++) {
 					if(checkClosedNumberOrNot(array3pp[i])){
 						Integer number = array3pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "3 apar ";
@@ -701,7 +941,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array4pp.length;i++) {
 					if(checkClosedNumberOrNot(array4pp[i])){
 						Integer number = array4pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "4 apar ";
@@ -714,7 +959,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array5pp.length;i++) {
 					if(checkClosedNumberOrNot(array5pp[i])){
 						Integer number = array5pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "5 apar ";
@@ -727,7 +977,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array6pp.length;i++) {
 					if(checkClosedNumberOrNot(array6pp[i])){
 						Integer number = array6pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "6 apar ";
@@ -740,7 +995,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array7pp.length;i++) {
 					if(checkClosedNumberOrNot(array7pp[i])){
 						Integer number = array7pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "7 apar ";
@@ -753,7 +1013,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array8pp.length;i++) {
 					if(checkClosedNumberOrNot(array8pp[i])){
 						Integer number = array8pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "8 apar ";
@@ -766,7 +1031,12 @@ public class TableController extends HttpServlet {
 				for(int i =0;i<array9pp.length;i++) {
 					if(checkClosedNumberOrNot(array9pp[i])){
 						Integer number = array9pp[i];
-						alertMsg = alertMsg + " " +  number.toString();
+						if(number < 10) {
+							alertMsg = alertMsg + " " + "0"+ number.toString();
+						}
+						else {
+							alertMsg = alertMsg + " " + number.toString();
+						}
 					}
 				}
 				shortMsg = "9 apar ";

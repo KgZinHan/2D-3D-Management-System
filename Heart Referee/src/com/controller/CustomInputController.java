@@ -123,7 +123,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS1;
 			}
 			if(checkClosedNumberOrNot(rNumber1)) {
-				alertMsg = alertMsg  + " " + rNumber1.toString();
+				if(rNumber1 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber1.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber1.toString();
+				}
 			}
 			shortMsg = numberS1;
 			shortMsgR = rNumber1.toString();
@@ -138,7 +143,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS2;
 			}
 			if(checkClosedNumberOrNot(rNumber2)) {
-				alertMsg = alertMsg + " " + rNumber2.toString();
+				if(rNumber2 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber2.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber2.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS2;
 			shortMsgR = shortMsgR + " / " + rNumber2.toString();
@@ -153,7 +163,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS3;
 			}
 			if(checkClosedNumberOrNot(rNumber3)) {
-				alertMsg = alertMsg + " " + rNumber3.toString();
+				if(rNumber3 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber3.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber3.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS3;
 			shortMsgR = shortMsgR + " / " + rNumber3.toString();
@@ -168,7 +183,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS4;
 			}
 			if(checkClosedNumberOrNot(rNumber4)) {
-				alertMsg = alertMsg + " " + rNumber4.toString();
+				if(rNumber4 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber4.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber4.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS4;
 			shortMsgR = shortMsgR + " / " + rNumber4.toString();
@@ -183,7 +203,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS5;
 			}
 			if(checkClosedNumberOrNot(rNumber5)) {
-				alertMsg = alertMsg + " " + rNumber5.toString();
+				if(rNumber5 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber5.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber5.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS5;
 			shortMsgR = shortMsgR + " / " + rNumber5.toString();
@@ -198,7 +223,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS6;
 			}
 			if(checkClosedNumberOrNot(rNumber6)) {
-				alertMsg = alertMsg + " " + rNumber6.toString();
+				if(rNumber6 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber6.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber6.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS6;
 			shortMsgR = shortMsgR + " / " + rNumber6.toString();
@@ -213,7 +243,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS7;
 			}
 			if(checkClosedNumberOrNot(rNumber7)) {
-				alertMsg = alertMsg + " " + rNumber7.toString();
+				if(rNumber7 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber7.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber7.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS7;
 			shortMsgR = shortMsgR + " / " + rNumber7.toString();
@@ -228,7 +263,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS8;
 			}
 			if(checkClosedNumberOrNot(rNumber8)) {
-				alertMsg = alertMsg + " " + rNumber8.toString();
+				if(rNumber8 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber8.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber8.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS8;
 			shortMsgR = shortMsgR + " / " + rNumber8.toString();
@@ -243,7 +283,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS9;
 			}
 			if(checkClosedNumberOrNot(rNumber9)) {
-				alertMsg = alertMsg + " " + rNumber9.toString();
+				if(rNumber9 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber9.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber9.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS9;
 			shortMsgR = shortMsgR + " / " + rNumber9.toString();
@@ -258,7 +303,12 @@ public class CustomInputController extends HttpServlet {
 				alertMsg = alertMsg + " " + numberS0;
 			}
 			if(checkClosedNumberOrNot(rNumber0)) {
-				alertMsg = alertMsg  + " " + rNumber0.toString();
+				if(rNumber0 < 10) {
+					alertMsg = alertMsg + " " + "0"+ rNumber0.toString();
+				}
+				else {
+					alertMsg = alertMsg + " " + rNumber0.toString();
+				}
 			}
 			shortMsg = shortMsg + " / " + numberS0;
 			shortMsgR = shortMsgR + " / " + rNumber0.toString();
