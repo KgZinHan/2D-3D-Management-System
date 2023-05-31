@@ -31,22 +31,19 @@
             <h3 style="color: white;text-align: center;margin-top: 30px;font-family: robom">id count = ${id}</h3>
             <div style="text-align: center">
             	<a href="ClosedNumbers?closedNumber=0&mode=nothing">
-					<button class="mv-delete-button" style="background-color: grey;border-color: grey"><i class="fas fa-stop"></i>&emsp;Closed Number</button>
-				</a>
-	            <a href="Delete?id=99999&pageNo=${pageNo}">
-					<button class="mv-delete-button" style="background-color: #2196F3;border-color: #2196F3;" onclick="if(!(confirm('Are you sure you want to save and delete this table?'))) return false;"><i class="fas fa-save"></i>&emsp;Save Table</button>
+					<button class="mv-delete-button hover-effect" ><i class="fas fa-stop"></i>&emsp;Closed Number</button>
 				</a><br>
 				<a href="Delete?id=delete">
-					<button class="mv-delete-button" onclick="if(!(confirm('Are you sure you want to delete user?'))) return false;"><i class="fas fa-user-slash"></i>&emsp;Delete User</button>
-				</a>
+					<button class="mv-delete-button hover-effect" onclick="if(!(confirm('Are you sure you want to delete user?'))) return false;"><i class="fas fa-user-slash"></i>&emsp;Delete User</button>
+				</a><br>
 				<a href="Delete?id=all">
-					<button class="mv-delete-button" onclick="if(!(confirm('Are you sure you want to delete all tables?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete Table</button>
+					<button class="mv-delete-button hover-effect" onclick="if(!(confirm('Are you sure you want to delete all tables?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete Table</button>
 				</a>
 			</div>
         </div>
         <!---->
         <div id="modal02" class="mv-display-center mv-view-image mv-animate-zoom"> 
-            <button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
+            <button class="mv-display-topRight mv-logIn-close-button hover-effect" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
             <h2 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;<% 
                	String name = (String)session.getAttribute("userName");
    				out.print(name);
@@ -63,7 +60,7 @@
 			</div>
              
             <a href="log-out">
-            	<button class="log-out-btn"><i class="fas fa-user-plus"></i>&nbsp;New</button>
+            	<button class="log-out-btn hover-effect"><i class="fas fa-user-plus"></i>&nbsp;New</button>
             </a>
         </div>
 		<div class="mv-basic-bg">

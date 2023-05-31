@@ -51,12 +51,14 @@
 					<th><h4>Name</h4></th>
 					<th style="width: 150px"><h4>Total Money</h4></th>
 					<th style="width: 80px"><h4>P x 80</h4></th>
+					<th style="width: 100px"><h4>Reports</h4></th>
 				</tr>
 				<c:forEach items="${twoDList}" var="result">
 					<tr class="mv-list-table-data" >
 						<td><h3>${result.userName}</h3></td>
 						<td><h3>${result.userMoney} ks</h3></td>
 						<td><h3 style="color: firebrick">${result.money}</h3></td>
+						<td><a href="Final?username=${result.userName}" style="font-style: normal"><h3>report</h3></a></td>
 					</tr>
 				</c:forEach>
 			</table>

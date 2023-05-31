@@ -12,10 +12,10 @@
 	<body tabindex="-1" style="overflow-x: hidden">
 		<div id="msgbox01" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0" onclick="displayNone('msgbox01')">${message}</div>
 		<div id="modal01" class="mv-display-center mv-view-image mv-animate-zoom"> 
-            <button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button>
+            <button class="mv-display-topRight mv-logIn-close-button hover-effect" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button>
              <div id="radioTab" class="mv-table-input">
              	<div style="text-align: center;margin-top: 50px">
-             		<p class="mv-username">Change User</p>
+             		<p class="mv-username">Change Name</p>
 	            	<c:forEach items="${userList}" var="user">
 	            		<a href="HResult?username=${user.username}">
 		            		<h5 class="user-choose" >
@@ -25,7 +25,7 @@
 	             	</c:forEach>
              	</div>
              	<a href="HResult?username=12345">
-	            	<button class="log-out-btn">Total</button>
+	            	<button class="log-out-btn hover-effect" style="width: 100px">Total</button>
 	            </a>
 			</div>
         </div>
@@ -54,9 +54,9 @@
 				</h3>
 			</div>	
 			<div class="user-total-field">
-				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px">${userName} ledger</span>
+				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px"><b>${userName}</b> ledger</span>
 			</div>	
-			<div class="mv-display-middle">
+			<div class="mv-display-middle" style="margin-top: 10px">
 				<div id="tb02" class="mv-table-style" style="height:auto;width: 100%">
 					<table class="mv-waiting-table">
 						<tr class="mv-list-table-head">
@@ -91,18 +91,18 @@
 						<c:forEach items="${user2DList}" var="user2D">
 							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px">
 								<td style="width: 30px"><p>${user2D.count}</p></td>
-								<td style="width: 200px"><p>${user2D.stringDate}</p></td>
+								<td style="width: 300px"><p>${user2D.time}</p></td>
 								<td style="width: 100px"><p>${user2D.number}</p></td>
 								<td style="width: 200px"><p>${user2D.totalMoney} ks</p></td>
 								<td style="width: 80px"><p>${user2D.p}</p></td>
 								<td style="width:200px"><p>${user2D.pMoney} ks</p></td>
 								<td style="width: 100px"><p>${user2D.comPercent} %</p></td>
 								<td style="width:200px"><p>${user2D.comMoney} ks</p></td>
-								<td style="width: 300px;color:${user2D.color}"><p>${user2D.total} ks</p></td>
+								<td style="width: 200px;color:${user2D.color}"><p>${user2D.total} ks</p></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${totalUser2DList}" var="tUser2D">
-							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px;background-color: grey">
+							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px;background-color: silver">
 								<td style="width: 30px"><p>Total</p></td>
 								<td style="width: 200px"><p>-</p></td>
 								<td style="width: 100px"><p>-</p></td>

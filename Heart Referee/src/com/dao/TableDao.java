@@ -79,30 +79,6 @@ public interface TableDao {
 	
 	public List<Number2D> getHistoryTableByUsername(String name);
 	
-	
-	// histroy result table methods
-	
-	public void addValuesToAllTable(); 
-	
-	public List<AllUser2D> getAllTableByUser(String username); 
-	
-	public List<AllUser2D> getTotalAllTableByUser(String username); 
-	
-	public List<AllUser2D> getUserAllTable();
-	
-	public List<AllUser2D> getTotalAllTable();
-	
-	public List<AllUser2D> getTotalTotalAllTable();
-	
-	public boolean checkNameInTempTable(String username);
-	
-	public void addUserTempTable(AllUser2D user2D);
-	
-	public void updateUserTempTable(AllUser2D user2D); 
-	
-	public void deleteAllTable(); 
-	
-	
 	// delete methods
 
 	public void deleteRow(int id);
@@ -145,6 +121,32 @@ public interface TableDao {
 	// final result methods
 	
 	public int getUserMoneyByNumber(String name,int number);
+	
+	public List<AllUser2D> getTempTable();
+	
+	public List<AllUser2D> getTotalTempTable();
+	
+	// histroy result table methods
+	
+	public void addValuesToAllTable(String date); 
+	
+	public List<AllUser2D> getAllTableByUser(String username); 
+	
+	public List<AllUser2D> getTotalAllTableByUser(String username); 
+	
+	public List<AllUser2D> getUserAllTable();
+	
+	public List<AllUser2D> getTotalAllTable();
+	
+	public List<AllUser2D> getTotalTotalAllTable();
+	
+	public boolean checkNameInTempTable(String username);
+	
+	public void addUserTempTable(AllUser2D user2D);
+	
+	public void updateUserTempTable(AllUser2D user2D); 
+	
+	public void deleteAllTable(); 
 	
 	
 	// closed number page

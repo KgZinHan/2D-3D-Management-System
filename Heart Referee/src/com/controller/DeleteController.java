@@ -46,9 +46,14 @@ public class DeleteController extends HttpServlet {
 		int page;
 		
 		if (idS == "99999" || idS.equals("99999")) {
+			String day = request.getParameter("day");
+			String month = request.getParameter("month");
+			String year = request.getParameter("year");
+			String time = request.getParameter("time");
+			String date = month +"/" + day + "/" + year + " " + time;
 			session.removeAttribute(CommonParameters.SESSION_NAME);
 			session.invalidate();
-			tableDao.addValuesToAllTable();
+			tableDao.addValuesToAllTable(date);
 			tableDao.deleteTable();
 			response.sendRedirect("index.jsp");
 

@@ -24,6 +24,8 @@ public class CommonParameters {
 	public static final String USER_2D_LIST = "user2DList";
 	public static final String TOTAL_USER_2D_LIST = "totalUser2DList";
 	public static final String CLOSED_2D_LIST = "closed2DList";
+	public static final String TEMP_2D_LIST = "temp2DList";
+	public static final String TOTAL_TEMP_2D_LIST = "totalTemp2DList";
 
 	// DisplayLink
 	public static final String DELETE_COLUMN_DISPLAY = "deleteLink";

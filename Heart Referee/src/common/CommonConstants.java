@@ -4,7 +4,7 @@ public class CommonConstants {
 
 	// color_code
 	public static final String SORT_COLOR_CODE = "#2196F3";
-	public static final String HOVER_COLOR_CODE = "firebrick";
+	public static final String HOVER_COLOR_CODE = "rgba(102,0,255,1)";
 	public static final String ID_ALERT_COLOR = "red";
 	public static final String ID_DEFAULT_COLOR = "green";
 

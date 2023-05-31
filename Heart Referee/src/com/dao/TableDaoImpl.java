@@ -947,23 +947,11 @@ public class TableDaoImpl implements TableDao {
 	}
 
 	@Override
-	public void addValuesToAllTable() {
+	public void addValuesToAllTable(String date) {
 		List<AllUser2D> userList = getTempTable();
-		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,DATE,TWO_D_TIME) VALUES (?,?,?,?,?,?,?,?,?,?)";
-		String checkQuery = "SELECT DATE FROM ALL_TABLE WHERE DATE = ?";
-		String time;
+		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_TIME) VALUES (?,?,?,?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(checkQuery);
-			preparedStatement.setDate(1, Date.valueOf(LocalDate.now()));
-			resultSet = preparedStatement.executeQuery();
-			if (!resultSet.next()) {
-				time = "morning";
-			}
-			else {
-				time = "evening";
-			}
-			
+		try {	
 			preparedStatement = connection.prepareStatement(query);
 			for(int i =0; i< userList.size(); i++) {
 				preparedStatement.setString(1, userList.get(i).getUsername());
@@ -974,8 +962,7 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(6,userList.get(i).getComPercent());
 				preparedStatement.setInt(7,userList.get(i).getComMoney());
 				preparedStatement.setInt(8,userList.get(i).getTotal());
-				preparedStatement.setDate(9, Date.valueOf(LocalDate.now()));
-				preparedStatement.setString(10, time);
+				preparedStatement.setString(9, date);
 				
 				preparedStatement.execute();
 			}
@@ -1004,10 +991,6 @@ public class TableDaoImpl implements TableDao {
 				user2D.setComPercent(resultSet.getInt("com_percent"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
 				user2D.setTotal(resultSet.getInt("total"));
-				user2D.setDate(resultSet.getDate("date"));
-				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		        String formattedDate = dateFormat.format(user2D.getDate());
-		        user2D.setStringDate(formattedDate);
 				user2D.setTime(resultSet.getString("two_d_time"));
 				if(user2D.getTotal() <= 0) {
 					user2D.setColor("red");
@@ -1061,7 +1044,8 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getTotalAllTable() {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE GROUP BY TWO_D_TIME";
+		String query = "SELECT TWO_D_TIME,NUMBER,SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,"
+				+ "SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE GROUP BY TWO_D_TIME,NUMBER ORDER BY TWO_D_TIME";
 		int count = 1;
 		connection = DbDriver.getConnection();
 		try {
@@ -1070,9 +1054,11 @@ public class TableDaoImpl implements TableDao {
 			while (resultSet.next()) {
 				AllUser2D user2D = new AllUser2D();
 				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setNumber(resultSet.getInt("number"));
 				user2D.setP(resultSet.getInt("p"));
 				user2D.setpMoney(resultSet.getInt("p_money"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTime(resultSet.getString("two_d_time"));
 				user2D.setTotal(resultSet.getInt("total"));
 				if(user2D.getTotal() <= 0) {
 					user2D.setColor("red");
@@ -1193,10 +1179,12 @@ public class TableDaoImpl implements TableDao {
 		}
 	}
 	
+	@Override
 	public List<AllUser2D> getTempTable() {
 		List<AllUser2D> allUser2DList = new ArrayList<AllUser2D>();
 		AllUser2D user2D;
 		String query = "SELECT * FROM TEMP_TABLE";
+		int count = 1;
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -1211,6 +1199,45 @@ public class TableDaoImpl implements TableDao {
 				user2D.setComPercent(resultSet.getInt("com_percent"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
 				user2D.setTotal(resultSet.getInt("Total"));
+				if(user2D.getTotal() <= 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
+				user2D.setCount(count);
+				count++;
+				allUser2DList.add(user2D);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return allUser2DList;
+	}
+	
+	@Override
+	public List<AllUser2D> getTotalTempTable() {
+		List<AllUser2D> allUser2DList = new ArrayList<AllUser2D>();
+		AllUser2D user2D;
+		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM TEMP_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				user2D = new AllUser2D();
+				user2D.setTotalMoney(resultSet.getInt("total_money"));
+				user2D.setP(resultSet.getInt("p"));	
+				user2D.setpMoney(resultSet.getInt("p_money"));
+				user2D.setComMoney(resultSet.getInt("com_money"));
+				user2D.setTotal(resultSet.getInt("Total"));
+				if(user2D.getTotal() <= 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
 				allUser2DList.add(user2D);
 			}
 		} catch (Exception e) {
