@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.io.IOException;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +92,8 @@ public class FinalResultController extends HttpServlet {
 		int totalMoney = tableDao.getUserTotalMoney(username);
 		int p = tableDao.getUserMoneyByNumber(username,number);
 		int userPMoney = p * 80 ;
-		int commission = (totalMoney * percent)/100;
+		int tCommission = (totalMoney * percent)/100;
+		int commission = Math.round(tCommission / 50f) * 50;
 		int total = totalMoney - userPMoney - commission;
 		if(total < 0) {
 			totalColor = "red";
