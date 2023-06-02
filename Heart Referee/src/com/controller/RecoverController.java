@@ -51,9 +51,10 @@ public class RecoverController extends HttpServlet {
 			Number2D thisNumber = new Number2D();
 			flag = true;
 			thisNumber = twoDList.get(i);
-			if (thisNumber.getMoney() > recoverLimit) {
-				int number = thisNumber.getNumber();
-
+			int number = thisNumber.getNumber();
+			int newMoney = thisNumber.getMoney()  - recoverTableDao.getRecoverMoney(number) - recoverLimit;
+			
+			if (thisNumber.getMoney() > recoverLimit && newMoney > 0) {
 				for (int j = 0; j < rNumberList.size(); j++) {
 					if (number == rNumberList.get(j)) {
 						flag = false;
@@ -63,7 +64,9 @@ public class RecoverController extends HttpServlet {
 				rNumberMoney = getRNumberMoney(number);
 				int rNumber = getReverse(number);
 				rNumberList.add(rNumber);
+				
 				if (flag == true) {
+					
 					if (rNumberMoney == 99) {
 						rNumberMoney = 0;						
 					} 
@@ -79,7 +82,12 @@ public class RecoverController extends HttpServlet {
 					Number2D r2D = new Number2D();
 					r2D.setNumber(number);
 					r2D.setrNumber(rNumberMoney);
-					r2D.setMoney(thisNumber.getMoney()  - recoverTableDao.getRecoverMoney(number) - recoverLimit);
+					
+					
+					if(newMoney < 0 ) {
+						newMoney = 0;
+					}
+					r2D.setMoney(newMoney);
 					r2D.setQuantity(thisNumber.getQuantity());
 					recoverList.add(r2D);
 				}

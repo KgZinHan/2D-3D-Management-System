@@ -16,7 +16,7 @@
 				<a href="Table" class="tab-bar-button hover-effect margin-left">Home</a>
 			</h3>
 			<h3>
-				<a href="WaitingTable?m=default" class="tab-bar-button hover-effect margin-left">Waiting Table</a>
+				<a href="WaitingTable?m=money" class="tab-bar-button hover-effect margin-left">Waiting Table</a>
 			</h3>
 			<h3>
 				<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left">Recover Check</a>

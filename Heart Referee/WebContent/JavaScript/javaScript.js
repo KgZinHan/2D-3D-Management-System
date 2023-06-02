@@ -62,7 +62,7 @@ function displayNone(id){
 //display switch (toggle)
 function clickfunction(id){
 	if(document.getElementById(id).style.background == 'deepskyblue'){
-		document.getElementById(id).style.background = 'rgba(200,200,200,0.95)';
+		document.getElementById(id).style.background = 'rgba(255,255,255,0.95)';
 	}
 	else{
 		document.getElementById(id).style.background = 'deepskyblue';
