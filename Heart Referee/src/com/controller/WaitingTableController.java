@@ -62,10 +62,10 @@ public class WaitingTableController extends HttpServlet {
 			quantityHColor = CommonConstants.SORT_COLOR_CODE;
 		}
 		for (int j = 0; j < top2D.size(); j++) {
-			if (top2D.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((top2D.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				top2D.get(j).setColor("green");
 			}
-			if ((top2D.get(j).getMoney() * 80) > getTotal()) {
+			if ((top2D.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
 				top2D.get(j).setColor("red");
 			}	
 		}
@@ -73,10 +73,10 @@ public class WaitingTableController extends HttpServlet {
 		//color count method
 		countList = tableDao.sortByMoney();
 		for (int j = 0; j < countList.size(); j++) {
-			if (countList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((countList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}
-			else if ((countList.get(j).getMoney() * 80) > getTotal()) {
+			else if ((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal> getTotal()) {
 				redCount = redCount + 1;
 			}		
 			else {
@@ -122,20 +122,20 @@ public class WaitingTableController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((twoDList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
-			if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
+			if ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
 				twoDList.get(j).setColor("red");
 			}
 		}
 		
 		//color count method
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((twoDList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}
-			else if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
+			else if ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
 				redCount = redCount + 1;
 			}
 			else {
@@ -143,7 +143,7 @@ public class WaitingTableController extends HttpServlet {
 			}
 		}
 		
-		count2D.setGreenCount(greenCount);
+		count2D.setGreenCount(greenCount * 10);
 		count2D.setBlackCount(blackCount * 10);
 		count2D.setRedCount(redCount * 10);
 		count2D.setPurpleCount((10 - blackCount - redCount - greenCount) * 10);

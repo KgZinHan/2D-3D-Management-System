@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dao.RecoverTableDao;
+import com.dao.RecoverTableDaoImpl;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.AllUser2D;
@@ -25,6 +27,7 @@ public class FinalResultController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
 	TableDao tableDao = new TableDaoImpl();
+	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
 
 	public FinalResultController() {
 		super();
@@ -35,8 +38,9 @@ public class FinalResultController extends HttpServlet {
 		List<User2D> user2DList = new ArrayList<>();
 		List<AllUser2D> totalTemp2DList = new ArrayList<>();
 		Integer number = 0;
-		String numberS = "";
+		int totalRecover = 0;
 		String username = request.getParameter("username");
+		String numberS = request.getParameter("number");
 		
 		if(username == null) {
 			HttpSession session = request.getSession();
@@ -57,15 +61,18 @@ public class FinalResultController extends HttpServlet {
 		}
 		if(!temp2DList.isEmpty()) {
 			number = temp2DList.get(0).getNumber();
+			numberS = number.toString();
+			if(number < 10) {
+				numberS = "0"+number.toString();
+			}
 		}
-		numberS = number.toString();
-		if(number < 10) {
-			numberS = "0"+number.toString();
-		}
+		
+		totalRecover = recoverTableDao.getTotalRecoverMoney();
 		
 		request.setAttribute(CommonParameters.USER_LIST, user2DList);
 		request.setAttribute(CommonParameters.TEMP_2D_LIST, temp2DList);
 		request.setAttribute(CommonParameters.TOTAL_TEMP_2D_LIST, totalTemp2DList);
+		request.setAttribute(CommonParameters.RECOVER_AMOUNT, totalRecover);
 		request.setAttribute(CommonParameters.FINAL_RESULT_NUMBER, numberS);
 		request.setAttribute(CommonParameters.TAB_BAR_FINAL_RESULT_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.SESSION_USER, username); 
@@ -79,6 +86,7 @@ public class FinalResultController extends HttpServlet {
 		List<AllUser2D> temp2DList = new ArrayList<>();
 		List<User2D> user2DList = new ArrayList<>();
 		List<AllUser2D> totalTemp2DList = new ArrayList<>();
+		int totalRecover = 0;
 		
 		String username = request.getParameter("username");
 		String numberS = request.getParameter("number");
@@ -111,9 +119,12 @@ public class FinalResultController extends HttpServlet {
 			user2DList.get(i).setChecked(checked);
 		}
 		
+		totalRecover = recoverTableDao.getTotalRecoverMoney();
+		
 		request.setAttribute(CommonParameters.USER_LIST, user2DList);
 		request.setAttribute(CommonParameters.TEMP_2D_LIST, temp2DList);
 		request.setAttribute(CommonParameters.TOTAL_TEMP_2D_LIST, totalTemp2DList);
+		request.setAttribute(CommonParameters.RECOVER_AMOUNT, totalRecover);
 		request.setAttribute(CommonParameters.TAB_BAR_FINAL_RESULT_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.SESSION_USER, username); 
 		request.setAttribute(CommonParameters.FINAL_RESULT_DIV_DISPLAY, "block"); 

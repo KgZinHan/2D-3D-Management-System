@@ -128,7 +128,7 @@ public interface TableDao {
 	
 	// histroy result table methods
 	
-	public void addValuesToAllTable(String date); 
+	public void addValuesToAllTable(String date,int recover); 
 	
 	public List<AllUser2D> getAllTableByUser(String username); 
 	

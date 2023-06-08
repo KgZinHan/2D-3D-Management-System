@@ -78,11 +78,14 @@
 							<th>
 								<h4>P Money</h4>
 							</th>
-							<th>
+							<th style="display:${comPercentLink}">
 								<h4>Com</h4>
 							</th>
 							<th>				
 								<h4>Com Money</h4>
+							</th>
+							<th style="display:none;display:${totalRecoverLink}">				
+								<h4>Recover</h4>
 							</th>
 							<th>				
 								<h4>Total</h4>
@@ -96,8 +99,9 @@
 								<td style="width: 200px"><p>${user2D.totalMoney} ks</p></td>
 								<td style="width: 80px"><p>${user2D.p}</p></td>
 								<td style="width:200px"><p>${user2D.pMoney} ks</p></td>
-								<td style="width: 100px"><p>${user2D.comPercent} %</p></td>
+								<td style="width: 100px;display:${comPercentLink}"><p>${user2D.comPercent} %</p></td>
 								<td style="width:200px"><p>${user2D.comMoney} ks</p></td>
+								<td style="width:200px;display:none;display:${totalRecoverLink}"><p>${user2D.recover} ks</p></td>
 								<td style="width: 200px;color:${user2D.color}"><p>${user2D.total} ks</p></td>
 							</tr>
 						</c:forEach>
@@ -109,8 +113,9 @@
 								<td style="width: 200px"><p>${tUser2D.totalMoney} ks</p></td>
 								<td style="width: 80px"><p>${tUser2D.p}</p></td>
 								<td style="width:200px"><p>${tUser2D.pMoney} ks</p></td>
-								<td style="width: 100px"><p>-</p></td>
+								<td style="width: 100px;display:${comPercentLink}"><p>-</p></td>
 								<td style="width:200px"><p>${tUser2D.comMoney} ks</p></td>
+								<td style="width:200px;display:none;display:${totalRecoverLink}"><p>${tUser2D.recover} ks</p></td>
 								<td style="width: 300px;color:${tUser2D.color}"><p>${tUser2D.total} ks</p></td>							
 							</tr>
 						</c:forEach>
@@ -118,6 +123,6 @@
 				</div>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

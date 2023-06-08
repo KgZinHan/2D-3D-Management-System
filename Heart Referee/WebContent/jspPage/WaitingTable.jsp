@@ -18,7 +18,7 @@
 	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be a little plus(+) in profit.</p>
 </div>
 <div id="greenDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: green;font-family:sans-serif;">Green color means the numbers with green color are less than P(1000) and will be plus(+) in profit.</p>
+	<p style="color: green;font-family:sans-serif;">Green color means the numbers with green color will be plus(+) more than 2 lakhs in profit.</p>
 </div>
 <div id="purpleDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
 	<p style="color: purple;font-family:sans-serif;">Purple color means the numbers with purple color are P(0) and will be significantly plus(+) in profit.</p>
@@ -122,6 +122,6 @@
 			</div>
 		</div>
 	</div>
-	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
 </body>
 </html>

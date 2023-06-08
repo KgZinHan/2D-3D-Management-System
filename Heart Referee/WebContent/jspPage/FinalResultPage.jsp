@@ -31,6 +31,7 @@
         	<button class="mv-display-topRight mv-logIn-close-button hover-effect" style="color: black" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
 				<div class="mv-display-middle" style="height:100px;margin-top: 30px">
 					<span class="user-name" style="cursor: default;color: black">Number = ${number}</span>
+					<span class="user-name" style="cursor: default;color: black">Recover = ${recover} ks</span>
 				</div>
 				<div id="tb02" class="mv-report-table-style">
 					<table class="mv-waiting-table" style="margin-right: 50px">
@@ -86,21 +87,21 @@
 						</c:forEach>
 					</table>
 				</div>
-				<div style="margin-left: 50px;margin-top: 10px">
+				<div style="margin-left: 20px;margin-top: 10px">
 					<form action="Delete" method="get" >				
 						<input type="hidden" name="id" value="99999"/>
-						<label style="font-family: robom">Day :</label>&emsp;<input type="number" name="day" class="f-pg-enter-no-2" min="1" max="31" step="1" required/>
-						<label style="font-family: robom">Month :</label>&emsp;<input type="number" name="month" class="f-pg-enter-no-2" min="1" max="12" step="1" required/>
-						<label style="font-family: robom">Year :</label>&emsp;<select name="year" class="f-pg-enter-no-2">
-									<option value="2023" label="2023"/>
-									<option value="2024" label="2024"/>
-									<option value="2025" label="2025"/>
-									<option value="2026" label="2026"/>
+						
+						<label style="font-family: robom">Date :</label>&emsp;<input type="date" name="date" class="f-pg-enter-no-2" min="1" max="12" step="1" style="width: 120px" required/>
+						
+						<label style="font-family: robom">Time :</label>&emsp;<select name="time" class="f-pg-enter-no-2" style="width: 100px">
+									<option value="AM" label="morning"/>
+									<option value="PM" label="evening"/>
 								</select>
-						<label style="font-family: robom">Time :</label>&emsp;<select name="time" class="f-pg-enter-no-2">
-									<option value="A" label="morning"/>
-									<option value="B" label="evening"/>
-								</select>
+												
+						<input type="checkbox" name="recoverFlag" value="add" onclick="displaySwitch2('inputRecoverId')">
+						<label style="font-family: robom">Add Recover</label>
+						<label style="font-family: robom;margin-left: 30px;">Plus Recover Money</label>
+						<input id="inputRecoverId"  type="number" name="plusRecover" value="0" class="f-pg-enter-no-2" min="0" step="500" style="width: 80px;display: none" placeholder="Plus recover amount">
 						<button class="f-pg-enter-no hover-effect" style="width:auto;cursor: pointer;float: right" onclick="if(!(confirm('Are you sure you want to save this to ledger and delete this table?'))) return false;">
 							<i class="fa fa-save" ></i>&emsp;Save to ledger
 						</button>
@@ -190,6 +191,6 @@
 				
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

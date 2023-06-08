@@ -38,6 +38,8 @@ public class CommonParameters {
 	public static final String PAGE_DISPLAY = "pageLink";
 	public static final String PAGE_TOTAL_DISPLAY = "pageTotalLink";
 	public static final String TOTAL_MONEY_DISPLAY = "totalMoneyLink";
+	public static final String COM_PERCENT_DISPLAY = "comPercentLink";
+	public static final String TOTAL_RECOVER_DISPLAY = "totalRecoverLink";
 
 	// Sort Color
 	public static final String NUMBER_SORT_COLOR = "numberHColor";

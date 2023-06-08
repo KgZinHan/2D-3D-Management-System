@@ -58,7 +58,7 @@
 						<td><h3>${result.userName}</h3></td>
 						<td><h3>${result.userMoney} ks</h3></td>
 						<td><h3 style="color: firebrick">${result.money}</h3></td>
-						<td><a href="Final?username=${result.userName}" style="font-style: normal"><h3>report</h3></a></td>
+						<td><a href="Final?username=${result.userName}&number=${number}" style="font-style: normal"><h3>report</h3></a></td>
 					</tr>
 				</c:forEach>
 			</table>

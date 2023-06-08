@@ -85,6 +85,15 @@ function displaySwitch(id){
 	}
 }
 
+function displaySwitch2(id){
+	if(document.getElementById(id).style.display == 'inline-block'){
+		displayNone(id);
+	}
+	else{
+		document.getElementById(id).style.display = 'inline-block';
+	}
+}
+
 function toggleSwitch(id1,id2){
 	if(document.getElementById(id1).style.display == 'none'){
 		displayNone(id2);

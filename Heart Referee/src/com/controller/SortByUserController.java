@@ -58,18 +58,6 @@ public class SortByUserController extends HttpServlet {
 			quantityHColor = CommonConstants.SORT_COLOR_CODE;
 		}
 		
-		for (int j = 0; j < top2D.size(); j++) {
-			if (top2D.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
-				top2D.get(j).setColor("green");
-			}
-			if (top2D.get(j).getMoney() > CommonConstants.ORANGE_LIMIT_PERSON) {
-				top2D.get(j).setColor("orange");
-			}
-			if (top2D.get(j).getMoney() >= CommonConstants.RED_LIMIT_PERSON) {
-				top2D.get(j).setColor("red");
-			}
-		}
-		
 		twoDList = tableDao.getTableByUser(userName);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);

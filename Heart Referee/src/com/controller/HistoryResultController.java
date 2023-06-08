@@ -51,6 +51,8 @@ public class HistoryResultController extends HttpServlet {
 				username = "Total";
 				user2DList = tableDao.getTotalAllTable();
 				totalUser2DList = tableDao.getTotalTotalAllTable();
+				request.setAttribute(CommonParameters.COM_PERCENT_DISPLAY,"none");
+				request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "block");
 			}
 			else {
 				user2DList = tableDao.getAllTableByUser(username);

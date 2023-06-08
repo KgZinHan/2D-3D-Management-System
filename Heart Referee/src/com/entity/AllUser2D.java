@@ -17,6 +17,7 @@ public class AllUser2D {
 	private String time;
 	private String color;
 	private int count;
+	private int recover;
 
 	public String getUsername() {
 		return username;
@@ -121,5 +122,15 @@ public class AllUser2D {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+	public int getRecover() {
+		return recover;
+	}
+
+	public void setRecover(int recover) {
+		this.recover = recover;
+	}
+	
+	
 	
 }

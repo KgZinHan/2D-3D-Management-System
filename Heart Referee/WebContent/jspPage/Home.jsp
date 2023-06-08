@@ -107,7 +107,7 @@
 				<form id="singleInput" action="Table" method="post" style="display: none">
 					<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
                   	<input id="number1" type="text" name="number" autofocus="autofocus" tabindex="1" class="mv-number-button" placeholder="Enter" min="00" max="99">
-                   	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+                   	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
                  	<h3 class="mv-special-note">
 	                 	&emsp;Shortcut Note!
 	                 	<br>** &nbsp;&nbsp;=&nbsp; a puu
@@ -149,7 +149,7 @@
 							<span class="checkmark"></span>
 						</label>
 	            	</div>
-                    <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+                    <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
 				</form>
 				
@@ -167,9 +167,9 @@
 						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
 						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
-					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
                     <h2 style="color: white; position: absolute;right: 80px">R</h2>
-                    <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+                    <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
                     <input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add" >
 				</form>
 				
@@ -243,6 +243,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.7.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

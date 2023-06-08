@@ -98,16 +98,10 @@ public class FullTableController extends HttpServlet {
 	
 	protected void setColor(List<Number2D> twoDList) {
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				twoDList.get(j).setColor("blue");
-			}
-			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((twoDList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal ) {
-				twoDList.get(j).setColor("rgb(255,165,30)");
-			}
-			if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
+			if ((twoDList.get(j).getMoney() * 80)+ ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
 				twoDList.get(j).setColor("red");
 			}
 		}

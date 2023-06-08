@@ -1,4 +1,4 @@
-package com.dao;
+ package com.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -947,9 +947,9 @@ public class TableDaoImpl implements TableDao {
 	}
 
 	@Override
-	public void addValuesToAllTable(String date) {
+	public void addValuesToAllTable(String date,int recoverMoney) {
 		List<AllUser2D> userList = getTempTable();
-		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_TIME) VALUES (?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_TIME,RECOVER) VALUES (?,?,?,?,?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		try {	
 			preparedStatement = connection.prepareStatement(query);
@@ -963,7 +963,12 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(7,userList.get(i).getComMoney());
 				preparedStatement.setInt(8,userList.get(i).getTotal());
 				preparedStatement.setString(9, date);
-				
+				if(i == 0) {
+					preparedStatement.setInt(10,recoverMoney);
+				}
+				else {
+					preparedStatement.setInt(10,0);
+				}
 				preparedStatement.execute();
 			}
 		} catch (Exception e) {
@@ -1045,13 +1050,14 @@ public class TableDaoImpl implements TableDao {
 	public List<AllUser2D> getTotalAllTable() {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
 		String query = "SELECT TWO_D_TIME,NUMBER,SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,"
-				+ "SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE GROUP BY TWO_D_TIME,NUMBER ORDER BY TWO_D_TIME";
+				+ "SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER FROM ALL_TABLE GROUP BY TWO_D_TIME,NUMBER ORDER BY TWO_D_TIME";
 		int count = 1;
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
+				int total = 0;
 				AllUser2D user2D = new AllUser2D();
 				user2D.setTotalMoney(resultSet.getInt("total_money"));
 				user2D.setNumber(resultSet.getInt("number"));
@@ -1059,7 +1065,9 @@ public class TableDaoImpl implements TableDao {
 				user2D.setpMoney(resultSet.getInt("p_money"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
 				user2D.setTime(resultSet.getString("two_d_time"));
-				user2D.setTotal(resultSet.getInt("total"));
+				total = resultSet.getInt("total") + resultSet.getInt("recover");
+				user2D.setTotal(total);
+				user2D.setRecover(resultSet.getInt("recover"));
 				if(user2D.getTotal() <= 0) {
 					user2D.setColor("red");
 				}
@@ -1080,18 +1088,21 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getTotalTotalAllTable() {
 		List<AllUser2D> totalUser2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL FROM ALL_TABLE";
+		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER FROM ALL_TABLE";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
+				int total;
 				AllUser2D user2D = new AllUser2D();
 				user2D.setTotalMoney(resultSet.getInt("total_money"));
 				user2D.setP(resultSet.getInt("p"));
 				user2D.setpMoney(resultSet.getInt("p_money"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
-				user2D.setTotal(resultSet.getInt("total"));
+				user2D.setRecover(resultSet.getInt("recover"));
+				total = resultSet.getInt("total")+resultSet.getInt("recover");
+				user2D.setTotal(total);
 				if(user2D.getTotal() <= 0) {
 					user2D.setColor("red");
 				}

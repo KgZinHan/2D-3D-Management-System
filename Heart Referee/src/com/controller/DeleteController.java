@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.parser.RecoveredModuleStatement;
+
+import com.dao.RecoverTableDao;
+import com.dao.RecoverTableDaoImpl;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.History2D;
@@ -33,6 +37,7 @@ public class DeleteController extends HttpServlet {
 	int realID;
 	String msg;
 	TableDao tableDao = new TableDaoImpl();
+	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
 
 	public DeleteController() {
 		super();
@@ -43,17 +48,25 @@ public class DeleteController extends HttpServlet {
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String idS = request.getParameter("id");
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
+		int recoverMoney = 0;
 		int page;
 		
 		if (idS == "99999" || idS.equals("99999")) {
-			String day = request.getParameter("day");
-			String month = request.getParameter("month");
-			String year = request.getParameter("year");
+			String date = request.getParameter("date");
 			String time = request.getParameter("time");
-			String date = month +"/" + day + "/" + year + " " + time;
+			String recoverFlag = request.getParameter("recoverFlag");
+			String plusRecover = request.getParameter("plusRecover");
+			String todayDate = date + " " + time;
+			
+			if(recoverFlag != null) {
+				recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
+			}
+			if(plusRecover != null || plusRecover != "" || plusRecover != " ") {
+				recoverMoney = recoverMoney + Integer.parseInt(plusRecover);
+			}
 			session.removeAttribute(CommonParameters.SESSION_NAME);
 			session.invalidate();
-			tableDao.addValuesToAllTable(date);
+			tableDao.addValuesToAllTable(todayDate,recoverMoney);
 			tableDao.deleteTable();
 			response.sendRedirect("index.jsp");
 

@@ -54,13 +54,10 @@ public class SearchController extends HttpServlet {
 
 		twoDList = tableDao.search2DAmount(number);
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((twoDList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < recoverTotal) {
-				twoDList.get(j).setColor("orange");
-			}
-			if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
+			if ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
 				twoDList.get(j).setColor("red");
 			}
 		}
@@ -71,10 +68,10 @@ public class SearchController extends HttpServlet {
 		//color count method
 		countList = tableDao.sortByMoney();
 		for (int j = 0; j < countList.size(); j++) {
-			if (countList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
+			if (getTotal() - ((countList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}	
-			else if ((countList.get(j).getMoney() * 80) > getTotal()) {
+			else if ((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal> getTotal()) {
 				redCount = redCount + 1;
 			}	
 			else {
@@ -104,22 +101,6 @@ public class SearchController extends HttpServlet {
 		int number = Integer.parseInt(search);
 		
 		twoDList = tableDao.search2DAmountByUser(number, userName);
-		
-		for (int j = 0; j < twoDList.size(); j++) {
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) > CommonConstants.FINAL_LIMIT) {
-				twoDList.get(j).setColor("blue");
-			}
-			if (twoDList.get(j).getMoney() < CommonConstants.VERY_HAPPY_LIMIT) {
-				twoDList.get(j).setColor("green");
-			}
-			if (getTotal()-((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100)) < CommonConstants.RECOVER_LIMIT ) {
-				twoDList.get(j).setColor("orange");
-			}
-			if ((twoDList.get(j).getMoney() * 80) > getTotal()) {
-				twoDList.get(j).setColor("red");
-			}
-		}
-		
 		twoDCheckList = tableDao.getHistoryTableByUsername(userName);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
