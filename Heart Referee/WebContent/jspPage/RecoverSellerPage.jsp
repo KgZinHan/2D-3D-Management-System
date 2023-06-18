@@ -35,35 +35,40 @@
 			</h3>
 		</div>
 		<div class="user-total-field">
-			Close Number Setup
+			Recover Seller Setup
 		</div>	
 		<div class="mv-recover-bg" style="background: rgb(50,50,50)">
 			<div class="mv-add-recover-field">
 				<div class="mv-display-middle">
-					<form action="ClosedNumbers" method="get" style="display: flex;margin:30px">
-					<input type="hidden" name="mode" value="update"/>	
-					<input type="number" name="closedNumber" class="f-pg-enter-no" min="0" max="99" placeholder="Enter Number to close" style="width: 80%" required>
-					<input type="submit" class="f-pg-enter-no hover-effect" value="Add" style="cursor: pointer;background-color: silver;">
-				</form>
+					<form action="RecoverSeller" method="get" style="display: flex;margin:30px">
+						<input type="hidden" name="mode" value="update"/>	
+						<input type="text" name="sellerName" class="f-pg-enter-no" min="0" max="99" placeholder="Recover Seller Name" style="width: 150px" required>
+						<input type="number" name="sellerCom" class="f-pg-enter-no" min="0" max="99" placeholder="Comm" style="width: 100px" required>
+						<input type="number" name="sellerZ" class="f-pg-enter-no" min="0" max="99" placeholder="Z" style="width: 100px" required>
+						<input type="submit" class="f-pg-enter-no hover-effect" value="Add" style="cursor: pointer;background-color: silver;">
+					</form>
 					<div class="mv-table-style" style="height: 450px">
 						<table>
 							<tr class="mv-list-table-head">
-								<th style="width: 60px">
-									<h4>#</h4>
+								<th style="width: 300px">
+									<h4>Seller Name</h4>
 								</th>
 								<th>				
-									<h4>Closed Number</h4>
+									<h4>Seller Com</h4>
 								</th>
-								<th style="width: 100px">
-									<h4>Delete</h4>
+								<th style="width: 150px">
+									<h4>Seller Z</h4>
 								</th>	
+								<th style="width: 50px">
+								</th>
 							</tr>
-							<c:forEach items="${closed2DList}" var="closed2D">
+							<c:forEach items="${recoverSellerList}" var="seller">
 								<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px">
-									<td>${closed2D.count}</td>
-									<td style="width: 150px"><p>${closed2D.number}</p></td>
+									<td style="width: 200px">${seller.sellerName}</td>
+									<td style="width: 150px"><p>${seller.sellerCom}%</p></td>
+									<td style="width: 150px"><p>${seller.sellerZ}z</p></td>
 									<td>
-										<a href="ClosedNumbers?closedNumber=${closed2D.number}&mode=delete"><i class="fas fa-trash"></i></a>
+										<a href="RecoverSeller?sellerName=${seller.sellerName}&mode=delete"><i class="fas fa-trash"></i></a>
 									</td>
 								</tr>
 							</c:forEach>

@@ -29,9 +29,11 @@
         </div>
         <div id="modal02" class="mv-display-center mv-view-table">
         	<button class="mv-display-topRight mv-logIn-close-button hover-effect" style="color: black" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
-				<div class="mv-display-middle" style="height:100px;margin-top: 30px">
+				<div class="mv-display-middle" style="height:100px;margin-top: 30px;width: 90%">
 					<span class="user-name" style="cursor: default;color: black">Number = ${number}</span>
-					<span class="user-name" style="cursor: default;color: black">Recover = ${recover} ks</span>
+					<span class="user-name" style="cursor: default;color: green">Recover = ${recover} ks </span>
+					<span class="user-name" style="cursor: default;color: green">P(${totalRecoverP}) = ${totalRecoverPlus} ks </span>
+					<span class="user-name" style="cursor: default;color: black">Total = <span style="color:${recoverTotalColor}">${allTotal} ks</span> </span>
 				</div>
 				<div id="tb02" class="mv-report-table-style">
 					<table class="mv-waiting-table" style="margin-right: 50px">
@@ -90,7 +92,7 @@
 				<div style="margin-left: 20px;margin-top: 10px">
 					<form action="Delete" method="get" >				
 						<input type="hidden" name="id" value="99999"/>
-						
+						<input type="hidden" name="number" value="${number}">
 						<label style="font-family: robom">Date :</label>&emsp;<input type="date" name="date" class="f-pg-enter-no-2" min="1" max="12" step="1" style="width: 120px" required/>
 						
 						<label style="font-family: robom">Time :</label>&emsp;<select name="time" class="f-pg-enter-no-2" style="width: 100px">
@@ -98,10 +100,11 @@
 									<option value="PM" label="evening"/>
 								</select>
 												
-						<input type="checkbox" name="recoverFlag" value="add" onclick="displaySwitch2('inputRecoverId')">
-						<label style="font-family: robom">Add Recover</label>
-						<label style="font-family: robom;margin-left: 30px;">Plus Recover Money</label>
-						<input id="inputRecoverId"  type="number" name="plusRecover" value="0" class="f-pg-enter-no-2" min="0" step="500" style="width: 80px;display: none" placeholder="Plus recover amount">
+						<input type="checkbox" name="recoverFlag" value="add" checked>
+						<label style="font-family: robom">Recover Plus</label>
+						<input type="number" class="f-pg-enter-no-2" value="${totalRecoverPlus}" readonly style="width: 100px">
+						<label style="font-family: robom;margin-left: 10px;">Extra Money</label>
+						<input id="inputRecoverId"  type="number" name="extraMoney" value="0" class="f-pg-enter-no-2" min="0" step="500" style="width: 80px" placeholder="Extra money" required>
 						<button class="f-pg-enter-no hover-effect" style="width:auto;cursor: pointer;float: right" onclick="if(!(confirm('Are you sure you want to save this to ledger and delete this table?'))) return false;">
 							<i class="fa fa-save" ></i>&emsp;Save to ledger
 						</button>
@@ -120,7 +123,7 @@
 				<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left" style="color:${recoverCheck}">Recover Check</a>
 			</h3>
 			<h3>
-				<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left">Recover Note</a>
+				<a href="RecoverPageController?sellerName=Default" class="tab-bar-button hover-effect margin-left">Recover Note</a>
 			</h3>
 			<h3>
 				<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>

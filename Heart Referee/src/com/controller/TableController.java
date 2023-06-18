@@ -98,7 +98,7 @@ public class TableController extends HttpServlet {
 		String numberS = request.getParameter("number");
 		String alertMsg = "";
 		Boolean flag = true;
-		int pageNo = 1;
+		int pageNo = CommonConstants.DEFAULT_PAGE_NO;
 		int money = Integer.parseInt(moneyS);
 		String note = "error";
 		int type = 1;

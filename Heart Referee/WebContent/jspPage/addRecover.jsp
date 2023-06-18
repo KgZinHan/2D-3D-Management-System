@@ -21,7 +21,7 @@
 				<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left" style="color:${recoverCheck}">Recover Check</a>
 			</h3>
 			<h3>
-				<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left">Recover Note</a>
+				<a href="RecoverPageController?sellerName=Default" class="tab-bar-button hover-effect margin-left">Recover Note</a>
 			</h3>
 			<h3>
 				<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>

@@ -99,7 +99,8 @@ public class CustomInputController extends HttpServlet {
 		String rMoneyS = request.getParameter("rMoney");
 		int money = Integer.parseInt(moneyS);
 		int rMoney = Integer.parseInt(rMoneyS);
-		int pageNo = 1;
+		int pageNo = CommonConstants.DEFAULT_PAGE_NO;
+		
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute(CommonParameters.SESSION_USER);
 		String numberS1 = request.getParameter("number1");

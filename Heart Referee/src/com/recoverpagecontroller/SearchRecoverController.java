@@ -16,7 +16,7 @@ import com.dao.RecoverTableDaoImpl;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.Number2D;
-import com.entity.User2D;
+import com.entity.Recover2D;
 
 import common.CommonConstants;
 import common.CommonParameters;
@@ -26,11 +26,9 @@ public class SearchRecoverController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
 	List<Number2D> twoDList = new ArrayList<Number2D>();
-	List<Number2D> twoDCheckList = new ArrayList<Number2D>();
-	List<User2D> userList = new ArrayList<User2D>();
+	List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 	int total;
 	int recoverTotal;
-	int realID;
 	TableDao tableDao = new TableDaoImpl();
 	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
 
@@ -39,19 +37,23 @@ public class SearchRecoverController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String sellerName = request.getParameter("sellerName");
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
 		
-		twoDList = recoverTableDao.search2DRecoverAmount(number);
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
-		userList = tableDao.getUsers();
-		realID = tableDao.getIdCount();
-
+		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
+		
+		recoverSellerList = recoverTableDao.getRecoverList();
+		twoDList = recoverTableDao.search2DRecoverAmount(number,sellerName);
+		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
+		request.setAttribute(CommonParameters.TOTAL_SELLER_RECOVER,totalSellerRecover);
+		request.setAttribute(CommonParameters.SELLER_NAME, sellerName);
+		request.setAttribute(CommonParameters.RECOVER_LIST, recoverSellerList);
 		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
-		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
 		dispatcher = request.getRequestDispatcher("/recoverPage");
 		dispatcher.forward(request, response);
@@ -60,12 +62,4 @@ public class SearchRecoverController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
-	protected int getTotal() {
-		int totalMoney = 0;
-		totalMoney = tableDao.getTotalMoney();
-		return totalMoney;
-
-	}
-
 }

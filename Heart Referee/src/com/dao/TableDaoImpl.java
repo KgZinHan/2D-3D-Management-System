@@ -1,20 +1,19 @@
  package com.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import com.driver.DbDriver;
 import com.entity.AllUser2D;
 import com.entity.Closed2D;
 import com.entity.History2D;
+import com.entity.Ledger;
 import com.entity.Number2D;
+import com.entity.Recover2D;
 import com.entity.Summary2D;
 import com.entity.User2D;
-import java.text.SimpleDateFormat;
 
 public class TableDaoImpl implements TableDao {
 
@@ -230,6 +229,7 @@ public class TableDaoImpl implements TableDao {
 		String deleteQuery3 = "DELETE FROM TWO_D_RECOVER_TABLE WHERE ID >= 0";
 		String deleteQuery4 = "DELETE FROM RECOVER_HISTORY_TABLE WHERE ID >= 0";
 		String deleteQuery5 = "DELETE FROM TEMP_TABLE";
+		String deleteQuery6 = "DELETE FROM RECOVER_ALL_TABLE";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
@@ -241,6 +241,8 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement = connection.prepareStatement(deleteQuery4);
 			preparedStatement.execute();
 			preparedStatement = connection.prepareStatement(deleteQuery5);
+			preparedStatement.execute();
+			preparedStatement = connection.prepareStatement(deleteQuery6);
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -947,9 +949,9 @@ public class TableDaoImpl implements TableDao {
 	}
 
 	@Override
-	public void addValuesToAllTable(String date,int recoverMoney) {
+	public void addValuesToAllTable(Ledger ledger) {
 		List<AllUser2D> userList = getTempTable();
-		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_TIME,RECOVER) VALUES (?,?,?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO ALL_TABLE(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_TIME,RECOVER,RECOVER_P,RECOVER_COM,RECOVER_PLUS,EXTRA) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		try {	
 			preparedStatement = connection.prepareStatement(query);
@@ -962,12 +964,20 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(6,userList.get(i).getComPercent());
 				preparedStatement.setInt(7,userList.get(i).getComMoney());
 				preparedStatement.setInt(8,userList.get(i).getTotal());
-				preparedStatement.setString(9, date);
+				preparedStatement.setString(9, ledger.getDate());
 				if(i == 0) {
-					preparedStatement.setInt(10,recoverMoney);
+					preparedStatement.setInt(10,ledger.getRecoverMoney());
+					preparedStatement.setInt(11,ledger.getRecoverPMoney());
+					preparedStatement.setInt(12, ledger.getRecoverComMoney());
+					preparedStatement.setInt(13, ledger.getRecoverPlusMoney());
+					preparedStatement.setInt(14, ledger.getExtraMoney());
 				}
 				else {
 					preparedStatement.setInt(10,0);
+					preparedStatement.setInt(11,0);
+					preparedStatement.setInt(12,0);
+					preparedStatement.setInt(13,0);
+					preparedStatement.setInt(14,0);
 				}
 				preparedStatement.execute();
 			}
@@ -1050,7 +1060,9 @@ public class TableDaoImpl implements TableDao {
 	public List<AllUser2D> getTotalAllTable() {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
 		String query = "SELECT TWO_D_TIME,NUMBER,SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,"
-				+ "SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER FROM ALL_TABLE GROUP BY TWO_D_TIME,NUMBER ORDER BY TWO_D_TIME";
+				+ "SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER, "
+				+ "SUM(RECOVER_P) AS RECOVER_P, SUM(RECOVER_COM) AS RECOVER_COM, SUM(RECOVER_PLUS) AS RECOVER_PLUS,"
+				+ "SUM(EXTRA) AS EXTRA FROM ALL_TABLE GROUP BY TWO_D_TIME,NUMBER ORDER BY TWO_D_TIME";
 		int count = 1;
 		connection = DbDriver.getConnection();
 		try {
@@ -1065,9 +1077,13 @@ public class TableDaoImpl implements TableDao {
 				user2D.setpMoney(resultSet.getInt("p_money"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
 				user2D.setTime(resultSet.getString("two_d_time"));
-				total = resultSet.getInt("total") + resultSet.getInt("recover");
+				total = resultSet.getInt("total") + resultSet.getInt("recover") + resultSet.getInt("recover_plus")+ resultSet.getInt("extra");
 				user2D.setTotal(total);
 				user2D.setRecover(resultSet.getInt("recover"));
+				user2D.setRecoverP(resultSet.getInt("recover_p"));
+				user2D.setRecoverCom(resultSet.getInt("recover_com"));
+				user2D.setRecoverPlus(resultSet.getInt("recover_plus"));
+				user2D.setExtra(resultSet.getInt("extra"));
 				if(user2D.getTotal() <= 0) {
 					user2D.setColor("red");
 				}
@@ -1088,7 +1104,10 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getTotalTotalAllTable() {
 		List<AllUser2D> totalUser2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER FROM ALL_TABLE";
+		String query = "SELECT SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,SUM(COM_MONEY) AS COM_MONEY , "
+				+ "SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER, "
+				+ "SUM(RECOVER_P) AS RECOVER_P, SUM(RECOVER_COM) AS RECOVER_COM, SUM(RECOVER_PLUS) AS RECOVER_PLUS,"
+				+ "SUM(EXTRA) AS EXTRA FROM ALL_TABLE";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -1101,7 +1120,11 @@ public class TableDaoImpl implements TableDao {
 				user2D.setpMoney(resultSet.getInt("p_money"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
 				user2D.setRecover(resultSet.getInt("recover"));
-				total = resultSet.getInt("total")+resultSet.getInt("recover");
+				user2D.setRecoverP(resultSet.getInt("recover_p"));
+				user2D.setRecoverCom(resultSet.getInt("recover_com"));
+				user2D.setRecoverPlus(resultSet.getInt("recover_plus"));
+				user2D.setExtra(resultSet.getInt("extra"));
+				total = resultSet.getInt("total")+resultSet.getInt("recover")+resultSet.getInt("recover_plus")+resultSet.getInt("extra");
 				user2D.setTotal(total);
 				if(user2D.getTotal() <= 0) {
 					user2D.setColor("red");
@@ -1346,7 +1369,101 @@ public class TableDaoImpl implements TableDao {
 		return userList;
 	}
 
-	
+	@Override
+	public List<AllUser2D> getAllRecoverTable() {
+		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
+		String query = "SELECT * FROM RECOVER_ALL_TABLE ORDER BY RECOVER_SELLER";
+		int count = 1;
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				AllUser2D user2D = new AllUser2D();
+				user2D.setTime(resultSet.getString("date"));
+				user2D.setUsername(resultSet.getString("recover_seller"));
+				user2D.setRecover(resultSet.getInt("recover"));
+				user2D.setRecoverCom(resultSet.getInt("recover_com"));
+				user2D.setRecoverP(resultSet.getInt("recover_p"));
+				user2D.setRecoverPlus(resultSet.getInt("recover_plus"));
+				user2D.setTotalMoney(resultSet.getInt("total_recover"));
+				if(user2D.getTotalMoney() < 0) {
+					user2D.setColor("red");
+				}
+				else {
+					user2D.setColor("green");
+				}
+				user2D.setCount(count);
+				user2DList.add(user2D);
+				count++;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user2DList;
+	}
+
+	@Override
+	public int getTempTotalResult() {
+		int money = 0;
+		String selectQuery = "SELECT SUM(TOTAL) AS TOTAL FROM TEMP_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(selectQuery);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				money = resultSet.getInt("total");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return money;
+	}
+
+	@Override
+	public List<AllUser2D> getTotalAllRecoverTable() {
+		List<AllUser2D> allRecoverList = new ArrayList<AllUser2D>();
+		String selectQuery = "SELECT SUM(RECOVER) AS RECOVER,SUM(RECOVER_P) AS RECOVER_P,SUM(RECOVER_COM) AS RECOVER_COM,SUM(RECOVER_PLUS) AS RECOVER_PLUS,SUM(TOTAL_RECOVER) AS TOTAL_RECOVER FROM RECOVER_ALL_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(selectQuery);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				AllUser2D recover = new AllUser2D();
+				recover.setRecover(resultSet.getInt("recover"));
+				recover.setRecoverP(resultSet.getInt("recover_p"));
+				recover.setRecoverCom(resultSet.getInt("recover_com"));
+				recover.setRecoverPlus(resultSet.getInt("recover_plus"));
+				recover.setTotalMoney(resultSet.getInt("total_recover"));
+				allRecoverList.add(recover);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return allRecoverList;
+	}
+
+	@Override
+	public void addValuesToAllRecoverTable(Recover2D seller) {
+		String insertQuery = "INSERT INTO RECOVER_ALL_TABLE(RECOVER_SELLER,RECOVER_COM,RECOVER_Z,RECOVER_P,DATE,RECOVER,RECOVER_PLUS,TOTAL_RECOVER) VALUES (?,?,?,?,?,?,?,?)";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(insertQuery);
+			preparedStatement.setString(1,seller.getSellerName());
+			preparedStatement.setInt(2, seller.getRecoverCom());
+			preparedStatement.setInt(3, seller.getSellerZ());		
+			preparedStatement.setInt(4, seller.getRecoverP());
+			preparedStatement.setString(5, seller.getDate());
+			preparedStatement.setInt(6, seller.getSellerMoney());
+			preparedStatement.setInt(7, seller.getRecoverPlus());
+			preparedStatement.setInt(8, seller.getTotalRecover());
+			preparedStatement.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	
 

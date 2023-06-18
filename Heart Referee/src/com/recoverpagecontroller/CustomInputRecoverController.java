@@ -16,6 +16,7 @@ import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.History2D;
 import com.entity.Number2D;
+import com.entity.Recover2D;
 
 import common.CommonConstants;
 import common.CommonParameters;
@@ -24,6 +25,7 @@ public class CustomInputRecoverController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
 	List<Number2D> twoDList = new ArrayList<Number2D>();
+	List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 	History2D h2D1 = null;
 	History2D h2D2 = null;
 	int total;
@@ -39,13 +41,20 @@ public class CustomInputRecoverController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String sellerName = (String) request.getAttribute(CommonParameters.SELLER_NAME);
 		
-		twoDList = recoverTableDao.getRecoverHistoryTable();
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
-
+		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
+		
+		recoverSellerList = recoverTableDao.getRecoverList();
+		twoDList = recoverTableDao.getRecoverHistoryTableBySeller(sellerName);
+		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
+		request.setAttribute(CommonParameters.TOTAL_SELLER_RECOVER,totalSellerRecover);
+		request.setAttribute(CommonParameters.SELLER_NAME, sellerName);
+		request.setAttribute(CommonParameters.RECOVER_LIST, recoverSellerList);
 		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");
@@ -61,6 +70,7 @@ public class CustomInputRecoverController extends HttpServlet {
 		h2D1 = new History2D();
 		h2D2 = new History2D();
 		String msg = new String();
+		String sellerName = request.getParameter("sellerName");
 		String moneyS = request.getParameter("money");
 		String rMoneyS = request.getParameter("rMoney");
 		int money = Integer.parseInt(moneyS);
@@ -79,8 +89,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS1.isEmpty())) {
 			int number1 = Integer.parseInt(numberS1);
 			Integer rNumber1 = getReverse(number1);
-			recoverTableDao.add2D(number1, money);
-			recoverTableDao.add2D(rNumber1, rMoney);
+			recoverTableDao.add2D(number1, money,sellerName);
+			recoverTableDao.add2D(rNumber1, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = numberS1;
 			shortMsgR = rNumber1.toString();
@@ -88,8 +98,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS2.isEmpty())) {
 			int number2 = Integer.parseInt(numberS2);
 			Integer rNumber2 = getReverse(number2);
-			recoverTableDao.add2D(number2, money);
-			recoverTableDao.add2D(rNumber2, rMoney);
+			recoverTableDao.add2D(number2, money,sellerName);
+			recoverTableDao.add2D(rNumber2, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS2;
 			shortMsgR = shortMsgR + " / " + rNumber2.toString();
@@ -97,8 +107,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS3.isEmpty())) {
 			int number3 = Integer.parseInt(numberS3);
 			Integer rNumber3 = getReverse(number3);
-			recoverTableDao.add2D(number3, money);
-			recoverTableDao.add2D(rNumber3, rMoney);
+			recoverTableDao.add2D(number3, money,sellerName);
+			recoverTableDao.add2D(rNumber3, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS3;
 			shortMsgR = shortMsgR + " / " + rNumber3.toString();
@@ -106,8 +116,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS4.isEmpty())) {
 			int number4 = Integer.parseInt(numberS4);
 			Integer rNumber4 = getReverse(number4);
-			recoverTableDao.add2D(number4, money);
-			recoverTableDao.add2D(rNumber4, rMoney);
+			recoverTableDao.add2D(number4, money,sellerName);
+			recoverTableDao.add2D(rNumber4, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS4;
 			shortMsgR = shortMsgR + " / " + rNumber4.toString();
@@ -115,8 +125,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS5.isEmpty())) {
 			int number5 = Integer.parseInt(numberS5);
 			Integer rNumber5 = getReverse(number5);
-			recoverTableDao.add2D(number5, money);
-			recoverTableDao.add2D(rNumber5, rMoney);
+			recoverTableDao.add2D(number5, money,sellerName);
+			recoverTableDao.add2D(rNumber5, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS5;
 			shortMsgR = shortMsgR + " / " + rNumber5.toString();
@@ -124,8 +134,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS6.isEmpty())) {
 			int number6 = Integer.parseInt(numberS6);
 			Integer rNumber6 = getReverse(number6);
-			recoverTableDao.add2D(number6, money);
-			recoverTableDao.add2D(rNumber6, rMoney);
+			recoverTableDao.add2D(number6, money,sellerName);
+			recoverTableDao.add2D(rNumber6, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS6;
 			shortMsgR = shortMsgR + " / " + rNumber6.toString();
@@ -133,8 +143,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS7.isEmpty())) {
 			int number7 = Integer.parseInt(numberS7);
 			Integer rNumber7 = getReverse(number7);
-			recoverTableDao.add2D(number7, money);
-			recoverTableDao.add2D(rNumber7, rMoney);
+			recoverTableDao.add2D(number7, money,sellerName);
+			recoverTableDao.add2D(rNumber7, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS7;
 			shortMsgR = shortMsgR + " / " + rNumber7.toString();
@@ -142,8 +152,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS8.isEmpty())) {
 			int number8 = Integer.parseInt(numberS8);
 			Integer rNumber8 = getReverse(number8);
-			recoverTableDao.add2D(number8, money);
-			recoverTableDao.add2D(rNumber8, rMoney);
+			recoverTableDao.add2D(number8, money,sellerName);
+			recoverTableDao.add2D(rNumber8, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS8;
 			shortMsgR = shortMsgR + " / " + rNumber8.toString();
@@ -151,8 +161,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS9.isEmpty())) {
 			int number9 = Integer.parseInt(numberS9);
 			Integer rNumber9 = getReverse(number9);
-			recoverTableDao.add2D(number9, money);
-			recoverTableDao.add2D(rNumber9, rMoney);
+			recoverTableDao.add2D(number9, money,sellerName);
+			recoverTableDao.add2D(rNumber9, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS9;
 			shortMsgR = shortMsgR + " / " + rNumber9.toString();
@@ -160,8 +170,8 @@ public class CustomInputRecoverController extends HttpServlet {
 		if (!(numberS0.isEmpty())) {
 			int number0 = Integer.parseInt(numberS0);
 			Integer rNumber0 = getReverse(number0);
-			recoverTableDao.add2D(number0, money);
-			recoverTableDao.add2D(rNumber0, rMoney);
+			recoverTableDao.add2D(number0, money,sellerName);
+			recoverTableDao.add2D(rNumber0, rMoney,sellerName);
 			rCount = rCount + 1;
 			shortMsg = shortMsg + " / " + numberS0;
 			shortMsgR = shortMsgR + " / " + rNumber0.toString();
@@ -171,12 +181,15 @@ public class CustomInputRecoverController extends HttpServlet {
 		h2D1.setR("-");
 		h2D1.setTotal(rCount * money);
 		h2D1.setMoney(money);
+		h2D1.setName(sellerName);
 		recoverTableDao.add2DtoRecoverHistory(h2D1);
 		h2D2.setNote(shortMsgR);
 		h2D2.setR("-");
 		h2D2.setTotal(rCount * rMoney);
 		h2D2.setMoney(rMoney);
+		h2D2.setName(sellerName);
 		recoverTableDao.add2DtoRecoverHistory(h2D2);
+		request.setAttribute(CommonParameters.SELLER_NAME, sellerName);
 		request.setAttribute(CommonParameters.MESSAGE, msg);
 		doGet(request, response);
 	}

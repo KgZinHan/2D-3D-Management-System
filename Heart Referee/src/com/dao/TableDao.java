@@ -6,7 +6,9 @@ import java.util.List;
 import com.entity.AllUser2D;
 import com.entity.Closed2D;
 import com.entity.History2D;
+import com.entity.Ledger;
 import com.entity.Number2D;
+import com.entity.Recover2D;
 import com.entity.Summary2D;
 import com.entity.User2D;
 
@@ -87,7 +89,6 @@ public interface TableDao {
 	
 	public void deleteUser(String name);
 	
-	
 	// recover table methods
 
 	public int getMoney(int number);
@@ -126,9 +127,13 @@ public interface TableDao {
 	
 	public List<AllUser2D> getTotalTempTable();
 	
+	public int getTempTotalResult();
+	
 	// histroy result table methods
 	
-	public void addValuesToAllTable(String date,int recover); 
+	public void addValuesToAllTable(Ledger ledger); 
+	
+	public void addValuesToAllRecoverTable(Recover2D recover2D);
 	
 	public List<AllUser2D> getAllTableByUser(String username); 
 	
@@ -140,6 +145,10 @@ public interface TableDao {
 	
 	public List<AllUser2D> getTotalTotalAllTable();
 	
+	public List<AllUser2D> getAllRecoverTable();
+	
+	public List<AllUser2D> getTotalAllRecoverTable();
+	
 	public boolean checkNameInTempTable(String username);
 	
 	public void addUserTempTable(AllUser2D user2D);
@@ -147,7 +156,7 @@ public interface TableDao {
 	public void updateUserTempTable(AllUser2D user2D); 
 	
 	public void deleteAllTable(); 
-	
+	 
 	
 	// closed number page
 	

@@ -16,7 +16,7 @@ import com.dao.RecoverTableDaoImpl;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.Summary2D;
-
+import com.entity.Recover2D;
 import common.CommonParameters;
 
 @WebServlet("/SummaryTableController")
@@ -29,6 +29,7 @@ public class SummaryTableController extends HttpServlet {
 	TableDao tableDao = new TableDaoImpl();
 	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
 	List<Summary2D> resultList = new ArrayList<Summary2D>();
+	List<Recover2D> recoverPList = new ArrayList<Recover2D>();
 
 	public SummaryTableController() {
 		super();
@@ -43,12 +44,14 @@ public class SummaryTableController extends HttpServlet {
 		resultList = tableDao.getResultTableByNumber(number);
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
+		recoverPList = recoverTableDao.getTotalRecoverPlusMoney(number);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.TWO_D_NUMBER, numberS);
 		request.setAttribute(CommonParameters.TWO_D_MONEY, money);
 		request.setAttribute(CommonParameters.TWO_D_LIST, resultList);
+		request.setAttribute(CommonParameters.RECOVER_LIST, recoverPList);
 		dispatcher = request.getRequestDispatcher("/summary");
 		dispatcher.forward(request, response);
 	}

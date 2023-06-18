@@ -10,7 +10,6 @@
         <script src="JavaScript/javaScript.js" defer></script>
 	</head>
 	<body tabindex="-1" style="overflow-x: hidden">
-		<div id="msgbox01" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0" onclick="displayNone('msgbox01')">${message}</div>
 		<div id="modal01" class="mv-display-center mv-view-image mv-animate-zoom"> 
             <button class="mv-display-topRight mv-logIn-close-button hover-effect" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button>
              <div id="radioTab" class="mv-table-input">
@@ -57,7 +56,7 @@
 				</h3>
 			</div>	
 			<div class="user-total-field">
-				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px"><b>${userName}</b> ledger</span>
+				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px">Recover ledger</span>
 			</div>	
 			<div class="mv-display-middle" style="margin-top: 10px">
 				<div id="tb02" class="mv-table-style" style="height:auto;width: 100%">
@@ -66,76 +65,50 @@
 							<th style="width: 50px">
 								<h4>#</h4>
 							</th>
-							</th>
 							<th style="width: 300px">				
+								<h4>SellerName</h4>
+							</th>
+							<th style="width: 200px">				
 								<h4>Date</h4>
 							</th>
-							<th style="width: 100px;display:${numberLink}">				
-								<h4>Number</h4>
+							<th>
+								<h4>Recover Money</h4>
 							</th>
 							<th>
-								<h4>Money</h4>
-							</th>
-							<th style="width: 100px">
-								<h4>P</h4>
+								<h4>Recover Com</h4>
 							</th>
 							<th>
-								<h4>P Money</h4>
-							</th>
-							<th style="width: 80px;display:${comPercentLink}">
-								<h4>Com</h4>
-							</th>
-							<th>				
-								<h4>Com Money</h4>
-							</th>
-							<th style="display:${totalRecoverLink};color: green">				
-								<h4>Recover</h4>
-							</th>
-							<th style="width: 100px;display:${totalRecoverLink};color: green">				
 								<h4>Recover P</h4>
 							</th>
-							<th style="display:${totalRecoverLink};color: green">				
+							<th>				
 								<h4>Recover Plus</h4>
 							</th>
-							<th style="display:${totalRecoverLink}">				
-								<h4>Extra</h4>
-							</th>
 							<th>				
-								<h4>Total</h4>
+								<h4>Recover Total</h4>
 							</th>
 						</tr>
 						<c:forEach items="${user2DList}" var="user2D">
 							<tr class="mv-waiting-table-data" style="font-size: 16px">
 								<td><p>${user2D.count}</p></td>
+								<td><p>${user2D.username}</p></td>
 								<td><p>${user2D.time}</p></td>
-								<td style="display:${numberLink}"><p>${user2D.number}</p></td>
-								<td><p>${user2D.totalMoney} ks</p></td>
-								<td><p>${user2D.p}</p></td>
-								<td><p>${user2D.pMoney} ks</p></td>
-								<td style="display:${comPercentLink}"><p>${user2D.comPercent} %</p></td>
-								<td><p>${user2D.comMoney} ks</p></td>
-								<td style="display:${totalRecoverLink}"><p>${user2D.recover} ks</p></td>
-								<td style="display:${totalRecoverLink}"><p>${user2D.recoverP}</p></td>
-								<td style="display:${totalRecoverLink}"><p>${user2D.recoverPlus} ks</p></td>
-								<td style="display:${totalRecoverLink}"><p>${user2D.extra} ks</p></td>
-								<td style="color:${user2D.color}"><p>${user2D.total} ks</p></td>
+								<td><p>${user2D.recover}</p></td>
+								<td><p>${user2D.recoverCom}</p></td>
+								<td><p>${user2D.recoverP}</p></td>
+								<td><p>${user2D.recoverPlus}</p></td>
+								<td><p style="color:${tUser2D.color}">${user2D.totalMoney}</p></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${totalUser2DList}" var="tUser2D">
 							<tr class="mv-waiting-table-data" style="font-size: 16px;background-color: silver">
-								<td><p>Total</p></td>
 								<td><p>-</p></td>
 								<td><p>-</p></td>
-								<td><p>${tUser2D.totalMoney} ks</p></td>
-								<td><p>${tUser2D.p}</p></td>
-								<td><p>${tUser2D.pMoney} ks</p></td>
-								<td style="display:${comPercentLink}"><p>-</p></td>
-								<td><p>${tUser2D.comMoney} ks</p></td>
-								<td style="display:${totalRecoverLink}"><p>${tUser2D.recover} ks</p></td>
-								<td style="display:${totalRecoverLink}"><p>${tUser2D.recoverP}</p></td>
-								<td style="display:${totalRecoverLink}"><p>${tUser2D.recoverPlus} ks</p></td>
-								<td style="display:${totalRecoverLink}"><p>${tUser2D.extra} ks</p></td>
-								<td style="color:${tUser2D.color}"><p>${tUser2D.total} ks</p></td>							
+								<td><p>-</p></td>
+								<td><p>${tUser2D.recover}</p></td>
+								<td><p>${tUser2D.recoverCom}</p></td>
+								<td><p>${tUser2D.recoverP}</p></td>
+								<td><p>${tUser2D.recoverPlus}</p></td>
+								<td><p style="color:${tUser2D.color}">${tUser2D.totalMoney}</p></td>
 							</tr>
 						</c:forEach>
 					</table>

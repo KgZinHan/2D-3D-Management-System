@@ -17,7 +17,12 @@ public class AllUser2D {
 	private String time;
 	private String color;
 	private int count;
+	private int sellerZ;
 	private int recover;
+	private int recoverP;
+	private int recoverCom;
+	private int recoverPlus;
+	private int extra;
 
 	public String getUsername() {
 		return username;
@@ -130,7 +135,45 @@ public class AllUser2D {
 	public void setRecover(int recover) {
 		this.recover = recover;
 	}
-	
-	
+
+	public int getRecoverP() {
+		return recoverP;
+	}
+
+	public void setRecoverP(int recoverP) {
+		this.recoverP = recoverP;
+	}
+
+	public int getRecoverCom() {
+		return recoverCom;
+	}
+
+	public void setRecoverCom(int recoverCom) {
+		this.recoverCom = recoverCom;
+	}
+
+	public int getRecoverPlus() {
+		return recoverPlus;
+	}
+
+	public void setRecoverPlus(int reocverPlus) {
+		this.recoverPlus = reocverPlus;
+	}
+
+	public int getExtra() {
+		return extra;
+	}
+
+	public void setExtra(int extra) {
+		this.extra = extra;
+	}
+
+	public int getSellerZ() {
+		return sellerZ;
+	}
+
+	public void setSellerZ(int sellerZ) {
+		this.sellerZ = sellerZ;
+	}
 	
 }

@@ -45,18 +45,19 @@ public class HistoryResultController extends HttpServlet {
 			username = (String) session.getAttribute(CommonParameters.SESSION_USER);
 			user2DList = tableDao.getAllTableByUser(username);
 			totalUser2DList = tableDao.getTotalAllTableByUser(username);
+			request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
 		}
 		else {
 			if(username == "12345" || username.equals("12345")) {
 				username = "Total";
 				user2DList = tableDao.getTotalAllTable();
 				totalUser2DList = tableDao.getTotalTotalAllTable();
-				request.setAttribute(CommonParameters.COM_PERCENT_DISPLAY,"none");
-				request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "block");
+				request.setAttribute(CommonParameters.COM_PERCENT_DISPLAY,"none");				
 			}
 			else {
 				user2DList = tableDao.getAllTableByUser(username);
 				totalUser2DList = tableDao.getTotalAllTableByUser(username);
+				request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
 			}
 		}
 		

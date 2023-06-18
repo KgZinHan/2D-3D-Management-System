@@ -211,7 +211,6 @@
     <url-pattern>/log-out</url-pattern>
   </servlet-mapping>
   
-  <!-- new Recover Table Controllers mapping -->
   <servlet>
     <servlet-name>RecoverPageController</servlet-name>
     <servlet-class>com.recoverpagecontroller.RecoverPageController</servlet-class>
@@ -396,5 +395,47 @@
   <servlet-mapping>
     <servlet-name>closedNumberPage</servlet-name>
     <url-pattern>/closedNumbersPage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>recoverSellerController</servlet-name>
+    <servlet-class>com.recoverpagecontroller.RecoverSellerController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>recoverSellerController</servlet-name>
+    <url-pattern>/RecoverSeller</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>recoverSellerPage</description>
+    <servlet-name>recoverSellerPage</servlet-name>
+    <jsp-file>/jspPage/RecoverSellerPage.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>recoverSellerPage</servlet-name>
+    <url-pattern>/recoverSellerPage</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>recoverResultController</servlet-name>
+    <servlet-class>com.controller.RecoverResultController</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>recoverResultController</servlet-name>
+    <url-pattern>/RecoverResult</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>recoverResultPage</description>
+    <servlet-name>recoverResultPage</servlet-name>
+    <jsp-file>/jspPage/RecoverResultPage.jsp</jsp-file>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>recoverResultPage</servlet-name>
+    <url-pattern>/recoverResultPage</url-pattern>
   </servlet-mapping>
 </web-app>

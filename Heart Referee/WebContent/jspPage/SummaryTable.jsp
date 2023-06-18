@@ -21,7 +21,7 @@
 			<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left">Recover Check</a>
 		</h3>
 		<h3>
-			<a href="RecoverPageController" class="tab-bar-button hover-effect margin-left">Recover Note</a>
+			<a href="RecoverPageController?sellerName=Default" class="tab-bar-button hover-effect margin-left">Recover Note</a>
 		</h3>
 		<h3>
 			<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>
@@ -50,8 +50,8 @@
 				<tr class="mv-list-table-head" style="font-size: 20px">
 					<th><h4>Name</h4></th>
 					<th style="width: 150px"><h4>Total Money</h4></th>
-					<th style="width: 80px"><h4>P x 80</h4></th>
-					<th style="width: 100px"><h4>Reports</h4></th>
+					<th style="width: 80px"><h4>P</h4></th>
+					<th style="width: 100px"><h4>Extra</h4></th>
 				</tr>
 				<c:forEach items="${twoDList}" var="result">
 					<tr class="mv-list-table-data" >
@@ -59,6 +59,14 @@
 						<td><h3>${result.userMoney} ks</h3></td>
 						<td><h3 style="color: firebrick">${result.money}</h3></td>
 						<td><a href="Final?username=${result.userName}&number=${number}" style="font-style: normal"><h3>report</h3></a></td>
+					</tr>
+				</c:forEach>
+				<c:forEach items="${recoverList}" var="recover">
+					<tr class="mv-list-table-data" style="color: green">
+						<td><h3>${recover.sellerName}</h3></td>
+						<td><h3>${recover.totalRecover} ks</h3></td>
+						<td><h3>${recover.sellerMoney}</h3></td>
+						<td>-</td>
 					</tr>
 				</c:forEach>
 			</table>

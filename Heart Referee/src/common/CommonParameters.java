@@ -76,6 +76,13 @@ public class CommonParameters {
 	public static final String FINAL_RESULT_COMMISSION_PERCENT = "comPercent";
 	public static final String FINAL_RESULT_TOTAL = "total";
 	public static final String FINAL_RESULT_TOTAL_COLOR = "totalColor";
+	public static final String FINAL_RESULT_TOTAL_RECOVER_P = "totalRecoverP";
+	public static final String FINAL_RESULT_TOTAL_RECOVER_PLUS = "totalRecoverPlus";
+	public static final String FINAL_RESULT_ALL_TOTAL = "allTotal";
 	
-
+	//recover seller List
+	public static final String RECOVER_SELLER_LIST = "recoverSellerList";
+	public static final String RECOVER_LIST = "recoverList";
+	public static final String SELLER_NAME = "sellerName";
+	public static final String TOTAL_SELLER_RECOVER = "totalSellerRecover";
 }

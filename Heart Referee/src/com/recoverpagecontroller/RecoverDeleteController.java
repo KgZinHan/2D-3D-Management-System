@@ -16,6 +16,7 @@ import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.History2D;
 import com.entity.Number2D;
+import com.entity.Recover2D;
 import com.entity.User2D;
 
 import common.CommonConstants;
@@ -25,7 +26,7 @@ public class RecoverDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
 	List<Number2D> twoDList = new ArrayList<Number2D>();
-	List<User2D> userList = new ArrayList<User2D>();
+	List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 	History2D twoDH = null;
 	Number2D twoD = null;
 	int total;
@@ -39,7 +40,7 @@ public class RecoverDeleteController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		String sellerName = request.getParameter("sellerName");
 		String idS = request.getParameter("id");
 		int id = Integer.parseInt(idS);
 		
@@ -50,6 +51,7 @@ public class RecoverDeleteController extends HttpServlet {
 		twoDH.setNote(twoD.getNumber() + " Deleted");
 		twoDH.setR("-");
 		twoDH.setTotal(-twoD.getMoney());
+		twoDH.setName(sellerName);
 		recoverTableDao.add2DtoRecoverHistory(twoDH);
 
 		recoverTableDao.deleteRecoverRow(id);
@@ -57,11 +59,17 @@ public class RecoverDeleteController extends HttpServlet {
 
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
-		twoDList = recoverTableDao.getRecoverTable();
+		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		request.setAttribute(CommonParameters.TOTAL_MONEY, total);	
-		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
+		recoverSellerList = recoverTableDao.getRecoverList();
+		twoDList = recoverTableDao.getRecoverTableBySeller(sellerName);
+		
+		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);
+		request.setAttribute(CommonParameters.TOTAL_SELLER_RECOVER,totalSellerRecover);
+		request.setAttribute(CommonParameters.SELLER_NAME, sellerName);
+		request.setAttribute(CommonParameters.RECOVER_LIST, recoverSellerList);
+		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
 		dispatcher = request.getRequestDispatcher("/recoverPage");

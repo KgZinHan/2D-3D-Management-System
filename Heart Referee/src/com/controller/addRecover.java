@@ -50,8 +50,10 @@ public class addRecover extends HttpServlet {
 		int rMoney = Integer.parseInt(rMoneyS);
 		
 		Integer rNumber1 = getReverse(number1);
-		recoverTableDao.add2D(number1, money);
-		recoverTableDao.add2D(rNumber1, rMoney);
+		/*
+		 * recoverTableDao.add2D(number1, money); recoverTableDao.add2D(rNumber1,
+		 * rMoney);
+		 */
 		h2D1.setNote(numberS1);
 		h2D1.setR("-");
 		h2D1.setTotal(money);
