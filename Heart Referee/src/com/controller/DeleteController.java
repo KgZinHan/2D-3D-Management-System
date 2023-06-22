@@ -65,18 +65,35 @@ public class DeleteController extends HttpServlet {
 			String extraMoney = request.getParameter("extraMoney");
 			String todayDate = date + " " + time;
 			
-			if(recoverFlag != null) {
-				recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
-				recoverPlusList = recoverTableDao.getTotalRecoverPlusMoney(Integer.parseInt(number));
-				for(int i =0;i<recoverPlusList.size();i++) {
-					Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recoverPlusList.get(i).getSellerName());
-					int commission = (seller.getSellerCom() * recoverTableDao.getTotalRecoverMoneyBySeller(recoverPlusList.get(i).getSellerName()))/100;
-					recoverComMoney = recoverComMoney + Math.round(commission/50f) * 50;
-					recoverPlusMoney = recoverPlusMoney + (recoverPlusList.get(i).getSellerMoney() * seller.getSellerZ());
-				}
-				recoverPlusMoney = recoverPlusMoney + recoverComMoney;
-				SetAllRecoverTable(Integer.parseInt(number),todayDate);
+			if (recoverFlag != null) {
+			    recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
+			    recoverPlusList = recoverTableDao.getTotalRecoverPlusMoney(Integer.parseInt(number));
+
+			    for (Recover2D recoverPlus : recoverPlusList) {
+			        Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recoverPlus.getSellerName());
+			        int commission = (seller.getSellerCom() * recoverTableDao.getTotalRecoverMoneyBySeller(recoverPlus.getSellerName())) / 100;
+			        recoverComMoney += Math.round(commission / 50f) * 50;
+			        recoverPlusMoney += (recoverPlus.getSellerMoney() * seller.getSellerZ());
+			    }
+
+			    recoverPlusMoney += recoverComMoney;
+
+			    List<Recover2D> recoverSellerList = recoverTableDao.getRecoverSellerList();
+
+			    for (Recover2D recoverSeller : recoverSellerList) {
+			        String seller = recoverSeller.getSellerName();
+			        recoverSeller.setDate(todayDate);
+			        recoverSeller.setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
+			        recoverSeller.setRecoverP(recoverTableDao.getTotalRecoverPBySeller(seller, Integer.parseInt(number)));
+			        int recoverCom = (recoverSeller.getSellerMoney() * recoverSeller.getSellerCom()) / 100;
+			        recoverCom = Math.round(recoverCom/ 50f) * 50;
+			        recoverSeller.setRecoverCom(recoverCom);
+			        recoverSeller.setRecoverPlus(recoverSeller.getRecoverCom() + (recoverSeller.getRecoverP() * recoverSeller.getSellerZ()));
+			        recoverSeller.setTotalRecover(recoverSeller.getRecoverPlus() - recoverSeller.getSellerMoney());
+			        tableDao.addValuesToAllRecoverTable(recoverSeller);
+			    }
 			}
+
 			
 			Ledger ledger = new Ledger();
 			ledger.setDate(todayDate);
@@ -163,18 +180,7 @@ public class DeleteController extends HttpServlet {
 	}
 	
 	protected void SetAllRecoverTable(int number,String date) {
-		List<Recover2D> recoverSellerList = recoverTableDao.getRecoverSellerList();
-		for(int i =0;i<recoverSellerList.size();i++) {
-			String seller = recoverSellerList.get(i).getSellerName();
-			recoverSellerList.get(i).setDate(date);
-			recoverSellerList.get(i).setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
-			recoverSellerList.get(i).setRecoverP(recoverTableDao.getTotalRecoverPBySeller(seller,number));
-			recoverSellerList.get(i).setRecoverCom((recoverSellerList.get(i).getSellerMoney()*recoverSellerList.get(i).getSellerCom())/100);
-			recoverSellerList.get(i).setRecoverPlus(recoverSellerList.get(i).getRecoverCom() + (recoverSellerList.get(i).getRecoverP()*recoverSellerList.get(i).getSellerZ()));
-			recoverSellerList.get(i).setTotalRecover(recoverSellerList.get(i).getRecoverPlus()-recoverSellerList.get(i).getSellerMoney());
-			tableDao.addValuesToAllRecoverTable(recoverSellerList.get(i));
-			
-		}
+		
 	}
 
 }

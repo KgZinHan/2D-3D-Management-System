@@ -108,18 +108,114 @@
 					<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
                   	<input id="number1" type="text" name="number" autofocus="autofocus" tabindex="1" class="mv-number-button" placeholder="Enter" min="00" max="99">
                    	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
-                 	<h3 class="mv-special-note">
-	                 	&emsp;Shortcut Note!
-	                 	<br>** &nbsp;&nbsp;=&nbsp; a puu
-	                 	<br> // &nbsp;&nbsp;&nbsp;=&nbsp; natkhat 
-	                 	<br> ++ &nbsp;=&nbsp; power 
-	                 	<br> /* &nbsp;&nbsp;=&nbsp; nyiko
-	                 	<br> ?+ &nbsp;=&nbsp; ? bk
-	                 	<br> ?* &nbsp;&nbsp;=&nbsp; ? start
-	                 	<br> *? &nbsp;&nbsp;=&nbsp; ? end
-	                 	<br> *?* &nbsp;=&nbsp; 19 numbers
-	                 	<br> *?** =&nbsp; 20 numbers
-                 	</h3>
+                 	
+                 	<table class="mv-special-note">
+                 		<tr>
+                 			<td>apuu</td>
+                 			<td>==</td>
+                 			<td>&emsp;**</td>
+                 		</tr>
+                 		<tr>
+                 			<td>natkhat</td>
+                 			<td>==</td>
+                 			<td>&emsp;//</td>
+                 		</tr>
+                 		<tr>
+                 			<td>power</td>
+                 			<td>==</td>
+                 			<td>&emsp;++</td>
+                 		</tr>
+                 		<tr>
+                 			<td>nyiko</td>
+							<td>==</td>
+                 			<td>&emsp;/*</td>          		
+                 		</tr>
+                 		<tr>
+                 			<td>? bk</td>
+                 			<td>==</td>
+                 			<td>&emsp;?+</td>
+                 		</tr>
+                 		<tr>
+                 			<td>? start</td>
+                 			<td>==</td>
+                 			<td>&emsp;?*</td>
+                 		</tr>
+                 		<tr>
+                 			<td>? end</td>
+                 			<td>==</td>
+                 			<td>&emsp;*?</td>
+                 		</tr>
+                 		<tr>
+                 			<td>apar 19</td>
+                 			<td>==</td>
+                 			<td>&emsp;*?*</td>
+                 		</tr>
+                 		<tr>
+                 			<td>apar 20</td>
+                 			<td>==</td>
+                 			<td>&emsp;*?**</td>
+                 		</tr>
+                 		<tr>
+                 			<td>sone sone</td>
+                 			<td>==</td>
+                 			<td>&emsp;+/+</td>
+                 		</tr>
+                 		<tr>
+                 			<td>ma ma</td>
+                 			<td>==</td>
+                 			<td>&emsp;-/-</td>
+                 		</tr>
+                 		<tr>
+                 			<td>sone ma</td>
+                 			<td>==</td>
+                 			<td>&emsp;+/-</td>
+                 		</tr>
+                 		<tr>
+                 			<td>ma sone</td>
+                 			<td>==</td>
+                 			<td>&emsp;-/+</td>
+                 		</tr>
+                 		<tr>
+                 			<td>akhway</td>
+                 			<td>==</td>
+                 			<td>&emsp;???/</td>
+                 		</tr>
+                 		<tr>
+                 			<td>akhwaypuu</td>
+                 			<td>==</td>
+                 			<td>&emsp;???/*</td>
+                 		</tr>  
+                 		<tr>
+                 			<td>? sone start</td>
+                 			<td>==</td>
+                 			<td>&emsp;?++</td>
+                 		</tr> 
+                 		<tr>
+                 			<td>? sone end</td>
+                 			<td>==</td>
+                 			<td>&emsp;++?</td>
+                 		</tr> 
+                 		<tr>
+                 			<td>? ma start</td>
+                 			<td>==</td>
+                 			<td>&emsp;--?</td>
+                 		</tr> 
+                 		<tr>
+                 			<td>? ma end</td>
+                 			<td>==</td>
+                 			<td>&emsp;?--</td>
+                 		</tr>   
+                 		<tr>
+                 			<td>? sone kat</td>
+                 			<td>==</td>
+                 			<td>&emsp;++?++</td>
+                 		</tr> 
+                 		<tr>
+                 			<td>? ma kat</td>
+                 			<td>==</td>
+                 			<td>&emsp;--?--</td>
+                 		</tr>    		
+                 	</table>
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
                 </form>
 

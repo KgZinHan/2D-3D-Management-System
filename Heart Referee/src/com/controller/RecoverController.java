@@ -52,7 +52,7 @@ public class RecoverController extends HttpServlet {
 			flag = true;
 			thisNumber = twoDList.get(i);
 			int number = thisNumber.getNumber();
-			int newMoney = thisNumber.getMoney()  - recoverTableDao.getRecoverMoney(number) - recoverLimit;
+			int newMoney = thisNumber.getMoney() - recoverTableDao.getRecoverMoney(number) - recoverLimit;
 			
 			if (thisNumber.getMoney() > recoverLimit && newMoney > 0) {
 				for (int j = 0; j < rNumberList.size(); j++) {

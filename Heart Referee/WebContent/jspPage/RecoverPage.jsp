@@ -31,7 +31,7 @@
         </div>
 		<div class="mv-basic-bg">
 			 <div class="mv-tab-bar">
-			 	<div class="user-name hover-effect" onclick="displayBlock('modal03')">
+			 	<div class="user-name hover-effect" style="color: green" onclick="displayBlock('modal03')">
 					<i class="fas fa-users"></i>&nbsp;
 					${sellerName}
 				</div>
@@ -70,7 +70,7 @@
 					<input type="hidden" name="sellerName" value="${sellerName}"/>
                   	<input id="number1" type="text" name="number" autofocus="autofocus" tabindex="1" class="mv-number-button" placeholder="Enter" min="00" max="99">
                    	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
-                 	<h3 class="mv-special-note" style="border-color: red;color: red">
+                 	<h3 class="mv-special-note" style="border-color: green;color: green">
 	                 	&emsp;Shortcut Note!
 	                 	<br>** &nbsp;&nbsp;=&nbsp; a puu
 	                 	<br> // &nbsp;&nbsp;&nbsp;=&nbsp; natkhat 
@@ -82,7 +82,7 @@
 	                 	<br> *?* &nbsp;=&nbsp; 19 numbers
 	                 	<br> *?** =&nbsp; 20 numbers
                  	</h3>
-                 	<h3 class="mv-page-field" style="color: red;border-color: red">Recover</h3>
+                 	<!-- <h3 class="mv-page-field" style="color: red;border-color: red">Recover</h3> -->
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
                 </form>
 
@@ -112,7 +112,7 @@
 						</label>
 	            	</div>
                     <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
-                    <h3 class="mv-page-field" style="color: red;border-color: red">Recover</h3>
+                    <h3 class="mv-page-field" style="color: green;border-color: green">Recover</h3>
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
 				</form>
 				
@@ -133,7 +133,7 @@
 					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
                     <h2 style="color: white; position: absolute;right: 80px">R</h2>
                     <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
-                    <h3 class="mv-page-field" style="color: red;border-color: red">Recover</h3>
+                    <h3 class="mv-page-field" style="color: green;border-color: green">Recover</h3>
                     <input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add" >
 				</form>
 				

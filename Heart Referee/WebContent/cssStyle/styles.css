@@ -413,14 +413,22 @@ footer{
 
 .mv-special-note{
 	position: absolute;
-	top: 150px;
-	left: 20px;
+	top: 20px;
+	left: 250px;
 	color: aliceblue;
 	text-align: left;
-	font-family: robol;
 	padding: 10px;
 	border: 1px solid silver;
 	border-radius: 5px;
+	font-family: roboto;
+}
+
+.mv-special-note tr{
+	padding: 5px;
+}
+
+.mv-special-note tr:hover{
+	background-color: black;
 }
 
 .multiple-input-tab{
@@ -492,7 +500,7 @@ footer{
 	display: inline-block;
 	margin-top: 120px;
 	background: none;
-	border: 1px solid white;
+	border: 5px solid white;
 	color: white;
 	padding: 15px;
 	font-size: 18px;

@@ -12,7 +12,7 @@
 	<body tabindex="-1" style="overflow-x: hidden">
 		<div class="mv-tab-bar">
 			<h3>
-				<a href="Table" class="recover-button hover-effect margin-left">Home</a>
+				<a href="Table" class="tab-bar-button hover-effect margin-left">Home</a>
 			</h3>
 			<h3>
 				<a href="WaitingTable?m=money" class="tab-bar-button hover-effect margin-left">Waiting Table</a>
@@ -43,6 +43,11 @@
 					<input type="number" name="money" style="right: 200px" value="${money}" class="mv-money-drop-button" placeholder="Enter" min="0" max="50000" step="50" required>
 	                <h2 style="color: white; position: absolute;right: 80px">R</h2>
 	                <input type="number" name="rMoney" value="${rMoney}" class="mv-money-drop-button" placeholder="Enter" min="0" max="50000" step="50" required>
+	                <select name="sellerName" class="mv-money-drop-button" style="top: 200px">
+	                	<c:forEach items="${recoverSellerList}" var="seller">
+							<option value="${seller.sellerName}">${seller.sellerName}</option>
+						</c:forEach>
+	                </select>
 	                <input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add" >
 				</form>
 			 <button id="singlebtn" class="special-button hover-effect" onclick="goBack()">Back</button>

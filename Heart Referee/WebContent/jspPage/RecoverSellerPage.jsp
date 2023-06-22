@@ -75,7 +75,7 @@
 						</table>
 					</div>
 				</div>
-				<a href="Table">
+				<a href="RecoverPageController?sellerName=Default">
 					<button id="singlebtn" class="special-button hover-effect">Back</button>
 				</a>
 			</div>

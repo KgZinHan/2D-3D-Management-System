@@ -45,6 +45,9 @@ public class SummaryTableController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		recoverPList = recoverTableDao.getTotalRecoverPlusMoney(number);
+		for(Recover2D recover : recoverPList) {
+			recover.setTotalRecover(recoverTableDao.getTotalRecoverMoneyBySeller(recover.getSellerName()));
+		}
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);

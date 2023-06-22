@@ -229,7 +229,6 @@ public class TableDaoImpl implements TableDao {
 		String deleteQuery3 = "DELETE FROM TWO_D_RECOVER_TABLE WHERE ID >= 0";
 		String deleteQuery4 = "DELETE FROM RECOVER_HISTORY_TABLE WHERE ID >= 0";
 		String deleteQuery5 = "DELETE FROM TEMP_TABLE";
-		String deleteQuery6 = "DELETE FROM RECOVER_ALL_TABLE";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
@@ -241,8 +240,6 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement = connection.prepareStatement(deleteQuery4);
 			preparedStatement.execute();
 			preparedStatement = connection.prepareStatement(deleteQuery5);
-			preparedStatement.execute();
-			preparedStatement = connection.prepareStatement(deleteQuery6);
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1144,9 +1141,12 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public void deleteAllTable() {
 		String deleteQuery = "DELETE FROM ALL_TABLE";
+		String deleteQuery2 = "DELETE FROM RECOVER_ALL_TABLE";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.execute();
+			preparedStatement = connection.prepareStatement(deleteQuery2);
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1462,9 +1462,5 @@ public class TableDaoImpl implements TableDao {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
-
-	
-
 }
