@@ -45,7 +45,7 @@ public class SearchRecoverController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		recoverSellerList = recoverTableDao.getRecoverList();
+		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.search2DRecoverAmount(number,sellerName);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);

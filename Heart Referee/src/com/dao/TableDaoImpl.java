@@ -3,6 +3,8 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import com.driver.DbDriver;
@@ -15,6 +17,8 @@ import com.entity.Recover2D;
 import com.entity.Summary2D;
 import com.entity.User2D;
 
+import common.CommonConstants;
+
 public class TableDaoImpl implements TableDao {
 
 	Connection connection = null;
@@ -24,6 +28,7 @@ public class TableDaoImpl implements TableDao {
 	List<Summary2D> resultList = null;
 	Number2D twoD = null;
 	Summary2D result2D = null;
+	
 
 	public TableDaoImpl() {
 	}
@@ -69,6 +74,8 @@ public class TableDaoImpl implements TableDao {
 				twoD.setPage(resultSet.getInt("page"));
 				twoD.setQuantity(1);
 				twoD.setrNumber(0);
+				twoD.setBy(resultSet.getString("by"));
+				twoD.setTime(resultSet.getTime("insert_time"));
 				twoDList.add(twoD);
 			}
 		} catch (Exception e) {
@@ -188,7 +195,7 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public void add2D(int number, int money, String name, int page) {
-		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE) VALUES (?,?,?,?)";
+		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE,BY,INSERT_TIME) VALUES (?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -196,6 +203,10 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement.setInt(2, money);
 			preparedStatement.setString(3, name);
 			preparedStatement.setInt(4, page);
+			preparedStatement.setString(5, CommonConstants.DEFAULT_MACHINE_NAME);
+			LocalDateTime currentTime = LocalDateTime.now();
+			Time timeValue = Time.valueOf(currentTime.toLocalTime());
+			preparedStatement.setTime(6,timeValue);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -204,7 +215,7 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public void add2DwithR(int number, int rNumber, int money, String name, int page) {
-		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE) VALUES (?,?,?,?),(?,?,?,?)";
+		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE,BY,INSERT_TIME) VALUES (?,?,?,?,?,?),(?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -212,10 +223,16 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement.setInt(2, money);
 			preparedStatement.setString(3, name);
 			preparedStatement.setInt(4, page);
-			preparedStatement.setInt(5, rNumber);
-			preparedStatement.setInt(6, money);
-			preparedStatement.setString(7, name);
-			preparedStatement.setInt(8, page);
+			preparedStatement.setString(5,CommonConstants.DEFAULT_MACHINE_NAME);
+			LocalDateTime currentTime = LocalDateTime.now();
+			Time timeValue = Time.valueOf(currentTime.toLocalTime());
+			preparedStatement.setTime(6,timeValue);
+			preparedStatement.setInt(7, rNumber);
+			preparedStatement.setInt(8, money);
+			preparedStatement.setString(9, name);
+			preparedStatement.setInt(10, page);
+			preparedStatement.setString(11,CommonConstants.DEFAULT_MACHINE_NAME);
+			preparedStatement.setTime(12,timeValue);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -249,7 +266,7 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public void add2DwithSpecialA(int[] array, int money, String name, int page) {
-		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE) VALUES (?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?)";
+		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE,BY,INSERT_TIME) VALUES (?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		int x = 0;
 		try {
@@ -259,7 +276,11 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(i + x + 1, money);
 				preparedStatement.setString(i + x + 2, name);
 				preparedStatement.setInt(i + x + 3, page);
-				x = x + 3;
+				preparedStatement.setString(i + x + 4, CommonConstants.DEFAULT_MACHINE_NAME);
+				LocalDateTime currentTime = LocalDateTime.now();
+				Time timeValue = Time.valueOf(currentTime.toLocalTime());
+				preparedStatement.setTime(i + x + 5, timeValue);
+				x = x + 5;
 			}
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
@@ -270,7 +291,10 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public void add2DwithSpecialB(int[] array, int money, String name, int page) {
-		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE) VALUES (?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?)";
+		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE,BY,INSERT_TIME) VALUES "
+				+ "(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),"
+				+ "(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),"
+				+ "(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		int x = 0;
 		try {
@@ -280,7 +304,11 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(i + x + 1, money);
 				preparedStatement.setString(i + x + 2, name);
 				preparedStatement.setInt(i + x + 3, page);
-				x = x + 3;
+				preparedStatement.setString(i + x + 4, CommonConstants.DEFAULT_MACHINE_NAME);
+				LocalDateTime currentTime = LocalDateTime.now();
+				Time timeValue = Time.valueOf(currentTime.toLocalTime());
+				preparedStatement.setTime(i + x + 5, timeValue);
+				x = x + 5;
 			}
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
@@ -291,7 +319,10 @@ public class TableDaoImpl implements TableDao {
 	
 	@Override
 	public void add2DwithSpecialC(int[] array, int money, String name, int page) {
-		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE) VALUES (?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?)";
+		String query = "INSERT INTO TWO_D_TABLE(NUMBER,MONEY,NAME,PAGE,BY,INSERT_TIME) VALUES "
+				+ "(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),"
+				+ "(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),"
+				+ "(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?),(?,?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		int x = 0;
 		try {
@@ -301,7 +332,11 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(i + x + 1, money);
 				preparedStatement.setString(i + x + 2, name);
 				preparedStatement.setInt(i + x + 3, page);
-				x = x + 3;
+				preparedStatement.setString(i + x + 4, CommonConstants.DEFAULT_MACHINE_NAME);
+				LocalDateTime currentTime = LocalDateTime.now();
+				Time timeValue = Time.valueOf(currentTime.toLocalTime());
+				preparedStatement.setTime(i + x + 5, timeValue);
+				x = x + 5;
 			}
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
@@ -881,6 +916,8 @@ public class TableDaoImpl implements TableDao {
 				twoD.setPage(resultSet.getInt("page"));
 				twoD.setQuantity(1);
 				twoD.setrNumber(0);
+				twoD.setBy(resultSet.getString("by"));
+				twoD.setTime(resultSet.getTime("insert_time"));
 				twoDList.add(twoD);
 			}
 		} catch (Exception e) {
@@ -1372,7 +1409,7 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getAllRecoverTable() {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT * FROM RECOVER_ALL_TABLE ORDER BY RECOVER_SELLER";
+		String query = "SELECT * FROM RECOVER_ALL_TABLE ORDER BY DATE,RECOVER DESC";
 		int count = 1;
 		connection = DbDriver.getConnection();
 		try {

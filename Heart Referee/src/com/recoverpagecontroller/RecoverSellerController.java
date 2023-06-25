@@ -17,7 +17,6 @@ import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Recover2D;
 
-import common.CommonConstants;
 import common.CommonParameters;
 
 public class RecoverSellerController extends HttpServlet {

@@ -46,7 +46,7 @@ public class RecoverDetailsController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		recoverSellerList = recoverTableDao.getRecoverList();
+		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverTableBySeller(sellerName);
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
@@ -70,7 +70,7 @@ public class RecoverDetailsController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		recoverSellerList = recoverTableDao.getRecoverList();
+		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverNumberDetails(number,sellerName);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);

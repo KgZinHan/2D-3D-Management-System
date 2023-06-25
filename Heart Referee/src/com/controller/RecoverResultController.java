@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.dao.RecoverTableDao;
+import com.dao.RecoverTableDaoImpl;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.AllUser2D;
 import com.entity.Number2D;
 import com.entity.User2D;
+
 import common.CommonConstants;
 import common.CommonParameters;
 
@@ -31,6 +32,7 @@ public class RecoverResultController extends HttpServlet {
 	int total;
 	int userTotal;
 	TableDao tableDao = new TableDaoImpl();
+	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
 
 	public RecoverResultController() {
 		super();
@@ -44,6 +46,7 @@ public class RecoverResultController extends HttpServlet {
 		totalUser2DList = tableDao.getTotalAllRecoverTable();
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
 		
+		/* List<Recover2D> userList = recoverTableDao.getRecoverSellerList(); */
 		List<AllUser2D> userList = tableDao.getUserAllTable();
 		
 		request.setAttribute(CommonParameters.TAB_BAR_LEDGER_COLOR, CommonConstants.HOVER_COLOR_CODE);

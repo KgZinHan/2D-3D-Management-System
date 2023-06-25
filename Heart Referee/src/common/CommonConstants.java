@@ -2,6 +2,9 @@ package common;
 
 public class CommonConstants {
 
+	//default machine name
+	public static final String DEFAULT_MACHINE_NAME = "A";
+	
 	// color_code
 	public static final String SORT_COLOR_CODE = "#2196F3";
 	public static final String HOVER_COLOR_CODE = "rgba(102,0,255,1)";

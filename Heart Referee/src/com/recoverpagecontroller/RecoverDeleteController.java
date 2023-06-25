@@ -17,7 +17,6 @@ import com.dao.TableDaoImpl;
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Recover2D;
-import com.entity.User2D;
 
 import common.CommonConstants;
 import common.CommonParameters;
@@ -61,7 +60,7 @@ public class RecoverDeleteController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		recoverSellerList = recoverTableDao.getRecoverList();
+		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverTableBySeller(sellerName);
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);

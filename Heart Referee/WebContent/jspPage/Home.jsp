@@ -16,18 +16,7 @@
 		<!--extra modal for full size scenes on click-->
         <div id="modal01" class="mv-display-center mv-view-image mv-animate-zoom">
         	<button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button> 
-            <form action="Setting" method="POST" style="text-align: center;margin-top: 30px">
-                <div id="radioTab" class="mv-table-input">
-                	<h3>Default Table</h3>
-					<input id="rd1" type="radio" name="defaultTable" value="history" checked>&emsp;History Table
-                	<br>
-					<input id="rd2" type="radio" name="defaultTable" value="details">&emsp;Details Table
-                	<br>
-					<input id="rd3" type="radio" name="defaultTable" value="normal">&emsp;Normal Table
-				</div>
-                <input type="submit" class="mv-logIn-button " value="Change">
-            </form>
-            <%-- color: ${idAlertColor} --%>
+            <h2 style="color: white;text-align: center;font-family: robol">Settings</h2>
             <h3 style="color: white;text-align: center;margin-top: 30px;font-family: robom">id count = ${id}</h3>
             <div style="text-align: center">
             	<a href="ClosedNumbers?closedNumber=0&mode=nothing">
@@ -107,7 +96,7 @@
 				<form id="singleInput" action="Table" method="post" style="display: none">
 					<input id="page" type="hidden" name="pageNumber" value="${pageNo}">
                   	<input id="number1" type="text" name="number" autofocus="autofocus" tabindex="1" class="mv-number-button" placeholder="Enter" min="00" max="99">
-                   	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
+                   	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                  	
                  	<table class="mv-special-note">
                  		<tr>
@@ -245,7 +234,7 @@
 							<span class="checkmark"></span>
 						</label>
 	            	</div>
-                    <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
+                    <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
 				</form>
 				
@@ -263,9 +252,9 @@
 						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
 						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
-					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
+					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                     <h2 style="color: white; position: absolute;right: 80px">R</h2>
-                    <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="100000" step="50" required>
+                    <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                     <input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add" >
 				</form>
 				
@@ -318,6 +307,8 @@
 								</button>
 							</a>
 						</th>
+						<th style="display: none;display: ${deleteLink} "><h4>Time</h4></th>
+						<th style="width: 60px;display: none;display: ${deleteLink} "><h4>By</h4></th>
 						<th style="width: 60px;display: none;display: ${deleteLink}"><h4>Delete</h4></th>
 					</tr>
 					
@@ -331,6 +322,8 @@
 							<td style="color: ${twoD.color};display: ${quantityLink}"><h3>${twoD.quantity}</h3></td>
 							<td style="display: none; display: ${rNumberLink}"><h3>${twoD.rNumber}</h3></td>				
 							<td style="display: none;display: ${totalLink}"><h3>${twoD.total}</h3></td>
+							<td style="display: none;display: ${deleteLink}"><h3>${twoD.time}</h3></td>
+							<td style="display: none;display: ${deleteLink}"><h3>${twoD.by}</h3></td>
 							<td style="display: none; display: ${deleteLink}">
 							<a href="Delete?id=${twoD.id}&pageNo=${pageNo}"><i class="fas fa-trash"></i></a>
 							</td>

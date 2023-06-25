@@ -26,6 +26,57 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 
 	@Override
+	public int getTotalRecoverMoney() {
+		int total = 0;
+		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				total = resultSet.getInt("money");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return total;
+	}
+	
+	@Override
+	public void add2D(int number, int money, String seller) {
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?)";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, number);
+			preparedStatement.setInt(2, money);
+			preparedStatement.setString(3, seller);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void add2DwithR(int number, int rNumber, int money,String seller) {
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?),(?,?,?)";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, number);
+			preparedStatement.setInt(2, money);
+			preparedStatement.setString(3,seller);
+			preparedStatement.setInt(4, rNumber);
+			preparedStatement.setInt(5, money);
+			preparedStatement.setString(6,seller);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
 	public List<Number2D> getRecoverHistoryTableBySeller(String seller) {
 		twoDList = new ArrayList<Number2D>();
 		String query = "SELECT * FROM RECOVER_HISTORY_TABLE WHERE NAME = ? ORDER BY ID DESC";
@@ -52,21 +103,21 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 
 	@Override
-	public int getTotalRecoverMoney() {
-		int total = 0;
-		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE";
+	public void add2DtoRecoverHistory(History2D twoD) {
+		String query = "INSERT INTO RECOVER_HISTORY_TABLE(NOTE,MONEY,TOTAL,R,NAME) VALUES (?,?,?,?,?)";
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				total = resultSet.getInt("money");
-			}
+			preparedStatement.setString(1, twoD.getNote());
+			preparedStatement.setInt(2, twoD.getMoney());
+			preparedStatement.setInt(3, twoD.getTotal());
+			preparedStatement.setString(4, twoD.getR());
+			preparedStatement.setString(5,twoD.getName());
+			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return total;
 	}
 	
 	@Override
@@ -125,57 +176,6 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 			e.printStackTrace();
 		}
 
-	}
-	
-	@Override
-	public void add2DtoRecoverHistory(History2D twoD) {
-		String query = "INSERT INTO RECOVER_HISTORY_TABLE(NOTE,MONEY,TOTAL,R,NAME) VALUES (?,?,?,?,?)";
-		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, twoD.getNote());
-			preparedStatement.setInt(2, twoD.getMoney());
-			preparedStatement.setInt(3, twoD.getTotal());
-			preparedStatement.setString(4, twoD.getR());
-			preparedStatement.setString(5,twoD.getName());
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Override
-	public void add2D(int number, int money, String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?)";
-		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, number);
-			preparedStatement.setInt(2, money);
-			preparedStatement.setString(3, seller);
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	@Override
-	public void add2DwithR(int number, int rNumber, int money,String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?),(?,?,?)";
-		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setInt(1, number);
-			preparedStatement.setInt(2, money);
-			preparedStatement.setString(3,seller);
-			preparedStatement.setInt(4, rNumber);
-			preparedStatement.setInt(5, money);
-			preparedStatement.setString(6,seller);
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@Override
@@ -345,27 +345,6 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 
 	@Override
-	public List<Recover2D> getRecoverList() {
-		List<Recover2D> recoverList = new ArrayList<Recover2D>();
-		String query = "SELECT SELLER_NAME,SELLER_Z FROM RECOVER_SELLER_TABLE";
-		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			while (resultSet.next()) {
-				Recover2D seller = new Recover2D();
-				seller.setSellerName(resultSet.getString("seller_name"));
-				seller.setSellerZ(resultSet.getInt("seller_z"));
-				recoverList.add(seller);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return recoverList;
-	}
-
-	@Override
 	public List<Recover2D> getRecoverSellerList() {
 		List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 		String query = "SELECT * FROM RECOVER_SELLER_TABLE";
@@ -386,21 +365,45 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 
 		return recoverSellerList;
 	}
-
+	
 	@Override
-	public void deleteRecoverSeller(String sellerName) {
-		String deleteQuery = "DELETE FROM RECOVER_SELLER_TABLE WHERE SELLER_NAME = ?";
+	public Recover2D getRecoverSellerBySellerName(String sellerName) {
+		Recover2D seller = new Recover2D();
+		String query = "SELECT * FROM RECOVER_SELLER_TABLE WHERE SELLER_NAME = ?";
 		connection = DbDriver.getConnection();
 		try {
-			preparedStatement = connection.prepareStatement(deleteQuery);
-			preparedStatement.setString(1, sellerName);
-			preparedStatement.execute();
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, sellerName);;
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				seller.setSellerCom(resultSet.getInt("seller_com"));
+				seller.setSellerZ(resultSet.getInt("seller_z"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	}
 
+		return seller;
+	}
+	
+	@Override
+	public String getSellerName() {
+		String query = "SELECT SELLER_NAME FROM RECOVER_SELLER_TABLE ORDER BY SELLER_Z DESC LIMIT 1";
+		String sellerName = "Default"; 
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				sellerName = resultSet.getString("seller_name");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return sellerName;
+	}
+	
 	@Override
 	public boolean checkSellerName(String sellerName) {
 		boolean flag = false;
@@ -449,23 +452,19 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Override
-	public String getSellerName() {
-		String query = "SELECT SELLER_NAME FROM RECOVER_SELLER_TABLE ORDER BY SELLER_Z DESC LIMIT 1";
-		String sellerName = "Default"; 
+	public void deleteRecoverSeller(String sellerName) {
+		String deleteQuery = "DELETE FROM RECOVER_SELLER_TABLE WHERE SELLER_NAME = ?";
 		connection = DbDriver.getConnection();
 		try {
-			preparedStatement = connection.prepareStatement(query);
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				sellerName = resultSet.getString("seller_name");
-			}
+			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setString(1, sellerName);
+			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		return sellerName;
+		
 	}
 
 	@Override
@@ -529,26 +528,6 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 
 	@Override
-	public Recover2D getRecoverSellerBySellerName(String sellerName) {
-		Recover2D seller = new Recover2D();
-		String query = "SELECT * FROM RECOVER_SELLER_TABLE WHERE SELLER_NAME = ?";
-		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, sellerName);;
-			resultSet = preparedStatement.executeQuery();
-			if (resultSet.next()) {
-				seller.setSellerCom(resultSet.getInt("seller_com"));
-				seller.setSellerZ(resultSet.getInt("seller_z"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return seller;
-	}
-
-	@Override
 	public List<Recover2D> getTotalRecoverPlusMoney(int number) {
 		List<Recover2D> recoverList = new ArrayList<Recover2D>();
 		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NUMBER=? GROUP BY NAME";
@@ -556,6 +535,26 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 		try {
 			preparedStatement = connection.prepareStatement(selectQuery);
 			preparedStatement.setInt(1, number);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Recover2D recover = new Recover2D();
+				recover.setSellerName(resultSet.getString("name"));
+				recover.setSellerMoney(resultSet.getInt("money"));
+				recoverList.add(recover);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return recoverList;
+	}
+
+	@Override
+	public List<Recover2D> getSellerList() {
+		List<Recover2D> recoverList = new ArrayList<Recover2D>();
+		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE GROUP BY NAME";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(selectQuery);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Recover2D recover = new Recover2D();

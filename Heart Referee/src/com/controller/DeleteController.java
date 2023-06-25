@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.eclipse.jdt.internal.compiler.parser.RecoveredModuleStatement;
-
 import com.dao.RecoverTableDao;
 import com.dao.RecoverTableDaoImpl;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
+
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Recover2D;
@@ -65,35 +64,41 @@ public class DeleteController extends HttpServlet {
 			String extraMoney = request.getParameter("extraMoney");
 			String todayDate = date + " " + time;
 			
-			if (recoverFlag != null) {
-			    recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
+			if (recoverFlag != null) { //add Recover Results to Recover Ledger
+			    
+				//Calculate recoverPlusMoney
+				recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
 			    recoverPlusList = recoverTableDao.getTotalRecoverPlusMoney(Integer.parseInt(number));
 
 			    for (Recover2D recoverPlus : recoverPlusList) {
 			        Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recoverPlus.getSellerName());
 			        int commission = (seller.getSellerCom() * recoverTableDao.getTotalRecoverMoneyBySeller(recoverPlus.getSellerName())) / 100;
+			        recoverPMoney += recoverPlus.getSellerMoney();
 			        recoverComMoney += Math.round(commission / 50f) * 50;
 			        recoverPlusMoney += (recoverPlus.getSellerMoney() * seller.getSellerZ());
 			    }
 
 			    recoverPlusMoney += recoverComMoney;
-
+			    
+			    //Add to Recover Ledger
 			    List<Recover2D> recoverSellerList = recoverTableDao.getRecoverSellerList();
-
+			    
 			    for (Recover2D recoverSeller : recoverSellerList) {
-			        String seller = recoverSeller.getSellerName();
-			        recoverSeller.setDate(todayDate);
-			        recoverSeller.setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
-			        recoverSeller.setRecoverP(recoverTableDao.getTotalRecoverPBySeller(seller, Integer.parseInt(number)));
-			        int recoverCom = (recoverSeller.getSellerMoney() * recoverSeller.getSellerCom()) / 100;
-			        recoverCom = Math.round(recoverCom/ 50f) * 50;
-			        recoverSeller.setRecoverCom(recoverCom);
-			        recoverSeller.setRecoverPlus(recoverSeller.getRecoverCom() + (recoverSeller.getRecoverP() * recoverSeller.getSellerZ()));
-			        recoverSeller.setTotalRecover(recoverSeller.getRecoverPlus() - recoverSeller.getSellerMoney());
-			        tableDao.addValuesToAllRecoverTable(recoverSeller);
+			    	
+			    		String seller = recoverSeller.getSellerName();
+				        recoverSeller.setDate(todayDate);
+				        recoverSeller.setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
+				        if(recoverSeller.getSellerMoney() > 0) {
+				        	recoverSeller.setRecoverP(recoverTableDao.getTotalRecoverPBySeller(seller, Integer.parseInt(number)));
+					        int recoverCom = (recoverSeller.getSellerMoney() * recoverSeller.getSellerCom()) / 100;
+					        recoverCom = Math.round(recoverCom/ 50f) * 50;
+					        recoverSeller.setRecoverCom(recoverCom);
+					        recoverSeller.setRecoverPlus(recoverSeller.getRecoverCom() + (recoverSeller.getRecoverP() * recoverSeller.getSellerZ()));
+					        recoverSeller.setTotalRecover(recoverSeller.getRecoverPlus() - recoverSeller.getSellerMoney());
+					        tableDao.addValuesToAllRecoverTable(recoverSeller);
+				        }
 			    }
 			}
-
 			
 			Ledger ledger = new Ledger();
 			ledger.setDate(todayDate);

@@ -4,10 +4,10 @@ public class Ledger {
 	private String date;
 	private int recoverMoney;
 	private int recoverPMoney;
-	private int recoverPlusMoney;
 	private int recoverComMoney;
+	private int recoverPlusMoney;
 	private int extraMoney;
-	
+
 	public String getDate() {
 		return date;
 	}
@@ -32,20 +32,20 @@ public class Ledger {
 		this.recoverPMoney = recoverPMoney;
 	}
 
-	public int getRecoverPlusMoney() {
-		return recoverPlusMoney;
-	}
-
-	public void setRecoverPlusMoney(int recoverPlusMoney) {
-		this.recoverPlusMoney = recoverPlusMoney;
-	}
-
 	public int getRecoverComMoney() {
 		return recoverComMoney;
 	}
 
 	public void setRecoverComMoney(int recoverComMoney) {
 		this.recoverComMoney = recoverComMoney;
+	}
+
+	public int getRecoverPlusMoney() {
+		return recoverPlusMoney;
+	}
+
+	public void setRecoverPlusMoney(int recoverPlusMoney) {
+		this.recoverPlusMoney = recoverPlusMoney;
 	}
 
 	public int getExtraMoney() {

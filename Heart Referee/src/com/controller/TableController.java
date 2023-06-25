@@ -997,11 +997,37 @@ public class TableController extends HttpServlet {
 					int number = Integer.parseInt(strNumberPlusPlusList.get(i));
 					int rNumber = getReverse(number);
 					tableDao.add2DwithR(number, rNumber, money, name, pageNo);
+					
+					if (checkClosedNumberOrNot(number)) {
+						Integer iNumber = number;
+						if (number < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
+					if (checkClosedNumberOrNot(rNumber)) {
+						Integer iNumber = rNumber;
+						if (rNumber < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
 				}
 				strNumberPlusPlusList = generateAllPairs("02468");
 				for (int j = 0; j < strNumberPlusPlusList.size(); j++) {
 					int number = Integer.parseInt(strNumberPlusPlusList.get(j));
 					tableDao.add2D(number, money, name, pageNo);
+					
+					if (checkClosedNumberOrNot(number)) {
+						Integer iNumber = number;
+						if (number < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
 				}
 				type = 6;
 				shortMsg = "sone sone";
@@ -1013,11 +1039,37 @@ public class TableController extends HttpServlet {
 					int number = Integer.parseInt(strNumberMinusMinusList.get(i));
 					int rNumber = getReverse(number);
 					tableDao.add2DwithR(number, rNumber, money, name, pageNo);
+					
+					if (checkClosedNumberOrNot(number)) {
+						Integer iNumber = number;
+						if (number < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
+					if (checkClosedNumberOrNot(rNumber)) {
+						Integer iNumber = rNumber;
+						if (rNumber < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
 				}
 				strNumberMinusMinusList = generateAllPairs("13579");
 				for (int j = 0; j < strNumberMinusMinusList.size(); j++) {
 					int number = Integer.parseInt(strNumberMinusMinusList.get(j));
 					tableDao.add2D(number, money, name, pageNo);
+					
+					if (checkClosedNumberOrNot(number)) {
+						Integer iNumber = number;
+						if (number < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
 				}
 				type = 6;
 				shortMsg = "ma ma";
@@ -1029,6 +1081,15 @@ public class TableController extends HttpServlet {
 				for (int i = 0; i < arrayPlusMinusList.length; i++) {
 					int number = arrayPlusMinusList[i];
 					tableDao.add2D(number, money, name, pageNo);
+					
+					if (checkClosedNumberOrNot(number)) {
+						Integer iNumber = number;
+						if (number < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
 				}
 				type = 6;
 				shortMsg = "sone ma";
@@ -1040,6 +1101,15 @@ public class TableController extends HttpServlet {
 				for (int i = 0; i < arrayMinusPlusList.length; i++) {
 					int number = arrayMinusPlusList[i];
 					tableDao.add2D(number, money, name, pageNo);
+					
+					if (checkClosedNumberOrNot(number)) {
+						Integer iNumber = number;
+						if (number < 10) {
+							alertMsg = alertMsg + " " + "0" + iNumber.toString();
+						} else {
+							alertMsg = alertMsg + " " + iNumber.toString();
+						}
+					}
 				}
 				type = 6;
 				shortMsg = "ma sone";
@@ -1058,6 +1128,23 @@ public class TableController extends HttpServlet {
 							int number = Integer.parseInt(strNumber);
 							int rNumber = getReverse(number);
 							tableDao.add2DwithR(number, rNumber, money, name, pageNo);
+							
+							if (checkClosedNumberOrNot(number)) {
+								Integer iNUmber = number;
+								if (number < 10) {
+									alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+								} else {
+									alertMsg = alertMsg + " " + iNUmber.toString();
+								}
+							}
+							if (checkClosedNumberOrNot(rNumber)) {
+								Integer iNUmber = rNumber;
+								if (rNumber < 10) {
+									alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+								} else {
+									alertMsg = alertMsg + " " + iNUmber.toString();
+								}
+							}
 						}
 						shortMsg = numberS + " akhway";
 
@@ -1066,6 +1153,15 @@ public class TableController extends HttpServlet {
 							for (String strPairNumber : strPairNumberList) {
 								int number = Integer.parseInt(strPairNumber);
 								tableDao.add2D(number, money, name, pageNo);
+								
+								if (checkClosedNumberOrNot(number)) {
+									Integer iNUmber = number;
+									if (number < 10) {
+										alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+									} else {
+										alertMsg = alertMsg + " " + iNUmber.toString();
+									}
+								}
 							}
 							shortMsg += " puu";
 						}
@@ -1089,6 +1185,15 @@ public class TableController extends HttpServlet {
 						List<Integer> evenList = generateTwoDigitsWithEvenStartCombinations(digit, r);
 						for (int i = 0; i < evenList.size(); i++) {
 							tableDao.add2D(evenList.get(i), money, name, pageNo);
+							
+							if (checkClosedNumberOrNot(evenList.get(i))) {
+								Integer iNUmber = evenList.get(i);
+								if (evenList.get(i) < 10) {
+									alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+								} else {
+									alertMsg = alertMsg + " " + iNUmber.toString();
+								}
+							}
 						}
 						shortMsg = numberS + (r ? " sone kat" : " sone start");
 						note = shortMsg;
@@ -1111,6 +1216,15 @@ public class TableController extends HttpServlet {
 						
 						for (int i = 0; i < oddList.size(); i++) {
 							tableDao.add2D(oddList.get(i), money, name, pageNo);
+							
+							if (checkClosedNumberOrNot(oddList.get(i))) {
+								Integer iNUmber = oddList.get(i);
+								if (oddList.get(i) < 10) {
+									alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+								} else {
+									alertMsg = alertMsg + " " + iNUmber.toString();
+								}
+							}
 						}
 						
 						shortMsg = numberS + (r ? " ma kat" : " ma start");
@@ -1131,6 +1245,15 @@ public class TableController extends HttpServlet {
 						
 						for (int i = 0; i < evenList.size(); i++) {
 							tableDao.add2D(evenList.get(i), money, name, pageNo);
+							
+							if (checkClosedNumberOrNot(evenList.get(i))) {
+								Integer iNUmber = evenList.get(i);
+								if (evenList.get(i) < 10) {
+									alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+								} else {
+									alertMsg = alertMsg + " " + iNUmber.toString();
+								}
+							}
 						}
 						
 						shortMsg = numberS + " sone end";
@@ -1150,6 +1273,15 @@ public class TableController extends HttpServlet {
 						
 						for (int i = 0; i < oddList.size(); i++) {
 							tableDao.add2D(oddList.get(i), money, name, pageNo);
+							
+							if (checkClosedNumberOrNot(oddList.get(i))) {
+								Integer iNUmber = oddList.get(i);
+								if (oddList.get(i) < 10) {
+									alertMsg = alertMsg + " " + "0" + iNUmber.toString();
+								} else {
+									alertMsg = alertMsg + " " + iNUmber.toString();
+								}
+							}
 						}
 						
 						shortMsg = numberS + " ma end";

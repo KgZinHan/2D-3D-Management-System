@@ -1,5 +1,7 @@
 package com.entity;
 
+import java.sql.Time;
+
 public class Number2D {
 
 	private int id;
@@ -17,6 +19,8 @@ public class Number2D {
 	private int pageTotal;
 	private int count;
 	private int recoverMoney;
+	private String By;
+	private Time time;
 
 	public int getId() {
 		return id;
@@ -137,7 +141,21 @@ public class Number2D {
 	public void setRecoverMoney(int recoverMoney) {
 		this.recoverMoney = recoverMoney;
 	}
-	
-	
+
+	public String getBy() {
+		return By;
+	}
+
+	public void setBy(String by) {
+		By = by;
+	}
+
+	public Time getTime() {
+		return time;
+	}
+
+	public void setTime(Time time) {
+		this.time = time;
+	}
 
 }

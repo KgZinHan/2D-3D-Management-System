@@ -1,7 +1,6 @@
 package com.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -9,16 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.Closed2D;
-import com.entity.History2D;
-import com.entity.Number2D;
-import com.entity.User2D;
 
-import common.CommonConstants;
 import common.CommonParameters;
 
 public class ClosedNumberController extends HttpServlet {

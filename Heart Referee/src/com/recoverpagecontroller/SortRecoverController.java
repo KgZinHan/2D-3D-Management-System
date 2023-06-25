@@ -55,7 +55,7 @@ public class SortRecoverController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		recoverSellerList = recoverTableDao.getRecoverList();
+		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, recoverTotal);

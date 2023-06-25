@@ -1,7 +1,5 @@
 package com.entity;
 
-import java.sql.Date;
-
 public class AllUser2D {
 
 	private String username;
@@ -12,8 +10,6 @@ public class AllUser2D {
 	private int comPercent;
 	private int comMoney;
 	private int total;
-	private Date date;
-	private String stringDate;
 	private String time;
 	private String color;
 	private int count;
@@ -88,28 +84,12 @@ public class AllUser2D {
 		this.total = total;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
 	public String getTime() {
 		return time;
 	}
 
 	public void setTime(String time) {
 		this.time = time;
-	}
-
-	public String getStringDate() {
-		return stringDate;
-	}
-
-	public void setStringDate(String stringDate) {
-		this.stringDate = stringDate;
 	}
 
 	public String getColor() {

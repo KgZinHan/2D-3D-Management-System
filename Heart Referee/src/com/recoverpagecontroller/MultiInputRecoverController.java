@@ -47,7 +47,7 @@ public class MultiInputRecoverController extends HttpServlet {
 		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
 		totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
 		
-		recoverSellerList = recoverTableDao.getRecoverList();
+		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverHistoryTableBySeller(sellerName);
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);

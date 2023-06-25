@@ -69,19 +69,54 @@
 				<form id="singleInput" action="RecoverPageController" method="post" style="display: none">
 					<input type="hidden" name="sellerName" value="${sellerName}"/>
                   	<input id="number1" type="text" name="number" autofocus="autofocus" tabindex="1" class="mv-number-button" placeholder="Enter" min="00" max="99">
-                   	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
-                 	<h3 class="mv-special-note" style="border-color: green;color: green">
-	                 	&emsp;Shortcut Note!
-	                 	<br>** &nbsp;&nbsp;=&nbsp; a puu
-	                 	<br> // &nbsp;&nbsp;&nbsp;=&nbsp; natkhat 
-	                 	<br> ++ &nbsp;=&nbsp; power 
-	                 	<br> /* &nbsp;&nbsp;=&nbsp; nyiko
-	                 	<br> ?+ &nbsp;=&nbsp; ? bk
-	                 	<br> ?* &nbsp;&nbsp;=&nbsp; ? start
-	                 	<br> *? &nbsp;&nbsp;=&nbsp; ? end
-	                 	<br> *?* &nbsp;=&nbsp; 19 numbers
-	                 	<br> *?** =&nbsp; 20 numbers
-                 	</h3>
+                   	<input type="number" name="money" tabindex="2" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
+                 	<table class="mv-special-note">
+                 		<tr>
+                 			<td>apuu</td>
+                 			<td>==</td>
+                 			<td>&emsp;**</td>
+                 		</tr>
+                 		<tr>
+                 			<td>natkhat</td>
+                 			<td>==</td>
+                 			<td>&emsp;//</td>
+                 		</tr>
+                 		<tr>
+                 			<td>power</td>
+                 			<td>==</td>
+                 			<td>&emsp;++</td>
+                 		</tr>
+                 		<tr>
+                 			<td>nyiko</td>
+							<td>==</td>
+                 			<td>&emsp;/*</td>          		
+                 		</tr>
+                 		<tr>
+                 			<td>? bk</td>
+                 			<td>==</td>
+                 			<td>&emsp;?+</td>
+                 		</tr>
+                 		<tr>
+                 			<td>? start</td>
+                 			<td>==</td>
+                 			<td>&emsp;?*</td>
+                 		</tr>
+                 		<tr>
+                 			<td>? end</td>
+                 			<td>==</td>
+                 			<td>&emsp;*?</td>
+                 		</tr>
+                 		<tr>
+                 			<td>apar 19</td>
+                 			<td>==</td>
+                 			<td>&emsp;*?*</td>
+                 		</tr>
+                 		<tr>
+                 			<td>apar 20</td>
+                 			<td>==</td>
+                 			<td>&emsp;*?**</td>
+                 		</tr>   		
+                 	</table>
                  	<!-- <h3 class="mv-page-field" style="color: red;border-color: red">Recover</h3> -->
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
                 </form>
@@ -111,7 +146,7 @@
 							<span class="checkmark"></span>
 						</label>
 	            	</div>
-                    <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+                    <input type="number" name="money" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                     <h3 class="mv-page-field" style="color: green;border-color: green">Recover</h3>
                  	<input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add">
 				</form>
@@ -130,9 +165,9 @@
 						<br><i style="color:white">9</i>&emsp;<input id="number" type="number" name="number9" class="multiple-input" placeholder="Enter" min="00" max="99">
 						<br><i style="color:white">10</i>&emsp;<input id="number" style="margin-left:-10px" type="number" name="number0" class="multiple-input" placeholder="Enter" min="00" max="99">
 					</div>
-					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+					<input type="number" name="money" style="right: 200px" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                     <h2 style="color: white; position: absolute;right: 80px">R</h2>
-                    <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="50000" step="50" required>
+                    <input type="number" name="rMoney" class="mv-money-drop-button" placeholder="Enter" min="50" max="300000" step="50" required>
                     <h3 class="mv-page-field" style="color: green;border-color: green">Recover</h3>
                     <input id="submitbtn" class="mv-submit-btn hover-effect" type="submit" value="Add" >
 				</form>
