@@ -30,7 +30,7 @@ public class DeleteController extends HttpServlet {
 	RequestDispatcher dispatcher = null;
 	List<Number2D> twoDList = new ArrayList<Number2D>();
 	List<User2D> userList = new ArrayList<User2D>();
-	List<Recover2D> recoverPlusList = new ArrayList<Recover2D>();
+	List<Recover2D> recoverList = new ArrayList<Recover2D>();
 	History2D twoDH = null;
 	Number2D twoD = null;
 	int total;
@@ -68,14 +68,15 @@ public class DeleteController extends HttpServlet {
 			    
 				//Calculate recoverPlusMoney
 				recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
-			    recoverPlusList = recoverTableDao.getTotalRecoverPlusMoney(Integer.parseInt(number));
+				recoverList = recoverTableDao.getTotalRecoverList();
 
-			    for (Recover2D recoverPlus : recoverPlusList) {
-			        Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recoverPlus.getSellerName());
-			        int commission = (seller.getSellerCom() * recoverTableDao.getTotalRecoverMoneyBySeller(recoverPlus.getSellerName())) / 100;
-			        recoverPMoney += recoverPlus.getSellerMoney();
-			        recoverComMoney += Math.round(commission / 50f) * 50;
-			        recoverPlusMoney += (recoverPlus.getSellerMoney() * seller.getSellerZ());
+			    for (Recover2D recover : recoverList) {
+			        Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recover.getSellerName());
+			        int recCom = (seller.getSellerCom() * recover.getSellerMoney()) / 100;
+			        int recP = recoverTableDao.getTotalRecoverPBySeller(recover.getSellerName(), Integer.parseInt(number));
+			        recoverPMoney += recP;
+			        recoverComMoney += Math.round(recCom / 50f) * 50;
+			        recoverPlusMoney += recP * seller.getSellerZ();
 			    }
 
 			    recoverPlusMoney += recoverComMoney;

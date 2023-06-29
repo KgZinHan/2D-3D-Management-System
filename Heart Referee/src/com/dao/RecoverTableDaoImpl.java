@@ -568,6 +568,26 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 		return recoverList;
 	}
 
+	@Override
+	public List<Recover2D> getTotalRecoverList() {
+		List<Recover2D> recoverList = new ArrayList<Recover2D>();
+		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE GROUP BY NAME";
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(selectQuery);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Recover2D recover = new Recover2D();
+				recover.setSellerName(resultSet.getString("name"));
+				recover.setSellerMoney(resultSet.getInt("money"));
+				recoverList.add(recover);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return recoverList;
+	}
+
 	
 	
 	
