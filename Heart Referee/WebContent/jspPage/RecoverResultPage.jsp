@@ -65,11 +65,11 @@
 							<th style="width: 50px">
 								<h4>#</h4>
 							</th>
-							<th style="width: 300px">				
-								<h4>SellerName</h4>
-							</th>
 							<th style="width: 200px">				
 								<h4>Date</h4>
+							</th>
+							<th style="width: 300px">				
+								<h4>SellerName</h4>
 							</th>
 							<th>
 								<h4>Recover Money</h4>
@@ -90,13 +90,13 @@
 						<c:forEach items="${user2DList}" var="user2D">
 							<tr class="mv-waiting-table-data" style="font-size: 16px">
 								<td><p>${user2D.count}</p></td>
-								<td><p>${user2D.username}</p></td>
 								<td><p>${user2D.time}</p></td>
-								<td><p>${user2D.recover}</p></td>
-								<td><p>${user2D.recoverCom}</p></td>
+								<td><p>${user2D.username}</p></td>
+								<td><p>${user2D.recover} ks</p></td>
+								<td><p>${user2D.recoverCom} ks</p></td>
 								<td><p>${user2D.recoverP}</p></td>
-								<td><p>${user2D.recoverPlus}</p></td>
-								<td><p style="color:${tUser2D.color}">${user2D.totalMoney}</p></td>
+								<td><p>${user2D.recoverPlus} ks</p></td>
+								<td><p style="color:${user2D.color}">${user2D.totalMoney} ks</p></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${totalUser2DList}" var="tUser2D">
@@ -104,11 +104,11 @@
 								<td><p>-</p></td>
 								<td><p>-</p></td>
 								<td><p>-</p></td>
-								<td><p>${tUser2D.recover}</p></td>
-								<td><p>${tUser2D.recoverCom}</p></td>
+								<td><p>${tUser2D.recover} ks</p></td>
+								<td><p>${tUser2D.recoverCom} ks</p></td>
 								<td><p>${tUser2D.recoverP}</p></td>
-								<td><p>${tUser2D.recoverPlus}</p></td>
-								<td><p style="color:${tUser2D.color}">${tUser2D.totalMoney}</p></td>
+								<td><p>${tUser2D.recoverPlus} ks</p></td>
+								<td><p style="color:${tUser2D.color}">${tUser2D.totalMoney} ks</p></td>
 							</tr>
 						</c:forEach>
 					</table>

@@ -1473,6 +1473,12 @@ public class TableDaoImpl implements TableDao {
 				recover.setRecoverCom(resultSet.getInt("recover_com"));
 				recover.setRecoverPlus(resultSet.getInt("recover_plus"));
 				recover.setTotalMoney(resultSet.getInt("total_recover"));
+				if(recover.getTotalMoney() < 0) {
+					recover.setColor("red");
+				}
+				else {
+					recover.setColor("green");
+				}
 				allRecoverList.add(recover);
 			}
 		}catch (Exception e) {

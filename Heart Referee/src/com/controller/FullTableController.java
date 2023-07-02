@@ -19,7 +19,6 @@ import com.entity.Number2D;
 import common.CommonConstants;
 import common.CommonParameters;
 
-
 public class FullTableController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
@@ -33,7 +32,8 @@ public class FullTableController extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<Number2D> zeroStartList = new ArrayList<Number2D>();
 		List<Number2D> oneStartList = new ArrayList<Number2D>();
 		List<Number2D> twoStartList = new ArrayList<Number2D>();
@@ -44,9 +44,9 @@ public class FullTableController extends HttpServlet {
 		List<Number2D> sevenStartList = new ArrayList<Number2D>();
 		List<Number2D> eightStartList = new ArrayList<Number2D>();
 		List<Number2D> nineStartList = new ArrayList<Number2D>();
-		
+
 		total = tableDao.getTotalMoney();
-		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
+		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		zeroStartList = tableDao.startList(0);
 		setColor(zeroStartList);
 		oneStartList = tableDao.startList(1);
@@ -67,7 +67,7 @@ public class FullTableController extends HttpServlet {
 		setColor(eightStartList);
 		nineStartList = tableDao.startList(9);
 		setColor(nineStartList);
-		
+
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
 		request.setAttribute(CommonParameters.TAB_BAR_FULL_TABLE_COLOR, CommonConstants.HOVER_COLOR_CODE);
@@ -85,25 +85,34 @@ public class FullTableController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request,response);
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
 	}
-	
+
 	protected int getTotal() {
 		int totalMoney = 0;
 		totalMoney = tableDao.getTotalMoney();
 		return totalMoney;
 
 	}
-	
+
 	protected void setColor(List<Number2D> twoDList) {
 		for (int j = 0; j < twoDList.size(); j++) {
-			if (getTotal() - ((twoDList.get(j).getMoney() * 80) +((getTotal() * 15) / 100) + recoverTotal)  > CommonConstants.HAPPY_LIMIT) {
+			int calculatedMoney = getTotal()
+					- ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal);
+			if (calculatedMoney >= CommonConstants.HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
-			if ((twoDList.get(j).getMoney() * 80)+ ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
+
+			if ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
 				twoDList.get(j).setColor("red");
 			}
+
+			/*
+			 * else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) {
+			 * twoDList.get(j).setColor("red"); }
+			 */
 		}
 	}
 

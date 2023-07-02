@@ -149,6 +149,7 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 			preparedStatement = connection.prepareStatement(query);
 			for (int i = 1; i <= array.length; i++) {
 				preparedStatement.setInt(i + x, array[i - 1]);
+				preparedStatement.setInt(i + x + 1, money);
 				preparedStatement.setString(i + x + 2, seller);
 				x = x + 2;
 			}
@@ -168,6 +169,7 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 			preparedStatement = connection.prepareStatement(query);
 			for (int i = 1; i <= array.length; i++) {
 				preparedStatement.setInt(i + x, array[i - 1]);
+				preparedStatement.setInt(i + x + 1, money);
 				preparedStatement.setString(i + x + 2, seller);
 				x = x + 2;
 			}

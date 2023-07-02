@@ -12,13 +12,13 @@
 <!-- For search box -->
 
 <div id="redDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: red;font-family:sans-serif;">Red color means the numbers with red color will be significantly minus(-) in profit.</p>
+	<p style="color: red;font-family:sans-serif;">Red color means the numbers with red color will be minus(-) above 5 lakhs in profit.</p>
 </div>
 <div id="blackDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be a little plus(+) in profit.</p>
+	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be minus(-) between 0 and 5 lakhs in profit.</p>
 </div>
 <div id="greenDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: green;font-family:sans-serif;">Green color means the numbers with green color will be plus(+) more than 4 lakhs in profit.</p>
+	<p style="color: green;font-family:sans-serif;">Green color means the numbers with green color will be plus(+) in profit.</p>
 </div>
 <div id="purpleDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
 	<p style="color: purple;font-family:sans-serif;">Purple color means the numbers with purple color are P(0) and will be significantly plus(+) in profit.</p>

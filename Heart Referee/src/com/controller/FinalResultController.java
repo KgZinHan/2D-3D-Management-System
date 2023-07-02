@@ -116,7 +116,7 @@ public class FinalResultController extends HttpServlet {
 		List<AllUser2D> temp2DList = new ArrayList<>();
 		List<User2D> user2DList = new ArrayList<>();
 		List<AllUser2D> totalTemp2DList = new ArrayList<>();
-		List<Recover2D> recoverPlusList = new ArrayList<Recover2D>();
+		List<Recover2D> recoverList = new ArrayList<Recover2D>();
 		int totalRecover = 0;
 		int totalRecoverP = 0;
 		int totalRecoverCom = 0;
@@ -157,14 +157,17 @@ public class FinalResultController extends HttpServlet {
 		
 		totalRecover = recoverTableDao.getTotalRecoverMoney();
 		totalRecoverP = recoverTableDao.getTotalRecoverP(number);	
-		recoverPlusList = recoverTableDao.getTotalRecoverPlusMoney(number);
-		for(int i =0;i<recoverPlusList.size();i++) {
-			Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recoverPlusList.get(i).getSellerName());
-			int sellerCommission = (seller.getSellerCom() * recoverTableDao.getTotalRecoverMoneyBySeller(recoverPlusList.get(i).getSellerName()))/100;
-			totalRecoverCom = totalRecoverCom + Math.round(sellerCommission/50f) * 50;
-			totalRecoverPlus = totalRecoverPlus + (recoverPlusList.get(i).getSellerMoney() * seller.getSellerZ());
-		}
-		totalRecoverPlus = totalRecoverPlus + totalRecoverCom;
+		recoverList = recoverTableDao.getTotalRecoverList();
+
+	    for (Recover2D recover : recoverList) {
+	        Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recover.getSellerName());
+	        int recCom = (seller.getSellerCom() * recover.getSellerMoney()) / 100;
+	        int recP = recoverTableDao.getTotalRecoverPBySeller(recover.getSellerName(), number);
+	        totalRecoverCom += Math.round(recCom / 50f) * 50;
+	        totalRecoverPlus += recP * seller.getSellerZ();
+	    }
+
+	    totalRecoverPlus += totalRecoverCom;
 		
 		allTotal = tableDao.getTempTotalResult() - totalRecover + totalRecoverPlus;
 		if(allTotal < 0) {
