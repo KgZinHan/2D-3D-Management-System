@@ -68,7 +68,8 @@
 									<td style="width: 150px"><p>${seller.sellerCom}%</p></td>
 									<td style="width: 150px"><p>${seller.sellerZ}z</p></td>
 									<td>
-										<a href="RecoverSeller?sellerName=${seller.sellerName}&mode=delete"><i class="fas fa-trash"></i></a>
+										<a href="RecoverSeller?sellerName=${seller.sellerName}&mode=delete" onclick="if(!(confirm('Are you sure you want to delete ${seller.sellerName}?'))) return false;">
+										<i class="fas fa-trash"></i></a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -83,6 +84,6 @@
 			
 			
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

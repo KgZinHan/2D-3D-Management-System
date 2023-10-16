@@ -78,6 +78,6 @@
 			
 			
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

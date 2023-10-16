@@ -16,7 +16,7 @@
              <div id="radioTab" class="mv-table-input">
              	<div style="text-align: center;margin-top: 50px">
              		<h5 style="text-align: center"><spam style="color: red">red = not save</spam>&emsp;|&emsp;<spam style="color: green"> green = save</spam></h5>  
-             		<p class="mv-username">Change Name</p>
+             		<p class="mv-username">Change Commission</p>
 	            	<c:forEach items="${userList}" var="user">
 	            		<a href="Final?username=${user.user}">
 		            		<h5 class="user-choose" >
@@ -30,10 +30,10 @@
         <div id="modal02" class="mv-display-center mv-view-table">
         	<button class="mv-display-topRight mv-logIn-close-button hover-effect" style="color: black" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
 				<div class="mv-display-middle" style="height:100px;margin-top: 30px;width: 90%">
-					<span class="user-name" style="cursor: default;color: black">Number = ${number}</span>
-					<span class="user-name" style="cursor: default;color: green">Recover = ${recover} ks </span>
-					<span class="user-name" style="cursor: default;color: green">P(${totalRecoverP}) = ${totalRecoverPlus} ks </span>
-					<span class="user-name" style="cursor: default;color: black">Total = <span style="color:${recoverTotalColor}">${allTotal} ks</span> </span>
+					<button class="f-pg-enter-no hover-effect" style="width: 150px;cursor: pointer" onclick="toggleSwitch('tb02','tb03');toggleSwitch('c01','c02')"><i class="fas fa-sync"></i>&nbsp;Change Report</button>
+					<span class="user-name" style="cursor: default;color: black"><b>Number = ${number}</b></span>
+					<span id="c01" class="user-name" style="cursor: default;color: green"><b>Recover Total = ${finalTotalRecover} ks</b></span>
+					<span class="user-name" style="cursor: default;color:${recoverTotalColor}">All Total = ${allTotal} ks </span>
 				</div>
 				<div id="tb02" class="mv-report-table-style">
 					<table class="mv-waiting-table" style="margin-right: 50px">
@@ -48,16 +48,16 @@
 								<h4>Money</h4>
 							</th>
 							<th>
+								<h4>Com %</h4>
+							</th>
+							<th>				
+								<h4>Com Money</h4>
+							</th>
+							<th>
 								<h4>P</h4>
 							</th>
 							<th>
 								<h4>P Money</h4>
-							</th>
-							<th>
-								<h4>Com</h4>
-							</th>
-							<th>				
-								<h4>Com Money</h4>
 							</th>
 							<th>				
 								<h4>Total</h4>
@@ -65,30 +65,80 @@
 						</tr>
 						<c:forEach items="${temp2DList}" var="temp2D">
 							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px">
-								<td style="width: 50px"><p>${temp2D.count}</p></td>
+								<td style="width: 30px"><p>${temp2D.count}</p></td>
 								<td style="width: 100px"><p>${temp2D.username}</p></td>
-								<td style="width: 200px"><p>${temp2D.totalMoney} ks</p></td>
-								<td style="width: 80px"><p>${temp2D.p}</p></td>
-								<td style="width:200px"><p>${temp2D.pMoney} ks</p></td>
-								<td style="width: 100px"><p>${temp2D.comPercent} %</p></td>
-								<td style="width:200px"><p>${temp2D.comMoney} ks</p></td>
-								<td style="width: 300px;color:${temp2D.color}"><p>${temp2D.total} ks</p></td>
+								<td style="width: 200px;text-align: right"><p>${temp2D.totalMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 100px;text-align: right"><p>${temp2D.comPercent} %&nbsp;&nbsp;</p></td>
+								<td style="width:200px;text-align: right"><p>${temp2D.comMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 80px;text-align: right"><b>${temp2D.p}&nbsp;&nbsp;</b></td>
+								<td style="width:220px;text-align: right"><p>${temp2D.pMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 300px;text-align: right;color:${temp2D.color}"><p>${temp2D.total} ks&nbsp;&nbsp;</p></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${totalTemp2DList}" var="tTemp2D">
 							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px;background-color: silver">
-								<td style="width: 50px"><p>-</p></td>
+								<td style="width: 30px"><p>-</p></td>
 								<td style="width: 200px"><p>Total</p></td>
-								<td style="width: 200px"><p>${tTemp2D.totalMoney} ks</p></td>
-								<td style="width: 80px"><p>${tTemp2D.p}</p></td>
-								<td style="width:200px"><p>${tTemp2D.pMoney} ks</p></td>
+								<td style="width: 200px;text-align: right"><p>${tTemp2D.totalMoney} ks&nbsp;&nbsp;</p></td>
 								<td style="width: 100px"><p>-</p></td>
-								<td style="width:200px"><p>${tTemp2D.comMoney} ks</p></td>
-								<td style="width: 200px;color:${tTemp2D.color}"><p>${tTemp2D.total} ks</p></td>							
+								<td style="width:200px;text-align: right"><p>${tTemp2D.comMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 80px;text-align: right"><b>${tTemp2D.p}&nbsp;&nbsp;</b></td>
+								<td style="width:220px;text-align: right"><p>${tTemp2D.pMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 300px;text-align: right;color:${tTemp2D.color}"><p>${tTemp2D.total} ks&nbsp;&nbsp;</p></td>							
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
+				<div id="tb03" class="mv-report-table-style" style="display: none">
+					<table class="mv-waiting-table" style="margin-right: 50px">
+						<tr class="mv-list-table-head" style="background-color: green">
+							<th>
+								<h4>#</h4>
+							</th>
+							<th>				
+								<h4>Seller Name</h4>
+							</th>
+							<th>
+								<h4>Recover Money</h4>
+							</th>
+							<th>
+								<h4>Recover Com</h4>
+							</th>
+							<th>
+								<h4>Recover P</h4>
+							</th>
+							<th>
+								<h4>Recover Plus</h4>
+							</th>
+							<th>				
+								<h4>Recover Total</h4>
+							</th>
+						</tr>
+						<c:forEach items="${tempRecover2DList}" var="tempRec2D">
+							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px;text-align: right">
+								<td style="width: 50px;text-align: center"><p>${tempRec2D.count}</p></td>
+								<td style="width: 200px;text-align: center"><p>${tempRec2D.sellerName}</p></td>
+								<td style="width: 200px"><p>${tempRec2D.sellerMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 200px"><p>${tempRec2D.recoverCom} ks&nbsp;&nbsp;</p></td>
+								<td style="width:100px"><b>${tempRec2D.recoverP}&nbsp;&nbsp;</b></td>
+								<td style="width: 200px"><p>${tempRec2D.recoverPlus} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 300px;color:${tempRec2D.color}"><p>${tempRec2D.totalRecover} ks&nbsp;&nbsp;</p></td>
+							</tr>
+						</c:forEach>
+						<c:forEach items="${totalTempRecover2DList}" var="tTempRec2D">
+							<tr class="mv-waiting-table-data" style="line-height: 0px;font-size: 18px;background-color: silver;text-align: right">
+								<td style="width: 50px;text-align: center"><p>-</p></td>
+								<td style="width: 200px;text-align: center"><p>Total</p></td>
+								<td style="width: 200px"><p>${tTempRec2D.sellerMoney} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 200px"><p>${tTempRec2D.recoverCom} ks&nbsp;&nbsp;</p></td>
+								<td style="width:100px"><b>${tTempRec2D.recoverP}&nbsp;&nbsp;</b></td>
+								<td style="width: 200px"><p>${tTempRec2D.recoverPlus} ks&nbsp;&nbsp;</p></td>
+								<td style="width: 300px;color:${tTempRec2D.color}"><p>${tTempRec2D.totalRecover} ks&nbsp;&nbsp;</p></td>					
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+				
 				<div style="margin-left: 20px;margin-top: 10px">
 					<form action="Delete" method="get" >				
 						<input type="hidden" name="id" value="99999"/>
@@ -101,11 +151,11 @@
 								</select>
 												
 						<input type="checkbox" name="recoverFlag" value="add" checked>
-						<label style="font-family: robom">Recover Plus</label>
-						<input type="number" class="f-pg-enter-no-2" value="${totalRecoverPlus}" readonly style="width: 100px">
-						<label style="font-family: robom;margin-left: 10px;">Extra Money</label>
-						<input id="inputRecoverId"  type="number" name="extraMoney" value="0" class="f-pg-enter-no-2" min="0" step="500" style="width: 80px" placeholder="Extra money" required>
-						<button class="f-pg-enter-no hover-effect" style="width:auto;cursor: pointer;float: right" onclick="if(!(confirm('Are you sure you want to save this to ledger and delete this table?'))) return false;">
+						<label style="font-family: robom">Add Recover</label>&emsp;
+						<input type="number" class="f-pg-enter-no-2" value="${finalTotalRecover}" readonly style="width: 100px">
+						<label style="font-family: robom;margin-left: 10px;">Extra</label>&emsp;
+						<input id="inputRecoverId"  type="number" name="extraMoney" value="0" class="f-pg-enter-no-2" step="500" style="width: 80px" placeholder="Extra money" required>
+						<button class="f-pg-enter-no hover-effect" style="width:auto;cursor: pointer;float: right" onclick="if(!(confirm('Are you sure you want to save this to ledger and delete tables?'))) return false;">
 							<i class="fa fa-save" ></i>&emsp;Save to ledger
 						</button>
 					</form>
@@ -147,7 +197,7 @@
 				</div>
 				<form action="FinalResultController" method="post" style="display: flex;margin-left: 15px">
 					<input type="hidden" name="username" value="${userName}">
-					<input type="number" name="number" class="f-pg-enter-no" value="${number}" min="0" max="99" placeholder="Enter P Number" required>
+					<input id="numberId" type="number" name="number" class="f-pg-enter-no" value="${number}" placeholder="Enter P Number" required>
 					<input type="number" name="comPercent" class="f-pg-enter-no" min="0" value="${comPercent}" max="99" placeholder="Enter Commission %" required>
 					<input type="submit" class="f-pg-enter-no hover-effect" value="Calculate" style="cursor: pointer;background-color: silver">
 				</form>
@@ -194,6 +244,6 @@
 				
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

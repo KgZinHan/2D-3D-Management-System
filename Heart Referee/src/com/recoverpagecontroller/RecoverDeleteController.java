@@ -31,20 +31,25 @@ public class RecoverDeleteController extends HttpServlet {
 	int total;
 	int recoverTotal;
 	String msg;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public RecoverDeleteController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		String sellerName = request.getParameter("sellerName");
 		String idS = request.getParameter("id");
 		int id = Integer.parseInt(idS);
 		
 		twoD = new Number2D();
 		twoD = recoverTableDao.getRecoverById(id);
+		
 		twoDH = new History2D();
 		twoDH.setMoney(twoD.getMoney());
 		twoDH.setNote(twoD.getNumber() + " Deleted");
@@ -59,7 +64,6 @@ public class RecoverDeleteController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
-		
 		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverTableBySeller(sellerName);
 		

@@ -36,9 +36,13 @@
 		</div>
 		<div class="user-total-field">
 				total money&emsp;-&emsp;${totalMoney} ks
-				<div style="margin-left: 100px"> 
+				<div style="margin-left: 50px;margin-right: 50px"> 
   					total recover&emsp;-&emsp;${totalRecover} ks
 				</div>
+				<form action="FullTableController" method="post">
+					<input type="hidden" name="mode" value="${buttonName}">
+					<button id="btn3" class="f-pg-enter-no hover-effect" style="width: 200px;cursor: pointer"><i class="fas fa-sync"></i>&emsp;${buttonName}</button>	
+				</form>
 			</div>
 		
 		<div class="ftbl-row">
@@ -144,6 +148,6 @@
 	  		</div>
 		</div>
 	</div>
-	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 </body>
 </html>

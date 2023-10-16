@@ -25,66 +25,66 @@ public class RecoverController extends HttpServlet {
 	int total;
 	int totalRecover;
 	int recoverTotal;
-	int userTotal;
 	Boolean flag = true;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public RecoverController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String recoverLimitS = request.getParameter("limit");
-		int recoverLimit = Integer.parseInt(recoverLimitS);
-		int rNumberMoney;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		List<Number2D> twoDList = new ArrayList<Number2D>();
 		List<Integer> rNumberList = new ArrayList<Integer>();
 		List<Number2D> recoverList = new ArrayList<Number2D>();
+		int rNumberMoney;
+		
+		String recoverLimitS = request.getParameter("limit");
+		int recoverLimit = Integer.parseInt(recoverLimitS);
 		
 		twoDList = tableDao.sortByMoney();
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		totalRecover = tableDao.getMoneyToRecoverByLimit(recoverLimit);
-		
+
 		for (int i = 0; i < twoDList.size(); i++) {
 			Number2D thisNumber = new Number2D();
 			flag = true;
 			thisNumber = twoDList.get(i);
 			int number = thisNumber.getNumber();
 			int newMoney = thisNumber.getMoney() - recoverTableDao.getRecoverMoney(number) - recoverLimit;
-			
+
 			if (thisNumber.getMoney() > recoverLimit && newMoney > 0) {
 				for (int j = 0; j < rNumberList.size(); j++) {
 					if (number == rNumberList.get(j)) {
 						flag = false;
 					}
 				}
-				
-				rNumberMoney = getRNumberMoney(number);
+
+				rNumberMoney = getRNumberMoney(number,request);
 				int rNumber = getReverse(number);
 				rNumberList.add(rNumber);
-				
+
 				if (flag == true) {
-					
+
 					if (rNumberMoney == 99) {
-						rNumberMoney = 0;						
-					} 
-					else if(rNumberMoney >= recoverLimit) 
-					{
+						rNumberMoney = 0;
+					} else if (rNumberMoney >= recoverLimit) {
 						rNumberMoney = rNumberMoney - recoverLimit;
-					}
-					else if (rNumberMoney < recoverLimit)
-					{
+					} else if (rNumberMoney < recoverLimit) {
 						rNumberMoney = 0;
 					}
 
 					Number2D r2D = new Number2D();
 					r2D.setNumber(number);
 					r2D.setrNumber(rNumberMoney);
-					
-					
-					if(newMoney < 0 ) {
+
+					if (newMoney < 0) {
 						newMoney = 0;
 					}
 					r2D.setMoney(newMoney);
@@ -93,6 +93,7 @@ public class RecoverController extends HttpServlet {
 				}
 			}
 		}
+		
 		request.setAttribute("limit", recoverLimit);
 		request.setAttribute(CommonParameters.RECOVER_2D_LIST, recoverList);
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
@@ -104,11 +105,14 @@ public class RecoverController extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 
-	protected int getRNumberMoney(int number) {
+	protected int getRNumberMoney(int number,HttpServletRequest request) {
+		tableDao = new TableDaoImpl(request);
+		
 		int rNumber;
 		int rNumberMoney;
 		rNumber = getReverse(number);

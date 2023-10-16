@@ -26,22 +26,27 @@ public class SortByUserController extends HttpServlet {
 	int total;
 	int userTotal;
 	int realID;
-	TableDao tableDao = new TableDaoImpl();
+	TableDao tableDao;
 
 	public SortByUserController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+		
+		tableDao = new TableDaoImpl(request);
+		
 		List<Number2D> top2D = new ArrayList<Number2D>();
 		List<User2D> userList = new ArrayList<User2D>();
-		String entity = request.getParameter("m");
 		String numberHColor = "";
 		String moneyHColor = "";
 		String quantityHColor = "";
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
+		
+		HttpSession session = request.getSession();
+		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+		
+		String entity = request.getParameter("m");
 		
 		if (entity == "number" || entity.equals("number")) {
 			top2D = tableDao.sortByUserNumber(userName);
@@ -63,6 +68,7 @@ public class SortByUserController extends HttpServlet {
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
+		
 		if(realID > CommonConstants.ID_COUNT_LIMIT) {
 			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
 		}

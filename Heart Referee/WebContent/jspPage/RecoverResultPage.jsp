@@ -14,20 +14,20 @@
             <button class="mv-display-topRight mv-logIn-close-button hover-effect" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button>
              <div id="radioTab" class="mv-table-input">
              	<div style="text-align: center;margin-top: 50px">
-             		<p class="mv-username">Change Name</p>
-	            	<c:forEach items="${userList}" var="user">
-	            		<a href="HResult?username=${user.username}">
+             		<p class="mv-username">Change Recover Seller</p>
+	            	<c:forEach items="${recoverSellerList}" var="seller">
+	            		<a href="RecoverResult?sellerName=${seller.sellerName}">
 		            		<h5 class="user-choose" >
-		             			${user.username}
+		             			${seller.sellerName}
 		             		</h5>
 	             		</a>
 	             	</c:forEach>
              	</div>
-             	<a href="HResult?username=12345">
+             	<a href="RecoverResult?sellerName=12345">
 	            	<button class="log-out-btn hover-effect" style="width: 100px">Total</button>
 	            </a>
-	            <a href="RecoverResult">
-	            	<button class="log-out-btn hover-effect" style="width: 100px;margin-left: 120px">Recover</button>
+	            <a href="HResult">
+	            	<button class="log-out-btn hover-effect" style="width: 150px;margin-left: 120px">Commission Ledger</button>
 	            </a>
 			</div>
         </div>
@@ -56,7 +56,7 @@
 				</h3>
 			</div>	
 			<div class="user-total-field">
-				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px">Recover ledger</span>
+				<span class="user-name hover-effect" onclick="displayBlock('modal01')" style="margin-right: 5px">${sellerName} ledger</span>
 			</div>	
 			<div class="mv-display-middle" style="margin-top: 10px">
 				<div id="tb02" class="mv-table-style" style="height:auto;width: 100%">
@@ -67,9 +67,6 @@
 							</th>
 							<th style="width: 200px">				
 								<h4>Date</h4>
-							</th>
-							<th style="width: 300px">				
-								<h4>SellerName</h4>
 							</th>
 							<th>
 								<h4>Recover Money</h4>
@@ -88,33 +85,31 @@
 							</th>
 						</tr>
 						<c:forEach items="${user2DList}" var="user2D">
-							<tr class="mv-waiting-table-data" style="font-size: 16px">
-								<td><p>${user2D.count}</p></td>
-								<td><p>${user2D.time}</p></td>
-								<td><p>${user2D.username}</p></td>
-								<td><p>${user2D.recover} ks</p></td>
-								<td><p>${user2D.recoverCom} ks</p></td>
-								<td><p>${user2D.recoverP}</p></td>
-								<td><p>${user2D.recoverPlus} ks</p></td>
-								<td><p style="color:${user2D.color}">${user2D.totalMoney} ks</p></td>
+							<tr class="mv-waiting-table-data" style="font-size: 16px;text-align: right">
+								<td style="text-align: center"><p>${user2D.count}</p></td>
+								<td style="text-align: center"><p>${user2D.time}</p></td>
+								<td><p>${user2D.recover} ks&nbsp;&nbsp;</p></td>
+								<td><p>${user2D.recoverCom} ks&nbsp;&nbsp;</p></td>
+								<td><p>${user2D.recoverP}&nbsp;&nbsp;</p></td>
+								<td><p>${user2D.recoverPlus} ks&nbsp;&nbsp;</p></td>
+								<td><p style="color:${user2D.color}">${user2D.totalMoney} ks&nbsp;&nbsp;</p></td>
 							</tr>
 						</c:forEach>
 						<c:forEach items="${totalUser2DList}" var="tUser2D">
-							<tr class="mv-waiting-table-data" style="font-size: 16px;background-color: silver">
-								<td><p>-</p></td>
-								<td><p>-</p></td>
-								<td><p>-</p></td>
-								<td><p>${tUser2D.recover} ks</p></td>
-								<td><p>${tUser2D.recoverCom} ks</p></td>
-								<td><p>${tUser2D.recoverP}</p></td>
-								<td><p>${tUser2D.recoverPlus} ks</p></td>
-								<td><p style="color:${tUser2D.color}">${tUser2D.totalMoney} ks</p></td>
+							<tr class="mv-waiting-table-data" style="font-size: 16px;background-color: silver;text-align: right">
+								<td style="text-align: center"><p>-</p></td>
+								<td style="text-align: center"><p>-</p></td>
+								<td><p>${tUser2D.recover} ks&nbsp;&nbsp;</p></td>
+								<td><p>${tUser2D.recoverCom} ks&nbsp;&nbsp;</p></td>
+								<td><p>${tUser2D.recoverP}&nbsp;&nbsp;</p></td>
+								<td><p>${tUser2D.recoverPlus} ks&nbsp;&nbsp;</p></td>
+								<td><p style="color:${tUser2D.color}">${tUser2D.totalMoney} ks&nbsp;&nbsp;</p></td>
 							</tr>
 						</c:forEach>
 					</table>
 				</div>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

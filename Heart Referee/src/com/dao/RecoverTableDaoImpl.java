@@ -6,14 +6,21 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.driver.DbDriver;
 import com.entity.History2D;
 import com.entity.Number2D;
 import com.entity.Recover2D;
 import com.entity.Summary2D;
 
+import common.CommonParameters;
+
 public class RecoverTableDaoImpl implements RecoverTableDao {
 
+	private HttpServletRequest request; // Member variable to store the HttpServletRequest
+	
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
@@ -21,17 +28,23 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	List<Summary2D> resultList = null;
 	Number2D twoD = null;
 	Summary2D result2D = null;
-
-	public RecoverTableDaoImpl() {
+	
+	public RecoverTableDaoImpl(HttpServletRequest request) {	
+	 this.request = request;
 	}
-
+	
 	@Override
 	public int getTotalRecoverMoney() {
 		int total = 0;
-		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE";
+		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, partition);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				total = resultSet.getInt("money");
@@ -44,14 +57,19 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 	
 	@Override
-	public void add2D(int number, int money, String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?)";
+	public void add2D(int number, int money, String seller) { //Check
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME,PARTITION) VALUES (?,?,?,?)";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, number);
 			preparedStatement.setInt(2, money);
 			preparedStatement.setString(3, seller);
+			preparedStatement.setString(4, partition);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -59,17 +77,45 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 
 	@Override
-	public void add2DwithR(int number, int rNumber, int money,String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?),(?,?,?)";
+	public void add2DwithR(int number, int rNumber, int money,String seller) { //Check
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME,PARTITION) VALUES (?,?,?,?),(?,?,?,?)";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, number);
 			preparedStatement.setInt(2, money);
 			preparedStatement.setString(3,seller);
-			preparedStatement.setInt(4, rNumber);
-			preparedStatement.setInt(5, money);
-			preparedStatement.setString(6,seller);
+			preparedStatement.setString(4, partition);
+			preparedStatement.setInt(5, rNumber);
+			preparedStatement.setInt(6, money);
+			preparedStatement.setString(7,seller);
+			preparedStatement.setString(8, partition);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void add2DtoRecoverHistory(History2D twoD) { //Check
+		String query = "INSERT INTO RECOVER_HISTORY_TABLE(NOTE,MONEY,TOTAL,R,NAME,PARTITION) VALUES (?,?,?,?,?,?)";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, twoD.getNote());
+			preparedStatement.setInt(2, twoD.getMoney());
+			preparedStatement.setInt(3, twoD.getTotal());
+			preparedStatement.setString(4, twoD.getR());
+			preparedStatement.setString(5,twoD.getName());
+			preparedStatement.setString(6,partition);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -77,13 +123,103 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	}
 	
 	@Override
-	public List<Number2D> getRecoverHistoryTableBySeller(String seller) {
+	public void add2DwithSpecialABySeller(int[] array, int money,String seller) { //Check
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME,PARTITION) VALUES "
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?)";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		connection = DbDriver.getConnection();
+		int x = 0;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			for (int i = 1; i <= array.length; i++) {
+				preparedStatement.setInt(i + x, array[i - 1]);
+				preparedStatement.setInt(i + x + 1, money);
+				preparedStatement.setString(i + x + 2, seller);
+				preparedStatement.setString(i + x + 3, partition);
+				x = x + 3;
+			}
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void add2DwithSpecialBBySeller(int[] array, int money,String seller) { //Check
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME,PARTITION) VALUES "
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?)";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		connection = DbDriver.getConnection();
+		int x = 0;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			for (int i = 1; i <= array.length; i++) {
+				preparedStatement.setInt(i + x, array[i - 1]);
+				preparedStatement.setInt(i + x + 1, money);
+				preparedStatement.setString(i + x + 2, seller);
+				preparedStatement.setString(i + x + 3, partition);
+				x = x + 3;
+			}
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Override
+	public void add2DwithSpecialCBySeller(int[] array, int money,String seller) { //Check
+		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME,PARTITION) VALUES "
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),"
+				+ "(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?),(?,?,?,?)";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		connection = DbDriver.getConnection();
+		int x = 0;
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			for (int i = 1; i <= array.length; i++) {
+				preparedStatement.setInt(i + x, array[i - 1]);
+				preparedStatement.setInt(i + x + 1, money);
+				preparedStatement.setString(i + x + 2, seller);
+				preparedStatement.setString(i + x + 3, partition);
+				x = x + 3;
+			}
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Override
+	public List<Number2D> getRecoverHistoryTableBySeller(String seller) { 
 		twoDList = new ArrayList<Number2D>();
-		String query = "SELECT * FROM RECOVER_HISTORY_TABLE WHERE NAME = ? ORDER BY ID DESC";
+		String query = "SELECT * FROM RECOVER_HISTORY_TABLE WHERE NAME = ? AND PARTITION = ? ORDER BY ID DESC";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, seller);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				twoD = new Number2D();
@@ -99,95 +235,21 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 		}
 
 		return twoDList;
-
-	}
-
-	@Override
-	public void add2DtoRecoverHistory(History2D twoD) {
-		String query = "INSERT INTO RECOVER_HISTORY_TABLE(NOTE,MONEY,TOTAL,R,NAME) VALUES (?,?,?,?,?)";
-		connection = DbDriver.getConnection();
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, twoD.getNote());
-			preparedStatement.setInt(2, twoD.getMoney());
-			preparedStatement.setInt(3, twoD.getTotal());
-			preparedStatement.setString(4, twoD.getR());
-			preparedStatement.setString(5,twoD.getName());
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Override
-	public void add2DwithSpecialABySeller(int[] array, int money,String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?)";
-		connection = DbDriver.getConnection();
-		int x = 0;
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			for (int i = 1; i <= array.length; i++) {
-				preparedStatement.setInt(i + x, array[i - 1]);
-				preparedStatement.setInt(i + x + 1, money);
-				preparedStatement.setString(i + x + 2, seller);
-				x = x + 2;
-			}
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	@Override
-	public void add2DwithSpecialBBySeller(int[] array, int money,String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?)";
-		connection = DbDriver.getConnection();
-		int x = 0;
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			for (int i = 1; i <= array.length; i++) {
-				preparedStatement.setInt(i + x, array[i - 1]);
-				preparedStatement.setInt(i + x + 1, money);
-				preparedStatement.setString(i + x + 2, seller);
-				x = x + 2;
-			}
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-	
-	@Override
-	public void add2DwithSpecialCBySeller(int[] array, int money,String seller) {
-		String query = "INSERT INTO TWO_D_RECOVER_TABLE(NUMBER,MONEY,NAME) VALUES (?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?),(?,?,?)";
-		connection = DbDriver.getConnection();
-		int x = 0;
-		try {
-			preparedStatement = connection.prepareStatement(query);
-			for (int i = 1; i <= array.length; i++) {
-				preparedStatement.setInt(i + x, array[i - 1]);
-				preparedStatement.setInt(i + x + 1, money);
-				preparedStatement.setString(i + x + 2, seller);
-				x = x + 2;
-			}
-			preparedStatement.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 	
 	@Override
 	public List<Number2D> getRecoverTableBySeller(String seller) {
 		twoDList = new ArrayList<Number2D>();
-		String query = "SELECT * FROM TWO_D_RECOVER_TABLE WHERE NAME = ? ORDER BY ID DESC";
+		String query = "SELECT * FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND PARTITION = ? ORDER BY ID DESC";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, seller);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				twoD = new Number2D();
@@ -206,12 +268,17 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public List<Number2D> getRecoverNumberDetails(int number,String seller) {
 		twoDList = new ArrayList<Number2D>();
-		String query = "SELECT * FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ? AND NAME = ? ORDER BY ID DESC";
+		String query = "SELECT * FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ? AND NAME = ? AND PARTITION = ? ORDER BY ID DESC";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, number);
 			preparedStatement.setString(2, seller);
+			preparedStatement.setString(3, partition);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				twoD = new Number2D();
@@ -230,15 +297,18 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public  List<Number2D> search2DRecoverAmount(int number,String seller) {
 		twoDList = new ArrayList<Number2D>();
-		String query = "SELECT SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NUMBER= ? AND NAME = ? GROUP BY NUMBER";
-		connection = DbDriver.getConnection();
+		String query = "SELECT SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NUMBER= ? AND NAME = ? AND PARTITION = ? GROUP BY NUMBER";
 		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, number);
 			preparedStatement.setString(2, seller);
+			preparedStatement.setString(3, partition);
 			resultSet = preparedStatement.executeQuery();
-			
 			while (resultSet.next()) {
 				twoD = new Number2D();
 				twoD.setId(99999);
@@ -255,11 +325,16 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public List<Number2D> sortRecoverByNumber(String seller) {
 		twoDList = new ArrayList<Number2D>();
-		String query = "SELECT NUMBER,SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NAME = ? GROUP BY NUMBER ORDER BY NUMBER";
+		String query = "SELECT NUMBER,SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND PARTITION = ? GROUP BY NUMBER ORDER BY NUMBER";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, seller);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				twoD = new Number2D();
@@ -277,11 +352,16 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public List<Number2D> sortRecoverByMoney(String seller) {
 		twoDList = new ArrayList<Number2D>();
-		String query = "SELECT NUMBER,SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NAME = ? GROUP BY NUMBER ORDER BY MONEY DESC";
+		String query = "SELECT NUMBER,SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND PARTITION = ? GROUP BY NUMBER ORDER BY MONEY DESC";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, seller);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				twoD = new Number2D();
@@ -298,11 +378,16 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public int getRecoverMoney(int number) {
 		int money = 0;
-		String selectQuery = "SELECT SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ? GROUP BY NUMBER";
+		String selectQuery = "SELECT SUM(MONEY) AS money FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ? AND PARTITION = ? GROUP BY NUMBER";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(selectQuery);
 			preparedStatement.setInt(1, number);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				money = resultSet.getInt("money");
@@ -312,14 +397,19 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 		}
 		return money;
 	}
-
+	
 	@Override
 	public Number2D getRecoverById(int id) {
-		String query = "SELECT NUMBER,MONEY FROM TWO_D_RECOVER_TABLE WHERE ID = ?";
+		String query = "SELECT NUMBER,MONEY FROM TWO_D_RECOVER_TABLE WHERE ID = ? AND PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, id);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				twoD = new Number2D();
@@ -334,22 +424,30 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 
 	@Override
 	public void deleteRecoverRow(int id) {
-		String deleteQuery = "DELETE FROM TWO_D_RECOVER_TABLE WHERE ID = ?";
+		String deleteQuery = "DELETE FROM TWO_D_RECOVER_TABLE WHERE ID = ? AND PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
 			preparedStatement.setInt(1, id);
+			preparedStatement.setString(2, partition);
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
+	
+	
+	// Recover Seller Table
 
 	@Override
 	public List<Recover2D> getRecoverSellerList() {
 		List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 		String query = "SELECT * FROM RECOVER_SELLER_TABLE";
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -364,7 +462,6 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return recoverSellerList;
 	}
 	
@@ -372,10 +469,11 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	public Recover2D getRecoverSellerBySellerName(String sellerName) {
 		Recover2D seller = new Recover2D();
 		String query = "SELECT * FROM RECOVER_SELLER_TABLE WHERE SELLER_NAME = ?";
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, sellerName);;
+			preparedStatement.setString(1, sellerName);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				seller.setSellerCom(resultSet.getInt("seller_com"));
@@ -437,7 +535,6 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
@@ -458,25 +555,44 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public void deleteRecoverSeller(String sellerName) {
 		String deleteQuery = "DELETE FROM RECOVER_SELLER_TABLE WHERE SELLER_NAME = ?";
+		String deleteQuery1 = "DELETE FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND PARTITION = ?";
+		String deleteQuery2 = "DELETE FROM RECOVER_HISTORY_TABLE WHERE NAME = ? AND PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
 			preparedStatement.setString(1, sellerName);
 			preparedStatement.execute();
+			preparedStatement = connection.prepareStatement(deleteQuery1);
+			preparedStatement.setString(1, sellerName);
+			preparedStatement.setString(2, partition);
+			preparedStatement.execute();
+			preparedStatement = connection.prepareStatement(deleteQuery2);
+			preparedStatement.setString(1, sellerName);
+			preparedStatement.setString(2, partition);
+			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
+	///////////////////////////////////////////////
 	@Override
 	public int getTotalRecoverMoneyBySeller(String sellerName) {
 		int total = 0;
-		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NAME = ?";
+		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, sellerName);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				total = resultSet.getInt("money");
@@ -491,12 +607,17 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public int getTotalRecoverPBySeller(String sellerName,int number) {
 		int p = 0;
-		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND NUMBER = ?";
+		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NAME = ? AND NUMBER = ? AND PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setString(1, sellerName);
 			preparedStatement.setInt(2, number);
+			preparedStatement.setString(3, partition);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				p = resultSet.getInt("money");
@@ -513,11 +634,16 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public int getTotalRecoverP(int number) {
 		int pTotal = 0;
-		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ?";
+		String query = "SELECT SUM(MONEY)AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ? AND PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
 			preparedStatement.setInt(1, number);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				pTotal = resultSet.getInt("money");
@@ -532,11 +658,16 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public List<Recover2D> getTotalRecoverPlusMoney(int number) {
 		List<Recover2D> recoverList = new ArrayList<Recover2D>();
-		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NUMBER=? GROUP BY NAME";
+		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE WHERE NUMBER = ? AND PARTITION = ? GROUP BY NAME";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(selectQuery);
 			preparedStatement.setInt(1, number);
+			preparedStatement.setString(2, partition);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Recover2D recover = new Recover2D();
@@ -553,10 +684,15 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public List<Recover2D> getSellerList() {
 		List<Recover2D> recoverList = new ArrayList<Recover2D>();
-		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE GROUP BY NAME";
+		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE WHERE PARTITION = ? GROUP BY NAME";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setString(1, partition);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Recover2D recover = new Recover2D();
@@ -573,14 +709,43 @@ public class RecoverTableDaoImpl implements RecoverTableDao {
 	@Override
 	public List<Recover2D> getTotalRecoverList() {
 		List<Recover2D> recoverList = new ArrayList<Recover2D>();
-		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE GROUP BY NAME";
+		String selectQuery = "SELECT NAME,SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE WHERE PARTITION = ? GROUP BY NAME";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setString(1, partition);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next()) {
 				Recover2D recover = new Recover2D();
 				recover.setSellerName(resultSet.getString("name"));
+				recover.setSellerMoney(resultSet.getInt("money"));
+				recoverList.add(recover);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return recoverList;
+	}
+	
+	@Override
+	public List<Recover2D> getAllTotalRecoverList() {
+		List<Recover2D> recoverList = new ArrayList<Recover2D>();
+		String selectQuery = "SELECT SUM(MONEY) AS MONEY FROM TWO_D_RECOVER_TABLE WHERE PARTITION = ?";
+		
+		HttpSession session = request.getSession();	
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(selectQuery);
+			preparedStatement.setString(1, partition);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next()) {
+				Recover2D recover = new Recover2D();
 				recover.setSellerMoney(resultSet.getInt("money"));
 				recoverList.add(recover);
 			}

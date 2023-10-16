@@ -29,15 +29,20 @@ public class RecoverSellerController extends HttpServlet {
 	int recoverTotal;
 	int realID;
 	String shortMsg;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public RecoverSellerController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		String mode = request.getParameter("mode");
+		
 		if(mode == "update" || mode.equals("update")) {
 			String sellerName = request.getParameter("sellerName");
 			String sellerCom = request.getParameter("sellerCom");
@@ -53,11 +58,14 @@ public class RecoverSellerController extends HttpServlet {
 				recoverTableDao.addSeller(seller);
 			}
 		}
+		
 		if(mode == "delete" || mode.equals("delete")) {
 			String sellerName = request.getParameter("sellerName");
 			recoverTableDao.deleteRecoverSeller(sellerName);
 		}
+		
 		recoverSellerList = recoverTableDao.getRecoverSellerList();
+		
 		request.setAttribute(CommonParameters.RECOVER_SELLER_LIST, recoverSellerList);
 		dispatcher = request.getRequestDispatcher("/recoverSellerPage");
 		dispatcher.forward(request, response);
@@ -65,7 +73,6 @@ public class RecoverSellerController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-			
+		doGet(request,response);
 		}
 }

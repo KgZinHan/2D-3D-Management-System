@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import com.dao.TableDao;
 import com.dao.TableDaoImpl;
 import com.entity.AllUser2D;
-import com.entity.Number2D;
-import com.entity.User2D;
 import common.CommonConstants;
 import common.CommonParameters;
 
@@ -23,46 +21,43 @@ import common.CommonParameters;
 public class HistoryResultController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
-	List<Number2D> twoDList = new ArrayList<Number2D>();
-	List<Integer> rNumberList = new ArrayList<Integer>();
-	List<User2D> userList = new ArrayList<User2D>();
-	int realID;
-	String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
-	int total;
-	int userTotal;
-	TableDao tableDao = new TableDaoImpl();
+	TableDao tableDao;
 
 	public HistoryResultController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
 		List<AllUser2D> totalUser2DList = new ArrayList<AllUser2D>();
+		
 		String username = request.getParameter("username");
-		if(username == null) {
+		
+		if (username == null) {
 			HttpSession session = request.getSession();
 			username = (String) session.getAttribute(CommonParameters.SESSION_USER);
 			user2DList = tableDao.getAllTableByUser(username);
 			totalUser2DList = tableDao.getTotalAllTableByUser(username);
 			request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
-		}
-		else {
-			if(username == "12345" || username.equals("12345")) {
+		} else {
+			if (username == "12345" || username.equals("12345")) {
 				username = "Total";
 				user2DList = tableDao.getTotalAllTable();
 				totalUser2DList = tableDao.getTotalTotalAllTable();
-				request.setAttribute(CommonParameters.COM_PERCENT_DISPLAY,"none");				
-			}
-			else {
+				request.setAttribute(CommonParameters.COM_PERCENT_DISPLAY, "none");
+			} else {
 				user2DList = tableDao.getAllTableByUser(username);
 				totalUser2DList = tableDao.getTotalAllTableByUser(username);
 				request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
 			}
 		}
-		
+
 		List<AllUser2D> userList = tableDao.getUserAllTable();
-		
+
 		request.setAttribute(CommonParameters.TAB_BAR_LEDGER_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.SESSION_USER, username);
 		request.setAttribute(CommonParameters.USER_LIST, userList);
@@ -72,7 +67,12 @@ public class HistoryResultController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+		
+		String message = "";
 		
 		String totalMoneyS = request.getParameter("totalMoney");
 		String numberS = request.getParameter("number");
@@ -82,9 +82,7 @@ public class HistoryResultController extends HttpServlet {
 		String comMoneyS = request.getParameter("comMoney");
 		String totalS = request.getParameter("total");
 		String username = request.getParameter("username");
-		
-		String message = "";
-		
+
 		int totalMoney = Integer.parseInt(totalMoneyS);
 		int number = Integer.parseInt(numberS);
 		int p = Integer.parseInt(pS);
@@ -92,7 +90,7 @@ public class HistoryResultController extends HttpServlet {
 		int comPercent = Integer.parseInt(comPercentS);
 		int comMoney = Integer.parseInt(comMoneyS);
 		int total = Integer.parseInt(totalS);
-		
+
 		AllUser2D user2D = new AllUser2D();
 		user2D.setUsername(username);
 		user2D.setNumber(number);
@@ -102,7 +100,7 @@ public class HistoryResultController extends HttpServlet {
 		user2D.setComPercent(comPercent);
 		user2D.setComMoney(comMoney);
 		user2D.setTotal(total);
-		
+
 		if (tableDao.checkNameInTempTable(username) == true) {
 			tableDao.updateUserTempTable(user2D);
 			message = "Successfully Updated!";
@@ -110,7 +108,7 @@ public class HistoryResultController extends HttpServlet {
 			tableDao.addUserTempTable(user2D);
 			message = "Successfully Saved!";
 		}
-		
+
 		request.setAttribute(CommonParameters.MESSAGE, message);
 		request.setAttribute(CommonParameters.FINAL_RESULT_NUMBER, number);
 		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_PERCENT, comPercent);

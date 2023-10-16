@@ -12,10 +12,10 @@
 <!-- For search box -->
 
 <div id="redDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: red;font-family:sans-serif;">Red color means the numbers with red color will be minus(-) above 5 lakhs in profit.</p>
+	<p style="color: red;font-family:sans-serif;">Red color means the numbers with red color will be minus(-) in profit.</p>
 </div>
 <div id="blackDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
-	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be minus(-) between 0 and 5 lakhs in profit.</p>
+	<p style="color: white;font-family:sans-serif;">Black color means the numbers with black color will be plus in profit.</p>
 </div>
 <div id="greenDetailsId" class="mv-display-center mv-view-details mv-animate-zoom" style="display: none">
 	<p style="color: green;font-family:sans-serif;">Green color means the numbers with green color will be plus(+) in profit.</p>
@@ -122,6 +122,6 @@
 			</div>
 		</div>
 	</div>
-	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 </body>
 </html>

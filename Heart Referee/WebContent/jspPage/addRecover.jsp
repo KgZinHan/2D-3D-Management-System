@@ -40,9 +40,9 @@
 						<input id="CNumber1" type="number" readonly="readonly" name="number1" value="${number}" class="multiple-input" placeholder="Enter" min="00" max="99" autofocus="autofocus" required>
 					</div>
 					<input type="hidden" name="limit" value="${limit}">
-					<input type="number" name="money" style="right: 200px" value="${money}" class="mv-money-drop-button" placeholder="Enter" min="0" max="50000" step="50" required>
+					<input type="number" name="money" style="right: 200px" value="${money}" class="mv-money-drop-button" placeholder="Enter" min="0" max="300000" step="50" required>
 	                <h2 style="color: white; position: absolute;right: 80px">R</h2>
-	                <input type="number" name="rMoney" value="${rMoney}" class="mv-money-drop-button" placeholder="Enter" min="0" max="50000" step="50" required>
+	                <input type="number" name="rMoney" value="${rMoney}" class="mv-money-drop-button" placeholder="Enter" min="0" max="300000" step="50" required>
 	                <select name="sellerName" class="mv-money-drop-button" style="top: 200px">
 	                	<c:forEach items="${recoverSellerList}" var="seller">
 							<option value="${seller.sellerName}">${seller.sellerName}</option>
@@ -53,6 +53,6 @@
 			 <button id="singlebtn" class="special-button hover-effect" onclick="goBack()">Back</button>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

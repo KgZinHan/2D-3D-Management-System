@@ -28,16 +28,19 @@ public class RecoverPageController extends HttpServlet {
 	History2D twoDH = null;
 	int total;
 	int recoverTotal;
-	int realID;
 	String shortMsg;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public RecoverPageController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		String sellerName = request.getParameter("sellerName"); 
 		
 		if(sellerName.equals("Default")) {
@@ -47,7 +50,6 @@ public class RecoverPageController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
-		
 		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverHistoryTableBySeller(sellerName);
 		
@@ -69,13 +71,20 @@ public class RecoverPageController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
+		Boolean flag = true;
+		Boolean pairFlag = false;
+		String note = "error";
+		int type = 1;
+		
 		String sellerName = request.getParameter("sellerName"); 
 		String moneyS = request.getParameter("money");
 		String numberS = request.getParameter("number");
-		Boolean flag = true;
 		int money = Integer.parseInt(moneyS);
-		String note = "error";
-		int type = 1;
+		
 		if(!(numberS.isEmpty())) {
 			switch(numberS) {
 			case "**":
@@ -424,9 +433,39 @@ public class RecoverPageController extends HttpServlet {
 				type = 3;
 				break;
 			default:
-				shortMsg = new String();
-				shortMsg = "wrong input!Please Enter again!!";
-				flag = false;
+				if (numberS.contains("/")) { // Round numbers
+					numberS = numberS.replace("/", "");
+					type = 5;
+					pairFlag = numberS.contains("*");
+					numberS = numberS.replace("*", "");
+
+					if (checkAllDigits(numberS)) {
+						List<String> strNumberList = generateTwoDigitsCombinations(numberS);
+						for (String strNumber : strNumberList) {
+							int number = Integer.parseInt(strNumber);
+							int rNumber = getReverse(number);
+							recoverTableDao.add2DwithR(number, rNumber, money, sellerName);
+						}
+						shortMsg = numberS + " akhway";
+
+						if (pairFlag) {
+							List<String> strPairNumberList = generateAllPairs(numberS);
+							for (String strPairNumber : strPairNumberList) {
+								int number = Integer.parseInt(strPairNumber);
+								recoverTableDao.add2D(number, money,sellerName);								
+							}
+							shortMsg += " puu";
+						}
+
+						note = shortMsg;
+					} else {
+						shortMsg = "wrong input! Please enter again!!";
+						flag = false;
+					}
+				}else {
+					shortMsg = "wrong input!Please Enter again!!";
+					flag = false;
+				}
 						
 		}
 			if(flag == true) {
@@ -444,6 +483,14 @@ public class RecoverPageController extends HttpServlet {
 				else if(type == 3) {
 					twoDH.setTotal(20 * money);
 				}
+				else if(type == 5) {
+					List<String> strNumberList = generateTwoDigitsCombinations(numberS);
+					List<String> strPairList = new ArrayList<String>();
+					if (pairFlag) {
+						strPairList = generateAllPairs(numberS);
+					}
+					twoDH.setTotal(((2 * strNumberList.size()) + strPairList.size()) * money);
+				}
 				else {
 					twoDH.setTotal(10 * money);
 				}
@@ -455,10 +502,10 @@ public class RecoverPageController extends HttpServlet {
 			else {
 				request.setAttribute(CommonParameters.MESSAGE, shortMsg);
 			}
+			
 			total = tableDao.getTotalMoney();
 			recoverTotal = recoverTableDao.getTotalRecoverMoney();
 			int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
-			
 			recoverSellerList = recoverTableDao.getRecoverSellerList();
 			twoDList = recoverTableDao.getRecoverHistoryTableBySeller(sellerName);
 			
@@ -490,7 +537,38 @@ public class RecoverPageController extends HttpServlet {
 				number = number / 10;
 			}
 		}
-
 		return reverse;
+	}
+	
+	protected boolean checkAllDigits(String str) {
+		return str.matches("\\d+");
+	}
+
+	protected boolean checkOnlyOneDigit(int number) {
+		return (number >= 0 && number <= 9);
+	}	
+
+	protected List<String> generateTwoDigitsCombinations(String number) {
+		List<String> combinations = new ArrayList<>();
+
+		for (int i = 0; i < number.length() - 1; i++) {
+			for (int j = i + 1; j < number.length(); j++) {
+				String combination = "" + number.charAt(i) + number.charAt(j);
+				combinations.add(combination);
+			}
+		}
+
+		return combinations;
+	}
+
+	protected List<String> generateAllPairs(String number) {
+		List<String> combinations = new ArrayList<>();
+
+		for (int i = 0; i < number.length(); i++) {
+			String combination = "" + number.charAt(i) + number.charAt(i);
+			combinations.add(combination);
+		}
+
+		return combinations;
 	}
 }

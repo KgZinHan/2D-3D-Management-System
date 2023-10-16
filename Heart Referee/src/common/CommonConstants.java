@@ -25,4 +25,7 @@ public class CommonConstants {
 	//Default 
 	public static final int DEFAULT_PAGE_NO = 0;
 	public static final String DEFAULT_USERNAME = "OTHERSEXTRA";
+	public static final String DEFAULT_PARTITION = "DEFAULT";
+	public static final String WITHOUT_RECOVER = "Without Recover";
+	public static final String WITH_RECOVER = "With Recover";
 }

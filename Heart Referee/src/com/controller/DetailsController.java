@@ -28,33 +28,36 @@ public class DetailsController extends HttpServlet {
 	History2D twoDH = null;
 	int total;
 	int userTotal;
-	String shortMsg;
-	TableDao tableDao = new TableDaoImpl();
+	TableDao tableDao;
 
 	public DetailsController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+
 		int realID;
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
-		
+
+		HttpSession session = request.getSession();
+		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+
 		twoDList = tableDao.getTableByUser(userName);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
-		
-		if(realID > CommonConstants.ID_COUNT_LIMIT) {
-			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+
+		if (realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR;
 		}
 
-		for(int i = 0;i < userList.size();i++) {
+		for (int i = 0; i < userList.size(); i++) {
 			String checked = "red";
-			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
-			{
+			if (tableDao.checkNameInTempTable(userList.get(i).getUser()) == true) {
 				checked = "green";
 			}
 			userList.get(i).setChecked(checked);
@@ -74,29 +77,33 @@ public class DetailsController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		
 		int realID;
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
+		
+		HttpSession session = request.getSession();
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+		
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
-		
-		twoDList = tableDao.getNumberDetailsByUser(userName,number);
-		
+
+		twoDList = tableDao.getNumberDetailsByUser(userName, number);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
-		
-		if(realID > CommonConstants.ID_COUNT_LIMIT) {
-			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+
+		if (realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR;
 		}
 
-		for(int i = 0;i < userList.size();i++) {
+		for (int i = 0; i < userList.size(); i++) {
 			String checked = "red";
-			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
-			{
+			if (tableDao.checkNameInTempTable(userList.get(i).getUser()) == true) {
 				checked = "green";
 			}
 			userList.get(i).setChecked(checked);

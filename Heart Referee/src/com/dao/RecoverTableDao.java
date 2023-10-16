@@ -64,6 +64,8 @@ public interface RecoverTableDao {
 	
 	public List<Recover2D> getTotalRecoverList();
 	
+	public List<Recover2D> getAllTotalRecoverList();
+	
 	public int getTotalRecoverP(int number);
 	
 	public int getTotalRecoverMoneyBySeller(String sellerName);

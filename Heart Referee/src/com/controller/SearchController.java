@@ -35,8 +35,8 @@ public class SearchController extends HttpServlet {
 	int userTotal;
 	int realID;
 	String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public SearchController() {
 		super();
@@ -44,24 +44,31 @@ public class SearchController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		List<Number2D> countList = new ArrayList<Number2D>();
-		String search = request.getParameter("number");
-		int number = Integer.parseInt(search);
 		ColorCount2D count2D = new ColorCount2D();
 		int redCount = 0;
 		int greenCount = 0;
 		int orangeCount = 0;
 		int blackCount = 0;
-
+		
+		String search = request.getParameter("number");
+		int number = Integer.parseInt(search);
+		
 		twoDList = tableDao.search2DAmount(number);
+		total = tableDao.getTotalMoney();
+		
 		for (int j = 0; j < twoDList.size(); j++) {
-			int calculatedMoney = getTotal()
-					- ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal);
+			int calculatedMoney = total
+					- ((twoDList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal);
 			if (calculatedMoney > CommonConstants.HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
 
-			if ((twoDList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
+			if ((twoDList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal > total) {
 				twoDList.get(j).setColor("red");
 			}
 
@@ -69,21 +76,21 @@ public class SearchController extends HttpServlet {
 			 * else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) {
 			 * twoDList.get(j).setColor("red"); }
 			 */
+
 		}
 
-		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 
 		// color count method
 		countList = tableDao.sortByMoney();
 		for (int j = 0; j < countList.size(); j++) {
-			int calculatedMoney = getTotal()
-					- ((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal);
+			int calculatedMoney = total
+					- ((countList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal);
 			if (calculatedMoney >= CommonConstants.HAPPY_LIMIT) {
 				greenCount = greenCount + 1;
 			}
 
-			else if ((countList.get(j).getMoney() * 80) + ((getTotal() * 15) / 100) + recoverTotal > getTotal()) {
+			else if ((countList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal > total) {
 				redCount = redCount + 1;
 			} else {
 				blackCount = blackCount + 1;
@@ -93,6 +100,7 @@ public class SearchController extends HttpServlet {
 			 * else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) { redCount =
 			 * redCount + 1; } else { blackCount = blackCount + 1; }
 			 */
+
 		}
 
 		count2D.setBlackCount(blackCount);
@@ -113,8 +121,12 @@ public class SearchController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		
 		HttpSession session = request.getSession();
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+		
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
 
@@ -149,12 +161,4 @@ public class SearchController extends HttpServlet {
 		dispatcher = request.getRequestDispatcher("/home");
 		dispatcher.forward(request, response);
 	}
-
-	protected int getTotal() {
-		int totalMoney = 0;
-		totalMoney = tableDao.getTotalMoney();
-		return totalMoney;
-
-	}
-
 }

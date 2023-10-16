@@ -16,7 +16,8 @@
 		<!--extra modal for full size scenes on click-->
         <div id="modal01" class="mv-display-center mv-view-image mv-animate-zoom">
         	<button class="mv-display-topRight mv-logIn-close-button" onclick="displayNone('modal01')"><i class="far fa-times-circle"></i></button> 
-            <h2 style="color: white;text-align: center;font-family: robol">Settings</h2>
+            <h2 style="color: white;text-align: center;font-family: robol"><% String partition = (String)session.getAttribute("sessionPartition");
+            out.print(partition); %> Settings</h2>
             <h3 style="color: white;text-align: center;margin-top: 30px;font-family: robom">id count = ${id}</h3>
             <div style="text-align: center">
             	<a href="ClosedNumbers?closedNumber=0&mode=nothing">
@@ -26,21 +27,20 @@
 					<button class="mv-delete-button hover-effect" onclick="if(!(confirm('Are you sure you want to delete user?'))) return false;"><i class="fas fa-user-slash"></i>&emsp;Delete User</button>
 				</a><br>
 				<a href="Delete?id=all">
-					<button class="mv-delete-button hover-effect" onclick="if(!(confirm('Are you sure you want to delete all tables?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete Table</button>
+					<button class="mv-delete-button hover-effect" style="color: red" onclick="if(!(confirm('Are you sure you want to delete all?'))) return false;"><i class="fas fa-ban"></i>&emsp;Delete All</button>
 				</a>
 			</div>
         </div>
         <!---->
         <div id="modal02" class="mv-display-center mv-view-image mv-animate-zoom"> 
             <button class="mv-display-topRight mv-logIn-close-button hover-effect" onclick="displayNone('modal02')"><i class="far fa-times-circle"></i></button>
-            <h2 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;<% 
-               	String name = (String)session.getAttribute("userName");
-   				out.print(name);
+            <h2 class="mv-username" style="margin-top: 50px;"><i class="fas fa-street-view"></i>&emsp;<% 
+   				out.print(partition);
    			%></h2>
              <div id="radioTab" class="mv-table-input">
             	<h5 style="text-align: center"><spam style="color: red">red = not save</spam>&emsp;|&emsp;<spam style="color: green"> green = save</spam></h5>  
             	<c:forEach items="${userList}" var="user">
-            		<a href="Setting?userName=${user.user}">
+            		<a href="Setting?userName=${user.user}&partition=done1998">
 	            		<h5 class="user-choose">
 	             			<span style="color:${user.checked}">${user.user}</span>&emsp;<spam style="float: right">${user.money} ks </spam>
 	             		</h5>
@@ -48,15 +48,19 @@
              	</c:forEach>
 			</div>
              
-            <a href="log-out">
-            	<button class="log-out-btn hover-effect"><i class="fas fa-user-plus"></i>&nbsp;New</button>
+            <a href="Commission?mode=nothing">
+            	<button class="log-out-btn hover-effect"><i class="fas fa-user-plus"></i>&nbsp;Commissions</button>
+            </a>
+            <a href="index.jsp">
+            	<button class="log-out-btn hover-effect" style="left: 140px"><i class="fas fa-server"></i>&nbsp;Partition</button>
             </a>
         </div>
 		<div class="mv-basic-bg">
 			<div class="mv-tab-bar">
 				<div class="user-name hover-effect" onclick="displayBlock('modal02')">
 					<i class="fas fa-users"></i>&nbsp;<b>
-					<% out.print(name);%></b>
+					<% String name = (String)session.getAttribute("userName");
+	   				out.print(name);%></b>
 				</div>
 				<h3>
 					<a href="Table" class="tab-bar-button hover-effect margin-left" style="color:${home}">Home</a>
@@ -177,12 +181,12 @@
                  		<tr>
                  			<td>? sone start</td>
                  			<td>==</td>
-                 			<td>&emsp;?++</td>
+                 			<td>&emsp;++?</td>
                  		</tr> 
                  		<tr>
                  			<td>? sone end</td>
                  			<td>==</td>
-                 			<td>&emsp;++?</td>
+                 			<td>&emsp;?++</td>
                  		</tr> 
                  		<tr>
                  			<td>? ma start</td>
@@ -332,6 +336,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

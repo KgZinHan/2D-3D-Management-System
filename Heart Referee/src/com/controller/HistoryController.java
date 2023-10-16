@@ -29,31 +29,33 @@ public class HistoryController extends HttpServlet {
 	String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 	int total;
 	int userTotal;
-	TableDao tableDao = new TableDaoImpl();
+	TableDao tableDao;
 
 	public HistoryController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+
 		HttpSession session = request.getSession();
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
-		
-		
+
 		twoDList = tableDao.getHistoryTableByUsername(userName);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
 		userList = tableDao.getUsers();
 		realID = tableDao.getIdCount();
-		
-		if(realID > CommonConstants.ID_COUNT_LIMIT) {
-			idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+
+		if (realID > CommonConstants.ID_COUNT_LIMIT) {
+			idAlertColor = CommonConstants.ID_ALERT_COLOR;
 		}
 
-		for(int i = 0;i < userList.size();i++) {
+		for (int i = 0; i < userList.size(); i++) {
 			String checked = "red";
-			if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
-			{
+			if (tableDao.checkNameInTempTable(userList.get(i).getUser()) == true) {
 				checked = "green";
 			}
 			userList.get(i).setChecked(checked);
@@ -77,7 +79,8 @@ public class HistoryController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

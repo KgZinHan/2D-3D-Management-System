@@ -12,7 +12,7 @@
 	<body tabindex="-1" style="overflow-x: hidden">
 		<div id="modal03" class="mv-display-center mv-view-image mv-animate-zoom"> 
             <button class="mv-display-topRight mv-logIn-close-button hover-effect" onclick="displayNone('modal03')"><i class="far fa-times-circle"></i></button>
-            <h2 class="mv-username"><i class="fas fa-user-tie"></i>&emsp;
+            <h2 class="mv-username" style="margin-top: 50px;"><i class="fas fa-user-tie"></i>&emsp;
                	${sellerName}
    			</h2>
              <div id="radioTab" class="mv-table-input">
@@ -26,7 +26,7 @@
 			</div>
              
             <a href="RecoverSeller?mode=nothing">
-            	<button class="log-out-btn hover-effect"><i class="fas fa-user-plus"></i>&nbsp;New</button>
+            	<button class="log-out-btn hover-effect"><i class="fas fa-user-plus"></i>&nbsp;Recover Sellers</button>
             </a>
         </div>
 		<div class="mv-basic-bg">
@@ -115,6 +115,16 @@
                  			<td>apar 20</td>
                  			<td>==</td>
                  			<td>&emsp;*?**</td>
+                 		</tr>  
+                 		<tr>
+                 			<td>akhway</td>
+                 			<td>==</td>
+                 			<td>&emsp;???/</td>
+                 		</tr>
+                 		<tr>
+                 			<td>akhwaypuu</td>
+                 			<td>==</td>
+                 			<td>&emsp;???/*</td>
                  		</tr>   		
                  	</table>
                  	<!-- <h3 class="mv-page-field" style="color: red;border-color: red">Recover</h3> -->
@@ -237,6 +247,6 @@
 				</table>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.0 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
 	</body>
 </html>

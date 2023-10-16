@@ -29,24 +29,26 @@ public class MultiInputRecoverController extends HttpServlet {
 	History2D h2D = null;
 	int total;
 	int recoverTotal;
-	int pageTotal;
-	int realID;
 	String shortMsg;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public MultiInputRecoverController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String sellerName = (String) request.getAttribute(CommonParameters.SELLER_NAME);
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		int totalSellerRecover = 0;
+		
+		String sellerName = (String) request.getAttribute(CommonParameters.SELLER_NAME);
 		
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney(); 
 		totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
-		
 		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.getRecoverHistoryTableBySeller(sellerName);
 
@@ -67,11 +69,13 @@ public class MultiInputRecoverController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String sellerName = request.getParameter("sellerName");
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		h2D = new History2D();
 		String msg = new String();
-		String moneyS = request.getParameter("money");
-		int money = Integer.parseInt(moneyS);
+
 		String reverse = request.getParameter("reverse");
 		String numberS1 = request.getParameter("number1");
 		String numberS2 = request.getParameter("number2");
@@ -83,6 +87,9 @@ public class MultiInputRecoverController extends HttpServlet {
 		String numberS8 = request.getParameter("number8");
 		String numberS9 = request.getParameter("number9");
 		String numberS0 = request.getParameter("number0");
+		String sellerName = request.getParameter("sellerName");
+		String moneyS = request.getParameter("money");
+		int money = Integer.parseInt(moneyS);
 
 		if (reverse.equals("yes") || reverse == "yes") {
 			int rCount = 0;
@@ -225,10 +232,12 @@ public class MultiInputRecoverController extends HttpServlet {
 			h2D.setR("-");
 			h2D.setTotal(count * money);
 		}
+		
 		h2D.setNote(shortMsg);
 		h2D.setMoney(money);
 		h2D.setName(sellerName);
 		recoverTableDao.add2DtoRecoverHistory(h2D);
+		
 		request.setAttribute(CommonParameters.SELLER_NAME, sellerName);
 		request.setAttribute(CommonParameters.MESSAGE, msg);
 		doGet(request, response);
@@ -245,8 +254,6 @@ public class MultiInputRecoverController extends HttpServlet {
 				number = number / 10;
 			}
 		}
-
 		return reverse;
 	}
-
 }

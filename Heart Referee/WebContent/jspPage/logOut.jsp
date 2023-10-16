@@ -2,6 +2,7 @@
 <% 
 	session.removeAttribute(CommonParameters.SESSION_USER);
 	session.removeAttribute(CommonParameters.SESSION_NAME);
-	session.invalidate();
-	response.sendRedirect("index.jsp");
+	request.setAttribute("partition",(String) session.getAttribute(CommonParameters.SESSION_PARTITION));
+	request.getRequestDispatcher("index.jsp").forward(request,response);
+	/* response.sendRedirect("index.jsp"); */
 %>

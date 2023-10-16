@@ -27,19 +27,24 @@ public class SortRecoverController extends HttpServlet {
 	List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 	int total;
 	int recoverTotal;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public SortRecoverController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		List<Number2D> top2D = new ArrayList<Number2D>();
-		String sellerName = request.getParameter("sellerName");
-		String entity = request.getParameter("m");
 		String numberHColor = "";
 		String moneyHColor = "";
+		
+		String sellerName = request.getParameter("sellerName");
+		String entity = request.getParameter("m");
 		
 		if (entity == "number" || entity.equals("number")) {
 			top2D = recoverTableDao.sortRecoverByNumber(sellerName);
@@ -54,7 +59,6 @@ public class SortRecoverController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
-		
 		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);

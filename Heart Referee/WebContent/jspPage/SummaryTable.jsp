@@ -10,6 +10,7 @@
     <script src="JavaScript/javaScript.js" defer></script>
 </head>
 <body class="mv-basic-bg" tabindex="-1" style="overflow-x: hidden" onload="checkNumber('${number}')">
+	<div id="msgbox01" class="mv-menu-msgBox mv-animate-fade-out" style="opacity: 0" onclick="displayNone('msgbox01')">${message}</div>
 	<div class="mv-tab-bar">
 		<h3>
 			<a href="Table" class="tab-bar-button hover-effect margin-left">Home</a>
@@ -36,15 +37,18 @@
 	<div id="userfield" class="user-total-field">
 		<p>total money - ${totalMoney} ks</p>
 		<h3 style="margin-right: 50px;margin-left: 50px;font-family: robom">${number} = P (${money})</h3>
-		<p>total recover - ${totalRecover} ks</p>
+		<p style="margin-right: 50px">total recover - ${totalRecover} ks</p>
+		<a href="AutoReport?number=${number}">
+			<button id="btn3" class="f-pg-enter-no hover-effect" style="width: 100px;cursor: pointer">Auto Report</button>	
+		</a>
 	</div>	
 	<div class="mv-margin-top mv-display-middle">
-		
 		<button class="back-button hover-effect" onclick="goBack()"><i class="fas fa-arrow-up fa-2x"></i></button>
 		<a href="SummaryTable?number=${number-1}&money=${money}">
 		<button id="btn1" class="back-button hover-effect" style="float: left"><i class="fas fa-angle-left fa-2x"></i></button></a>
 		<a href="SummaryTable?number=${number+1}&money=${money}">
 		<button id="btn2" class="back-button hover-effect" style="float: right;margin-right: 30px"><i class="fas fa-angle-right fa-2x"></i></button></a>
+		
 		<div id="tb02" class="mv-table-style" style="height: 600px">
 			<table class="mv-waiting-table" style="width: 600px">
 				<tr class="mv-list-table-head" style="font-size: 20px">

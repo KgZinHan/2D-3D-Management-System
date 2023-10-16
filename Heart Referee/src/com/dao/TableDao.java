@@ -19,13 +19,13 @@ public interface TableDao {
 
 	public int getUserTotalMoney(String name);
 
-	public List<Integer> getDangerousNumber();
-
 	public List<User2D> getUsers();
 	
 	public int getIdCount();
 	
 	public int getMoneyToRecoverByLimit(int limit);
+	
+	/* public List<Integer> getDangerousNumber(); */
 	
 	
 	// normal table methods
@@ -103,8 +103,6 @@ public interface TableDao {
 
 
 	// delete table methods
-	
-	public int getPageNoById(int id); 
 
 	public List<Number2D> search2DAmountByUser(int number, String name);
 
@@ -134,19 +132,15 @@ public interface TableDao {
 	
 	public void addValuesToAllRecoverTable(Recover2D recover2D);
 	
+	public List<AllUser2D> getUserAllTable();
+	
 	public List<AllUser2D> getAllTableByUser(String username); 
 	
 	public List<AllUser2D> getTotalAllTableByUser(String username); 
 	
-	public List<AllUser2D> getUserAllTable();
-	
 	public List<AllUser2D> getTotalAllTable();
 	
 	public List<AllUser2D> getTotalTotalAllTable();
-	
-	public List<AllUser2D> getAllRecoverTable();
-	
-	public List<AllUser2D> getTotalAllRecoverTable();
 	
 	public boolean checkNameInTempTable(String username);
 	
@@ -155,7 +149,17 @@ public interface TableDao {
 	public void updateUserTempTable(AllUser2D user2D); 
 	
 	public void deleteAllTable(); 
-	 
+	
+	
+	// recover history table methods
+	
+	public List<AllUser2D> getAllRecoverTableBySeller(String sellerName);
+	
+	public List<AllUser2D> getTotalAllRecoverTableBySeller(String sellerName);
+	
+	public List<AllUser2D> getAllRecoverTable();
+	
+	public List<AllUser2D> getTotalAllRecoverTable();
 	
 	// closed number page
 	

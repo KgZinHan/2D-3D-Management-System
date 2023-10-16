@@ -34,17 +34,22 @@ public class CustomInputController extends HttpServlet {
 	int realID;
 	String shortMsg;
 	String shortMsgR;
-	TableDao tableDao = new TableDaoImpl();
+	TableDao tableDao;
 
 	public CustomInputController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+		
+		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
+		
 		HttpSession session = request.getSession();
 		String defaultTable = (String) session.getAttribute(CommonParameters.SESSION_NAME);
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
-		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 
 		if (defaultTable == null || defaultTable.isEmpty() || defaultTable.equals("details")) {
 			if (userName == null || userName.isEmpty() || userName.equals(null)) {
@@ -57,15 +62,14 @@ public class CustomInputController extends HttpServlet {
 			userTotal = tableDao.getUserTotalMoney(userName);
 			userList = tableDao.getUsers();
 			realID = tableDao.getIdCount();
-			
-			if(realID > CommonConstants.ID_COUNT_LIMIT) {
-				idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+
+			if (realID > CommonConstants.ID_COUNT_LIMIT) {
+				idAlertColor = CommonConstants.ID_ALERT_COLOR;
 			}
 
-			for(int i = 0;i < userList.size();i++) {
+			for (int i = 0; i < userList.size(); i++) {
 				String checked = "red";
-				if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
-				{
+				if (tableDao.checkNameInTempTable(userList.get(i).getUser()) == true) {
 					checked = "green";
 				}
 				userList.get(i).setChecked(checked);
@@ -81,7 +85,6 @@ public class CustomInputController extends HttpServlet {
 			request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
 			dispatcher = request.getRequestDispatcher("/home");
 			dispatcher.forward(request, response);
-			dispatcher.forward(request, response);
 		} else if (defaultTable.equals("history")) {
 			dispatcher = request.getRequestDispatcher("History");
 			dispatcher.forward(request, response);
@@ -90,19 +93,19 @@ public class CustomInputController extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		h2D1 = new History2D();
-		h2D2 = new History2D();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+
 		String msg = new String();
 		String alertMsg = "";
-		String moneyS = request.getParameter("money");
-		String rMoneyS = request.getParameter("rMoney");
-		int money = Integer.parseInt(moneyS);
-		int rMoney = Integer.parseInt(rMoneyS);
 		int pageNo = CommonConstants.DEFAULT_PAGE_NO;
+		int rCount = 0;
 		
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute(CommonParameters.SESSION_USER);
+		
 		String numberS1 = request.getParameter("number1");
 		String numberS2 = request.getParameter("number2");
 		String numberS3 = request.getParameter("number3");
@@ -113,21 +116,24 @@ public class CustomInputController extends HttpServlet {
 		String numberS8 = request.getParameter("number8");
 		String numberS9 = request.getParameter("number9");
 		String numberS0 = request.getParameter("number0");
-		int rCount = 0;
+		String moneyS = request.getParameter("money");
+		String rMoneyS = request.getParameter("rMoney");
+		int money = Integer.parseInt(moneyS);
+		int rMoney = Integer.parseInt(rMoneyS);
+
 		if (!(numberS1.isEmpty())) {
 			int number1 = Integer.parseInt(numberS1);
 			Integer rNumber1 = getReverse(number1);
 			tableDao.add2D(number1, money, name, pageNo);
 			tableDao.add2D(rNumber1, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number1)) {
+			if (checkClosedNumberOrNot(number1)) {
 				alertMsg = alertMsg + " " + numberS1;
 			}
-			if(checkClosedNumberOrNot(rNumber1)) {
-				if(rNumber1 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber1.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber1)) {
+				if (rNumber1 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber1.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber1.toString();
 				}
 			}
@@ -140,14 +146,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number2, money, name, pageNo);
 			tableDao.add2D(rNumber2, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number2)) {
+			if (checkClosedNumberOrNot(number2)) {
 				alertMsg = alertMsg + " " + numberS2;
 			}
-			if(checkClosedNumberOrNot(rNumber2)) {
-				if(rNumber2 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber2.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber2)) {
+				if (rNumber2 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber2.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber2.toString();
 				}
 			}
@@ -160,14 +165,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number3, money, name, pageNo);
 			tableDao.add2D(rNumber3, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number3)) {
+			if (checkClosedNumberOrNot(number3)) {
 				alertMsg = alertMsg + " " + numberS3;
 			}
-			if(checkClosedNumberOrNot(rNumber3)) {
-				if(rNumber3 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber3.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber3)) {
+				if (rNumber3 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber3.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber3.toString();
 				}
 			}
@@ -180,14 +184,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number4, money, name, pageNo);
 			tableDao.add2D(rNumber4, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number4)) {
+			if (checkClosedNumberOrNot(number4)) {
 				alertMsg = alertMsg + " " + numberS4;
 			}
-			if(checkClosedNumberOrNot(rNumber4)) {
-				if(rNumber4 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber4.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber4)) {
+				if (rNumber4 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber4.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber4.toString();
 				}
 			}
@@ -200,14 +203,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number5, money, name, pageNo);
 			tableDao.add2D(rNumber5, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number5)) {
+			if (checkClosedNumberOrNot(number5)) {
 				alertMsg = alertMsg + " " + numberS5;
 			}
-			if(checkClosedNumberOrNot(rNumber5)) {
-				if(rNumber5 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber5.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber5)) {
+				if (rNumber5 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber5.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber5.toString();
 				}
 			}
@@ -220,14 +222,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number6, money, name, pageNo);
 			tableDao.add2D(rNumber6, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number6)) {
+			if (checkClosedNumberOrNot(number6)) {
 				alertMsg = alertMsg + " " + numberS6;
 			}
-			if(checkClosedNumberOrNot(rNumber6)) {
-				if(rNumber6 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber6.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber6)) {
+				if (rNumber6 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber6.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber6.toString();
 				}
 			}
@@ -240,14 +241,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number7, money, name, pageNo);
 			tableDao.add2D(rNumber7, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number7)) {
+			if (checkClosedNumberOrNot(number7)) {
 				alertMsg = alertMsg + " " + numberS7;
 			}
-			if(checkClosedNumberOrNot(rNumber7)) {
-				if(rNumber7 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber7.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber7)) {
+				if (rNumber7 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber7.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber7.toString();
 				}
 			}
@@ -260,14 +260,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number8, money, name, pageNo);
 			tableDao.add2D(rNumber8, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number8)) {
+			if (checkClosedNumberOrNot(number8)) {
 				alertMsg = alertMsg + " " + numberS8;
 			}
-			if(checkClosedNumberOrNot(rNumber8)) {
-				if(rNumber8 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber8.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber8)) {
+				if (rNumber8 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber8.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber8.toString();
 				}
 			}
@@ -280,14 +279,13 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number9, money, name, pageNo);
 			tableDao.add2D(rNumber9, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number9)) {
+			if (checkClosedNumberOrNot(number9)) {
 				alertMsg = alertMsg + " " + numberS9;
 			}
-			if(checkClosedNumberOrNot(rNumber9)) {
-				if(rNumber9 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber9.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber9)) {
+				if (rNumber9 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber9.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber9.toString();
 				}
 			}
@@ -300,21 +298,23 @@ public class CustomInputController extends HttpServlet {
 			tableDao.add2D(number0, money, name, pageNo);
 			tableDao.add2D(rNumber0, rMoney, name, pageNo);
 			rCount = rCount + 1;
-			if(checkClosedNumberOrNot(number0)) {
+			if (checkClosedNumberOrNot(number0)) {
 				alertMsg = alertMsg + " " + numberS0;
 			}
-			if(checkClosedNumberOrNot(rNumber0)) {
-				if(rNumber0 < 10) {
-					alertMsg = alertMsg + " " + "0"+ rNumber0.toString();
-				}
-				else {
+			if (checkClosedNumberOrNot(rNumber0)) {
+				if (rNumber0 < 10) {
+					alertMsg = alertMsg + " " + "0" + rNumber0.toString();
+				} else {
 					alertMsg = alertMsg + " " + rNumber0.toString();
 				}
 			}
 			shortMsg = shortMsg + " / " + numberS0;
 			shortMsgR = shortMsgR + " / " + rNumber0.toString();
 		}
+
 		msg = shortMsg + " - " + moneyS + " R " + rMoneyS + " ks added.";
+		
+		h2D1 = new History2D();
 		h2D1.setNote(shortMsg);
 		h2D1.setR("-");
 		h2D1.setTotal(rCount * money);
@@ -325,6 +325,8 @@ public class CustomInputController extends HttpServlet {
 		pageTotal = pageTotal + (rCount * money);
 		h2D1.setPageTotal(pageTotal);
 		tableDao.add2DtoHistory(h2D1);
+
+		h2D2 = new History2D();
 		h2D2.setNote(shortMsgR);
 		h2D2.setR("-");
 		h2D2.setTotal(rCount * rMoney);
@@ -335,9 +337,11 @@ public class CustomInputController extends HttpServlet {
 		pageTotal = pageTotal + (rCount * rMoney);
 		h2D2.setPageTotal(pageTotal);
 		tableDao.add2DtoHistory(h2D2);
-		if(!alertMsg.equals("")) {
+
+		if (!alertMsg.equals("")) {
 			alertMsg = "The number (" + alertMsg + ") are closed numbers.";
 		}
+
 		request.setAttribute(CommonParameters.MESSAGE, msg);
 		request.setAttribute(CommonParameters.ALERT_MESSAGE, alertMsg);
 		doGet(request, response);
@@ -354,16 +358,15 @@ public class CustomInputController extends HttpServlet {
 				number = number / 10;
 			}
 		}
-
 		return reverse;
 	}
-	
+
 	protected boolean checkClosedNumberOrNot(int number) {
 		boolean flag = false;
 		List<Closed2D> closed2DList = new ArrayList<Closed2D>();
 		closed2DList = tableDao.getClosedNumberTable();
-		for(int i=0;i<closed2DList.size();i++) {
-			if(number == closed2DList.get(i).getNumber()) {
+		for (int i = 0; i < closed2DList.size(); i++) {
+			if (number == closed2DList.get(i).getNumber()) {
 				flag = true;
 			}
 		}

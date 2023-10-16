@@ -38,24 +38,31 @@ public class DeleteController extends HttpServlet {
 	int pageTotal;
 	int realID;
 	String msg;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public DeleteController() {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
-		String idS = request.getParameter("id");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+
 		String idAlertColor = CommonConstants.ID_DEFAULT_COLOR;
 		int recoverMoney = 0;
 		int recoverPMoney = 0;
 		int recoverPlusMoney = 0;
 		int recoverComMoney = 0;
 		int page;
-		
+
+		HttpSession session = request.getSession();
+		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
+
+		String idS = request.getParameter("id");
+
 		if (idS == "99999" || idS.equals("99999")) {
 			String number = request.getParameter("number");
 			String date = request.getParameter("date");
@@ -63,69 +70,70 @@ public class DeleteController extends HttpServlet {
 			String recoverFlag = request.getParameter("recoverFlag");
 			String extraMoney = request.getParameter("extraMoney");
 			String todayDate = date + " " + time;
-			
-			if (recoverFlag != null) { //add Recover Results to Recover Ledger
-			    
-				//Calculate recoverPlusMoney
+
+			if (recoverFlag != null) { // add Recover Results to Recover Ledger
+
+				// Calculate recoverPlusMoney
 				recoverMoney = 0 - recoverTableDao.getTotalRecoverMoney();
 				recoverList = recoverTableDao.getTotalRecoverList();
 
-			    for (Recover2D recover : recoverList) {
-			        Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recover.getSellerName());
-			        int recCom = (seller.getSellerCom() * recover.getSellerMoney()) / 100;
-			        int recP = recoverTableDao.getTotalRecoverPBySeller(recover.getSellerName(), Integer.parseInt(number));
-			        recoverPMoney += recP;
-			        recoverComMoney += Math.round(recCom / 50f) * 50;
-			        recoverPlusMoney += recP * seller.getSellerZ();
-			    }
+				for (Recover2D recover : recoverList) {
+					Recover2D seller = recoverTableDao.getRecoverSellerBySellerName(recover.getSellerName());
+					int recCom = (seller.getSellerCom() * recover.getSellerMoney()) / 100;
+					int recP = recoverTableDao.getTotalRecoverPBySeller(recover.getSellerName(),
+							Integer.parseInt(number));
+					recoverPMoney += recP;
+					recoverComMoney += Math.round(recCom / 50f) * 50;
+					recoverPlusMoney += recP * seller.getSellerZ();
+				}
 
-			    recoverPlusMoney += recoverComMoney;
-			    
-			    //Add to Recover Ledger
-			    List<Recover2D> recoverSellerList = recoverTableDao.getRecoverSellerList();
-			    
-			    for (Recover2D recoverSeller : recoverSellerList) {
-			    	
-			    		String seller = recoverSeller.getSellerName();
-				        recoverSeller.setDate(todayDate);
-				        recoverSeller.setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
-				        if(recoverSeller.getSellerMoney() > 0) {
-				        	recoverSeller.setRecoverP(recoverTableDao.getTotalRecoverPBySeller(seller, Integer.parseInt(number)));
-					        int recoverCom = (recoverSeller.getSellerMoney() * recoverSeller.getSellerCom()) / 100;
-					        recoverCom = Math.round(recoverCom/ 50f) * 50;
-					        recoverSeller.setRecoverCom(recoverCom);
-					        recoverSeller.setRecoverPlus(recoverSeller.getRecoverCom() + (recoverSeller.getRecoverP() * recoverSeller.getSellerZ()));
-					        recoverSeller.setTotalRecover(recoverSeller.getRecoverPlus() - recoverSeller.getSellerMoney());
-					        tableDao.addValuesToAllRecoverTable(recoverSeller);
-				        }
-			    }
+				recoverPlusMoney += recoverComMoney;
+
+				// Add to Recover Ledger
+				List<Recover2D> recoverSellerList = recoverTableDao.getRecoverSellerList();
+
+				for (Recover2D recoverSeller : recoverSellerList) {
+
+					String seller = recoverSeller.getSellerName();
+					recoverSeller.setDate(todayDate);
+					recoverSeller.setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
+					if (recoverSeller.getSellerMoney() > 0) {
+						recoverSeller.setRecoverP(
+								recoverTableDao.getTotalRecoverPBySeller(seller, Integer.parseInt(number)));
+						int recoverCom = (recoverSeller.getSellerMoney() * recoverSeller.getSellerCom()) / 100;
+						recoverCom = Math.round(recoverCom / 50f) * 50;
+						recoverSeller.setRecoverCom(recoverCom);
+						recoverSeller.setRecoverPlus(recoverSeller.getRecoverCom()
+								+ (recoverSeller.getRecoverP() * recoverSeller.getSellerZ()));
+						recoverSeller.setTotalRecover(recoverSeller.getRecoverPlus() - recoverSeller.getSellerMoney());
+						tableDao.addValuesToAllRecoverTable(recoverSeller);
+					}
+				}
 			}
-			
+
 			Ledger ledger = new Ledger();
 			ledger.setDate(todayDate);
 			ledger.setRecoverMoney(recoverMoney);
 			ledger.setRecoverPMoney(recoverPMoney);
 			ledger.setRecoverComMoney(recoverComMoney);
 			ledger.setRecoverPlusMoney(recoverPlusMoney);
-			ledger.setExtraMoney(0 - Integer.parseInt(extraMoney));
+			ledger.setExtraMoney(Integer.parseInt(extraMoney));
+			tableDao.addValuesToAllTable(ledger);
+			tableDao.deleteTable();
 			
 			session.removeAttribute(CommonParameters.SESSION_NAME);
 			session.invalidate();
-			tableDao.addValuesToAllTable(ledger);
-			tableDao.deleteTable();
+			
 			response.sendRedirect("index.jsp");
 
-		} 
-		else if(idS == "delete" || idS.equals("delete")) {
+		} else if (idS == "delete" || idS.equals("delete")) {
 			tableDao.deleteUser(userName);
 			response.sendRedirect("index.jsp");
-		}
-		else if (idS == "all" || idS.equals("all")) {
+		} else if (idS == "all" || idS.equals("all")) {
 			tableDao.deleteAllTable();
 			tableDao.deleteTable();
 			response.sendRedirect("index.jsp");
-		}
-		else {
+		} else {
 			int id = Integer.parseInt(idS);
 			twoD = new Number2D();
 			twoD = tableDao.getNumber(id);
@@ -140,7 +148,6 @@ public class DeleteController extends HttpServlet {
 			pageTotal = tableDao.getPageTotal(userName, page);
 			pageTotal = pageTotal - (twoD.getMoney());
 			twoDH.setPageTotal(pageTotal);
-
 			tableDao.add2DtoHistory(twoDH);
 
 			tableDao.deleteRow(id);
@@ -151,14 +158,14 @@ public class DeleteController extends HttpServlet {
 			userTotal = tableDao.getUserTotalMoney(userName);
 			userList = tableDao.getUsers();
 			realID = tableDao.getIdCount();
-			if(realID > CommonConstants.ID_COUNT_LIMIT) {
-				idAlertColor = CommonConstants.ID_ALERT_COLOR; 
+			
+			if (realID > CommonConstants.ID_COUNT_LIMIT) {
+				idAlertColor = CommonConstants.ID_ALERT_COLOR;
 			}
 
-			for(int i = 0;i < userList.size();i++) {
+			for (int i = 0; i < userList.size(); i++) {
 				String checked = "red";
-				if(tableDao.checkNameInTempTable(userList.get(i).getUser()) == true)
-				{
+				if (tableDao.checkNameInTempTable(userList.get(i).getUser()) == true) {
 					checked = "green";
 				}
 				userList.get(i).setChecked(checked);
@@ -181,12 +188,9 @@ public class DeleteController extends HttpServlet {
 
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
-	}
-	
-	protected void SetAllRecoverTable(int number,String date) {
-		
 	}
 
 }

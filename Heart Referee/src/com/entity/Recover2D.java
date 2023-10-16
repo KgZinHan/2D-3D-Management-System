@@ -10,6 +10,8 @@ public class Recover2D {
 	private int recoverCom;
 	private int recoverPlus;
 	private int totalRecover;
+	private int count;
+	private String color;
 
 	public String getSellerName() {
 		return sellerName;
@@ -82,5 +84,23 @@ public class Recover2D {
 	public void setTotalRecover(int totalRecover) {
 		this.totalRecover = totalRecover;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+	
 
 }

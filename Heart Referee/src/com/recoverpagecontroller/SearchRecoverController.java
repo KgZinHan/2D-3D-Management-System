@@ -29,14 +29,18 @@ public class SearchRecoverController extends HttpServlet {
 	List<Recover2D> recoverSellerList = new ArrayList<Recover2D>();
 	int total;
 	int recoverTotal;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public SearchRecoverController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
 		String sellerName = request.getParameter("sellerName");
 		String search = request.getParameter("number");
 		int number = Integer.parseInt(search);
@@ -44,7 +48,6 @@ public class SearchRecoverController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		int totalSellerRecover = recoverTableDao.getTotalRecoverMoneyBySeller(sellerName);
-		
 		recoverSellerList = recoverTableDao.getRecoverSellerList();
 		twoDList = recoverTableDao.search2DRecoverAmount(number,sellerName);
 		

@@ -6,6 +6,7 @@ public class CommonParameters {
 	public static final String SESSION_USER = "userName";
 	public static final String SESSION_NAME = "sessionName";
 	public static final String SESSION_PAGE = "sessionPage";
+	public static final String SESSION_PARTITION = "sessionPartition";
 
 	// Constants
 	public static final String MESSAGE = "message";
@@ -16,6 +17,7 @@ public class CommonParameters {
 	public static final String PAGE_NUMBER = "pageNo";
 	public static final String REAL_ID = "id";
 	public static final String ID_ALERT_COLOR = "idAlertColor";
+	public static final String BUTTON_NAME = "buttonName";
 
 	// Lists
 	public static final String TWO_D_LIST = "twoDList";
@@ -26,6 +28,8 @@ public class CommonParameters {
 	public static final String CLOSED_2D_LIST = "closed2DList";
 	public static final String TEMP_2D_LIST = "temp2DList";
 	public static final String TOTAL_TEMP_2D_LIST = "totalTemp2DList";
+	public static final String TEMP_RECOVER_2D_LIST = "tempRecover2DList";
+	public static final String TOTAL_TEMP_RECOVER_2D_LIST = "totalTempRecover2DList";
 
 	// DisplayLink
 	public static final String DELETE_COLUMN_DISPLAY = "deleteLink";
@@ -76,13 +80,17 @@ public class CommonParameters {
 	public static final String FINAL_RESULT_COMMISSION_PERCENT = "comPercent";
 	public static final String FINAL_RESULT_TOTAL = "total";
 	public static final String FINAL_RESULT_TOTAL_COLOR = "totalColor";
-	public static final String FINAL_RESULT_TOTAL_RECOVER_P = "totalRecoverP";
-	public static final String FINAL_RESULT_TOTAL_RECOVER_PLUS = "totalRecoverPlus";
+	public static final String FINAL_RESULT_TOTAL_COMMSSION = "totalCommission";
+	public static final String FINAL_RESULT_FINAL_TOTAL_RECOVER = "finalTotalRecover";
 	public static final String FINAL_RESULT_ALL_TOTAL = "allTotal";
+	public static final String FINAL_RESULT_RECOVER_TOTAL_COLOR = "recoverTotalColor";
 	
 	//recover seller List
 	public static final String RECOVER_SELLER_LIST = "recoverSellerList";
 	public static final String RECOVER_LIST = "recoverList";
 	public static final String SELLER_NAME = "sellerName";
 	public static final String TOTAL_SELLER_RECOVER = "totalSellerRecover";
+	
+	//commission List
+	public static final String COMM_LIST = "commList";
 }

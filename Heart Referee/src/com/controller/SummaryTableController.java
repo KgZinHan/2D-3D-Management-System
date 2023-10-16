@@ -23,28 +23,33 @@ import common.CommonParameters;
 public class SummaryTableController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	RequestDispatcher dispatcher = null;
-	Summary2D sum2D = null;
-	int total;
-	int recoverTotal;
-	TableDao tableDao = new TableDaoImpl();
-	RecoverTableDao recoverTableDao = new RecoverTableDaoImpl();
 	List<Summary2D> resultList = new ArrayList<Summary2D>();
 	List<Recover2D> recoverPList = new ArrayList<Recover2D>();
+	int total;
+	int recoverTotal;
+	TableDao tableDao;
+	RecoverTableDao recoverTableDao;
 
 	public SummaryTableController() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		tableDao = new TableDaoImpl(request);
+		recoverTableDao = new RecoverTableDaoImpl(request);
+		
+		int money = 0;
+		
 		String numberS = request.getParameter("number");
 		int number = Integer.parseInt(numberS);
-		int money = 0;
 		
 		money = tableDao.getMoney(number);
 		resultList = tableDao.getResultTableByNumber(number);
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		recoverPList = recoverTableDao.getTotalRecoverPlusMoney(number);
+		
 		for(Recover2D recover : recoverPList) {
 			recover.setTotalRecover(recoverTableDao.getTotalRecoverMoneyBySeller(recover.getSellerName()));
 		}
