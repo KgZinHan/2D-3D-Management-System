@@ -53,14 +53,14 @@ public class CommonParameters {
 	// Waiting Table
 	public static final String COLOR_COUNT = "count";
 	public static final String RECOVER_AMOUNT = "recover";
-	
+
 	// Summary Table
 	public static final String SUMMARY_LIST = "summaryList";
 	public static final String PERCENT_GIVE_TYPE = "percentGiveType";
 	public static final String COMMISSION_TYPE = "comType";
 	public static final String TWO_D_NUMBER = "number";
 	public static final String TWO_D_MONEY = "money";
-	
+
 	// tab bar color
 	public static final String TAB_BAR_HOME_COLOR = "home";
 	public static final String TAB_BAR_WAITING_TABLE_COLOR = "waiting";
@@ -69,10 +69,10 @@ public class CommonParameters {
 	public static final String TAB_BAR_FULL_TABLE_COLOR = "fullTable";
 	public static final String TAB_BAR_FINAL_RESULT_COLOR = "finalResult";
 	public static final String TAB_BAR_LEDGER_COLOR = "ledger";
-	
+
 	// final result Page
 	public static final String FINAL_RESULT_DIV_DISPLAY = "divDisplay";
-	public static final String FINAL_RESULT_NUMBER = "number";	
+	public static final String FINAL_RESULT_NUMBER = "number";
 	public static final String FINAL_RESULT_TOTAL_MONEY = "totalMoney";
 	public static final String FINAL_RESULT_P = "p";
 	public static final String FINAL_RESULT_P_MONEY = "pMoney";
@@ -81,16 +81,17 @@ public class CommonParameters {
 	public static final String FINAL_RESULT_TOTAL = "total";
 	public static final String FINAL_RESULT_TOTAL_COLOR = "totalColor";
 	public static final String FINAL_RESULT_TOTAL_COMMSSION = "totalCommission";
-	public static final String FINAL_RESULT_FINAL_TOTAL_RECOVER = "finalTotalRecover";
 	public static final String FINAL_RESULT_ALL_TOTAL = "allTotal";
-	public static final String FINAL_RESULT_RECOVER_TOTAL_COLOR = "recoverTotalColor";
-	
-	//recover seller List
+	public static final String FINAL_RESULT_ALL_TOTAL_COLOR = "allTotalColor";
+	public static final String FINAL_RESULT_TOTAL_RECOVER = "totalRecover";
+	public static final String FINAL_RESULT_TOTAL_RECOVER_COLOR = "totalRecoverColor";
+
+	// recover seller List
 	public static final String RECOVER_SELLER_LIST = "recoverSellerList";
 	public static final String RECOVER_LIST = "recoverList";
 	public static final String SELLER_NAME = "sellerName";
 	public static final String TOTAL_SELLER_RECOVER = "totalSellerRecover";
-	
-	//commission List
+
+	// commission List
 	public static final String COMM_LIST = "commList";
 }

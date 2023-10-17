@@ -57,10 +57,12 @@ public class FinalResultController extends HttpServlet {
 		int totalRecoverCom = 0;
 		int totalRecoverPlus = 0;
 		int totalFinalRecover = 0;
-		int commTotal = 0;
+		/* int commTotal = 0; */
 		int allTotal = 0;
 		int count = 1;
-		String recoverTotalColor = "green";
+		String allTotalColor = "green";
+		String finalRecoverColor = "green";
+		
 
 		String username = request.getParameter("username");
 		String numberS = request.getParameter("number");
@@ -148,11 +150,18 @@ public class FinalResultController extends HttpServlet {
 			}
 		}
 		
-		commTotal = tableDao.getTempTotalResult();
+		/*
+		 * commTotal = tableDao.getTempTotalResult(); if(commTotal < 0) {
+		 * recoverTotalColor = "red"; }
+		 */
 		
 		allTotal = tableDao.getTempTotalResult() - totalRecover + totalRecoverPlus;
 		if (allTotal < 0) {
-			recoverTotalColor = "red";
+			allTotalColor = "red";
+		}
+		
+		if(totalFinalRecover < 0) {
+			finalRecoverColor = "red";
 		}
 
 		request.setAttribute(CommonParameters.USER_LIST, user2DList);
@@ -160,10 +169,14 @@ public class FinalResultController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_TEMP_2D_LIST, totalTemp2DList);
 		request.setAttribute(CommonParameters.TEMP_RECOVER_2D_LIST, recoverList);
 		request.setAttribute(CommonParameters.TOTAL_TEMP_RECOVER_2D_LIST, totalRecoverList);
-		request.setAttribute(CommonParameters.FINAL_RESULT_FINAL_TOTAL_RECOVER, totalFinalRecover);
-		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_COMMSSION, commTotal);
 		request.setAttribute(CommonParameters.FINAL_RESULT_ALL_TOTAL, allTotal);
-		request.setAttribute(CommonParameters.FINAL_RESULT_RECOVER_TOTAL_COLOR, recoverTotalColor);
+		request.setAttribute(CommonParameters.FINAL_RESULT_ALL_TOTAL_COLOR, allTotalColor);
+		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_RECOVER, totalFinalRecover);
+		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_RECOVER_COLOR, finalRecoverColor);
+		/*
+		 * request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_COMMSSION,
+		 * commTotal);
+		 */
 		request.setAttribute(CommonParameters.FINAL_RESULT_NUMBER, numberS);
 		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_PERCENT, commission.getCommPercent());
 		request.setAttribute(CommonParameters.TAB_BAR_FINAL_RESULT_COLOR, CommonConstants.HOVER_COLOR_CODE);
@@ -185,6 +198,7 @@ public class FinalResultController extends HttpServlet {
 		List<AllUser2D> totalTemp2DList = new ArrayList<>();
 		List<Recover2D> recoverList = new ArrayList<Recover2D>();
 		List<Recover2D> totalRecoverList = new ArrayList<Recover2D>();
+		
 		int totalRecover = 0;
 		int totalRecoverP = 0;
 		int totalRecoverCom = 0;
@@ -192,8 +206,9 @@ public class FinalResultController extends HttpServlet {
 		int totalFinalRecover = 0;
 		int commTotal = 0;
 		int allTotal = 0;
-		String recoverTotalColor = "green";
 		String totalColor = "green";
+		String allTotalColor = "green";
+		String finalRecoverColor = "green";
 
 		String username = request.getParameter("username");
 		String numberS = request.getParameter("number");
@@ -271,20 +286,24 @@ public class FinalResultController extends HttpServlet {
 		
 		allTotal = tableDao.getTempTotalResult() - totalRecover + totalRecoverPlus;
 		if (allTotal < 0) {
-			recoverTotalColor = "red";
+			allTotalColor = "red";
 		}
 		
-		
+		if(totalFinalRecover < 0) {
+			finalRecoverColor = "red";
+		}
 
 		request.setAttribute(CommonParameters.USER_LIST, user2DList);
 		request.setAttribute(CommonParameters.TEMP_2D_LIST, temp2DList);
 		request.setAttribute(CommonParameters.TOTAL_TEMP_2D_LIST, totalTemp2DList);
 		request.setAttribute(CommonParameters.TEMP_RECOVER_2D_LIST, recoverList);
 		request.setAttribute(CommonParameters.TOTAL_TEMP_RECOVER_2D_LIST, totalRecoverList);
-		request.setAttribute(CommonParameters.FINAL_RESULT_FINAL_TOTAL_RECOVER, totalFinalRecover);
+		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_RECOVER, totalFinalRecover);
 		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_COMMSSION, commTotal);
 		request.setAttribute(CommonParameters.FINAL_RESULT_ALL_TOTAL, allTotal);
-		request.setAttribute(CommonParameters.FINAL_RESULT_RECOVER_TOTAL_COLOR, recoverTotalColor);
+		request.setAttribute(CommonParameters.FINAL_RESULT_ALL_TOTAL_COLOR, allTotalColor);
+		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_RECOVER, totalFinalRecover);
+		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_RECOVER_COLOR, finalRecoverColor);
 		request.setAttribute(CommonParameters.TAB_BAR_FINAL_RESULT_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.SESSION_USER, username);
 		request.setAttribute(CommonParameters.FINAL_RESULT_DIV_DISPLAY, "block");

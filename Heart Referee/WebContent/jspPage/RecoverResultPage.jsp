@@ -61,7 +61,7 @@
 			<div class="mv-display-middle" style="margin-top: 10px">
 				<div id="tb02" class="mv-table-style" style="height:auto;width: 100%">
 					<table class="mv-waiting-table" style="width: 1200px">
-						<tr class="mv-list-table-head" style="font-size: 16px">
+						<tr class="mv-list-table-head" style="font-size: 16px;background-color: green">
 							<th style="width: 50px">
 								<h4>#</h4>
 							</th>
@@ -97,7 +97,7 @@
 						</c:forEach>
 						<c:forEach items="${totalUser2DList}" var="tUser2D">
 							<tr class="mv-waiting-table-data" style="font-size: 16px;background-color: silver;text-align: right">
-								<td style="text-align: center"><p>-</p></td>
+								<td style="text-align: center"><p>Total</p></td>
 								<td style="text-align: center"><p>-</p></td>
 								<td><p>${tUser2D.recover} ks&nbsp;&nbsp;</p></td>
 								<td><p>${tUser2D.recoverCom} ks&nbsp;&nbsp;</p></td>
@@ -110,6 +110,6 @@
 				</div>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.9.0 &nbsp; Design by N0iSy2099</footer>
 	</body>
 </html>

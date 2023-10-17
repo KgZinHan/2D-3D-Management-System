@@ -34,7 +34,7 @@
 	            	<button class="log-out-btn hover-effect" style="width: 100px">Total</button>
 	            </a>
 	            <a href="RecoverResult">
-	            	<button class="log-out-btn hover-effect" style="width: 120px;margin-left: 120px">Recover Ledger</button>
+	            	<button class="log-out-btn hover-effect" style="width: 120px;margin-left: 120px;background-color: green">Recover Ledger</button>
 	            </a>
 	            
 			</div>
@@ -95,13 +95,13 @@
 							<th>
 								<h4>P Money</h4>
 							</th>
-							<th style="display:${totalRecoverLink};color: green">				
+							<th style="display:${totalRecoverLink};background-color: green">				
 								<h4>Recover</h4>
 							</th>
-							<th style="width: 100px;display:${totalRecoverLink};color: green">				
+							<th style="width: 100px;display:${totalRecoverLink};background-color: green">				
 								<h4>Recover P</h4>
 							</th>
-							<th style="display:${totalRecoverLink};color: green" onmouseout="closeDetails('recoverPlusId')" onmouseover="showDetails('recoverPlusId')">				
+							<th style="display:${totalRecoverLink};background-color: green" onmouseout="closeDetails('recoverPlusId')" onmouseover="showDetails('recoverPlusId')">				
 								<h4>Recover Plus</h4>
 							</th>
 							<th style="display:${totalRecoverLink}">				
@@ -149,6 +149,6 @@
 				</div>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.9.0 &nbsp; Design by N0iSy2099</footer>
 	</body>
 </html>

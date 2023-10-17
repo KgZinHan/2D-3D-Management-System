@@ -53,6 +53,6 @@
 			 <button id="singlebtn" class="special-button hover-effect" onclick="goBack()">Back</button>
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.9.0 &nbsp; Design by N0iSy2099</footer>
 	</body>
 </html>

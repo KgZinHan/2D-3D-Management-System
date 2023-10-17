@@ -32,8 +32,8 @@
 				<div class="mv-display-middle" style="height:100px;margin-top: 30px;width: 90%">
 					<button class="f-pg-enter-no hover-effect" style="width: 150px;cursor: pointer" onclick="toggleSwitch('tb02','tb03');toggleSwitch('c01','c02')"><i class="fas fa-sync"></i>&nbsp;Change Report</button>
 					<span class="user-name" style="cursor: default;color: black"><b>Number = ${number}</b></span>
-					<span id="c01" class="user-name" style="cursor: default;color: green"><b>Recover Total = ${finalTotalRecover} ks</b></span>
-					<span class="user-name" style="cursor: default;color:${recoverTotalColor}">All Total = ${allTotal} ks </span>
+					<span id="c01" class="user-name" style="cursor: default;color:${totalRecoverColor}"><b>Recover Total = ${totalRecover} ks</b></span>
+					<span class="user-name" style="cursor: default;color:${allTotalColor}">All Total = ${allTotal} ks </span>
 				</div>
 				<div id="tb02" class="mv-report-table-style">
 					<table class="mv-waiting-table" style="margin-right: 50px">
@@ -152,7 +152,7 @@
 												
 						<input type="checkbox" name="recoverFlag" value="add" checked>
 						<label style="font-family: robom">Add Recover</label>&emsp;
-						<input type="number" class="f-pg-enter-no-2" value="${finalTotalRecover}" readonly style="width: 100px">
+						<input type="number" class="f-pg-enter-no-2" value="${totalRecover}" readonly style="width: 100px">
 						<label style="font-family: robom;margin-left: 10px;">Extra</label>&emsp;
 						<input id="inputRecoverId"  type="number" name="extraMoney" value="0" class="f-pg-enter-no-2" step="500" style="width: 80px" placeholder="Extra money" required>
 						<button class="f-pg-enter-no hover-effect" style="width:auto;cursor: pointer;float: right" onclick="if(!(confirm('Are you sure you want to save this to ledger and delete tables?'))) return false;">
@@ -244,6 +244,6 @@
 				
 			</div>
 		</div>
-		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.8.1 &nbsp; Design by N0iSyLuvie</footer>
+		<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.9.0 &nbsp; Design by N0iSy2099</footer>
 	</body>
 </html>
