@@ -27,6 +27,7 @@ public class SettingController extends HttpServlet {
 		HttpSession session = request.getSession();
 		String userName = request.getParameter("userName");
 		String partition = request.getParameter("partition");
+		//String mode = request.getParameter("mode");
 		if(!partition.equals("done1998")) {
 			session.setAttribute(CommonParameters.SESSION_PARTITION, partition);
 		}

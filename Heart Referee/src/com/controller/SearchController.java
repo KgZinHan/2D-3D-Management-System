@@ -68,14 +68,15 @@ public class SearchController extends HttpServlet {
 				twoDList.get(j).setColor("green");
 			}
 
-			if ((twoDList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal > total) {
-				twoDList.get(j).setColor("red");
-			}
-
 			/*
-			 * else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) {
-			 * twoDList.get(j).setColor("red"); }
+			 * if ((twoDList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal >
+			 * total) { twoDList.get(j).setColor("red"); }
 			 */
+
+			
+			  else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) {
+			  twoDList.get(j).setColor("red"); }
+			 
 
 		}
 
@@ -90,16 +91,16 @@ public class SearchController extends HttpServlet {
 				greenCount = greenCount + 1;
 			}
 
-			else if ((countList.get(j).getMoney() * 80) + ((total * 15) / 100) + recoverTotal > total) {
-				redCount = redCount + 1;
-			} else {
-				blackCount = blackCount + 1;
-			}
-
 			/*
-			 * else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) { redCount =
-			 * redCount + 1; } else { blackCount = blackCount + 1; }
+			 * else if ((countList.get(j).getMoney() * 80) + ((total * 15) / 100) +
+			 * recoverTotal > total) { redCount = redCount + 1; } else { blackCount =
+			 * blackCount + 1; }
 			 */
+
+			
+			  else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) { redCount =
+			  redCount + 1; } else { blackCount = blackCount + 1; }
+			 
 
 		}
 

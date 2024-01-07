@@ -13,7 +13,7 @@ public class CommonConstants {
 
 	// Limits
 	public static final int VERY_HAPPY_LIMIT = 1000;
-	public static final int HAPPY_LIMIT = 200000;
+	public static final int HAPPY_LIMIT = 50;
 	public static final int RECOVER_LIMIT = 50000;
 	public static final int FINAL_LIMIT = -500000;
 	
