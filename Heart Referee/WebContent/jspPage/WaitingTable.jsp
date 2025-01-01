@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,29 +35,30 @@
     <div class="mv-basic-bg">
     	<div class="mv-tab-bar">
 			<h3>
-				<a href="Table" class="tab-bar-button hover-effect margin-left">Home</a>
+				<a href="Table" class="tab-bar-button hover-effect margin-left"><i class="fas fa-home"></i> Home</a>
 			</h3>
 			<h3>
-				<a href="WaitingTable?m=money" class="tab-bar-button hover-effect margin-left" style="color:${waiting}">Waiting Table</a>
+				<a href="WaitingTable?m=money" class="tab-bar-button hover-effect margin-left" style="color:${waiting}"><i class="fas fa-list-ol"></i> Waiting</a>
 			</h3>
 			<h3>
-				<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left">Recover Check</a>
+				<a href="Recover?limit=1500" class="tab-bar-button hover-effect margin-left"><i class="fas fa-file-medical"></i> R Check</a>
 			</h3>
 			<h3>
-				<a href="RecoverPageController?sellerName=Default" class="tab-bar-button hover-effect margin-left">Recover Note</a>
+				<a href="RecoverPageController?sellerName=Default" class="tab-bar-button hover-effect margin-left"><i class="fas fa-pen-square"></i> R Note</a>
 			</h3>
 			<h3>
-				<a href="FullTableController" class="tab-bar-button hover-effect margin-left">Full Table</a>
+				<a href="FullTableController" class="tab-bar-button hover-effect margin-left"><i class="fas fa-table"></i> Full</a>
 			</h3>
 			<h3>
-				<a href="Final" class="tab-bar-button hover-effect margin-left">Report</a>
+				<a href="Final" class="tab-bar-button hover-effect margin-left"><i class="fas fa-edit"></i> Report</a>
 			</h3>
 			<h3>
-				<a href="HResult" class="tab-bar-button hover-effect margin-left">Ledger</a>
+				<a href="HResult" class="tab-bar-button hover-effect margin-left"><i class="fas fa-book"></i> Ledger</a>
 			</h3>
 		</div>
 		<div id="userfield" class="user-total-field">
-			total money&emsp;-&emsp;${totalMoney} ks
+			total money&emsp;-&emsp;<fmt:formatNumber
+										value="${totalMoney}" type="number" /> ks
 			<table style="margin-left: 50px;margin-right: 50px">
 				<tr class="mv-count-table">
 					<th class="mv-count-table-head" style="color: red" onmouseout="closeDetails('redDetailsId')" onmouseover="showDetails('redDetailsId')" >${count.redCount}%</th>
@@ -65,7 +67,8 @@
 					<th class="mv-count-table-head" style="color: purple" onmouseout="closeDetails('purpleDetailsId')" onmouseover="showDetails('purpleDetailsId')">${count.purpleCount}%</th>
 				</tr>
 			</table>
-			total recover&emsp;-&emsp;${totalRecover} ks
+			total recover&emsp;-&emsp;<fmt:formatNumber
+										value="${totalRecover}" type="number" /> ks
 			<h3 style="cursor: pointer;margin-left: 100px" onclick="displayNone('userfield')">
 				X
 			</h3>
@@ -78,16 +81,16 @@
 				<h3 class="hide-button"  onclick="displayBlock('modal01')"><i class="fab fa-sistrix"></i></h3>
 				<h3 class="hide-button"  onclick="hideCol(4)"><i class="fas fa-ban"></i></h3>
 			</div>
-			<div id="tb02" class="mv-table-style" style="height: 620px">
+			<div id="tb02" class="mv-table-style" style="max-height: 550px">
 				<table id="tblMain" class="mv-waiting-table">
 					<tr class="mv-list-table-head">
 						<th style="width: 40px">				
-							<h4>No.</h4>
+							<h4>#</h4>
 						</th>
-						<th style="width: 120px;display: ${numberLink}">
+						<th style="width: 100px;display: ${numberLink}">
 							<a href="WaitingTable?m=number">
 								<button class="sort-button"  style="background-color: ${numberHColor}">
-									<h4>Number<i class="fas fa-sort" style="float: right"></i></h4>
+									<h4>No.<i class="fas fa-sort" style="float: right"></i></h4>
 								</button>
 							</a>
 						</th>
@@ -99,29 +102,32 @@
 							</a>
 						</th>
 						<th id="4" style="width: 120px">
-							<h4>Recover Money</h4>
+							<h4>Recover</h4>
 						</th>
 						<th>
-							<h4>Total Net</h4>
+							<h4>Net</h4>
 						</th>
 						<th style="width: 80px">				
-							<h4>Summary</h4>
+							<h4>Result</h4>
 						</th>
 					</tr>
 					<c:forEach items="${twoDList}" var="twoD">
 						<tr id="${twoD.number}" class="mv-waiting-table-data" style="color:${twoD.color}" >
-							<td><h3>${twoD.count}</h3></td>
+							<td><h3>${twoD.count}.</h3></td>
 							<td style="display: ${numberLink}"><h3>${twoD.number}</h3></td>
-							<td><h3>${twoD.money}</h3></td>
-							<td id="4"><h3>${twoD.recoverMoney}</h3></td>
-							<td><h3>${twoD.total}</h3></td>
-							<td><h3><a href="SummaryTable?number=${twoD.number}" style="color: black">result</a></h3></td>
+							<td><h3><fmt:formatNumber
+										value="${twoD.money}" type="number" /></h3></td>
+							<td id="4"><h3><fmt:formatNumber
+										value="${twoD.recoverMoney}" type="number" /></h3></td>
+							<td><h3><fmt:formatNumber
+										value="${twoD.total}" type="number" /></h3></td>
+							<td><a href="SummaryTable?number=${twoD.number}" style="color: black"><i class="fas fa-th-list hover-effect"></i></a></td>
 						</tr>
 					</c:forEach>
 				</table>
 			</div>
 		</div>
 	</div>
-	<footer style="background-color: black;color:white">&copy; Heart Referee Version 2.9.0 &nbsp; Design by N0iSy2099</footer>
+	<footer style="background-color: black;color:white">&copy; Heart Referee Version 4.0.0 &nbsp; Design by N0iSy</footer>
 </body>
 </html>

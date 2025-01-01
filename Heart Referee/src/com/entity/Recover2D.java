@@ -1,12 +1,16 @@
 package com.entity;
 
+import java.sql.Date;
+
 public class Recover2D {
 	private String sellerName;
 	private int sellerCom;
 	private int sellerZ;
 	private int sellerMoney;
-	private String date;
+	private Date date;
+	private String time;
 	private int recoverP;
+	private int recoverT;
 	private int recoverCom;
 	private int recoverPlus;
 	private int totalRecover;
@@ -44,13 +48,22 @@ public class Recover2D {
 	public void setSellerMoney(int sellerMoney) {
 		this.sellerMoney = sellerMoney;
 	}
-
-	public String getDate() {
+	
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
+	}
+
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public int getRecoverP() {
@@ -59,6 +72,14 @@ public class Recover2D {
 
 	public void setRecoverP(int recoverP) {
 		this.recoverP = recoverP;
+	}
+	
+	public int getRecoverT() {
+		return recoverT;
+	}
+
+	public void setRecoverT(int recoverT) {
+		this.recoverT = recoverT;
 	}
 
 	public int getRecoverCom() {

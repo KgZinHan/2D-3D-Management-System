@@ -384,4 +384,359 @@
     <servlet-name>autoReportController</servlet-name>
     <url-pattern>/AutoReport</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  <!-- Three Digits -->
+  
+  
+  <!-- Home Page -->
+  
+  <servlet>
+    <description>threeDHomePage</description>
+    <servlet-name>threeDHomePage</servlet-name>
+    <jsp-file>/jsp3DPage/Home.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>threeDHomePage</servlet-name>
+    <url-pattern>/threeDHome</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>history3DController</servlet-name>
+    <servlet-class>com.threeDController.History3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>history3DController</servlet-name>
+    <url-pattern>/History3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>table3DController</servlet-name>
+    <servlet-class>com.threeDController.Table3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>table3DController</servlet-name>
+    <url-pattern>/Table3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>threeDCommPage</description>
+    <servlet-name>threeDCommPage</servlet-name>
+    <jsp-file>/jsp3DPage/CommissionPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>threeDCommPage</servlet-name>
+    <url-pattern>/threeDCommissionPage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>threeDCommController</servlet-name>
+    <servlet-class>com.threeDController.Commission3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>threeDCommController</servlet-name>
+    <url-pattern>/Commission3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>sortByUser3DController</servlet-name>
+    <servlet-class>com.threeDController.SortByUser3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sortByUser3DController</servlet-name>
+    <url-pattern>/SortByUser3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>details3DController</servlet-name>
+    <servlet-class>com.threeDController.Details3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>details3DController</servlet-name>
+    <url-pattern>/Details3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>search3DController</servlet-name>
+    <servlet-class>com.threeDController.Search3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search3DController</servlet-name>
+    <url-pattern>/Search3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>multiInput3DController</servlet-name>
+    <servlet-class>com.threeDController.MultiInput3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>multiInput3DController</servlet-name>
+    <url-pattern>/MultiInput3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>customInput3DController</servlet-name>
+    <servlet-class>com.threeDController.CustomInput3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>customInput3DController</servlet-name>
+    <url-pattern>/CustomInput3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>delete3DController</servlet-name>
+    <servlet-class>com.threeDController.Delete3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>delete3DController</servlet-name>
+    <url-pattern>/Delete3D</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Waiting Table Page -->
+  
+  <servlet>
+    <description>WaitingTable3DPage</description>
+    <servlet-name>WaitingTable3DPage</servlet-name>
+    <jsp-file>/jsp3DPage/WaitingTable.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WaitingTable3DPage</servlet-name>
+    <url-pattern>/waiting3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>waiting3DController</servlet-name>
+    <servlet-class>com.threeDController.WaitingTable3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>waiting3DController</servlet-name>
+    <url-pattern>/Waiting3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>SummaryTable3DPage</description>
+    <servlet-name>SummaryTable3DPage</servlet-name>
+    <jsp-file>/jsp3DPage/SummaryTable.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SummaryTable3DPage</servlet-name>
+    <url-pattern>/summary3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>summary3DController</servlet-name>
+    <servlet-class>com.threeDController.Summary3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>summary3DController</servlet-name>
+    <url-pattern>/Summary3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AutoReport3DController</servlet-name>
+    <servlet-class>com.threeDController.AutoReport3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AutoReport3DController</servlet-name>
+    <url-pattern>/AutoReport3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>RecoverCheck3DPage</description>
+    <servlet-name>RecoverCheck3DPage</servlet-name>
+    <jsp-file>/jsp3DPage/RecoverTable.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverCheck3DPage</servlet-name>
+    <url-pattern>/recoverCheck3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>recover3DController</servlet-name>
+    <servlet-class>com.threeDController.Recover3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>recover3DController</servlet-name>
+    <url-pattern>/Recover3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>fullTable3D</description>
+    <servlet-name>fullTable3D</servlet-name>
+    <jsp-file>/jsp3DPage/FullTable.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fullTable3D</servlet-name>
+    <url-pattern>/full3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>FullTable3DController</servlet-name>
+    <servlet-class>com.threeDController.FullTable3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FullTable3DController</servlet-name>
+    <url-pattern>/Full3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>report3D</description>
+    <servlet-name>report3D</servlet-name>
+    <jsp-file>/jsp3DPage/FinalResultPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>report3D</servlet-name>
+    <url-pattern>/report3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Report3DController</servlet-name>
+    <servlet-class>com.threeDController.Report3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Report3DController</servlet-name>
+    <url-pattern>/Report3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>ledger3D</description>
+    <servlet-name>ledger3D</servlet-name>
+    <jsp-file>/jsp3DPage/HistoryResultPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ledger3D</servlet-name>
+    <url-pattern>/ledger3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Ledger3DController</servlet-name>
+    <servlet-class>com.threeDController.Ledger3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Ledger3DController</servlet-name>
+    <url-pattern>/Ledger3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>recoverLedger3D</description>
+    <servlet-name>recoverLedger3D</servlet-name>
+    <jsp-file>/jsp3DPage/RecoverResultPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>recoverLedger3D</servlet-name>
+    <url-pattern>/recoverLedger3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverLedger3DController</servlet-name>
+    <servlet-class>com.threeDController.RecoverLedger3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverLedger3DController</servlet-name>
+    <url-pattern>/RecoverLedger3D</url-pattern>
+  </servlet-mapping>
+  
+  <!-- Three D Recover Page -->
+  
+  <servlet>
+    <description>recoverPage3D</description>
+    <servlet-name>recoverPage3D</servlet-name>
+    <jsp-file>/jsp3DPage/RecoverPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>recoverPage3D</servlet-name>
+    <url-pattern>/recoverPage3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverPage3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.RecoverPage3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverPage3DController</servlet-name>
+    <url-pattern>/RecoverPage3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>MultiInputRecover3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.MultiInputRecover3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MultiInputRecover3DController</servlet-name>
+    <url-pattern>/MultiInputRecover3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CustomInputRecover3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.CustomInput3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomInputRecover3DController</servlet-name>
+    <url-pattern>/CustomInputRecover3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverDetails3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.RecoverDetails3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverDetails3DController</servlet-name>
+    <url-pattern>/RecoverDetails3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>SearchRecover3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.SearchRecover3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchRecover3DController</servlet-name>
+    <url-pattern>/SearchRecover3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>recoverSeller3D</description>
+    <servlet-name>recoverSeller3D</servlet-name>
+    <jsp-file>/jsp3DPage/RecoverSellerPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>recoverSeller3D</servlet-name>
+    <url-pattern>/recoverSeller3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverSeller3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.RecoverSeller3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverSeller3DController</servlet-name>
+    <url-pattern>/RecoverSeller3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecoverDelete3DController</servlet-name>
+    <servlet-class>com.threeDRecoverPageController.RecoverDelete3DController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecoverDelete3DController</servlet-name>
+    <url-pattern>/RecoverDelete3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>addRecover3D</description>
+    <servlet-name>addRecover3D</servlet-name>
+    <jsp-file>/jsp3DPage/addRecover.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addRecover3D</servlet-name>
+    <url-pattern>/addRecover3D</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddRecover3DController</servlet-name>
+    <servlet-class>com.threeDController.AddRecover3D</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddRecover3DController</servlet-name>
+    <url-pattern>/AddRecover3D</url-pattern>
+  </servlet-mapping>
 </web-app>

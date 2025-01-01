@@ -111,6 +111,13 @@ footer{
 	background-color: #003366;
 }
 
+.mv-3d-tab-bar{
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: rgba(100,0,0,0.95);
+}
+
 .margin-left{
 	margin-left: 50px;
 }
@@ -337,23 +344,34 @@ footer{
 }
 
 .mv-basic-bg{
-	height: 900px;
-	background-image: url(../Images/wp1.png);
+	height: 780px;
+	background-image: url(../Images/wp4.png);
 	background-position: center;
 	background-size: cover;
 	text-align: center;
 }
 
 .mv-ftbl-bg{
-	height: 100vh;
-	background-color: black;
+	height: 780px;
+	background-image: url(../Images/wp4.png);
 	background-position: center;
 	background-size: cover;
 	text-align: center;
 }
 
 .mv-recover-bg{
-	height: 100vh;
+	height: 780px;
+	background-image: url(../Images/wp1.png);
+	background-position: center;
+	background-size: cover;
+	text-align: center;
+}
+
+.mv-3d-basic-bg{
+	height: 780px;
+	background-image: url(../Images/wp5.jpg);
+	background-position: center;
+	background-size: cover;
 	text-align: center;
 }
 
@@ -526,6 +544,10 @@ footer{
 	color: rgba(102, 0, 255, 1);
 }
 
+.hover-3D-effect:hover{
+	color: firebrick;
+}
+
 .summary-button{
 	position: absolute;
 	top: 660px;
@@ -565,7 +587,7 @@ footer{
 	display: flex;
 	top: 160px;
 	right: 0px;
-	width: 635px;
+	width: 625px;
 	height: 40px;
 	background-color: rgb(220,220,220);
 	border: 1px solid black;
@@ -582,30 +604,45 @@ footer{
 	z-index: 1;
 }
 
-.mv-drop-down-list{
+.mv-drop-down-list,.mv-3D-drop-down-list{
 	display: none;
 	position: absolute;
     top: 40px;
-    right: 455px;
+    right: 445px;
 	width: 180px;
-	height: 150px;
+	height: 120px;
     background-color: rgba(240,240,240,1);   
     z-index: 1;  
 }
 
 .mv-drop-down-list a{
     display: block;
-    padding: 15px;
-    font-size: 16px;
+    padding: 12px;
+    font-size: 14px;
     color: black;
     font-family: robom;
     font-style: normal;
-    text-align: center;
+   text-align: left;
+}
+
+.mv-3D-drop-down-list a{
+	display: block;
+    padding: 12px;
+    font-size: 14px;
+    color: black;
+    font-family: robom;
+    font-style: normal;
+    text-align: left;
 }
 
 .mv-drop-down-list a:hover{
     background-color: #003366;
 }
+
+.mv-3D-drop-down-list a:hover{
+    background-color: firebrick;
+}
+
 
 .mv-container{
 	height: 70px;
@@ -734,7 +771,7 @@ footer{
 
 .mv-list-table,.mv-waiting-table{
 	position: relative;
-	margin-right: 20px;
+	margin-right: 10px;
 	float: right;
 	width: 600px;
 	overflow: hidden;
@@ -751,13 +788,22 @@ footer{
     text-align: center;
 }
 
-.mv-list-table-head,.mv-count-table{
+.mv-list-table-head,.mv-count-table,.mv-3d-list-table-head{
 	position: static;
 	background-color: #003366;
 	color: white;
     font-size: 14px;
     font-family: roboto;
     text-align: center;
+}
+
+.mv-3d-list-table-head{
+	background-color: rgba(100,0,0,0.95);
+}
+
+.mv-3d-list-table-head th{
+	width: 150px;
+	height: auto;
 }
 
 .mv-list-table-head th{

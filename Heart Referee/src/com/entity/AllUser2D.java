@@ -7,6 +7,8 @@ public class AllUser2D {
 	private int totalMoney;
 	private int p;
 	private int pMoney;
+	private int t;
+	private int tMoney;
 	private int comPercent;
 	private int comMoney;
 	private int total;
@@ -16,6 +18,7 @@ public class AllUser2D {
 	private int sellerZ;
 	private int recover;
 	private int recoverP;
+	private int recoverT;
 	private int recoverCom;
 	private int recoverPlus;
 	private int extra;
@@ -43,7 +46,7 @@ public class AllUser2D {
 	public void setTotalMoney(int totalMoney) {
 		this.totalMoney = totalMoney;
 	}
-
+	
 	public int getP() {
 		return p;
 	}
@@ -58,6 +61,22 @@ public class AllUser2D {
 
 	public void setpMoney(int pMoney) {
 		this.pMoney = pMoney;
+	}
+	
+	public int getT() {
+		return t;
+	}
+
+	public void setT(int t) {
+		this.t = t;
+	}
+	
+	public int gettMoney() {
+		return tMoney;
+	}
+
+	public void settMoney(int tMoney) {
+		this.tMoney = tMoney;
 	}
 
 	public int getComPercent() {
@@ -122,6 +141,14 @@ public class AllUser2D {
 
 	public void setRecoverP(int recoverP) {
 		this.recoverP = recoverP;
+	}
+
+	public int getRecoverT() {
+		return recoverT;
+	}
+
+	public void setRecoverT(int recoverT) {
+		this.recoverT = recoverT;
 	}
 
 	public int getRecoverCom() {

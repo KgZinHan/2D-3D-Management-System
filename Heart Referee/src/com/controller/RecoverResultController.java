@@ -50,7 +50,7 @@ public class RecoverResultController extends HttpServlet {
 			//request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
 		} else {
 			if (sellerName == "12345" || sellerName.equals("12345")) {
-				sellerName = "Total";
+				sellerName = "All Recover Sellers";
 				recover2DList = tableDao.getAllRecoverTable();
 				totalRecover2DList = tableDao.getTotalAllRecoverTable();
 				//totalRecover2DList = tableDao.getTotalTotalAllRecoverTable();

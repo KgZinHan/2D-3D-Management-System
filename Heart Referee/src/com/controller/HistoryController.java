@@ -42,7 +42,7 @@ public class HistoryController extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String userName = (String) session.getAttribute(CommonParameters.SESSION_USER);
-
+		System.out.println(userName);
 		twoDList = tableDao.getHistoryTableByUsername(userName);
 		total = tableDao.getTotalMoney();
 		userTotal = tableDao.getUserTotalMoney(userName);
@@ -65,6 +65,10 @@ public class HistoryController extends HttpServlet {
 		request.setAttribute(CommonParameters.USER_TOTAL_MONEY, userTotal);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
+		request.setAttribute(CommonParameters.AVG_COMM_PERCENT, CommonConstants.AVERAGE_COMM_PERCENT);
+		request.setAttribute(CommonParameters.DEFAULT_MACHINE_NAME, CommonConstants.DEFAULT_MACHINE_NAME);
+		request.setAttribute(CommonParameters.RED_COLOR_LIMIT, CommonConstants.FINAL_LIMIT);
+		request.setAttribute(CommonParameters.GREEN_COLOR_LIMIT, CommonConstants.HAPPY_LIMIT);
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.NOTE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.R_COLUMN_DISPLAY, "table-cell");

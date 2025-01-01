@@ -5,8 +5,15 @@ public class CommonParameters {
 	// Sessions
 	public static final String SESSION_USER = "userName";
 	public static final String SESSION_NAME = "sessionName";
+	public static final String SESSION_LOGIN_USER = "logInName";
 	public static final String SESSION_PAGE = "sessionPage";
 	public static final String SESSION_PARTITION = "sessionPartition";
+	
+	// Home
+	public static final String AVG_COMM_PERCENT = "avgCommPercent";
+	public static final String DEFAULT_MACHINE_NAME = "defMachineName";
+	public static final String RED_COLOR_LIMIT = "redColorLimit"; 
+	public static final String GREEN_COLOR_LIMIT = "greenColorLimit";
 
 	// Constants
 	public static final String MESSAGE = "message";
@@ -76,8 +83,11 @@ public class CommonParameters {
 	public static final String FINAL_RESULT_TOTAL_MONEY = "totalMoney";
 	public static final String FINAL_RESULT_P = "p";
 	public static final String FINAL_RESULT_P_MONEY = "pMoney";
+	public static final String FINAL_RESULT_T = "t";
+	public static final String FINAL_RESULT_T_MONEY = "tMoney";
 	public static final String FINAL_RESULT_COMMISSION = "commission";
 	public static final String FINAL_RESULT_COMMISSION_PERCENT = "comPercent";
+	public static final String FINAL_RESULT_COMMISSION_Z = "comZ";
 	public static final String FINAL_RESULT_TOTAL = "total";
 	public static final String FINAL_RESULT_TOTAL_COLOR = "totalColor";
 	public static final String FINAL_RESULT_TOTAL_COMMSSION = "totalCommission";
@@ -94,4 +104,9 @@ public class CommonParameters {
 
 	// commission List
 	public static final String COMM_LIST = "commList";
+	
+	// three D
+	public static final String THREE_D_HOME_LIST = "threeDList";
+	public static final String THREE_D_RECOVER_LIST = "threeDList";
+	public static final String START_NUMBER = "start";
 }

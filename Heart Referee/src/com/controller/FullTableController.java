@@ -34,10 +34,10 @@ public class FullTableController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		tableDao = new TableDaoImpl(request);
 		recoverTableDao = new RecoverTableDaoImpl(request);
-		
+
 		List<Number2D> zeroStartList = new ArrayList<Number2D>();
 		List<Number2D> oneStartList = new ArrayList<Number2D>();
 		List<Number2D> twoStartList = new ArrayList<Number2D>();
@@ -52,25 +52,25 @@ public class FullTableController extends HttpServlet {
 		total = tableDao.getTotalMoney();
 		recoverTotal = recoverTableDao.getTotalRecoverMoney();
 		zeroStartList = tableDao.startList(0);
-		setColor(zeroStartList,request);
+		setColor(zeroStartList, request);
 		oneStartList = tableDao.startList(1);
-		setColor(oneStartList,request);
+		setColor(oneStartList, request);
 		twoStartList = tableDao.startList(2);
-		setColor(twoStartList,request);
+		setColor(twoStartList, request);
 		threeStartList = tableDao.startList(3);
-		setColor(threeStartList,request);
+		setColor(threeStartList, request);
 		fourStartList = tableDao.startList(4);
-		setColor(fourStartList,request);
+		setColor(fourStartList, request);
 		fiveStartList = tableDao.startList(5);
-		setColor(fiveStartList,request);
+		setColor(fiveStartList, request);
 		sixStartList = tableDao.startList(6);
-		setColor(sixStartList,request);
+		setColor(sixStartList, request);
 		sevenStartList = tableDao.startList(7);
-		setColor(sevenStartList,request);
+		setColor(sevenStartList, request);
 		eightStartList = tableDao.startList(8);
-		setColor(eightStartList,request);
+		setColor(eightStartList, request);
 		nineStartList = tableDao.startList(9);
-		setColor(nineStartList,request);
+		setColor(nineStartList, request);
 
 		request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 		request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
@@ -94,11 +94,10 @@ public class FullTableController extends HttpServlet {
 			throws ServletException, IOException {
 		tableDao = new TableDaoImpl(request);
 		recoverTableDao = new RecoverTableDaoImpl(request);
-		
-		if(request.getParameter("mode").equals("Without Recover")) {
-			doGet(request,response);
-		}
-		else {
+
+		if (request.getParameter("mode").equals("Without Recover")) {
+			doGet(request, response);
+		} else {
 			List<Number2D> zeroStartList = new ArrayList<Number2D>();
 			List<Number2D> oneStartList = new ArrayList<Number2D>();
 			List<Number2D> twoStartList = new ArrayList<Number2D>();
@@ -113,25 +112,25 @@ public class FullTableController extends HttpServlet {
 			total = tableDao.getTotalMoney();
 			recoverTotal = recoverTableDao.getTotalRecoverMoney();
 			zeroStartList = getStartListWithRecover(tableDao.startList(0), request);
-			setColor(zeroStartList,request);
+			setColor(zeroStartList, request);
 			oneStartList = getStartListWithRecover(tableDao.startList(1), request);
-			setColor(oneStartList,request);
+			setColor(oneStartList, request);
 			twoStartList = getStartListWithRecover(tableDao.startList(2), request);
-			setColor(twoStartList,request);
+			setColor(twoStartList, request);
 			threeStartList = getStartListWithRecover(tableDao.startList(3), request);
-			setColor(threeStartList,request);
+			setColor(threeStartList, request);
 			fourStartList = getStartListWithRecover(tableDao.startList(4), request);
-			setColor(fourStartList,request);
+			setColor(fourStartList, request);
 			fiveStartList = getStartListWithRecover(tableDao.startList(5), request);
-			setColor(fiveStartList,request);
+			setColor(fiveStartList, request);
 			sixStartList = getStartListWithRecover(tableDao.startList(6), request);
-			setColor(sixStartList,request);
+			setColor(sixStartList, request);
 			sevenStartList = getStartListWithRecover(tableDao.startList(7), request);
-			setColor(sevenStartList,request);
+			setColor(sevenStartList, request);
 			eightStartList = getStartListWithRecover(tableDao.startList(8), request);
-			setColor(eightStartList,request);
+			setColor(eightStartList, request);
 			nineStartList = getStartListWithRecover(tableDao.startList(9), request);
-			setColor(nineStartList,request);
+			setColor(nineStartList, request);
 
 			request.setAttribute(CommonParameters.TOTAL_MONEY, total);
 			request.setAttribute(CommonParameters.TOTAL_RECOVER_MONEY, recoverTotal);
@@ -160,27 +159,32 @@ public class FullTableController extends HttpServlet {
 
 	}
 
-	protected void setColor(List<Number2D> twoDList,HttpServletRequest request) {
+	protected void setColor(List<Number2D> twoDList, HttpServletRequest request) {
 		for (int j = 0; j < twoDList.size(); j++) {
-			int calculatedMoney = getTotal(request)
-					- ((twoDList.get(j).getMoney() * 80) + ((getTotal(request) * 15) / 100) + recoverTotal);
+
+			int netMoney = (twoDList.get(j).getMoney() * 80) + ((getTotal(request) * CommonConstants.AVERAGE_COMM_PERCENT) / 100) + recoverTotal;
+
+			int calculatedMoney = getTotal(request) - netMoney;
+
 			if (calculatedMoney >= CommonConstants.HAPPY_LIMIT) {
 				twoDList.get(j).setColor("green");
 			}
 
+			else if (netMoney > getTotal(request)) {
+				twoDList.get(j).setColor("red");
+			}
+
 			/*
-			 * if ((twoDList.get(j).getMoney() * 80) + ((getTotal(request) * 15) / 100) +
-			 * recoverTotal > getTotal(request)) { twoDList.get(j).setColor("red"); }
+			 * else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) {
+			 * twoDList.get(j).setColor("red"); }
 			 */
-			
-			else if (calculatedMoney <= CommonConstants.FINAL_LIMIT) {
-				twoDList.get(j).setColor("red"); }
+
 		}
 	}
-	
-	protected List<Number2D> getStartListWithRecover(List<Number2D> startList,HttpServletRequest request){
+
+	protected List<Number2D> getStartListWithRecover(List<Number2D> startList, HttpServletRequest request) {
 		recoverTableDao = new RecoverTableDaoImpl(request);
-		for(Number2D number2D : startList) {
+		for (Number2D number2D : startList) {
 			int newMoney = number2D.getMoney() - recoverTableDao.getRecoverMoney(number2D.getNumber());
 			number2D.setMoney(newMoney);
 		}

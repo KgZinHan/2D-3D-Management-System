@@ -1,19 +1,30 @@
 package com.entity;
 
+import java.sql.Date;
+
 public class Ledger {
-	private String date;
+	private Date date;
+	private String time;
 	private int recoverMoney;
 	private int recoverPMoney;
 	private int recoverComMoney;
 	private int recoverPlusMoney;
 	private int extraMoney;
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public int getRecoverMoney() {

@@ -81,7 +81,7 @@ public class RecoverDetailsController extends HttpServlet {
 		request.setAttribute(CommonParameters.TOTAL_SELLER_RECOVER,totalSellerRecover);
 		request.setAttribute(CommonParameters.SELLER_NAME, sellerName);
 		request.setAttribute(CommonParameters.RECOVER_LIST, recoverSellerList);
-		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, "aqua");
+		request.setAttribute(CommonParameters.TAB_BAR_RECOVER_NOTE_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.TWO_D_LIST, twoDList);
 		dispatcher = request.getRequestDispatcher("/recoverPage");

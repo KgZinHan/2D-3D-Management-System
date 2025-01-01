@@ -1,10 +1,12 @@
 package com.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -150,6 +152,52 @@ public class TableDaoImpl implements TableDao {
 		}
 
 		return id;
+	}
+	
+	@Override
+	public Boolean find2DUser(String name) {
+		String query = "SELECT * FROM COMM_TABLE WHERE PARTITION = ? AND COMM_NAME = ?";
+
+		HttpSession session = request.getSession();
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, partition);
+			preparedStatement.setString(2, name);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
+	}
+	
+	@Override
+	public Boolean find3DUser(String name) {
+		String query = "SELECT * FROM THREE_D_COMM_TABLE WHERE PARTITION = ? AND COMM_NAME = ?";
+
+		HttpSession session = request.getSession();
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+
+		connection = DbDriver.getConnection();
+		try {
+			preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, partition);
+			preparedStatement.setString(2, name);
+			resultSet = preparedStatement.executeQuery();
+			if (resultSet.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 
 	@Override
@@ -1182,8 +1230,8 @@ public class TableDaoImpl implements TableDao {
 	public void addValuesToAllTable(Ledger ledger) {
 		List<AllUser2D> userList = getTempTable();
 		String query = "INSERT INTO ALL_TABLE"
-				+ "(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_TIME,RECOVER,RECOVER_P,RECOVER_COM,RECOVER_PLUS,EXTRA,PARTITION) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "(NAME,NUMBER,TOTAL_MONEY,P,P_MONEY,COM_PERCENT,COM_MONEY,TOTAL,TWO_D_DATE,TWO_D_TIME,RECOVER,RECOVER_P,RECOVER_COM,RECOVER_PLUS,EXTRA,PARTITION) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		HttpSession session = request.getSession();
 		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
@@ -1200,21 +1248,22 @@ public class TableDaoImpl implements TableDao {
 				preparedStatement.setInt(6, userList.get(i).getComPercent());
 				preparedStatement.setInt(7, userList.get(i).getComMoney());
 				preparedStatement.setInt(8, userList.get(i).getTotal());
-				preparedStatement.setString(9, ledger.getDate());
+				preparedStatement.setDate(9, ledger.getDate());
+				preparedStatement.setString(10, ledger.getTime());
 				if (i == 0) {
-					preparedStatement.setInt(10, ledger.getRecoverMoney());
-					preparedStatement.setInt(11, ledger.getRecoverPMoney());
-					preparedStatement.setInt(12, ledger.getRecoverComMoney());
-					preparedStatement.setInt(13, ledger.getRecoverPlusMoney());
-					preparedStatement.setInt(14, ledger.getExtraMoney());
+					preparedStatement.setInt(11, ledger.getRecoverMoney());
+					preparedStatement.setInt(12, ledger.getRecoverPMoney());
+					preparedStatement.setInt(13, ledger.getRecoverComMoney());
+					preparedStatement.setInt(14, ledger.getRecoverPlusMoney());
+					preparedStatement.setInt(15, ledger.getExtraMoney());
 				} else {
-					preparedStatement.setInt(10, 0);
 					preparedStatement.setInt(11, 0);
 					preparedStatement.setInt(12, 0);
 					preparedStatement.setInt(13, 0);
 					preparedStatement.setInt(14, 0);
+					preparedStatement.setInt(15, 0);
 				}
-				preparedStatement.setString(15, partition);
+				preparedStatement.setString(16, partition);
 				preparedStatement.execute();
 			}
 		} catch (Exception e) {
@@ -1230,6 +1279,8 @@ public class TableDaoImpl implements TableDao {
 
 		HttpSession session = request.getSession();
 		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 		connection = DbDriver.getConnection();
 		try {
@@ -1247,7 +1298,8 @@ public class TableDaoImpl implements TableDao {
 				user2D.setComPercent(resultSet.getInt("com_percent"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
 				user2D.setTotal(resultSet.getInt("total"));
-				user2D.setTime(resultSet.getString("two_d_time"));
+				Date twoDDate = resultSet.getDate("two_d_date");
+				user2D.setTime(twoDDate.toLocalDate().format(formatter)+ " "+ resultSet.getString("two_d_time"));
 				if (user2D.getTotal() <= 0) {
 					user2D.setColor("red");
 				} else {
@@ -1303,15 +1355,16 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getTotalAllTable() {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT TWO_D_TIME,NUMBER,SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,"
+		String query = "SELECT TWO_D_DATE,TWO_D_TIME,NUMBER,SUM(TOTAL_MONEY) AS TOTAL_MONEY,SUM(P) AS P,SUM(P_MONEY) AS P_MONEY,"
 				+ "SUM(COM_MONEY) AS COM_MONEY , SUM(TOTAL) AS TOTAL,SUM(RECOVER) AS RECOVER, "
 				+ "SUM(RECOVER_P) AS RECOVER_P, SUM(RECOVER_COM) AS RECOVER_COM, SUM(RECOVER_PLUS) AS RECOVER_PLUS,"
-				+ "SUM(EXTRA) AS EXTRA FROM ALL_TABLE WHERE PARTITION = ? GROUP BY TWO_D_TIME,NUMBER ORDER BY TWO_D_TIME";
+				+ "SUM(EXTRA) AS EXTRA FROM ALL_TABLE WHERE PARTITION = ? GROUP BY TWO_D_DATE,TWO_D_TIME,NUMBER ORDER BY TWO_D_DATE,TWO_D_TIME";
 		int count = 1;
 
 		HttpSession session = request.getSession();
 		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
-
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(query);
@@ -1325,7 +1378,8 @@ public class TableDaoImpl implements TableDao {
 				user2D.setP(resultSet.getInt("p"));
 				user2D.setpMoney(resultSet.getInt("p_money"));
 				user2D.setComMoney(resultSet.getInt("com_money"));
-				user2D.setTime(resultSet.getString("two_d_time"));
+				Date twoDDate = resultSet.getDate("two_d_date");
+				user2D.setTime(twoDDate.toLocalDate().format(formatter) + " " + resultSet.getString("two_d_time"));
 				total = resultSet.getInt("total") + resultSet.getInt("recover") + resultSet.getInt("recover_plus")
 						+ resultSet.getInt("extra");
 				user2D.setTotal(total);
@@ -1397,13 +1451,18 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public void deleteAllTable() { // need to be checked to fix or not
-		String deleteQuery = "DELETE FROM ALL_TABLE";
-		String deleteQuery2 = "DELETE FROM RECOVER_ALL_TABLE";
+		
+		String deleteQuery = "DELETE FROM ALL_TABLE WHERE PARTITION = ?";
+		String deleteQuery2 = "DELETE FROM RECOVER_ALL_TABLE WHERE PARTITION = ?";
+		HttpSession session = request.getSession();
+		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
 		connection = DbDriver.getConnection();
 		try {
 			preparedStatement = connection.prepareStatement(deleteQuery);
+			preparedStatement.setString(1, partition);
 			preparedStatement.execute();
 			preparedStatement = connection.prepareStatement(deleteQuery2);
+			preparedStatement.setString(1, partition);
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -1658,11 +1717,13 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getAllRecoverTableBySeller(String seller) {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT * FROM RECOVER_ALL_TABLE WHERE PARTITION = ? AND RECOVER_SELLER = ? ORDER BY DATE,RECOVER DESC";
+		String query = "SELECT * FROM RECOVER_ALL_TABLE WHERE PARTITION = ? AND RECOVER_SELLER = ? ORDER BY TWOD_DATE,TWOD_TIME,RECOVER DESC";
 		int count = 1;
 
 		HttpSession session = request.getSession();
 		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 		connection = DbDriver.getConnection();
 		try {
@@ -1670,9 +1731,12 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement.setString(1, partition);
 			preparedStatement.setString(2, seller);
 			resultSet = preparedStatement.executeQuery();
+			
+	        // Format the date as a string
 			while (resultSet.next()) {
 				AllUser2D user2D = new AllUser2D();
-				user2D.setTime(resultSet.getString("date"));			
+				Date twod_date = resultSet.getDate("twod_date");
+				user2D.setTime(twod_date.toLocalDate().format(formatter) + " "+ resultSet.getString("twod_time"));			
 				user2D.setRecover(resultSet.getInt("recover"));
 				user2D.setRecoverCom(resultSet.getInt("recover_com"));
 				user2D.setRecoverP(resultSet.getInt("recover_p"));
@@ -1731,14 +1795,16 @@ public class TableDaoImpl implements TableDao {
 	@Override
 	public List<AllUser2D> getAllRecoverTable() {
 		List<AllUser2D> user2DList = new ArrayList<AllUser2D>();
-		String query = "SELECT DATE,SUM(RECOVER) AS RECOVER,SUM(RECOVER_P) AS RECOVER_P,SUM(RECOVER_COM) "
+		String query = "SELECT TWOD_DATE,TWOD_TIME,SUM(RECOVER) AS RECOVER,SUM(RECOVER_P) AS RECOVER_P,SUM(RECOVER_COM) "
 				+ "AS RECOVER_COM,SUM(RECOVER_PLUS) AS RECOVER_PLUS,SUM(TOTAL_RECOVER) AS TOTAL_RECOVER "
-				+ "FROM RECOVER_ALL_TABLE WHERE PARTITION = ? GROUP BY DATE ORDER BY DATE";
+				+ "FROM RECOVER_ALL_TABLE WHERE PARTITION = ? GROUP BY TWOD_DATE,TWOD_TIME ORDER BY TWOD_DATE,TWOD_TIME";
 		
 		int count = 1;
 
 		HttpSession session = request.getSession();
 		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
 		connection = DbDriver.getConnection();
 		try {
@@ -1747,7 +1813,8 @@ public class TableDaoImpl implements TableDao {
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				AllUser2D user2D = new AllUser2D();
-				user2D.setTime(resultSet.getString("date"));
+				Date twoDDate = resultSet.getDate("twod_date");
+				user2D.setTime(twoDDate.toLocalDate().format(formatter) + " "+ resultSet.getString("twod_time"));
 				user2D.setUsername("-");
 				user2D.setRecover(resultSet.getInt("recover"));
 				user2D.setRecoverCom(resultSet.getInt("recover_com"));
@@ -1827,7 +1894,7 @@ public class TableDaoImpl implements TableDao {
 
 	@Override
 	public void addValuesToAllRecoverTable(Recover2D seller) {
-		String insertQuery = "INSERT INTO RECOVER_ALL_TABLE(RECOVER_SELLER,RECOVER_COM,RECOVER_Z,RECOVER_P,DATE,RECOVER,RECOVER_PLUS,TOTAL_RECOVER,PARTITION) VALUES (?,?,?,?,?,?,?,?,?)";
+		String insertQuery = "INSERT INTO RECOVER_ALL_TABLE(RECOVER_SELLER,RECOVER_COM,RECOVER_Z,RECOVER_P,TWOD_DATE,TWOD_TIME,RECOVER,RECOVER_PLUS,TOTAL_RECOVER,PARTITION) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
 		HttpSession session = request.getSession();
 		String partition = (String) session.getAttribute(CommonParameters.SESSION_PARTITION);
@@ -1839,11 +1906,12 @@ public class TableDaoImpl implements TableDao {
 			preparedStatement.setInt(2, seller.getRecoverCom());
 			preparedStatement.setInt(3, seller.getSellerZ());
 			preparedStatement.setInt(4, seller.getRecoverP());
-			preparedStatement.setString(5, seller.getDate());
-			preparedStatement.setInt(6, seller.getSellerMoney());
-			preparedStatement.setInt(7, seller.getRecoverPlus());
-			preparedStatement.setInt(8, seller.getTotalRecover());
-			preparedStatement.setString(9, partition);
+			preparedStatement.setDate(5, seller.getDate());
+			preparedStatement.setString(6, seller.getTime());
+			preparedStatement.setInt(7, seller.getSellerMoney());
+			preparedStatement.setInt(8, seller.getRecoverPlus());
+			preparedStatement.setInt(9, seller.getTotalRecover());
+			preparedStatement.setString(10, partition);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

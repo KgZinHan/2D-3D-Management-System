@@ -68,6 +68,10 @@ public class DetailsController extends HttpServlet {
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
+		request.setAttribute(CommonParameters.AVG_COMM_PERCENT, CommonConstants.AVERAGE_COMM_PERCENT);
+		request.setAttribute(CommonParameters.DEFAULT_MACHINE_NAME, CommonConstants.DEFAULT_MACHINE_NAME);
+		request.setAttribute(CommonParameters.RED_COLOR_LIMIT, CommonConstants.FINAL_LIMIT);
+		request.setAttribute(CommonParameters.GREEN_COLOR_LIMIT, CommonConstants.HAPPY_LIMIT);
 		request.setAttribute(CommonParameters.PAGE_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");
@@ -114,6 +118,10 @@ public class DetailsController extends HttpServlet {
 		request.setAttribute(CommonParameters.TAB_BAR_HOME_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.REAL_ID, realID);
 		request.setAttribute(CommonParameters.ID_ALERT_COLOR, idAlertColor);
+		request.setAttribute(CommonParameters.AVG_COMM_PERCENT, CommonConstants.AVERAGE_COMM_PERCENT);
+		request.setAttribute(CommonParameters.DEFAULT_MACHINE_NAME, CommonConstants.DEFAULT_MACHINE_NAME);
+		request.setAttribute(CommonParameters.RED_COLOR_LIMIT, CommonConstants.FINAL_LIMIT);
+		request.setAttribute(CommonParameters.GREEN_COLOR_LIMIT, CommonConstants.HAPPY_LIMIT);
 		request.setAttribute(CommonParameters.PAGE_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.DELETE_COLUMN_DISPLAY, "table-cell");
 		request.setAttribute(CommonParameters.QUANTITY_COLUMN_DISPLAY, "none");

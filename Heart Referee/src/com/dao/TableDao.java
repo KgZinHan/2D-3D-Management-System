@@ -21,6 +21,10 @@ public interface TableDao {
 
 	public List<User2D> getUsers();
 	
+	public Boolean find2DUser(String name);
+	
+	public Boolean find3DUser(String name);
+	
 	public int getIdCount();
 	
 	public int getMoneyToRecoverByLimit(int limit);

@@ -46,6 +46,43 @@ function switchTab(id){
 
 }
 
+function switch3DTab(id)
+{
+	var singleInputTab = document.getElementById("singleInput");
+	var multiInputTab = document.getElementById("multiInput");
+	var customInputTab = document.getElementById("customInput");
+	var singlebtn = document.getElementById("specialbtn");
+	var multibtn = document.getElementById("multibtn");
+	var autoFocusMulti = document.getElementById("MNumber1");
+	var autoFocusSpecial = document.getElementById("SNumber1");
+	var autoFocusCustom = document.getElementById("CNumber1");
+	if(id == "multiInput"){
+		multiInputTab.style.display = 'block';
+		singleInputTab.style.display = 'none';
+		customInputTab.style.display = 'none';
+		multibtn.style.display = 'none';
+		singlebtn.style.display = 'block';
+		autoFocusMulti.focus();
+	}
+	else if(id == 'singleInput'){
+		singleInputTab.style.display = 'block';
+		multiInputTab.style.display = 'none';
+		customInputTab.style.display = 'none';
+		singlebtn.style.display = 'none';
+		multibtn.style.display = 'block';
+		autoFocusSpecial.focus();
+	}
+	else if(id == 'customInput'){
+		singleInputTab.style.display = 'none';		
+		multiInputTab.style.display = 'none';
+		customInputTab.style.display = 'block';
+		singlebtn.style.display = 'block';
+		multibtn.style.display = 'none';
+		autoFocusCustom.focus();
+	}
+
+}
+
 function myFocus(){
 	var autoFocusNo = document.getElementById("number1");
 	var autoFocusMulti = document.getElementById("MNumber1");

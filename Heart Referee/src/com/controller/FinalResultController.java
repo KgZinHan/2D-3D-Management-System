@@ -179,6 +179,7 @@ public class FinalResultController extends HttpServlet {
 		 */
 		request.setAttribute(CommonParameters.FINAL_RESULT_NUMBER, numberS);
 		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_PERCENT, commission.getCommPercent());
+		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_Z, commission.getCommZ());
 		request.setAttribute(CommonParameters.TAB_BAR_FINAL_RESULT_COLOR, CommonConstants.HOVER_COLOR_CODE);
 		request.setAttribute(CommonParameters.SESSION_USER, username);
 		request.setAttribute(CommonParameters.FINAL_RESULT_DIV_DISPLAY, "none");
@@ -213,12 +214,14 @@ public class FinalResultController extends HttpServlet {
 		String username = request.getParameter("username");
 		String numberS = request.getParameter("number");
 		String percentS = request.getParameter("comPercent");
+		String zS = request.getParameter("comZ");
 		int number = Integer.parseInt(numberS);
 		int percent = Integer.parseInt(percentS);
+		int z = Integer.parseInt(zS);
 
 		int totalMoney = tableDao.getUserTotalMoney(username);
 		int p = tableDao.getUserMoneyByNumber(username, number);
-		int userPMoney = p * 80;
+		int userPMoney = p * z;
 		int tCommission = (totalMoney * percent) / 100;
 		int commission = Math.round(tCommission / 50f) * 50;
 		int total = totalMoney - userPMoney - commission;
@@ -313,6 +316,7 @@ public class FinalResultController extends HttpServlet {
 		request.setAttribute(CommonParameters.FINAL_RESULT_P_MONEY, userPMoney);
 		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_PERCENT, percent);
 		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION, commission);
+		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_Z,z);
 		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL, total);
 		request.setAttribute(CommonParameters.FINAL_RESULT_TOTAL_COLOR, totalColor);
 		dispatcher = request.getRequestDispatcher("/finalResult");

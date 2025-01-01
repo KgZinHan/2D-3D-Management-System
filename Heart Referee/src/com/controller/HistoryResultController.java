@@ -45,7 +45,7 @@ public class HistoryResultController extends HttpServlet {
 			request.setAttribute(CommonParameters.TOTAL_RECOVER_DISPLAY, "none");
 		} else {
 			if (username == "12345" || username.equals("12345")) {
-				username = "Total";
+				username = "All Commissions";
 				user2DList = tableDao.getTotalAllTable();
 				totalUser2DList = tableDao.getTotalTotalAllTable();
 				request.setAttribute(CommonParameters.COM_PERCENT_DISPLAY, "none");
@@ -79,6 +79,7 @@ public class HistoryResultController extends HttpServlet {
 		String pS = request.getParameter("p");
 		String pMoneyS = request.getParameter("pMoney");
 		String comPercentS = request.getParameter("comPercent");
+		String comZS = request.getParameter("comZ");
 		String comMoneyS = request.getParameter("comMoney");
 		String totalS = request.getParameter("total");
 		String username = request.getParameter("username");
@@ -88,6 +89,7 @@ public class HistoryResultController extends HttpServlet {
 		int p = Integer.parseInt(pS);
 		int pMoney = Integer.parseInt(pMoneyS);
 		int comPercent = Integer.parseInt(comPercentS);
+		int comZ = Integer.parseInt(comZS);
 		int comMoney = Integer.parseInt(comMoneyS);
 		int total = Integer.parseInt(totalS);
 
@@ -112,6 +114,7 @@ public class HistoryResultController extends HttpServlet {
 		request.setAttribute(CommonParameters.MESSAGE, message);
 		request.setAttribute(CommonParameters.FINAL_RESULT_NUMBER, number);
 		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_PERCENT, comPercent);
+		request.setAttribute(CommonParameters.FINAL_RESULT_COMMISSION_Z, comZ);
 		dispatcher = request.getRequestDispatcher("/Final");
 		dispatcher.forward(request, response);
 	}

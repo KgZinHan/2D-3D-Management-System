@@ -1,8 +1,12 @@
 package com.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,8 +73,9 @@ public class DeleteController extends HttpServlet {
 			String time = request.getParameter("time");
 			String recoverFlag = request.getParameter("recoverFlag");
 			String extraMoney = request.getParameter("extraMoney");
-			String todayDate = date + " " + time;
-
+	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDate todayDate = LocalDate.parse(date, formatter);
+	        Date sqlDate = Date.valueOf(todayDate); 
 			if (recoverFlag != null) { // add Recover Results to Recover Ledger
 
 				// Calculate recoverPlusMoney
@@ -95,7 +100,8 @@ public class DeleteController extends HttpServlet {
 				for (Recover2D recoverSeller : recoverSellerList) {
 
 					String seller = recoverSeller.getSellerName();
-					recoverSeller.setDate(todayDate);
+					recoverSeller.setDate(sqlDate);
+					recoverSeller.setTime(time);
 					recoverSeller.setSellerMoney(recoverTableDao.getTotalRecoverMoneyBySeller(seller));
 					if (recoverSeller.getSellerMoney() > 0) {
 						recoverSeller.setRecoverP(
@@ -112,7 +118,8 @@ public class DeleteController extends HttpServlet {
 			}
 
 			Ledger ledger = new Ledger();
-			ledger.setDate(todayDate);
+			ledger.setDate(sqlDate);
+			ledger.setTime(time);
 			ledger.setRecoverMoney(recoverMoney);
 			ledger.setRecoverPMoney(recoverPMoney);
 			ledger.setRecoverComMoney(recoverComMoney);
